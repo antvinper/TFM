@@ -1,0 +1,56 @@
+{
+    "name": "PlayerInputs",
+    "maps": [
+        {
+            "name": "PlayerMap",
+            "id": "a444f6f9-470a-4169-81f9-e726c86adb2b",
+            "actions": [
+                {
+                    "name": "Attack",
+                    "type": "Button",
+                    "id": "2ca7ce6b-d4c6-4beb-90a0-caefa3012f35",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "23262d8c-bb55-4197-bb55-f9016baabda7",
+                    "path": "<XInputController>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Attack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0be2bdb9-445e-4430-864f-65492d8fb9e4",
+                    "path": "<XInputController>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Attack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c9927645-d53c-4ad8-8c27-a39c66042718",
+                    "path": "<XInputController>/rightTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Attack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

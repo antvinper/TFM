@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class CharacterModel : MonoBehaviour
 {
-    private int life;
-    private int strength;
-    private int defense;
+    [SerializeField] private int life;
+    [SerializeField] private int strength;
+    [SerializeField] private int defense;
 
     public int Life
     {
