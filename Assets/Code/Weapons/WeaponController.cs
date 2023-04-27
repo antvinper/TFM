@@ -9,6 +9,7 @@ public class WeaponController : MonoBehaviour
     private float actualTimeCharging = 0;
     private bool isCharging = false;
 
+
     public void StopCharging()
     {
         isCharging = false;

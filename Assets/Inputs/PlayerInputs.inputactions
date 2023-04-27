@@ -6,7 +6,7 @@
             "id": "a444f6f9-470a-4169-81f9-e726c86adb2b",
             "actions": [
                 {
-                    "name": "Attack",
+                    "name": "Combat",
                     "type": "Button",
                     "id": "2ca7ce6b-d4c6-4beb-90a0-caefa3012f35",
                     "expectedControlType": "Button",
@@ -23,7 +23,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Attack",
+                    "action": "Combat",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -34,7 +34,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Attack",
+                    "action": "Combat",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -45,7 +45,18 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Attack",
+                    "action": "Combat",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "80a2014c-2fd8-4bf9-9583-aef1652727cd",
+                    "path": "<XInputController>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Combat",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
