@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class Sword : WeaponModel
 {
-    [SerializeField] BasicComboDefinition[] basicComboDefinitionList;
+    
 }

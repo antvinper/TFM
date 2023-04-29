@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9686a4c640c7414887742c42f334c45, type: 3}
   m_Name: BasicSwordCombo1
   m_EditorClassIdentifier: 
-  damageMultiplier:
+  DamageMultiplier:
   - 1.1
   - 1.3
-  buttons: 010000000100000001000000
-  activated: 1
+  Buttons: 010000000100000001000000
+  Activated: 0

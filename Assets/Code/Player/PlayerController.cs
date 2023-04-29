@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] PlayerModel model;
     
 
+
     public void TakeDamage(int damage)
     {
         int realDamage = damage - model.Defense;
@@ -22,37 +23,18 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void GetInput(InputAction.CallbackContext callbackContext)
+    public void DoCombo(ButtonsXbox buttonPressed)
     {
-        if(callbackContext.phase.Equals(InputActionPhase.Performed))
-        {
-            if(callbackContext.action.activeControl.ToString().Contains("buttonWest"))
-            {
-                //Debug.Log("West or X Pressed");
-                //TODO
-            }
-            if(callbackContext.action.activeControl.ToString().Contains("buttonNorth"))
-            {
-                StartCoroutine(model.activeWeapon.StartCharging());
-            }
-            if(callbackContext.action.activeControl.ToString().Contains("rightTrigger"))
-            {
-                //Debug.Log("Right or RT Pressed");
-                //TODO
-            }
-            if(callbackContext.action.activeControl.ToString().Contains("buttonEst"))
-            {
-                //Debug.log("Dash");
-                //TODO
-            }
-        }
+        model.activeWeapon.DoCombo(buttonPressed);
+    }
 
-        if(callbackContext.phase.Equals(InputActionPhase.Canceled))
-        {
-            if (callbackContext.action.activeControl.ToString().Contains("buttonNorth"))
-            {
-                model.activeWeapon.StopCharging();
-            }
-        }
+    public void StartCharging()
+    {
+        StartCoroutine(model.activeWeapon.StartCharging());
+    }
+
+    public void StopCharging()
+    {
+        model.activeWeapon.StopCharging();
     }
 }
