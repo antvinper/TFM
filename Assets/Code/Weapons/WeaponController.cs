@@ -8,20 +8,13 @@ public class WeaponController : MonoBehaviour
 
     private float actualTimeCharging = 0;
     private bool isCharging = false;
-
     private int ActualIndex = 0;
     private bool DoingCombo = false;
     private bool CanCancelCombo = false;
-
-    //public int actualIndex { get => ActualIndex; }
-
-    //Tengo que ponerla a false al terminar el ResetCombo
-    bool comboStarted;
-
-    public int actualIndex { get => ActualIndex; set => ActualIndex = value; }
-
+    private bool comboStarted; 
     private bool canAttack;
 
+    public int actualIndex { get => ActualIndex; set => ActualIndex = value; }
     public bool doingCombo { get => DoingCombo; set => DoingCombo = value; }
     public bool canCancelCombo { get => CanCancelCombo; set => CanCancelCombo = value; }
 
@@ -120,7 +113,6 @@ public class WeaponController : MonoBehaviour
             {
                 comboStarted = true;
                 cancelComboAfterTime = StartCoroutine(CancelComboAfterTime());
-                //StartCoroutine(weaponModel.basicComboDefinitions[i].CancelComboAfterTime());
             }
         }
 
@@ -136,7 +128,6 @@ public class WeaponController : MonoBehaviour
                 //cancelamos la corrutina y empezamos otra
                 StopCoroutine(cancelComboAfterTime);
                 cancelComboAfterTime = StartCoroutine(CancelComboAfterTime());
-                //StartCoroutine(weaponModel.basicComboDefinitions[i].CancelComboAfterTime());
             }
         }
     }
