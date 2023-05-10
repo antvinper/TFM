@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.0102813905, g: 0.012838788, b: 0.015892105, a: 1}
+  m_IndirectSpecularColor: {r: 0.0006469377, g: 0.0003163212, b: 0.00060081546, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -167,8 +167,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 17.39523, y: 1, z: 6.3013}
-  m_Center: {x: 0.074705124, y: 0, z: -0.03755951}
+  m_Size: {x: 16.274317, y: 2.5168052, z: 5.893284}
+  m_Center: {x: 0.6351614, y: 0.7584026, z: 0.1664486}
 --- !u!114 &7359474
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -350,18 +350,6 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 833025631728410713, guid: 7bb8a1601f4c73e48be35f95792316c6, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 833025631728410713, guid: 7bb8a1601f4c73e48be35f95792316c6, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 833025631728410713, guid: 7bb8a1601f4c73e48be35f95792316c6, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 833025631728410713, guid: 7bb8a1601f4c73e48be35f95792316c6, type: 3}
       propertyPath: m_LocalPosition.x
       value: 6.5793767
       objectReference: {fileID: 0}
@@ -400,10 +388,6 @@ PrefabInstance:
     - target: {fileID: 833025631728410713, guid: 7bb8a1601f4c73e48be35f95792316c6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 833025631728410713, guid: 7bb8a1601f4c73e48be35f95792316c6, type: 3}
-      propertyPath: m_ConstrainProportionsScale
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 833025631728410719, guid: 7bb8a1601f4c73e48be35f95792316c6, type: 3}
       propertyPath: m_Name
