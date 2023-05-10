@@ -16,19 +16,30 @@ public class BhutaController : MonoBehaviour
      */
 
     BhutaModel model;
+    [SerializeField] int actualFloorColliderInstanceId;
 
-    List<TeleportPoint> teleportPoints;
+    //List<TeleportPoint> teleportPoints;
 
     // Start is called before the first frame update
     void Start()
     {
         model = GetComponent<BhutaModel>();
-        teleportPoints = new List<TeleportPoint>(GetComponentsInChildren<TeleportPoint>());
+        //teleportPoints = new List<TeleportPoint>(GetComponentsInChildren<TeleportPoint>());
+
+        List<Collider> colliders = new List<Collider>(Physics.OverlapSphere(transform.position, 1));
+
+        foreach (Collider c in colliders)
+        {
+            if(c.gameObject.GetComponent<RoomBounds>())
+            {
+                actualFloorColliderInstanceId = c.gameObject.GetInstanceID();
+            }
+        }
 
         StartCoroutine(TeleportAfterSeconds());
     }
 
-    public void Teleport(int index)
+    /*public void Teleport(int index)
     {
         //int index = Random.Range(0, teleportPoints.Count - 1);
 
@@ -44,7 +55,7 @@ public class BhutaController : MonoBehaviour
             gameObject.transform.position = teleportPoints[index].gameObject.transform.position;
         }
         
-    }
+    }*/
 
     public void TeleportInSphereRange(float minDistance, float maxDistance)
     {
@@ -57,18 +68,22 @@ public class BhutaController : MonoBehaviour
         float randomDistance = Random.Range(minDistance, maxDistance);
         Vector3 randomPosition = currentPosition + randomVector * randomDistance;
 
-        bool isColliding = true;
+        bool isRandomPosOk = false;
 
         int count = 0;
-        while(isColliding == true && count <= 50)
+        while(isRandomPosOk == false && count <= 50)
         {
-            Debug.Log("Times call GetRandomPos: " + count++);
-            isColliding = GetRandomPos(minDistance, maxDistance, currentPosition, randomVector, randomDistance, ref randomPosition);
-            break;
+            
+            isRandomPosOk = GetRandomPos(minDistance, maxDistance, currentPosition, randomVector, randomDistance, ref randomPosition);
+
+            Debug.Log("#RANDOM POS isRandomPosOk? " +  isRandomPosOk);
+            ++count;
+            Debug.Log("Times call GetRandomPos: " + count);
         }
 
         if(count < 50)
         {
+            Debug.Log("#RANDOM POS Teleporting...");
             gameObject.transform.position = new Vector3(randomPosition.x, gameObject.transform.position.y, randomPosition.z);
         }
         else
@@ -81,6 +96,7 @@ public class BhutaController : MonoBehaviour
     private bool GetRandomPos(float minDistance, float maxDistance, Vector3 currentPosition, Vector3 randomVector, float randomDistance, ref Vector3 randomPosition)
     {
         int count = 0;
+        bool isRandomPosOk = false;
 
         while (Vector3.Distance(randomPosition, currentPosition) < minDistance && count <= 50)
         {
@@ -91,20 +107,36 @@ public class BhutaController : MonoBehaviour
             randomPosition = currentPosition + randomVector * randomDistance;
         }
 
-        return Physics.CheckSphere(randomPosition, 1);
+        if(Physics.CheckSphere(randomPosition, 1))
+        {
+            List<Collider> colliders = new List<Collider>(Physics.OverlapSphere(randomPosition, 1));
+
+            //Diferente de sí mismo y de actualfloor a false
+
+            //if(colliders.Count == 1 && colliders[0].gameObject.GetInstanceID().Equals(actualFloorColliderInstanceId))
+                if(colliders[0].gameObject.GetInstanceID().Equals(actualFloorColliderInstanceId))
+            {
+                isRandomPosOk = true;
+                Debug.Log("#RANDOM POS " + colliders[0].gameObject.name);
+            }
+        }
+
+        Debug.Log("#RANDOM POS " + isRandomPosOk);
+        return isRandomPosOk;
     }
 
     //ERASE
     IEnumerator TeleportAfterSeconds()
     {
-        for(int i = 0; i < 10; ++i)
+        for(int i = 0; i < 100; ++i)
         {
             yield return new WaitForSeconds(3);
             //Teleport(i);
 
             //TODO
             //Ver esto bien calculando max con las distancias a las paredes
-            TeleportInSphereRange(5f, 15f);
+           // TeleportInSphereRange(5f, 15f);
+            TeleportInSphereRange(1.5f, 5f);
         }
         
     }
