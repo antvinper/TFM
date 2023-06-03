@@ -1,9 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
-public class LevelManager : MonoBehaviour
+public class SceneManager : MonoBehaviour
 {
     private int numScene;
 
@@ -15,22 +12,22 @@ public class LevelManager : MonoBehaviour
 
             if (numScene == 1)
             {
-                SceneManager.LoadScene("HouseHall1Level1");
+                UnityEngine.SceneManagement.SceneManager.LoadScene("HouseHall1Level1");
             }
 
             if (numScene == 2)
             {
-                SceneManager.LoadScene("HouseHall2Level1");
+                UnityEngine.SceneManagement.SceneManager.LoadScene("HouseHall2Level1");
             }
 
             if (numScene == 3)
             {
-                SceneManager.LoadScene("HouseHall3Level1");
+                UnityEngine.SceneManagement.SceneManager.LoadScene("HouseHall3Level1");
             }
 
             if (numScene == 4)
             {
-                SceneManager.LoadScene("HouseHall4Level1");
+                UnityEngine.SceneManagement.SceneManager.LoadScene("HouseHall4Level1");
             }
         }
     }
