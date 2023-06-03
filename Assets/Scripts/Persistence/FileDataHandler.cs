@@ -20,8 +20,8 @@ public class FileDataHandler : MonoBehaviour
 
     public void SaveGame(GameData data)
     {
-        string fullFileName = fileName + "_" + data.SlotIndex + ".game";
-        string fullPath = Path.Combine(dataDirPath, fullFileName);
+        //string fullFileName = fileName + "_" + data.SlotIndex + ".game";
+        string fullPath = dataDirPath + "/" + fileName + "_" + data.SlotIndex + ".game";
 
         try
         {

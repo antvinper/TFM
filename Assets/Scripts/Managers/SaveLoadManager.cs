@@ -7,6 +7,9 @@ using System.IO;
 
 public class SaveLoadManager : MonoBehaviour
 {
+    /*
+     * TODO BORRAR
+     */
 
     public void SaveGame(GameData data)
     {

@@ -3,12 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : Singleton<PlayerController>
 {
     [SerializeField] PlayerModel model;
-    
-
-
     public void TakeDamage(int damage)
     {
         int realDamage = damage - model.Defense;

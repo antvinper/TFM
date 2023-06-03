@@ -55,7 +55,21 @@ public class GameManager : Singleton<GameManager>
     {
         if (isGameStarted)
         {
+            /**
+             * TODO
+             * Get the player quaternion to save the data
+             */
+            SetPlayerPosition();
+
             SaveGame(0);
         }
+    }
+
+    private void SetPlayerPosition()
+    {
+        Vector3 position = PlayerController.Instance.gameObject.transform.position;
+        dataPersistenceManager.gameData.PositionX = position.x;
+        dataPersistenceManager.gameData.PositionY = position.y;
+        dataPersistenceManager.gameData.PositionZ = position.z;
     }
 }
