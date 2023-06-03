@@ -2,17 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using Newtonsoft.Json;
+using System.IO;
+
 public class SaveLoadManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+
+    public void SaveGame(GameData data)
     {
         
     }
 
-    // Update is called once per frame
-    void Update()
+    public GameData LoadGame()
     {
-        
+        return null;
     }
 }

@@ -2,17 +2,64 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class GameManager : Singleton<GameManager>
 {
-    // Start is called before the first frame update
-    void Start()
+    private bool isGameStarted = false;
+    private DataPersistenceManager dataPersistenceManager;
+
+    public GameData GameData
     {
-        
+        get => dataPersistenceManager.gameData;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        
+        dataPersistenceManager = new DataPersistenceManager();
+
+        string fileName = "GameName_SaveData_";
+        string slot = "0";
+
+        GameData data = GetDataByFileName(fileName + slot);
+        if(data != null)
+        {
+            LoadData(data);
+        }
+
+        NewGame();
+    }
+
+    public void NewGame()
+    {
+        dataPersistenceManager.NewGame();
+        isGameStarted = true;
+    }
+
+    public bool IsGameStarted
+    {
+        get => this.isGameStarted;
+        set => isGameStarted = value;
+    }
+
+    public void SaveGame(int slotIndex = 0)
+    {
+        dataPersistenceManager.SaveGame(slotIndex);
+    }
+
+    public void LoadData(GameData data)
+    {
+        dataPersistenceManager.LoadGame(data);
+    }
+
+    public GameData GetDataByFileName(string fileName)
+    {
+        return dataPersistenceManager.GetDataByFileName(fileName);
+    }
+
+    private void OnApplicationQuit()
+    {
+        if (isGameStarted)
+        {
+            SaveGame(0);
+        }
     }
 }
