@@ -19,11 +19,7 @@ public class GameManager : Singleton<GameManager>
         string fileName = "GameName_SaveData_";
         string slot = "0";
 
-        GameData data = GetDataByFileName(fileName + slot);
-        if(data != null)
-        {
-            LoadData(data);
-        }
+        LoadData(fileName + slot);
 
         NewGame();
     }
@@ -45,9 +41,9 @@ public class GameManager : Singleton<GameManager>
         dataPersistenceManager.SaveGame(slotIndex);
     }
 
-    public void LoadData(GameData data)
+    public void LoadData(string fileName)
     {
-        dataPersistenceManager.LoadGame(data);
+        dataPersistenceManager.LoadGame(fileName);
     }
 
     public GameData GetDataByFileName(string fileName)

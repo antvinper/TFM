@@ -40,13 +40,9 @@ public class DataPersistenceManager// : Singleton<DataPersistenceManager>
         dataHandler.SaveGame(gameData);
     }
 
-    public void LoadGame(GameData data)
+    public void LoadGame(string fileName)
     {
-        /*
-         * TODO
-         * Use the slot index to get the filePath
-         */
-        this.gameData = data;
+        this.gameData = GetDataByFileName(fileName);
     }
 
     /*
