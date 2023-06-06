@@ -13,6 +13,10 @@ public class PlayerController : Singleton<PlayerController>
     /**
      * TODO
      * borrar este start y ponerlo donde toque
+     * El weapon controller se obtendrá de un menú antes de iniciar el nivel
+     * que es donde se elegirá el arma. Por tanto, el PlayerController tiene 2 opciones:
+     * 1- Tener todas las armas como hijas y activar la que necesite
+     * 2- Instanciar el arma y hacerla hija
      */
     private void Start()
     {
