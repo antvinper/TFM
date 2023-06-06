@@ -5,7 +5,7 @@ using UnityEngine;
 public class DataPersistenceManager// : Singleton<DataPersistenceManager>
 {
     public string fileName;
-    public GameData gameData;
+    public GameModel gameData;
     private FileDataHandler dataHandler;
 
     public DataPersistenceManager()
@@ -22,7 +22,7 @@ public class DataPersistenceManager// : Singleton<DataPersistenceManager>
 
     public void NewGame()
     {
-        this.gameData = new GameData();
+        this.gameData = new GameModel();
         this.gameData.Setup();
 
         /*
@@ -53,7 +53,7 @@ public class DataPersistenceManager// : Singleton<DataPersistenceManager>
         return dataHandler.GetAllFilesForLoad();
     }
 
-    public GameData GetDataByFileName(string fileName)
+    public GameModel GetDataByFileName(string fileName)
     {
         return dataHandler.GetDataByFileName(fileName);
     }

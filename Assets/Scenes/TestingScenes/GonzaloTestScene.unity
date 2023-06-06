@@ -309,18 +309,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2162050470827708545, guid: 808582c9e898f6f498a4feaea605a149, type: 3}
   m_PrefabInstance: {fileID: 1494490832}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &257251298 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4712745728779480778, guid: 808582c9e898f6f498a4feaea605a149, type: 3}
-  m_PrefabInstance: {fileID: 1494490832}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 257251296}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 09e88cbb1380ee149bcc2e14bfdd9542, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &257251302
+--- !u!114 &257251307
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -329,10 +318,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 257251296}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 08d6d87e37f579d47bc9fd95639b0075, type: 3}
+  m_Script: {fileID: 11500000, guid: 1d56550e76921ba4888ee5272be97c06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponModel: {fileID: 257251298}
+  model:
+    name: Sword
+    damage: 15
+    maxTimeCharge: 2
+    maxDamageMultiplier: 2
+    basicComboDefinitions:
+    - {fileID: 11400000, guid: c8df6cf21de5fc84a9fcbb1e6dd70bd3, type: 2}
+    - {fileID: 11400000, guid: c595f628fad7c4446be92e74912512b4, type: 2}
+    - {fileID: 11400000, guid: af5c073261f0abe4e80c0cd313b222e0, type: 2}
+    - {fileID: 11400000, guid: 8305376819db7e948a2e208961f8f92e, type: 2}
 --- !u!1 &628223188
 GameObject:
   m_ObjectHideFlags: 0
@@ -433,7 +431,6 @@ GameObject:
   - component: {fileID: 1080338669}
   - component: {fileID: 1080338668}
   - component: {fileID: 1080338667}
-  - component: {fileID: 1080338666}
   - component: {fileID: 1080338665}
   m_Layer: 0
   m_Name: Bhuta
@@ -454,21 +451,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0320812ddb54ceb42a37b4dc658f8412, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1080338666
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1080338664}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 53dd563e6379b9447aeb0b1a72940edd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  life: 0
-  strength: 0
-  defense: 0
 --- !u!65 &1080338667
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -561,12 +543,24 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1398823075860278194, guid: 808582c9e898f6f498a4feaea605a149, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.06
+      objectReference: {fileID: 0}
+    - target: {fileID: 1398823075860278194, guid: 808582c9e898f6f498a4feaea605a149, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.76
+      objectReference: {fileID: 0}
+    - target: {fileID: 1398823075860278194, guid: 808582c9e898f6f498a4feaea605a149, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.06
+      objectReference: {fileID: 0}
+    - target: {fileID: 1398823075860278194, guid: 808582c9e898f6f498a4feaea605a149, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 1.718492e-11
       objectReference: {fileID: 0}
     - target: {fileID: 1398823075860278194, guid: 808582c9e898f6f498a4feaea605a149, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.46000004
       objectReference: {fileID: 0}
     - target: {fileID: 1398823075860278194, guid: 808582c9e898f6f498a4feaea605a149, type: 3}
       propertyPath: m_LocalPosition.z
@@ -574,7 +568,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1398823075860278194, guid: 808582c9e898f6f498a4feaea605a149, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.8730504
       objectReference: {fileID: 0}
     - target: {fileID: 1398823075860278194, guid: 808582c9e898f6f498a4feaea605a149, type: 3}
       propertyPath: m_LocalRotation.x
@@ -586,7 +580,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1398823075860278194, guid: 808582c9e898f6f498a4feaea605a149, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0.48763007
       objectReference: {fileID: 0}
     - target: {fileID: 1398823075860278194, guid: 808582c9e898f6f498a4feaea605a149, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -598,40 +592,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1398823075860278194, guid: 808582c9e898f6f498a4feaea605a149, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
+      value: 58.37
       objectReference: {fileID: 0}
     - target: {fileID: 2162050470827708545, guid: 808582c9e898f6f498a4feaea605a149, type: 3}
       propertyPath: m_Name
       value: SwordTesting
       objectReference: {fileID: 0}
-    - target: {fileID: 4712745728779480778, guid: 808582c9e898f6f498a4feaea605a149, type: 3}
-      propertyPath: Damage
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4712745728779480778, guid: 808582c9e898f6f498a4feaea605a149, type: 3}
-      propertyPath: MaxTimeCharge
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4712745728779480778, guid: 808582c9e898f6f498a4feaea605a149, type: 3}
-      propertyPath: MaxDamageMultiplier
-      value: 1.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 4712745728779480778, guid: 808582c9e898f6f498a4feaea605a149, type: 3}
-      propertyPath: BasicComboDefinitions.Array.size
+    - target: {fileID: 6816182895891712673, guid: 808582c9e898f6f498a4feaea605a149, type: 3}
+      propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 4712745728779480778, guid: 808582c9e898f6f498a4feaea605a149, type: 3}
-      propertyPath: BasicComboDefinitions.Array.data[0]
-      value: 
-      objectReference: {fileID: 11400000, guid: c8df6cf21de5fc84a9fcbb1e6dd70bd3, type: 2}
-    - target: {fileID: 4712745728779480778, guid: 808582c9e898f6f498a4feaea605a149, type: 3}
-      propertyPath: basicComboDefinitionList.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4712745728779480778, guid: 808582c9e898f6f498a4feaea605a149, type: 3}
-      propertyPath: basicComboDefinitionList.Array.data[0]
-      value: 
-      objectReference: {fileID: 11400000, guid: c8df6cf21de5fc84a9fcbb1e6dd70bd3, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 808582c9e898f6f498a4feaea605a149, type: 3}
 --- !u!1 &1521536469
@@ -932,11 +902,11 @@ PrefabInstance:
     - target: {fileID: 8522391017935463820, guid: a345f673d2230134680375d3ac1d9559, type: 3}
       propertyPath: model
       value: 
-      objectReference: {fileID: 8715711154573070210}
-    - target: {fileID: 8605260851988711019, guid: a345f673d2230134680375d3ac1d9559, type: 3}
-      propertyPath: ActiveWeapon
+      objectReference: {fileID: 0}
+    - target: {fileID: 8522391017935463820, guid: a345f673d2230134680375d3ac1d9559, type: 3}
+      propertyPath: weaponController
       value: 
-      objectReference: {fileID: 257251302}
+      objectReference: {fileID: 257251307}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a345f673d2230134680375d3ac1d9559, type: 3}
 --- !u!4 &8715711154573070203 stripped
@@ -944,17 +914,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5597519482873115246, guid: a345f673d2230134680375d3ac1d9559, type: 3}
   m_PrefabInstance: {fileID: 8715711154573070202}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &8715711154573070210 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8605260851988711019, guid: a345f673d2230134680375d3ac1d9559, type: 3}
-  m_PrefabInstance: {fileID: 8715711154573070202}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 944d4f57b3ba5c947b05937e448fae29, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &8715711154573070211 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7495053869211985696, guid: a345f673d2230134680375d3ac1d9559, type: 3}

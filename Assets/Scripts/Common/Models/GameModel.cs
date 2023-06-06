@@ -2,7 +2,7 @@ using Newtonsoft.Json;
 using System;
 using UnityEngine;
 
-public class GameData
+public class GameModel
 {
     private int slotIndex = 0;
     private int characterLevel = 1;
@@ -11,6 +11,11 @@ public class GameData
     private float positionX;
     private float positionY;
     private float positionZ;
+    private float rotationX;
+    private float rotationY;
+    private float rotationZ;
+    private float rotationW;
+    private PlayerMutableModel playerModel;
     //private Quaternion rotation;
 
 
@@ -49,6 +54,32 @@ public class GameData
     {
         get => positionZ;
         set => positionZ = value;
+    }
+    public float RotationX
+    {
+        get => rotationX;
+        set => rotationX = value;
+    }
+    public float RotationY
+    {
+        get => rotationY;
+        set => rotationY = value;
+    }
+    public float RotationZ
+    {
+        get => rotationZ;
+        set => rotationZ = value;
+    }
+    public float RotationW
+    {
+        get => rotationZ;
+        set => rotationZ = value;
+    }
+
+    public PlayerMutableModel PlayerModel
+    {
+        get => playerModel;
+        set => playerModel = value;
     }
 
 

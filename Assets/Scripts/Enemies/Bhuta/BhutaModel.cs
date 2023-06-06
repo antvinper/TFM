@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class BhutaModel : EnemyModel
 {
-    List<TeleportPoint> TeleportPoints;
-    int ActualFloorColliderInstanceId;
-    BoxCollider FloorCollider;
+    List<TeleportPoint> teleportPoints;
+    int actualFloorColliderInstanceId;
+    BoxCollider floorCollider;
 
-    public List<TeleportPoint> teleportPoints { get => TeleportPoints; }
-    public int actualFloorColliderInstanceId { get => ActualFloorColliderInstanceId; set => ActualFloorColliderInstanceId = value; }
-    public BoxCollider floorCollider { get => FloorCollider; set => FloorCollider = value; }
+    public List<TeleportPoint> TeleportPoints { get => teleportPoints; }
+    public int ActualFloorColliderInstanceId { get => actualFloorColliderInstanceId; set => actualFloorColliderInstanceId = value; }
+    public BoxCollider FloorCollider { get => floorCollider; set => floorCollider = value; }
 
-    public void SetTeleportPoints()
+    public void SetTeleportPoints(List<TeleportPoint> teleportPoints)
     {
-        TeleportPoints = new List<TeleportPoint>(GetComponentsInChildren<TeleportPoint>());
+        this.teleportPoints = teleportPoints;
     }
 }

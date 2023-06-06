@@ -11,12 +11,12 @@ public class SaveLoadManager : MonoBehaviour
      * TODO BORRAR
      */
 
-    public void SaveGame(GameData data)
+    public void SaveGame(GameModel data)
     {
         
     }
 
-    public GameData LoadGame()
+    public GameModel LoadGame()
     {
         return null;
     }

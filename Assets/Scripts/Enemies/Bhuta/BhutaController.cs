@@ -5,10 +5,12 @@ using UnityEngine;
 
 public class BhutaController : EnemyController<BhutaModel>
 {
+
     void Start()
     {
-        model = GetComponent<BhutaModel>();
-        model.SetTeleportPoints();
+        model = new BhutaModel();
+
+        model.SetTeleportPoints(new List<TeleportPoint>(GetComponentsInChildren<TeleportPoint>()));
 
         List<Collider> colliders = new List<Collider>(Physics.OverlapSphere(transform.position, 1));
 
@@ -16,8 +18,8 @@ public class BhutaController : EnemyController<BhutaModel>
         {
             if(c.gameObject.GetComponent<RoomBounds>())
             {
-                model.floorCollider = c.gameObject.GetComponent<BoxCollider>();
-                model.actualFloorColliderInstanceId = c.gameObject.GetInstanceID();
+                model.FloorCollider = c.gameObject.GetComponent<BoxCollider>();
+                model.ActualFloorColliderInstanceId = c.gameObject.GetInstanceID();
             }
         }
     }
@@ -43,7 +45,7 @@ public class BhutaController : EnemyController<BhutaModel>
     {
         bool isRandomPosOk = false;
 
-        int maxSize = model.teleportPoints.Count; 
+        int maxSize = model.TeleportPoints.Count; 
         int[] numeros = new int[maxSize];
         List<int> numerosPosibles = Enumerable.Range(0, maxSize).ToList();
         System.Random rnd = new System.Random();
@@ -57,11 +59,11 @@ public class BhutaController : EnemyController<BhutaModel>
 
         foreach(int n in numeros)
         {
-            Vector3 telPos = model.teleportPoints[n].gameObject.transform.position;
+            Vector3 telPos = model.TeleportPoints[n].gameObject.transform.position;
             if (Physics.CheckSphere(telPos, 1))
             {
                 List<Collider> colliders = new List<Collider>(Physics.OverlapSphere(telPos, 0.5f));
-                if (colliders.Count() == 1 && colliders[0].gameObject.GetInstanceID().Equals(model.actualFloorColliderInstanceId))
+                if (colliders.Count() == 1 && colliders[0].gameObject.GetInstanceID().Equals(model.ActualFloorColliderInstanceId))
                 {
                     isRandomPosOk = true;
                     randomPosition = telPos;

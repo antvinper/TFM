@@ -2,17 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WeaponController : MonoBehaviour
+public class WeaponController: MonoBehaviour
 {
-    [SerializeField] WeaponModel weaponModel;
-
-    private float actualTimeCharging = 0;
-    private bool isCharging = false;
-    private int ActualIndex = 0;
-    private bool DoingCombo = false;
-    private bool CanCancelCombo = false;
-    private bool comboStarted; 
-    private bool canAttack;
+    protected float actualTimeCharging = 0;
+    protected bool isCharging = false;
+    protected int ActualIndex = 0;
+    protected bool DoingCombo = false;
+    protected bool CanCancelCombo = false;
+    protected bool comboStarted;
+    protected bool canAttack;
 
     public int actualIndex { get => ActualIndex; set => ActualIndex = value; }
     public bool doingCombo { get => DoingCombo; set => DoingCombo = value; }
@@ -22,10 +20,18 @@ public class WeaponController : MonoBehaviour
     //Quizás sea necesario crear una lista de estas corrutinas.
     Coroutine cancelComboAfterTime;
 
+    WeaponModel model;
+
     private void Start()
     {
+    }
+
+    public void Setup(WeaponModel model)
+    {
+        this.model = model;
+
         canAttack = true;
-        foreach(BasicComboDefinition basicComboDefinition in weaponModel.basicComboDefinitions)
+        foreach (BasicComboDefinition basicComboDefinition in this.model.BasicComboDefinitions)
         {
             basicComboDefinition.SetUp(this);
         }
@@ -105,11 +111,11 @@ public class WeaponController : MonoBehaviour
         }
         
     }
-    private void StartCombo(ButtonsXbox buttonPressed)
+    protected void StartCombo(ButtonsXbox buttonPressed)
     {
-        for (int i = 0; i < weaponModel.basicComboDefinitions.Length; ++i)
+        for (int i = 0; i < model.BasicComboDefinitions.Length; ++i)
         {
-            if (weaponModel.basicComboDefinitions[i].StartCombo(buttonPressed))
+            if (model.BasicComboDefinitions[i].StartCombo(buttonPressed))
             {
                 comboStarted = true;
                 cancelComboAfterTime = StartCoroutine(CancelComboAfterTime());
@@ -121,9 +127,9 @@ public class WeaponController : MonoBehaviour
     {
         //TODO
 
-        for(int i = 0; i < weaponModel.basicComboDefinitions.Length; ++i)
+        for(int i = 0; i < model.BasicComboDefinitions.Length; ++i)
         {
-            if (weaponModel.basicComboDefinitions[i].ContinueCombo(buttonPressed))
+            if (model.BasicComboDefinitions[i].ContinueCombo(buttonPressed))
             {
                 //cancelamos la corrutina y empezamos otra
                 StopCoroutine(cancelComboAfterTime);
@@ -142,7 +148,7 @@ public class WeaponController : MonoBehaviour
     public IEnumerator StartCharging()
     {
         isCharging = true;
-        while(isCharging && actualTimeCharging < weaponModel.maxTimeCharge)
+        while(isCharging && actualTimeCharging < model.MaxTimeCharge)
         {
             actualTimeCharging += Time.deltaTime;
             Debug.Log("Time recharging = " + actualTimeCharging);

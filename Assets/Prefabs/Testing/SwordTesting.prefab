@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 862711994670685403}
   - component: {fileID: 6816182895891712673}
   - component: {fileID: 2716602360406223197}
-  - component: {fileID: 4712745728779480778}
   m_Layer: 0
   m_Name: SwordTesting
   m_TagString: Untagged
@@ -99,23 +98,3 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
---- !u!114 &4712745728779480778
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2162050470827708545}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 09e88cbb1380ee149bcc2e14bfdd9542, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Damage: 5
-  MaxTimeCharge: 2
-  MaxDamageMultiplier: 1.8
-  basicComboDefinitionList:
-  - {fileID: 11400000, guid: c8df6cf21de5fc84a9fcbb1e6dd70bd3, type: 2}
-  - {fileID: 11400000, guid: c595f628fad7c4446be92e74912512b4, type: 2}
-  - {fileID: 11400000, guid: af5c073261f0abe4e80c0cd313b222e0, type: 2}
-  - {fileID: 11400000, guid: 8305376819db7e948a2e208961f8f92e, type: 2}

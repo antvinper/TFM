@@ -7,7 +7,7 @@ using System.IO;
 using System.Linq;
 using UnityEngine;
 
-public class FileDataHandler : MonoBehaviour
+public class FileDataHandler
 {
     private string dataDirPath = "";
     private string fileName = "";
@@ -18,7 +18,7 @@ public class FileDataHandler : MonoBehaviour
         this.fileName = fileName;
     }
 
-    public void SaveGame(GameData data)
+    public void SaveGame(GameModel data)
     {
         //string fullFileName = fileName + "_" + data.SlotIndex + ".game";
         string fullPath = dataDirPath + "/" + fileName + "_" + data.SlotIndex + ".game";
@@ -44,11 +44,11 @@ public class FileDataHandler : MonoBehaviour
         }
     }
 
-    public GameData GetDataByFileName(string fileName)
+    public GameModel GetDataByFileName(string fileName)
     {
         //string fullPath = Path.Combine(dataDirPath, fileName);
         string fullPath = dataDirPath + "/" +  fileName + ".game";
-        GameData loadedData = null;
+        GameModel loadedData = null;
 
         if (File.Exists(fullPath))
         {
@@ -63,7 +63,7 @@ public class FileDataHandler : MonoBehaviour
                     }
                 }
 
-                loadedData = JsonConvert.DeserializeObject<GameData>(dataToLoad);
+                loadedData = JsonConvert.DeserializeObject<GameModel>(dataToLoad);
             }
             catch (Exception e)
             {
