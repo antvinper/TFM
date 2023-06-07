@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "SkillTest", menuName = "Effects/Skill Definition Test")]
+[CreateAssetMenu(fileName = "Skill Definition", menuName = "Skills/Skill Definition Definition")]
 public class SkillDefinition : ScriptableObject
 {
     public new PlayerEnumSkillsTest name;
     [TextArea] public new string description;
-    public List<InstantEffect> instantEffects = new List<InstantEffect>();
+    public List<InstantEffectDefinition> instantEffects = new List<InstantEffectDefinition>();
     public List<OverTimeEffect> overTimeEffects = new List<OverTimeEffect>();
     public List<DuringTimeEffect> duringTimeEffects = new List<DuringTimeEffect>();
 
@@ -21,7 +21,7 @@ public class SkillDefinition : ScriptableObject
 
     private void ProcessInstantEffects(Characters.CharacterController owner, Characters.CharacterController target)
     {
-        foreach(InstantEffect effect in instantEffects)
+        foreach(InstantEffectDefinition effect in instantEffects)
         {
             effect.ProcessEffect(owner, target);
         }

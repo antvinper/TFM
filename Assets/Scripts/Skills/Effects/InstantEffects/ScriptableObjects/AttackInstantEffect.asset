@@ -9,12 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8b412017c4acd13459edac39cc56d685, type: 3}
-  m_Name: SlowDownEffect
+  m_Script: {fileID: 11500000, guid: 8d5f060d8b8ab12449ce2909f580252f, type: 3}
+  m_Name: AttackInstantEffect
   m_EditorClassIdentifier: 
   name: 
   description: 
-  reductionValue: 5
-  effectTime: 5
-  statAffected: 6
-  isPositive: 1
+  statAffected: 0
+  isValueInPercentage: 0
+  valueInPercentage: 0

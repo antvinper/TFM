@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 
 
-public class AttackInstantEffect : InstantEffectDefinition
+public class HealInstantEffect : InstantEffectDefinition
 {
     public override async Task ProcessEffect(Characters.CharacterController owner, Characters.CharacterController target)
     {
@@ -12,5 +12,4 @@ public class AttackInstantEffect : InstantEffectDefinition
 
         target.SetStat(statAffected, owner.GetMyRealDamage());
     }
-
 }

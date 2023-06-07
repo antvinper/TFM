@@ -5,8 +5,10 @@ using UnityEngine;
 
 public abstract class EffectDefinition : ScriptableObject
 {
-    public new string name;
-    [TextArea] public new string description;
+    [SerializeField] protected new string name;
+    [SerializeField] [TextArea] protected string description;
+
+
     public abstract Task ProcessEffect(Characters.CharacterController owner, Characters.CharacterController target);
 
 }
