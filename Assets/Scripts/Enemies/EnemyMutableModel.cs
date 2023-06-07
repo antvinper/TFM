@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyModel : CharacterMutableModel
+public class EnemyMutableModel : CharacterMutableModel
 {
     /*
      * TODO

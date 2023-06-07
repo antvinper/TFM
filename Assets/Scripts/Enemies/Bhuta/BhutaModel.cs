@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BhutaModel : EnemyModel
+public class BhutaModel : EnemyMutableModel
 {
     List<TeleportPoint> teleportPoints;
     int actualFloorColliderInstanceId;

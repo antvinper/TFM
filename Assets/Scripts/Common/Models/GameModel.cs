@@ -15,7 +15,7 @@ public class GameModel
     private float rotationY;
     private float rotationZ;
     private float rotationW;
-    private PlayerMutableModel playerModel;
+    private CharacterMutableModel playerModel;
     //private Quaternion rotation;
 
 
@@ -76,7 +76,7 @@ public class GameModel
         set => rotationZ = value;
     }
 
-    public PlayerMutableModel PlayerModel
+    public CharacterMutableModel PlayerModel
     {
         get => playerModel;
         set => playerModel = value;

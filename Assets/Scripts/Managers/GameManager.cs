@@ -7,9 +7,21 @@ public class GameManager : Singleton<GameManager>
     private bool isGameStarted = false;
     private DataPersistenceManager dataPersistenceManager;
 
+    /**
+     * TODO
+     * Quizás borrar. Ahora se usa en el application quit para almacenar la localización del personaje
+     * Pero eso en un futuro no debe ser así sino sólo cuando se esté en el lobby.
+     */
+    private PlayerController playerController;
+
     public GameModel GameData
     {
         get => dataPersistenceManager.gameData;
+    }
+
+    public void SetPlayerController(PlayerController playerController)
+    {
+        this.playerController = playerController;
     }
 
     private void Start()
@@ -75,7 +87,7 @@ public class GameManager : Singleton<GameManager>
 
     private void SavePlayerPosition()
     {
-        Vector3 position = PlayerController.Instance.gameObject.transform.position;
+        Vector3 position = playerController.gameObject.transform.position;
         dataPersistenceManager.gameData.PositionX = position.x;
         dataPersistenceManager.gameData.PositionY = position.y;
         dataPersistenceManager.gameData.PositionZ = position.z;
@@ -83,7 +95,7 @@ public class GameManager : Singleton<GameManager>
 
     private void SavePlayerRotation()
     {
-        Quaternion rotation = PlayerController.Instance.gameObject.transform.rotation;
+        Quaternion rotation = playerController.gameObject.transform.rotation;
 
         dataPersistenceManager.gameData.RotationX = rotation.x;
         dataPersistenceManager.gameData.RotationY = rotation.y;

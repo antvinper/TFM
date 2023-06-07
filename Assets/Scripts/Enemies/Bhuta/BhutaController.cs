@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class BhutaController : EnemyController<BhutaModel>
-{
-
-    void Start()
+//public class BhutaController : EnemyController//<BhutaModel>
+//{
+    
+    /*void Start()
     {
         model = new BhutaModel();
 
@@ -73,5 +73,5 @@ public class BhutaController : EnemyController<BhutaModel>
         }
 
         return isRandomPosOk;
-    }
-}
+    }*/
+//}

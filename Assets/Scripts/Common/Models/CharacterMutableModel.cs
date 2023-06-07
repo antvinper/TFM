@@ -95,7 +95,12 @@ public class CharacterMutableModel : ICharacterModel, ICharacterModelStats
         set => statsIncrement = value;
     }
 
-    public void TakeDamage(float value)
+    /**
+     * TODO ?
+     * Si el TakeDamage fuese diferente en el personaje y en los enemigos
+     * debe implementarse en cada uno por separado
+     */
+    public virtual void TakeDamage(float value)
     {
         float realDamage = value - Defense;
         float finalDamage = realDamage < 0 ? 0 : realDamage;

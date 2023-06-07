@@ -4,15 +4,14 @@ using UnityEngine;
 
 public class CombatManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] private List<EnemyController> enemies;
+    //private PlayerController player;
 
-    // Update is called once per frame
-    void Update()
+    /**
+     * Compruebo que se llama al modelo de buta y no al genérico
+     */
+    public void Test()
     {
-        
+
     }
 }

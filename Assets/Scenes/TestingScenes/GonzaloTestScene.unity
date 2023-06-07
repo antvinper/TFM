@@ -415,7 +415,7 @@ GameObject:
   - component: {fileID: 1080338669}
   - component: {fileID: 1080338668}
   - component: {fileID: 1080338667}
-  - component: {fileID: 1080338665}
+  - component: {fileID: 1080338671}
   m_Layer: 0
   m_Name: Bhuta
   m_TagString: Untagged
@@ -423,18 +423,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1080338665
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1080338664}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0320812ddb54ceb42a37b4dc658f8412, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!65 &1080338667
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -515,6 +503,46 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1080338671
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1080338664}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc6a4e7911f4525439079f4a373c6904, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  model:
+    maxHealth: 100
+    health: 100
+    defense: 10
+    magicDefense: 10
+    attack: 10
+    magicAttack: 10
+    speed: 10
+    shield: 10
+    accuracy: 100
+    blockChance: 0
+    dodgeChance: 0
+    critChance: 0
+    critDamageMultiplier: 0
+    statsIncrement:
+      maxHealth: 0
+      health: 0
+      defense: 0
+      magicDefense: 0
+      attack: 0
+      magicAttack: 0
+      speed: 0
+      shield: 0
+      accuracy: 0
+      blockChance: 0
+      dodgeChance: 0
+      critChance: 0
+      critDamageMultiplier: 0
 --- !u!1001 &1494490832
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -615,6 +643,52 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1684290695
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1684290697}
+  - component: {fileID: 1684290696}
+  m_Layer: 0
+  m_Name: CombatManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1684290696
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1684290695}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53199f61b26b01e47962c66620e2bf84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemies:
+  - {fileID: 1080338671}
+--- !u!4 &1684290697
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1684290695}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.08432481, y: 1.388586, z: 0.9005174}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1699444126
 GameObject:
@@ -868,6 +942,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8522391017935463820, guid: a345f673d2230134680375d3ac1d9559, type: 3}
+      propertyPath: enemy
+      value: 
+      objectReference: {fileID: 1080338671}
+    - target: {fileID: 8522391017935463820, guid: a345f673d2230134680375d3ac1d9559, type: 3}
       propertyPath: model
       value: 
       objectReference: {fileID: 0}
@@ -875,6 +953,26 @@ PrefabInstance:
       propertyPath: weaponController
       value: 
       objectReference: {fileID: 257251307}
+    - target: {fileID: 8522391017935463820, guid: a345f673d2230134680375d3ac1d9559, type: 3}
+      propertyPath: skills.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8522391017935463820, guid: a345f673d2230134680375d3ac1d9559, type: 3}
+      propertyPath: skills.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 3717f084b9a34be43b4300f2d0221e71, type: 2}
+    - target: {fileID: 8522391017935463820, guid: a345f673d2230134680375d3ac1d9559, type: 3}
+      propertyPath: skills.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 001fa2db69c6b4542a84b48b26d414ec, type: 2}
+    - target: {fileID: 8522391017935463820, guid: a345f673d2230134680375d3ac1d9559, type: 3}
+      propertyPath: skills.Array.data[0].instantEffects.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8522391017935463820, guid: a345f673d2230134680375d3ac1d9559, type: 3}
+      propertyPath: skills.Array.data[0].overTimeEffects.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a345f673d2230134680375d3ac1d9559, type: 3}
 --- !u!4 &8715711154573070203 stripped

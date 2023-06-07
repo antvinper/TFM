@@ -1,14 +1,40 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
-using UnityEngine.InputSystem;
+using System.Linq;
 
-public class PlayerController : Singleton<PlayerController>
+public class PlayerController : Characters.CharacterController//<PlayerMutableModel>
 {
-    [SerializeField] PlayerMutableModel model;
+    private PlayerController instance;
+    /**
+     * TODO
+     * No sé si vale la pena separar enemy y player models
+     */
+    //[SerializeField] PlayerMutableModel model;
+    [SerializeField] List<SkillDefinition> skills = new List<SkillDefinition>();
 
     public WeaponController weaponController;
+
+
+
+
+    /**
+     * TODO
+     * Borrar de aquí
+     */
+    public Characters.CharacterController enemy;
+
+    private void Awake()
+    {
+        if (instance != null && instance != this)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            instance = this;
+        }
+    }
 
     /**
      * TODO
@@ -20,9 +46,11 @@ public class PlayerController : Singleton<PlayerController>
      */
     private void Start()
     {
-        Debug.Log(model.Accuracy);
+        GameManager.Instance.SetPlayerController(this);
         weaponController = GetComponent<WeaponController>();
         SetModel();
+        UseSkill(PlayerEnumSkillsTest.SINGLE_ATTACK, enemy);
+        UseSkill(PlayerEnumSkillsTest.SLOW_DOWN, enemy);
     }
 
     private async Task SetModel()
@@ -30,13 +58,37 @@ public class PlayerController : Singleton<PlayerController>
         await new WaitForSeconds(1.0f);
         GameManager.Instance.GameData.PlayerModel = model;
     }
+    public override void ProcessDamage(float value)
+    {
+        Debug.Log("ProcessDamage in player");
+    }
 
-    public void ProcessDamage(float value)
+    public override float GetMyRealDamage()
     {
         /**
-         * TODO
-         * Usar dodgeChance, critChance, critDamageMultiplier...
+         * TODO 
+         * Calcular correctamente el daño.
          */
+        Debug.Log("My real damage = " + model.Attack);
+        return model.Attack;
+    }
+
+    public void UseSkill(PlayerEnumSkillsTest skillName, Characters.CharacterController target)
+    {
+        Debug.Log("Using: " + skillName);
+        SkillDefinition skill = skills.Where(s => s.name.Equals(skillName)).FirstOrDefault();
+        /*switch (skillName)
+        {
+            case PlayerEnumSkillsTest.SINGLE_ATTACK:
+
+                break;
+        }*/
+        
+        skill.ProcessSkill(this, target);
+    }
+
+    /*public void ProcessDamage(float value)
+    {
         model.TakeDamage(value);
 
         if(model.Health <= 0)
@@ -44,7 +96,7 @@ public class PlayerController : Singleton<PlayerController>
             //TODO
             Debug.Log("Dead");
         }
-    }
+    }*/
 
     public void DoCombo(ButtonsXbox buttonPressed)
     {
