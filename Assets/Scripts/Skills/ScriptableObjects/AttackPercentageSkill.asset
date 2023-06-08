@@ -9,11 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e16115a543739941828459aac967659, type: 3}
-  m_Name: HealInstantEffect
+  m_Script: {fileID: 11500000, guid: 05fc9090caa00b64f8b347b5ee0f4cc9, type: 3}
+  m_Name: AttackPercentageSkill
   m_EditorClassIdentifier: 
-  name: 
+  name: 1
   description: 
-  statAffected: 0
-  isValueInPercentage: 0
-  valueInPercentage: 0
+  instantEffects:
+  - {fileID: 11400000, guid: 816aa4f30af32f340a03e7d4ac28c93a, type: 2}
+  overTimeEffects: []
+  duringTimeEffects: []

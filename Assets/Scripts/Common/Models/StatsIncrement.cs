@@ -8,7 +8,8 @@ using System;
 public class StatsIncrement : ICharacterModelStats
 {
     [SerializeField] private float maxHealth = 0;
-    [SerializeField] private float health = 0;
+    //No es necesaria, pero se necesita para usar el ICharacterModelStats
+    private float health = 0;
     [SerializeField] private int defense = 0;
     [SerializeField] private int magicDefense = 0;
     [SerializeField] private int attack = 0;
@@ -27,7 +28,8 @@ public class StatsIncrement : ICharacterModelStats
         get => maxHealth;
         set => maxHealth = value;
     }
-    [JsonProperty]
+    //No es necesaria, pero se necesita para usar el ICharacterModelStats
+    [JsonIgnore]
     public float Health
     {
         get => health;

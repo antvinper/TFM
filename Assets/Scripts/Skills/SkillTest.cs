@@ -14,7 +14,7 @@ using UnityEngine;
 [Serializable]
 public class SkillTest
 {
-    public List<InstantEffectDefinition> instantEffects = new List<InstantEffectDefinition>();
+    public List<InstantEffectDefinitionForRun> instantEffects = new List<InstantEffectDefinitionForRun>();
     public List<OverTimeEffect> overTimeEffects = new List<OverTimeEffect>();
     public List<DuringTimeEffect> duringTimeEffects = new List<DuringTimeEffect>();
 

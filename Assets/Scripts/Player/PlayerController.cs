@@ -49,8 +49,9 @@ public class PlayerController : Characters.CharacterController//<PlayerMutableMo
         GameManager.Instance.SetPlayerController(this);
         weaponController = GetComponent<WeaponController>();
         SetModel();
-        UseSkill(PlayerEnumSkillsTest.SINGLE_ATTACK, enemy);
-        UseSkill(PlayerEnumSkillsTest.SLOW_DOWN, enemy);
+        UseSkill(PlayerEnumSkills.SINGLE_PERCENTAGE_ATTACK, this);
+        UseSkill(PlayerEnumSkills.HEAL_BY_MAX_HEALTH_PERCENTAGE, this);
+        //UseSkill(PlayerEnumSkills.SLOW_DOWN, enemy);
     }
 
     private async Task SetModel()
@@ -73,7 +74,7 @@ public class PlayerController : Characters.CharacterController//<PlayerMutableMo
         return model.Attack;
     }
 
-    public void UseSkill(PlayerEnumSkillsTest skillName, Characters.CharacterController target)
+    public void UseSkill(PlayerEnumSkills skillName, Characters.CharacterController target)
     {
         Debug.Log("Using: " + skillName);
         SkillDefinition skill = skills.Where(s => s.name.Equals(skillName)).FirstOrDefault();

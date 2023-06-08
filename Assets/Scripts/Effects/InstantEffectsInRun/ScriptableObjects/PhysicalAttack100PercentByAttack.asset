@@ -9,12 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 05fc9090caa00b64f8b347b5ee0f4cc9, type: 3}
-  m_Name: SlowDown
+  m_Script: {fileID: 11500000, guid: c046bc736b3587745ac1dd148a0620bd, type: 3}
+  m_Name: PhysicalAttack100PercentByAttack
   m_EditorClassIdentifier: 
-  name: 2
+  name: 
   description: 
-  instantEffects: []
-  overTimeEffects: []
-  duringTimeEffects:
-  - {fileID: 11400000, guid: 4aeff75be0f8eae44a1e1ebe6c558fb7, type: 2}
+  isStatIncremented: 0
+  statAffectedInTarget: 1
+  statInterventorInOwner: 4
+  isStatOwnerValueInPercentage: 1
+  valueInPercentage: 100
+  statWhatToSee: 4
+  isTheOwnerStat: 0
