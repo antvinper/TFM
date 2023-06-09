@@ -967,32 +967,44 @@ PrefabInstance:
       objectReference: {fileID: 257251307}
     - target: {fileID: 8522391017935463820, guid: a345f673d2230134680375d3ac1d9559, type: 3}
       propertyPath: skills.Array.size
-      value: 6
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 8522391017935463820, guid: a345f673d2230134680375d3ac1d9559, type: 3}
       propertyPath: skills.Array.data[0]
       value: 
-      objectReference: {fileID: 11400000, guid: 001fa2db69c6b4542a84b48b26d414ec, type: 2}
+      objectReference: {fileID: 11400000, guid: 040672ea6b6e16e4fb962d60dcde5f2e, type: 2}
     - target: {fileID: 8522391017935463820, guid: a345f673d2230134680375d3ac1d9559, type: 3}
       propertyPath: skills.Array.data[1]
       value: 
-      objectReference: {fileID: 11400000, guid: 753a6c86758146343a988e79321703d2, type: 2}
+      objectReference: {fileID: 11400000, guid: 2736fa704d230f94dae91e933c4d42be, type: 2}
     - target: {fileID: 8522391017935463820, guid: a345f673d2230134680375d3ac1d9559, type: 3}
       propertyPath: skills.Array.data[2]
       value: 
-      objectReference: {fileID: 11400000, guid: a1470b99f2c6061498a9a066e03c597d, type: 2}
+      objectReference: {fileID: 11400000, guid: 100c9e07d1b26404799b8b56574f9325, type: 2}
     - target: {fileID: 8522391017935463820, guid: a345f673d2230134680375d3ac1d9559, type: 3}
       propertyPath: skills.Array.data[3]
       value: 
-      objectReference: {fileID: 11400000, guid: fa00884baec29f24792055931bd939a1, type: 2}
+      objectReference: {fileID: 11400000, guid: e19e620398370b5439a6cb65998a16d0, type: 2}
     - target: {fileID: 8522391017935463820, guid: a345f673d2230134680375d3ac1d9559, type: 3}
       propertyPath: skills.Array.data[4]
       value: 
-      objectReference: {fileID: 11400000, guid: 1c33d141562108445baf81cc51618ca6, type: 2}
+      objectReference: {fileID: 11400000, guid: 531ae63e1f4ddc347b155fffc0e50993, type: 2}
     - target: {fileID: 8522391017935463820, guid: a345f673d2230134680375d3ac1d9559, type: 3}
       propertyPath: skills.Array.data[5]
       value: 
-      objectReference: {fileID: 11400000, guid: eb97ed5d50bc99f408760fc3a3eee0b7, type: 2}
+      objectReference: {fileID: 11400000, guid: 3f0876dfd39deaf4cbfe7b429cd7c123, type: 2}
+    - target: {fileID: 8522391017935463820, guid: a345f673d2230134680375d3ac1d9559, type: 3}
+      propertyPath: skills.Array.data[6]
+      value: 
+      objectReference: {fileID: 11400000, guid: 943e95f1fa0f8b442a34b720858c92d9, type: 2}
+    - target: {fileID: 8522391017935463820, guid: a345f673d2230134680375d3ac1d9559, type: 3}
+      propertyPath: skills.Array.data[7]
+      value: 
+      objectReference: {fileID: 11400000, guid: 81156142c916c8c46b087d87008af931, type: 2}
+    - target: {fileID: 8522391017935463820, guid: a345f673d2230134680375d3ac1d9559, type: 3}
+      propertyPath: skills.Array.data[8]
+      value: 
+      objectReference: {fileID: 11400000, guid: 01f5da1fd57400148af5524f53a128be, type: 2}
     - target: {fileID: 8522391017935463820, guid: a345f673d2230134680375d3ac1d9559, type: 3}
       propertyPath: skills.Array.data[0].instantEffects.Array.size
       value: 0

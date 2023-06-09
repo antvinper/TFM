@@ -5,7 +5,7 @@ using UnityEngine;
 public interface ICharacterModel
 {
     public void TakeDamage(StatModificator statModificator);
-    public void TakePercentualDamage(StatModificator statModificator);
-    public void Heal(float value);
+    public void TakeRealDamage(StatModificator statModificator);
+    public void Heal(StatModificator statModificator);
 
 }

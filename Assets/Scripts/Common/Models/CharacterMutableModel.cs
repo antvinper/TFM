@@ -27,6 +27,10 @@ public class CharacterMutableModel : ICharacterModel, ICharacterModelStats
 
     [JsonIgnore] private List<TimeEffectDefinition> timeEffectDefinitions = new List<TimeEffectDefinition>();
 
+    [JsonIgnore]
+    [HideInInspector]
+    public List<TimeEffectDefinition> TimeEffectDefinitions { get => timeEffectDefinitions; }
+
     [JsonProperty]
     public float MaxHealth { 
         get => maxHealth + statsIncrementPermanent.MaxHealth + statsIncrementTemporally.MaxHealth; 
@@ -34,10 +38,9 @@ public class CharacterMutableModel : ICharacterModel, ICharacterModelStats
     }
     [JsonIgnore]
     public float Health { 
-        get => health; 
+        get => health + statsIncrementTemporally.Health; 
         set 
         {
-            Debug.Log("AA");
             health = value; 
         }
     }
@@ -117,33 +120,6 @@ public class CharacterMutableModel : ICharacterModel, ICharacterModelStats
         
     }
 
-    public bool TryAddTemporallyState(TimeEffectDefinition timeEffectDefinition)
-    {
-        bool hasBeenAdded = false;
-        TimeEffectDefinition te = timeEffectDefinitions.Where(t => t.BuffDebuffTypes.Equals(timeEffectDefinition.BuffDebuffTypes)).FirstOrDefault();
-        if (te == null)
-        {
-            timeEffectDefinitions.Add(timeEffectDefinition);
-            hasBeenAdded = true;
-        }
-        else
-        {
-            if (timeEffectDefinition.Value.Equals(te.Value) && timeEffectDefinition.EffectTime.Equals(te.EffectTime))
-            {
-                te.Reset();
-            }
-            else if (timeEffectDefinition.Value > te.Value || timeEffectDefinition.EffectTime > te.EffectTime)
-            {
-                te.Cancel();
-                timeEffectDefinitions.Remove(te);
-                timeEffectDefinitions.Add(timeEffectDefinition);
-                hasBeenAdded = true;
-            }
-        }
-
-        return hasBeenAdded;
-    }
-
     public void PerformTemporallyState(StatModificator statModificator)
     {
         statsIncrementTemporally.ChangeStat(statModificator.StatToModify, statModificator.Value);
@@ -151,7 +127,11 @@ public class CharacterMutableModel : ICharacterModel, ICharacterModelStats
 
     public void PerformRealHealthChange(StatModificator statModificator)
     {
-        if(statModificator.IsAttack)
+        if (statModificator.BuffDebuffType.Equals(BuffDebuffTypes.POISON))
+        {
+            TakeRealDamage(statModificator);
+        }
+        else if(statModificator.IsAttack)
         {
             TakeDamage(statModificator);
         }
@@ -160,7 +140,7 @@ public class CharacterMutableModel : ICharacterModel, ICharacterModelStats
     {
         if(statModificator.IsAttack)
         {
-            TakePercentualDamage(statModificator);
+            TakeRealDamage(statModificator);
         }
     }
 
@@ -172,34 +152,34 @@ public class CharacterMutableModel : ICharacterModel, ICharacterModelStats
      */
     public void TakeDamage(StatModificator statModificator)
     {
-        float realDamage = statModificator.Value - Defense;
+        float realDamage = Defense + statModificator.Value;
         float finalDamage = realDamage < 0 ? 0 : realDamage;
 
-        health -= finalDamage;
+        statsIncrementTemporally.ChangeStat(statModificator.StatToModify, finalDamage);
 
-        statModificator.IsAlive = CheckIsDead();
+        statModificator.IsAlive = CheckIsAlive();
     }
-    public void TakePercentualDamage(StatModificator statModificator)
+
+    public void TakeRealDamage(StatModificator statModificator)
     {
-        health += statModificator.Value;
-
-        statModificator.IsAlive = CheckIsDead();
+        statsIncrementTemporally.ChangeStat(statModificator.StatToModify, statModificator.Value);
+        statModificator.IsAlive = CheckIsAlive();
     }
 
-    public void Heal(float value)
+    public void Heal(StatModificator statModificator)
     {
-        float finalHeal = Math.Clamp(value + Health, 0, maxHealth - Health);
-        health += finalHeal;
-        Debug.Log(finalHeal);
+        float finalHeal = Math.Clamp(statModificator.Value + Health, 0, maxHealth - Health);
+
+        statsIncrementTemporally.ChangeStat(statModificator.StatToModify, finalHeal);
     }
 
-    private bool CheckIsDead()
+    private bool CheckIsAlive()
     {
         /**
          * TODO
          * Debería llamar a algún evento de muerte??
          */
-        return health <= 0;
+        return Health > 0;
     }
 
 }

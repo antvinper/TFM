@@ -53,7 +53,7 @@ public class PlayerController : Characters.CharacterController//<PlayerMutableMo
         //UseSkill(PlayerEnumSkills.HEAL_BY_MAX_HEALTH_PERCENTAGE, this);
         //UseSkill(PlayerEnumSkills.SLOW_DOWN, enemy);
 
-        UseSkills(PlayerEnumSkills.SLOW_DOWN, this);
+        UseSkills(PlayerEnumSkills.POISON, this);
     }
 
     private async Task SetModel()
@@ -80,7 +80,7 @@ public class PlayerController : Characters.CharacterController//<PlayerMutableMo
     {
         foreach(SkillDefinition sd in skills)
         {
-            await new WaitForSeconds(1);
+            await new WaitForSeconds(2);
             sd.ProcessSkill(this, target);
         }
     }

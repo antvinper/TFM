@@ -42,6 +42,7 @@ public abstract class TimeEffectDefinition : EffectDefinition
     [HideInInspector] protected bool reset = false;
     public void Reset()
     {
+        Debug.Log(name);
         reset = true;
     }
     [HideInInspector] protected bool cancel = false;

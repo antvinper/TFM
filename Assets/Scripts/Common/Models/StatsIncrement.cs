@@ -8,7 +8,7 @@ using System;
 public class StatsIncrement : ICharacterModelStats
 {
     [SerializeField] private float maxHealth = 0;
-    //No es necesaria, pero se necesita para usar el ICharacterModelStats
+    //Es necesaria sólo para calcular la vida que tiene
     private float health = 0;
     [SerializeField] private int defense = 0;
     [SerializeField] private int magicDefense = 0;
@@ -108,6 +108,9 @@ public class StatsIncrement : ICharacterModelStats
         {
             case StatsEnum.MAX_HEALTH:
                 maxHealth += value;
+                break;
+            case StatsEnum.HEALTH:
+                health += value;
                 break;
             case StatsEnum.DEFENSE:
                 defense += (int)value;

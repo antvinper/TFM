@@ -5,7 +5,7 @@ using UnityEngine;
 
 public abstract class EffectDefinition : ScriptableObject
 {
-    [SerializeField] protected new string name;
+    [SerializeField] protected string myName;
     [SerializeField] [TextArea] protected string description;
 
 

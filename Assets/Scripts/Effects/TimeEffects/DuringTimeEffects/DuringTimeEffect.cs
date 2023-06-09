@@ -72,7 +72,7 @@ public class DuringTimeEffect : TimeEffectDefinition
     {
         cancel = true;
         ChangeStat(-finalValue, false);
-        Debug.Log("Finally apply the Effect, " + statAffected + " " + target.GetStat(statAffected));
+        Debug.Log("Cancelled apply the Effect, " + statAffected + " " + target.GetStat(statAffected));
     }
 
     private void ChangeStat(float value, bool isPercentual)

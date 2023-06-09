@@ -16,7 +16,7 @@ using UnityEngine;
  */
 public class StatModificator
 {
-    private BuffDebuffTypes bufDebufType;
+    private BuffDebuffTypes buffDebuffType;
     private StatsEnum statToModify;
     private float value;
     private bool isPercentual;
@@ -25,7 +25,7 @@ public class StatModificator
     private float timeToBeActive;
     private bool isAlive = true;
 
-    public BuffDebuffTypes BufDebufType { get => bufDebufType; }
+    public BuffDebuffTypes BuffDebuffType { get => buffDebuffType; }
     public StatsEnum StatToModify { get => statToModify; }
     public float Value { get => value; }
     public bool IsPercentual { get => isPercentual; }
@@ -44,6 +44,7 @@ public class StatModificator
         this.value = value;
         this.isPercentual = isPercentual;
         this.isPermanent = isPermanent;
+        this.buffDebuffType = buffDebuffType;
     }
 
 

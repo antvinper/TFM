@@ -27,7 +27,7 @@ public class DuringTimeEffectDefinitionEditor : Editor
 
     private void OnEnable()
     {
-        nameProperty = serializedObject.FindProperty("name");
+        nameProperty = serializedObject.FindProperty("myName");
         descriptionProperty = serializedObject.FindProperty("description");
 
         buffDebuffTypeProperty = serializedObject.FindProperty("buffDebuffType");
