@@ -17,6 +17,7 @@ public class OverTimeEffectDefinitionEditor : Editor
     private SerializedProperty nameProperty;
     private SerializedProperty descriptionProperty;
 
+    private SerializedProperty buffDebuffTypeProperty;
     private SerializedProperty effectTimeProperty;
     private SerializedProperty statAffectedProperty;
     private SerializedProperty isPositiveProperty;
@@ -31,6 +32,8 @@ public class OverTimeEffectDefinitionEditor : Editor
     {
         nameProperty = serializedObject.FindProperty("name");
         descriptionProperty = serializedObject.FindProperty("description");
+
+        buffDebuffTypeProperty = serializedObject.FindProperty("buffDebuffType");
         effectTimeProperty = serializedObject.FindProperty("effectTime");
         statAffectedProperty = serializedObject.FindProperty("statAffected");
         isPositiveProperty = serializedObject.FindProperty("isPositive");
@@ -48,6 +51,8 @@ public class OverTimeEffectDefinitionEditor : Editor
 
         EditorGUILayout.PropertyField(nameProperty);
         EditorGUILayout.PropertyField(descriptionProperty);
+
+        EditorGUILayout.PropertyField(buffDebuffTypeProperty);
         EditorGUILayout.PropertyField(effectTimeProperty);
         EditorGUILayout.PropertyField(statAffectedProperty);
         EditorGUILayout.PropertyField(isPositiveProperty);

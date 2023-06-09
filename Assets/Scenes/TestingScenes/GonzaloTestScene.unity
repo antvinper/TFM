@@ -529,9 +529,8 @@ MonoBehaviour:
     dodgeChance: 0
     critChance: 0
     critDamageMultiplier: 0
-    statsIncrement:
+    statsIncrementPermanent:
       maxHealth: 0
-      health: 0
       defense: 0
       magicDefense: 0
       attack: 0
@@ -543,9 +542,8 @@ MonoBehaviour:
       dodgeChance: 0
       critChance: 0
       critDamageMultiplier: 0
-    statsIncrementInRun:
+    statsIncrementTemporally:
       maxHealth: 0
-      health: 0
       defense: 0
       magicDefense: 0
       attack: 0
@@ -969,20 +967,32 @@ PrefabInstance:
       objectReference: {fileID: 257251307}
     - target: {fileID: 8522391017935463820, guid: a345f673d2230134680375d3ac1d9559, type: 3}
       propertyPath: skills.Array.size
-      value: 3
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8522391017935463820, guid: a345f673d2230134680375d3ac1d9559, type: 3}
       propertyPath: skills.Array.data[0]
       value: 
-      objectReference: {fileID: 11400000, guid: 3717f084b9a34be43b4300f2d0221e71, type: 2}
+      objectReference: {fileID: 11400000, guid: 001fa2db69c6b4542a84b48b26d414ec, type: 2}
     - target: {fileID: 8522391017935463820, guid: a345f673d2230134680375d3ac1d9559, type: 3}
       propertyPath: skills.Array.data[1]
       value: 
-      objectReference: {fileID: 11400000, guid: 001fa2db69c6b4542a84b48b26d414ec, type: 2}
+      objectReference: {fileID: 11400000, guid: 753a6c86758146343a988e79321703d2, type: 2}
     - target: {fileID: 8522391017935463820, guid: a345f673d2230134680375d3ac1d9559, type: 3}
       propertyPath: skills.Array.data[2]
       value: 
-      objectReference: {fileID: 11400000, guid: cf1e6b6aefabc1940b6419a56198b37a, type: 2}
+      objectReference: {fileID: 11400000, guid: a1470b99f2c6061498a9a066e03c597d, type: 2}
+    - target: {fileID: 8522391017935463820, guid: a345f673d2230134680375d3ac1d9559, type: 3}
+      propertyPath: skills.Array.data[3]
+      value: 
+      objectReference: {fileID: 11400000, guid: fa00884baec29f24792055931bd939a1, type: 2}
+    - target: {fileID: 8522391017935463820, guid: a345f673d2230134680375d3ac1d9559, type: 3}
+      propertyPath: skills.Array.data[4]
+      value: 
+      objectReference: {fileID: 11400000, guid: 1c33d141562108445baf81cc51618ca6, type: 2}
+    - target: {fileID: 8522391017935463820, guid: a345f673d2230134680375d3ac1d9559, type: 3}
+      propertyPath: skills.Array.data[5]
+      value: 
+      objectReference: {fileID: 11400000, guid: eb97ed5d50bc99f408760fc3a3eee0b7, type: 2}
     - target: {fileID: 8522391017935463820, guid: a345f673d2230134680375d3ac1d9559, type: 3}
       propertyPath: skills.Array.data[0].instantEffects.Array.size
       value: 0

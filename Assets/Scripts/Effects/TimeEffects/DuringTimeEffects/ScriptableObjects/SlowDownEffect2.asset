@@ -9,16 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5dc003174a4856f479ea2c452aa282e7, type: 3}
-  m_Name: PoisonEffect
+  m_Script: {fileID: 11500000, guid: 8b412017c4acd13459edac39cc56d685, type: 3}
+  m_Name: SlowDownEffect2
   m_EditorClassIdentifier: 
-  name: Poison
+  name: 
   description: 
-  buffDebuffType: 2
-  effectTime: 0
-  statAffected: 0
+  buffDebuffType: 1
+  effectTime: 10
+  statAffected: 6
   isPositive: 0
   isValueInPercentage: 0
   valueInPercentage: 0
-  value: 0
-  timeBetweenApplyEffect: 0
+  value: 5

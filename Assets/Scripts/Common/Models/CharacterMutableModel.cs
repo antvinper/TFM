@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Newtonsoft.Json;
 using System;
+using System.Linq;
 
 [Serializable]
 public class CharacterMutableModel : ICharacterModel, ICharacterModelStats
@@ -23,6 +24,8 @@ public class CharacterMutableModel : ICharacterModel, ICharacterModelStats
 
     [SerializeField] private StatsIncrement statsIncrementPermanent;
     [SerializeField] private StatsIncrement statsIncrementTemporally;
+
+    [JsonIgnore] private List<TimeEffectDefinition> timeEffectDefinitions = new List<TimeEffectDefinition>();
 
     [JsonProperty]
     public float MaxHealth { 
@@ -113,6 +116,34 @@ public class CharacterMutableModel : ICharacterModel, ICharacterModelStats
         statsIncrementPermanent.ChangeStat(statModificator.StatToModify, statModificator.Value);
         
     }
+
+    public bool TryAddTemporallyState(TimeEffectDefinition timeEffectDefinition)
+    {
+        bool hasBeenAdded = false;
+        TimeEffectDefinition te = timeEffectDefinitions.Where(t => t.BuffDebuffTypes.Equals(timeEffectDefinition.BuffDebuffTypes)).FirstOrDefault();
+        if (te == null)
+        {
+            timeEffectDefinitions.Add(timeEffectDefinition);
+            hasBeenAdded = true;
+        }
+        else
+        {
+            if (timeEffectDefinition.Value.Equals(te.Value) && timeEffectDefinition.EffectTime.Equals(te.EffectTime))
+            {
+                te.Reset();
+            }
+            else if (timeEffectDefinition.Value > te.Value || timeEffectDefinition.EffectTime > te.EffectTime)
+            {
+                te.Cancel();
+                timeEffectDefinitions.Remove(te);
+                timeEffectDefinitions.Add(timeEffectDefinition);
+                hasBeenAdded = true;
+            }
+        }
+
+        return hasBeenAdded;
+    }
+
     public void PerformTemporallyState(StatModificator statModificator)
     {
         statsIncrementTemporally.ChangeStat(statModificator.StatToModify, statModificator.Value);

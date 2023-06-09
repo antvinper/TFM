@@ -49,9 +49,11 @@ public class PlayerController : Characters.CharacterController//<PlayerMutableMo
         GameManager.Instance.SetPlayerController(this);
         weaponController = GetComponent<WeaponController>();
         SetModel();
-        UseSkill(PlayerEnumSkills.SINGLE_PERCENTAGE_ATTACK, this);
-        UseSkill(PlayerEnumSkills.HEAL_BY_MAX_HEALTH_PERCENTAGE, this);
+        //UseSkill(PlayerEnumSkills.SINGLE_PERCENTAGE_ATTACK, this);
+        //UseSkill(PlayerEnumSkills.HEAL_BY_MAX_HEALTH_PERCENTAGE, this);
         //UseSkill(PlayerEnumSkills.SLOW_DOWN, enemy);
+
+        UseSkills(PlayerEnumSkills.SLOW_DOWN, this);
     }
 
     private async Task SetModel()
@@ -72,6 +74,15 @@ public class PlayerController : Characters.CharacterController//<PlayerMutableMo
          */
         Debug.Log("My real damage = " + model.Attack);
         return model.Attack;
+    }
+
+    public async Task UseSkills(PlayerEnumSkills skillName, Characters.CharacterController target)
+    {
+        foreach(SkillDefinition sd in skills)
+        {
+            await new WaitForSeconds(1);
+            sd.ProcessSkill(this, target);
+        }
     }
 
     public void UseSkill(PlayerEnumSkills skillName, Characters.CharacterController target)

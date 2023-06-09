@@ -23,6 +23,11 @@ namespace Characters
             model.PerformPermanentChangeState(statModificator);
         }
 
+        public bool TryAddTemporallyState(TimeEffectDefinition timeEffectDefinition)
+        {
+            return model.TryAddTemporallyState(timeEffectDefinition);
+        }
+
         public void ChangeStatTemporally(StatModificator statModificator)
         {
             model.PerformTemporallyState(statModificator);

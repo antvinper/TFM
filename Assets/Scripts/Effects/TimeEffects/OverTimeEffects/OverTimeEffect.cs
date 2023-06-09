@@ -6,7 +6,7 @@ using UnityEditor;
 using UnityEngine;
 
 //[Serializable]
-public abstract class OverTimeEffect : TimeEffectDefinition
+public class OverTimeEffect : TimeEffectDefinition
 {
     /**
      * Aplica el efecto cada x tiempo.
@@ -18,31 +18,52 @@ public abstract class OverTimeEffect : TimeEffectDefinition
 
     public override async Task ProcessEffect(Characters.CharacterController owner, Characters.CharacterController target)
     {
-        Debug.Log("Before apply the Effect, " + statAffected + " " + target.GetStat(statAffected));
-
-        float timeAplyingEffect = 0.0f;
-        float actualTimeBetweenApplyEffect = 0.0f;
-
-        
-
-        Debug.Log("After apply the slowDownapply the Effect, " + statAffected + " " + target.GetStat(statAffected));
-
-        while(timeAplyingEffect < effectTime)
+        if (target.TryAddTemporallyState(this))
         {
-            Debug.Log("Time = " + timeAplyingEffect);
+            Debug.Log("Before apply the Effect, " + statAffected + " " + target.GetStat(statAffected));
 
-            if(actualTimeBetweenApplyEffect >= timeBetweenApplyEffect)
+            float timeAplyingEffect = 0.0f;
+            float actualTimeBetweenApplyEffect = 0.0f;
+
+
+
+            Debug.Log("After apply the the Effect, " + statAffected + " " + target.GetStat(statAffected));
+
+            while (timeAplyingEffect < effectTime && !cancel)
             {
-                ApplyEffect(target);
-                actualTimeBetweenApplyEffect = 0.0f;
+                if (reset)
+                {
+                    timeAplyingEffect = 0.0f;
+                    actualTimeBetweenApplyEffect = 0.0f;
+                    reset = false;
+                }
+                Debug.Log("Time = " + timeAplyingEffect);
+
+                if (actualTimeBetweenApplyEffect >= timeBetweenApplyEffect)
+                {
+                    ApplyEffect(target);
+                    actualTimeBetweenApplyEffect = 0.0f;
+                }
+                timeAplyingEffect += Time.deltaTime;
+                actualTimeBetweenApplyEffect += Time.deltaTime;
+
+                await new WaitForSeconds(Time.deltaTime);
             }
-            timeAplyingEffect += Time.deltaTime;
-            actualTimeBetweenApplyEffect += Time.deltaTime;
 
-            await new WaitForSeconds(Time.deltaTime);
+            Debug.Log("Finally apply the Effect, " + statAffected + " " + target.GetStat(statAffected));
         }
+        else
+        {
+            Debug.Log(statAffected + " couldn't be applied");
+        }
+    }
 
-        Debug.Log("Finally apply the Effect, " + statAffected + " " + target.GetStat(statAffected));
+    /**
+     * TODO
+     */
+    public override void Cancel()
+    {
+        throw new NotImplementedException();
     }
 
     private void ApplyEffect(Characters.CharacterController target)

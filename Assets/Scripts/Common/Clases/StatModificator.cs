@@ -2,23 +2,39 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/**
+ * REFACTOR
+ * Usar esta clase como base y crear 2 o 3 diferentes:
+ * - Una para los overtimeEffects
+ * - Otra para los duringTimeEffects
+ * - Otra para los instantEffects
+ * - AttackStat?
+ * 
+ * - Puedo almacenar el SO de cada estado?
+ * 
+ * Por ejemplo para los instant el timeToBeActive no debería existir, no lo necesita.
+ */
 public class StatModificator
 {
+    private BuffDebuffTypes bufDebufType;
     private StatsEnum statToModify;
     private float value;
     private bool isPercentual;
     private bool isAttack = false;
     private bool isPermanent;
+    private float timeToBeActive;
     private bool isAlive = true;
 
-    public StatsEnum StatToModify { get; }
-    public float Value { get; }
-    public bool IsPercentual { get; }
-    public bool IsAttack { get; }
-    public bool IsPermanent { get; }
+    public BuffDebuffTypes BufDebufType { get => bufDebufType; }
+    public StatsEnum StatToModify { get => statToModify; }
+    public float Value { get => value; }
+    public bool IsPercentual { get => isPercentual; }
+    public bool IsAttack { get => isAttack; }
+    public bool IsPermanent { get => isPermanent; }
+    public float TimeToBeActive { get => timeToBeActive; }
     public bool IsAlive { get => isAlive; set => isAlive = value; }
 
-    public StatModificator(StatsEnum statToModify, float value, bool isPercentual, bool isPermanent)
+    public StatModificator(StatsEnum statToModify, float value, bool isPercentual, bool isPermanent, BuffDebuffTypes buffDebuffType = BuffDebuffTypes.NONE)
     {
         if(value < 0 && statToModify.Equals(StatsEnum.HEALTH))
         {
@@ -29,4 +45,11 @@ public class StatModificator
         this.isPercentual = isPercentual;
         this.isPermanent = isPermanent;
     }
+
+
+    /**
+     * TODO
+     * Hacer aquí las lógicas??
+     * 
+     */
 }
