@@ -1,12 +1,10 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEditor;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "InstantEffectForRun", menuName = "Effects/InstantEffects/Instant Effect Definition For Run")]
-public class InstantEffectDefinitionForRun : EffectDefinition
+[CreateAssetMenu(fileName = "InstantEffectTemporally", menuName = "Effects/InstantEffects/Instant Effect Temporally Definition")]
+public class InstantEffectTemporallyDefinition : EffectDefinition
 {
     /**
      * TODO
@@ -41,6 +39,7 @@ public class InstantEffectDefinitionForRun : EffectDefinition
 
     public override Task ProcessEffect(Characters.CharacterController owner, Characters.CharacterController target)
     {
+        float finalValue;
         if(isStatOwnerValueInPercentage)
         {
             ProcessEffectInPercentage(owner, target);
@@ -55,19 +54,6 @@ public class InstantEffectDefinitionForRun : EffectDefinition
 
     private void ProcessEffectInPercentage(Characters.CharacterController owner, Characters.CharacterController target)
     {
-        //TODO
-        /**
-         * ## Datos necesarios: ##
-         * - Stat affected in target
-         * - Value in percentage
-         * - StatWhatToSee
-         * - IsTheOwnerStat
-         */
-
-        /**
-        * ## Algoritmo: ##
-        * 1- Comprobar el estado que ver, de quién y obtenerlo:
-        */
         float statValue;
         if(isTheOwnerStat)
         {
@@ -77,32 +63,39 @@ public class InstantEffectDefinitionForRun : EffectDefinition
         {
             statValue = target.GetStat(statWhatToSee);
         }
-        /**
-         * 2- Sacar su valor porcentual en función de valueInPercentage
-         */
-        float statValueInPercentage = (statValue / 100) * valueInPercentage;
 
-        if(isStatIncremented)
+        float finalValueInPercentage = (statValue / 100) * valueInPercentage;
+
+        if (!isStatIncremented)
         {
-            target.ChangePercentualStatInRun(statAffectedInTarget, statValueInPercentage);
-            Debug.Log(statAffectedInTarget + " now is: " + target.GetStat(statAffectedInTarget));
-        }
-        else
-        {
-            target.ChangePercentualStatInRun(statAffectedInTarget, -statValueInPercentage);
-            Debug.Log(statAffectedInTarget + " now is: " + target.GetStat(statAffectedInTarget));
+            finalValueInPercentage = -finalValueInPercentage;
+
         }
 
+        //IsPermanent siempre será false puesto que es forRun
+        StatModificator statModificator = new StatModificator(statAffectedInTarget, finalValueInPercentage, true, false);
+        target.ChangeStat(statModificator);
+
+        Debug.Log(statAffectedInTarget + " now is: " + target.GetStat(statAffectedInTarget));
     }
 
     private void ProcessEffectInReal(Characters.CharacterController owner, Characters.CharacterController target)
     {
-        //TODO
+        /**
+         * TODO??
+         * Obtener el daño real¿?????
+         */
+        float finalValue = owner.GetStat(statInterventorInOwner);
+
+        StatModificator statModificator = new StatModificator(statAffectedInTarget, finalValue, true, false);
+        target.ChangeStat(statModificator);
+
+        Debug.Log(statAffectedInTarget + " now is: " + target.GetStat(statAffectedInTarget));
     }
 }
 
 
-[CustomEditor(typeof(InstantEffectDefinitionForRun))]
+[CustomEditor(typeof(InstantEffectTemporallyDefinition))]
 public class InstantEffectDefinitionForRunEditor : Editor
 {
     private SerializedProperty nameProperty;

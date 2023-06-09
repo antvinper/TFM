@@ -14,7 +14,8 @@ public abstract class OverTimeEffect : TimeEffectDefinition
      * Si es tipo curación, se irá curando x cantidad cada cierto tiempo.
      */
     [SerializeField] protected float timeBetweenApplyEffect;
-    
+
+
     public override async Task ProcessEffect(Characters.CharacterController owner, Characters.CharacterController target)
     {
         Debug.Log("Before apply the Effect, " + statAffected + " " + target.GetStat(statAffected));
@@ -46,13 +47,20 @@ public abstract class OverTimeEffect : TimeEffectDefinition
 
     private void ApplyEffect(Characters.CharacterController target)
     {
+        float finalValue;
+        /**
+         * TODO
+         * refactor the if else in a new method to get the finalValue
+         */
         if (isPositive)
         {
-            target.SetStat(statAffected, (target.GetStat(statAffected) + valueInPercentage));
+            finalValue = target.GetStat(statAffected) + valueInPercentage;
         }
         else
         {
-            target.SetStat(statAffected, (target.GetStat(statAffected) - valueInPercentage));
+            finalValue = target.GetStat(statAffected) - valueInPercentage;
         }
+        StatModificator statModificator = new StatModificator(statAffected, finalValue, isValueInPercentage, false);
+        target.ChangeStat(statModificator);
     }
 }

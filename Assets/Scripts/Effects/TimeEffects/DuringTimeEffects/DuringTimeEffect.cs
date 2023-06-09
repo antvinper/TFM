@@ -15,16 +15,23 @@ public abstract class DuringTimeEffect : TimeEffectDefinition
         float timeAplyingEffect = 0.0f;
 
         float preValue = target.GetStat(statAffected);
-
+        float finalValue;
+            
+        /**
+         * TODO
+         * refactor in a new method
+         */
         if (isPositive)
         {
-            target.SetStat(statAffected, (preValue + value));
+            finalValue = preValue + value;
         }
         else
         {
-            target.SetStat(statAffected, (preValue - value));
+            finalValue = preValue - value;
         }
 
+        StatModificator statModificator = new StatModificator(statAffected, finalValue, isValueInPercentage, false);
+        target.ChangeStat(statModificator);
 
         Debug.Log("After apply the slowDownapply the Effect, " + statAffected + " " + target.GetStat(statAffected));
 
@@ -36,7 +43,9 @@ public abstract class DuringTimeEffect : TimeEffectDefinition
             await new WaitForSeconds(Time.deltaTime);
         }
 
-        target.SetStat(statAffected, preValue);
+        //Siempre será isPercentual a false, porque tiene que devolver el valor que había en un inicio.
+        statModificator = new StatModificator(statAffected, preValue, false, false);
+        target.ChangeStat(statModificator);
 
         Debug.Log("Finally apply the Effect, " + statAffected + " " + target.GetStat(statAffected));
     }

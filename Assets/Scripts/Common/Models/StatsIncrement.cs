@@ -100,4 +100,49 @@ public class StatsIncrement : ICharacterModelStats
         get => critDamageMultiplier;
         set => critDamageMultiplier = value;
     }
+
+
+    public void ChangeStat(StatsEnum stat, float value)
+    {
+        switch (stat)
+        {
+            case StatsEnum.MAX_HEALTH:
+                maxHealth += value;
+                break;
+            case StatsEnum.DEFENSE:
+                defense += (int)value;
+                break;
+            case StatsEnum.MAGIC_DEFENSE:
+                magicDefense += (int)value;
+                break;
+            case StatsEnum.ATTACK:
+                attack += (int)value;
+                break;
+            case StatsEnum.MAGIC_ATTACK:
+                magicAttack += (int)value;
+                break;
+            case StatsEnum.SPEED:
+                speed += (int)value;
+                break;
+            case StatsEnum.SHIELD:
+                shield += (int)value;
+                break;
+            case StatsEnum.ACCURACY:
+                accuracy += (int)value;
+                break;
+            case StatsEnum.BLOCK_CHANCE:
+                blockChance += (int)value;
+                break;
+            case StatsEnum.DODGE_CHANCE:
+                dodgeChance += (int)value;
+                break;
+            case StatsEnum.CRIT_CHANCE:
+                critChance += (int)value;
+                break;
+            case StatsEnum.CRIT_DAMAGE_MULTIPLIER:
+                critDamageMultiplier += (int)value;
+                break;
+
+        }
+    }
 }

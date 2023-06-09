@@ -4,8 +4,8 @@ using UnityEngine;
 
 public interface ICharacterModel
 {
-    public bool TakeDamage(float value);
-    public bool TakePercentualDamage(float value);
+    public void TakeDamage(StatModificator statModificator);
+    public void TakePercentualDamage(StatModificator statModificator);
     public void Heal(float value);
 
 }

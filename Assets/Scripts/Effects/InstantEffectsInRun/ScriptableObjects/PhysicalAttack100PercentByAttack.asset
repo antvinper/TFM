@@ -20,4 +20,4 @@ MonoBehaviour:
   isStatOwnerValueInPercentage: 1
   valueInPercentage: 100
   statWhatToSee: 4
-  isTheOwnerStat: 0
+  isTheOwnerStat: 1

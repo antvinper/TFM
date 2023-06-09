@@ -8,7 +8,7 @@ public class SkillDefinition : ScriptableObject
 {
     public new PlayerEnumSkills name;
     [TextArea] public new string description;
-    public List<InstantEffectDefinitionForRun> instantEffects = new List<InstantEffectDefinitionForRun>();
+    public List<InstantEffectTemporallyDefinition> instantEffects = new List<InstantEffectTemporallyDefinition>();
     public List<OverTimeEffect> overTimeEffects = new List<OverTimeEffect>();
     public List<DuringTimeEffect> duringTimeEffects = new List<DuringTimeEffect>();
 
@@ -21,7 +21,7 @@ public class SkillDefinition : ScriptableObject
 
     private void ProcessInstantEffects(Characters.CharacterController owner, Characters.CharacterController target)
     {
-        foreach(InstantEffectDefinitionForRun effect in instantEffects)
+        foreach(InstantEffectTemporallyDefinition effect in instantEffects)
         {
             effect.ProcessEffect(owner, target);
         }

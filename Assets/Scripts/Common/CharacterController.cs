@@ -9,95 +9,32 @@ namespace Characters
         [SerializeField] protected CharacterMutableModel model;
         public abstract void ProcessDamage(float value);
 
-        //public abstract void ProcessEffect(CharacterMutableModel attacker);
-        //public abstract void ProcessHealth(float value);
-        //public abstract void ProcessEffectOverTime();
-
         public abstract float GetMyRealDamage();
 
-        public void SetStat(StatsEnum stat, float value)
+
+        public void ChangeStat(StatModificator statModificator)
         {
-            switch(stat)
-            {
-                case StatsEnum.SPEED:
-                    model.Speed = (int)value;
-                    break; 
-                case StatsEnum.HEALTH:
-                    model.Health = (int)value;
-                    break;
-                /**
-                * TODO
-                */
-            }
+            StateModifier stateModifier = new StateModifier(statModificator);
+            stateModifier.PerformBehaviour(this, statModificator);
         }
 
-        /**
-         * TODO
-         * Refactor para pasa una estructura y tener sólo un ChangeStat
-         * Tener en cuenta si es un ataque o una curación cuando se vea afectada la Health. Por ejemplo para mostrar los números en verde o en rojo
-         */
-
-        public void ChangeStatPermanent(StatsEnum stat, float value)
+        public void ChangeStatPermanent(StatModificator statModificator)
         {
-            switch (stat)
-            {
-                case StatsEnum.MAX_HEALTH:
-                    model.StatsIncrement.MaxHealth += (int)value;
-                    break;
-                /**
-                 * TODO
-                 */
-            }
+            model.PerformPermanentChangeState(statModificator);
         }
 
-        public void ChangeStatInRun(StatsEnum stat, float value)
+        public void ChangeStatTemporally(StatModificator statModificator)
         {
-            switch(stat)
-            {
-                case StatsEnum.HEALTH:
-                    /**
-                     * TODO:
-                     * Tener en cuenta en la struct si es un ataque o una curación
-                     */
-                    if(value < 0)
-                    {
-                        bool isDead = model.TakeDamage(value);
-                    }
-                    else
-                    {
-                        model.Heal(value);
-                    }
-                    
-                    break;
-                case StatsEnum.MAX_HEALTH:
-                    /**
-                     * TODO
-                     * hay que modificar 
-                     */
-                    break;
-            }
+            model.PerformTemporallyState(statModificator);
         }
-        public void ChangePercentualStatInRun(StatsEnum stat, float value)
+
+        public void ChangeRealHealth(StatModificator statModificator)
         {
-            switch(stat)
-            {
-                case StatsEnum.HEALTH:
-                    if(value < 0)
-                    {
-                        bool isDead = model.TakePercentualDamage(value);
-                    }
-                    else
-                    {
-                        model.Heal(value);
-                    }
-                    break;
-                case StatsEnum.MAX_HEALTH:
-                    /**
-                     * TODO
-                     * hay que modificar 
-                     */
-                    break;
-            }
+            model.PerformRealHealthChange(statModificator);
+        }
+        public void ChangePercentualHealth(StatModificator statModificator)
+        {
+            model.PerformPercentualHealthChange(statModificator);
         }
 
         public float GetStat(StatsEnum stat)

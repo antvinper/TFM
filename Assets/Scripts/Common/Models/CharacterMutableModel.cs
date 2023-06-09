@@ -21,12 +21,12 @@ public class CharacterMutableModel : ICharacterModel, ICharacterModelStats
     [SerializeField] [Range(0, 100)] private int critChance = 0;
     [SerializeField] [Range(0, 100)] private int critDamageMultiplier = 0;
 
-    [SerializeField] private StatsIncrement statsIncrement;
-    [SerializeField] private StatsIncrement statsIncrementInRun;
+    [SerializeField] private StatsIncrement statsIncrementPermanent;
+    [SerializeField] private StatsIncrement statsIncrementTemporally;
 
     [JsonProperty]
     public float MaxHealth { 
-        get => maxHealth + statsIncrement.MaxHealth + statsIncrementInRun.MaxHealth; 
+        get => maxHealth + statsIncrementPermanent.MaxHealth + statsIncrementTemporally.MaxHealth; 
         set => maxHealth = value; 
     }
     [JsonIgnore]
@@ -40,92 +40,119 @@ public class CharacterMutableModel : ICharacterModel, ICharacterModelStats
     }
     [JsonProperty]
     public int Defense { 
-        get => defense + statsIncrement.Defense + statsIncrementInRun.Defense; 
+        get => defense + statsIncrementPermanent.Defense + statsIncrementTemporally.Defense; 
         set => defense = value; 
     }
     [JsonProperty]
     public int MagicDefense { 
-        get => magicDefense + statsIncrement.MagicDefense + statsIncrementInRun.MagicDefense; 
+        get => magicDefense + statsIncrementPermanent.MagicDefense + statsIncrementTemporally.MagicDefense; 
         set => magicDefense = value; 
     }
     [JsonProperty]
     public int Attack { 
-        get => attack + statsIncrement.Attack + statsIncrementInRun.Attack; 
+        get => attack + statsIncrementPermanent.Attack + statsIncrementTemporally.Attack; 
         set => attack = value; 
     }
     [JsonProperty]
     public int MagicAttack { 
-        get => magicAttack + statsIncrement.MagicAttack + statsIncrementInRun.MagicAttack;
+        get => magicAttack + statsIncrementPermanent.MagicAttack + statsIncrementTemporally.MagicAttack;
         set => magicAttack = value;
     }
     [JsonProperty]
     public int Speed { 
-        get => speed + statsIncrement.Speed + statsIncrementInRun.Speed;
+        get => speed + statsIncrementPermanent.Speed + statsIncrementTemporally.Speed;
         set => speed = value;
     }
     [JsonProperty]
     public int Shield { 
-        get => shield + statsIncrement.Shield + statsIncrementInRun.Shield; 
+        get => shield + statsIncrementPermanent.Shield + statsIncrementTemporally.Shield; 
         set => shield = value; 
     }
     [JsonProperty]
     public int Accuracy { 
-        get => accuracy + statsIncrement.Accuracy + statsIncrementInRun.Accuracy; 
+        get => accuracy + statsIncrementPermanent.Accuracy + statsIncrementTemporally.Accuracy; 
         set => accuracy = value; 
     }
     [JsonProperty]
     public int BlockChance { 
-        get => blockChance + statsIncrement.BlockChance + statsIncrementInRun.BlockChance; 
+        get => blockChance + statsIncrementPermanent.BlockChance + statsIncrementTemporally.BlockChance; 
         set => blockChance = value; 
     }
     public int DodgeChance { 
-        get => dodgeChance + statsIncrement.DodgeChance + statsIncrementInRun.DodgeChance;
+        get => dodgeChance + statsIncrementPermanent.DodgeChance + statsIncrementTemporally.DodgeChance;
         set => dodgeChance = value;
     }
     [JsonProperty]
     public int CritChance { 
-        get => critChance + statsIncrement.CritChance + statsIncrementInRun.CritChance; 
+        get => critChance + statsIncrementPermanent.CritChance + statsIncrementTemporally.CritChance; 
         set => critChance = value; 
     }
     [JsonProperty]
     public int CritDamageMultiplier { 
-        get => critDamageMultiplier + statsIncrement.CritDamageMultiplier + statsIncrementInRun.CritDamageMultiplier; 
+        get => critDamageMultiplier + statsIncrementPermanent.CritDamageMultiplier + statsIncrementTemporally.CritDamageMultiplier; 
         set => critDamageMultiplier = value; 
     }
 
     [JsonProperty]
     public StatsIncrement StatsIncrement
     {
-        get => statsIncrement;
-        set => statsIncrement = value;
+        get => statsIncrementPermanent;
+        set => statsIncrementPermanent = value;
     }
 
     [JsonIgnore]
     public StatsIncrement StatsIncrementInRun
     {
-        get => statsIncrementInRun;
-        set => statsIncrementInRun = value;
+        get => statsIncrementTemporally;
+        set => statsIncrementTemporally = value;
     }
+
+
+    public void PerformPermanentChangeState(StatModificator statModificator)
+    {
+        statsIncrementPermanent.ChangeStat(statModificator.StatToModify, statModificator.Value);
+        
+    }
+    public void PerformTemporallyState(StatModificator statModificator)
+    {
+        statsIncrementTemporally.ChangeStat(statModificator.StatToModify, statModificator.Value);
+    }
+
+    public void PerformRealHealthChange(StatModificator statModificator)
+    {
+        if(statModificator.IsAttack)
+        {
+            TakeDamage(statModificator);
+        }
+    }
+     public void PerformPercentualHealthChange(StatModificator statModificator)
+    {
+        if(statModificator.IsAttack)
+        {
+            TakePercentualDamage(statModificator);
+        }
+    }
+
 
     /**
      * TODO ?
      * Si el TakeDamage fuese diferente en el personaje y en los enemigos
      * debe implementarse en cada uno por separado
      */
-    public bool TakeDamage(float value)
+    public void TakeDamage(StatModificator statModificator)
     {
-        float realDamage = value - Defense;
+        float realDamage = statModificator.Value - Defense;
         float finalDamage = realDamage < 0 ? 0 : realDamage;
 
         health -= finalDamage;
 
-        return CheckIsDead();
+        statModificator.IsAlive = CheckIsDead();
     }
-    public bool TakePercentualDamage(float value)
+    public void TakePercentualDamage(StatModificator statModificator)
     {
-        health += value;
+        health += statModificator.Value;
 
-        return CheckIsDead();
+        statModificator.IsAlive = CheckIsDead();
     }
 
     public void Heal(float value)
@@ -137,6 +164,10 @@ public class CharacterMutableModel : ICharacterModel, ICharacterModelStats
 
     private bool CheckIsDead()
     {
+        /**
+         * TODO
+         * Debería llamar a algún evento de muerte??
+         */
         return health <= 0;
     }
 
