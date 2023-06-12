@@ -962,17 +962,25 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 8522391017935463820, guid: a345f673d2230134680375d3ac1d9559, type: 3}
+      propertyPath: model.speed
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 8522391017935463820, guid: a345f673d2230134680375d3ac1d9559, type: 3}
+      propertyPath: model.attack
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 8522391017935463820, guid: a345f673d2230134680375d3ac1d9559, type: 3}
       propertyPath: weaponController
       value: 
       objectReference: {fileID: 257251307}
     - target: {fileID: 8522391017935463820, guid: a345f673d2230134680375d3ac1d9559, type: 3}
       propertyPath: skills.Array.size
-      value: 9
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8522391017935463820, guid: a345f673d2230134680375d3ac1d9559, type: 3}
       propertyPath: skills.Array.data[0]
       value: 
-      objectReference: {fileID: 11400000, guid: 040672ea6b6e16e4fb962d60dcde5f2e, type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 8522391017935463820, guid: a345f673d2230134680375d3ac1d9559, type: 3}
       propertyPath: skills.Array.data[1]
       value: 

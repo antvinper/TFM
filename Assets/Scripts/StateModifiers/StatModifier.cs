@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StateModifier
+public class StatModifier
 {
     private IModifyStateBehaviour behaviour;
 
-    public StateModifier(StatModificator statModificator)
+    public StatModifier(StatModificator statModificator)
     {
         if (statModificator.StatToModify.Equals(StatsEnum.HEALTH))
         {

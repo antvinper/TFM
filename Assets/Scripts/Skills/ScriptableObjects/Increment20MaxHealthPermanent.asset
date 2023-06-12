@@ -9,15 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c046bc736b3587745ac1dd148a0620bd, type: 3}
-  m_Name: HealByMaxHealth10Percentage
+  m_Script: {fileID: 11500000, guid: 05fc9090caa00b64f8b347b5ee0f4cc9, type: 3}
+  m_Name: Increment20MaxHealthPermanent
   m_EditorClassIdentifier: 
-  name: 
+  name: 8
   description: 
-  isStatIncremented: 1
-  statAffectedInTarget: 1
-  statInterventorInOwner: 0
-  isStatOwnerValueInPercentage: 1
-  valueInPercentage: 10
-  statWhatToSee: 0
-  isTheOwnerStat: 1
+  temporalInstantEffects: []
+  permanentInstantEffects:
+  - {fileID: 11400000, guid: 4bb9486f0fb99a54d9f5bd3a399902ef, type: 2}
+  overTimeEffects: []
+  duringTimeEffects: []

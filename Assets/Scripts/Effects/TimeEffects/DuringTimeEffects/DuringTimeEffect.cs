@@ -20,28 +20,36 @@ public class DuringTimeEffect : TimeEffectDefinition
 
         if (target.TryAddTemporallyState(this))
         {
-            Debug.Log("Before apply the Effect, " + statAffected + " " + target.GetStat(statAffected));
+            Debug.Log("Before apply the Effect, " + StatAffected + " " + target.GetStat(StatAffected));
 
             float timeAplyingEffect = 0.0f;
 
             /**
              * TODO
-             * refactor in a new method
+             * ADD PERCENTUAL CHANGE
+             * Puede ser que se le reduzca la velocidad un 10%, la defensa un 15%
+             * Pero siempre del total sin tener en cuenta los cambios temporales.
+             * Si se reduce la defensa 2 veces un 10%, siempre será respecto al valor Permanent
+             * 
+             * ¿¿Como puedo saber si obtener el valor del actual o del permanente? Elección de momento.
              */
-            if (isPositive)
+            
+            if(isValueInPercentage)
             {
-                finalValue = value;
+                finalValue = GetPercentageValue(this.owner, this.target);
             }
             else
             {
-                finalValue = -value;
+                finalValue = GetValue();
             }
 
+            
+
             ChangeStat(finalValue, isValueInPercentage);
-            Debug.Log("After apply the slowDownapply the Effect, " + statAffected + " " + target.GetStat(statAffected));
+            Debug.Log("After apply the slowDownapply the Effect, " + StatAffected + " " + target.GetStat(StatAffected));
 
             //Lo dejo así por si se desea dar feedback del tiempo o algo
-            while (timeAplyingEffect < effectTime && !cancel)
+            while (timeAplyingEffect < effectLifeTime && !cancel)
             {
                 if (reset)
                 {
@@ -49,21 +57,26 @@ public class DuringTimeEffect : TimeEffectDefinition
                     reset = false;
                 }
                 timeAplyingEffect += Time.deltaTime;
+
+                
                 await new WaitForSeconds(Time.deltaTime);
             }
 
+            /**
+             * TODO hay qye comprobarlo bien todo
+             */
             if (!cancel)
             {
                 //Siempre será isPercentual a false, porque tiene que devolver el valor que había en un inicio.
                 ChangeStat(-finalValue, false);
 
-                Debug.Log("Finally apply the Effect, " + statAffected + " " + target.GetStat(statAffected));
+                Debug.Log("Finally apply the Effect, " + StatAffected + " " + target.GetStat(StatAffected));
             }
            
         }
         else
         {
-            Debug.Log(statAffected + " couldn't be applied");
+            Debug.Log(StatAffected + " couldn't be applied");
         }
         
     }
@@ -72,12 +85,17 @@ public class DuringTimeEffect : TimeEffectDefinition
     {
         cancel = true;
         ChangeStat(-finalValue, false);
-        Debug.Log("Cancelled apply the Effect, " + statAffected + " " + target.GetStat(statAffected));
+        Debug.Log("Cancelled apply the Effect, " + StatAffected + " " + target.GetStat(StatAffected));
     }
 
     private void ChangeStat(float value, bool isPercentual)
     {
-        StatModificator statModificator = new StatModificator(statAffected, value, isPercentual, false);
+        StatModificator statModificator = new StatModificator(StatAffected, value, isPercentual, false);
         target.ChangeStat(statModificator);
+    }
+
+    public override Task ProcessEffect(Characters.CharacterController target)
+    {
+        return Task.CompletedTask;
     }
 }

@@ -32,10 +32,11 @@ public class CharacterMutableModel : ICharacterModel, ICharacterModelStats
     public List<TimeEffectDefinition> TimeEffectDefinitions { get => timeEffectDefinitions; }
 
     [JsonProperty]
-    public float MaxHealth { 
-        get => maxHealth + statsIncrementPermanent.MaxHealth + statsIncrementTemporally.MaxHealth; 
-        set => maxHealth = value; 
+    public float MaxHealth {
+        get => maxHealth + statsIncrementPermanent.MaxHealth + statsIncrementTemporally.MaxHealth;
+        set => maxHealth = value;
     }
+
     [JsonIgnore]
     public float Health { 
         get => health + statsIncrementTemporally.Health; 
@@ -113,6 +114,21 @@ public class CharacterMutableModel : ICharacterModel, ICharacterModelStats
         set => statsIncrementTemporally = value;
     }
 
+    /**
+     * TODO 
+     * Do it with the rest of the stats
+     */
+    [JsonIgnore]
+    public float MaxHealthWithPermanent
+    {
+        get => maxHealth + statsIncrementPermanent.MaxHealth;
+    }
+    [JsonIgnore]
+    public float SpeedWithPermanent
+    {
+        get => speed + statsIncrementPermanent.Speed;
+    }
+
 
     public void PerformPermanentChangeState(StatModificator statModificator)
     {
@@ -127,7 +143,7 @@ public class CharacterMutableModel : ICharacterModel, ICharacterModelStats
 
     public void PerformRealHealthChange(StatModificator statModificator)
     {
-        if (statModificator.BuffDebuffType.Equals(BuffDebuffTypes.POISON))
+        if (statModificator.BuffDebuffType.Equals(EffectTypes.POISON))
         {
             TakeRealDamage(statModificator);
         }
@@ -152,10 +168,11 @@ public class CharacterMutableModel : ICharacterModel, ICharacterModelStats
      */
     public void TakeDamage(StatModificator statModificator)
     {
-        float realDamage = Defense + statModificator.Value;
+        //float realDamage = Defense + statModificator.Value;
+        float realDamage = Math.Abs(statModificator.Value) - Defense;
         float finalDamage = realDamage < 0 ? 0 : realDamage;
 
-        statsIncrementTemporally.ChangeStat(statModificator.StatToModify, finalDamage);
+        statsIncrementTemporally.ChangeStat(statModificator.StatToModify, -finalDamage);
 
         statModificator.IsAlive = CheckIsAlive();
     }

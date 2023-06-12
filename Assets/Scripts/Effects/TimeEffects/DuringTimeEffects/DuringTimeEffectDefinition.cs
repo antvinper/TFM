@@ -16,29 +16,37 @@ public class DuringTimeEffectDefinitionEditor : Editor
     private SerializedProperty nameProperty;
     private SerializedProperty descriptionProperty;
 
+    private SerializedProperty isStatIncrementedProperty;
     private SerializedProperty buffDebuffTypeProperty;
-    private SerializedProperty effectTimeProperty;
     private SerializedProperty statAffectedProperty;
-    private SerializedProperty isPositiveProperty;
+    private SerializedProperty effectTimeProperty;
     private SerializedProperty isValueInPercentageProperty;
+
+    private SerializedProperty statWhatToSeeProperty;
+    private SerializedProperty isTheOwnerStatProperty;
+    private SerializedProperty useOnlyPermanentStatVariationsProperty;
 
     private SerializedProperty valueInPercentageProperty;
     private SerializedProperty valueProperty;
 
     private void OnEnable()
     {
-        nameProperty = serializedObject.FindProperty("myName");
+        nameProperty = serializedObject.FindProperty("effectName");
         descriptionProperty = serializedObject.FindProperty("description");
 
-        buffDebuffTypeProperty = serializedObject.FindProperty("buffDebuffType");
-        effectTimeProperty = serializedObject.FindProperty("effectTime");
+        isStatIncrementedProperty = serializedObject.FindProperty("isStatIncremented");
+        buffDebuffTypeProperty = serializedObject.FindProperty("effectType");
+
         statAffectedProperty = serializedObject.FindProperty("statAffected");
-        isPositiveProperty = serializedObject.FindProperty("isPositive");
+        effectTimeProperty = serializedObject.FindProperty("effectLifeTime");
         isValueInPercentageProperty = serializedObject.FindProperty("isValueInPercentage");
+
+        statWhatToSeeProperty = serializedObject.FindProperty("statWhatToSee");
+        isTheOwnerStatProperty = serializedObject.FindProperty("isTheOwnerStat");
+        useOnlyPermanentStatVariationsProperty = serializedObject.FindProperty("useOnlyPermanentStatVariations");
 
         valueInPercentageProperty = serializedObject.FindProperty("valueInPercentage");
         valueProperty = serializedObject.FindProperty("value");
-
     }
 
     public override void OnInspectorGUI()
@@ -49,13 +57,17 @@ public class DuringTimeEffectDefinitionEditor : Editor
         EditorGUILayout.PropertyField(descriptionProperty);
 
         EditorGUILayout.PropertyField(buffDebuffTypeProperty);
+
+        EditorGUILayout.PropertyField(isStatIncrementedProperty);
         EditorGUILayout.PropertyField(effectTimeProperty);
         EditorGUILayout.PropertyField(statAffectedProperty);
-        EditorGUILayout.PropertyField(isPositiveProperty);
         EditorGUILayout.PropertyField(isValueInPercentageProperty);
 
         if (isValueInPercentageProperty.boolValue)
         {
+            EditorGUILayout.PropertyField(statWhatToSeeProperty);
+            EditorGUILayout.PropertyField(isTheOwnerStatProperty);
+            EditorGUILayout.PropertyField(useOnlyPermanentStatVariationsProperty);
             EditorGUILayout.PropertyField(valueInPercentageProperty);
         }
         else

@@ -16,7 +16,7 @@ using UnityEngine;
  */
 public class StatModificator
 {
-    private BuffDebuffTypes buffDebuffType;
+    private EffectTypes buffDebuffType;
     private StatsEnum statToModify;
     private float value;
     private bool isPercentual;
@@ -25,7 +25,7 @@ public class StatModificator
     private float timeToBeActive;
     private bool isAlive = true;
 
-    public BuffDebuffTypes BuffDebuffType { get => buffDebuffType; }
+    public EffectTypes BuffDebuffType { get => buffDebuffType; }
     public StatsEnum StatToModify { get => statToModify; }
     public float Value { get => value; }
     public bool IsPercentual { get => isPercentual; }
@@ -34,7 +34,7 @@ public class StatModificator
     public float TimeToBeActive { get => timeToBeActive; }
     public bool IsAlive { get => isAlive; set => isAlive = value; }
 
-    public StatModificator(StatsEnum statToModify, float value, bool isPercentual, bool isPermanent, BuffDebuffTypes buffDebuffType = BuffDebuffTypes.NONE)
+    public StatModificator(StatsEnum statToModify, float value, bool isPercentual, bool isPermanent, EffectTypes buffDebuffType = EffectTypes.NONE)
     {
         if(value < 0 && statToModify.Equals(StatsEnum.HEALTH))
         {

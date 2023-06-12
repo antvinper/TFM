@@ -53,7 +53,10 @@ public class PlayerController : Characters.CharacterController//<PlayerMutableMo
         //UseSkill(PlayerEnumSkills.HEAL_BY_MAX_HEALTH_PERCENTAGE, this);
         //UseSkill(PlayerEnumSkills.SLOW_DOWN, enemy);
 
-        UseSkills(PlayerEnumSkills.POISON, this);
+        //UseSkills(PlayerEnumSkills.POISON, this);
+
+        //UseSkill(PlayerEnumSkills.SLOW_DOWN, this);
+        UseSkill(PlayerEnumSkills.PERMANENT, this);
     }
 
     private async Task SetModel()
@@ -96,7 +99,8 @@ public class PlayerController : Characters.CharacterController//<PlayerMutableMo
                 break;
         }*/
         
-        skill.ProcessSkill(this, target);
+        skill.ProcessSkill(this);
+        Debug.Log(model.MaxHealth);
     }
 
     /*public void ProcessDamage(float value)

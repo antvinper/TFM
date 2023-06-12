@@ -11,32 +11,14 @@ public abstract class TimeEffectDefinition : EffectDefinition
      * - Slow down (dismiunye velocidad)
      * - Poison (disminuye la vida poco a poco)
      * - Hurry up (aumenta velocidad)
-     * 
-     * Se tiene que guardar una lista de stat modificators en el mutablemodel
-     * A partir de ahí calcular los stats, cuando se remueva de la lista el que termine
-     * se actualizará automáticamente el valor del stat.
      */
-    [SerializeField] protected BuffDebuffTypes buffDebuffType;
+    [SerializeField] protected EffectTypes effectType;
     [Range(0f, float.MaxValue)]
-    [SerializeField] protected float effectTime;
-    [SerializeField] protected StatsEnum statAffected;
-    [SerializeField] protected bool isPositive;
+    [SerializeField] protected float effectLifeTime;
 
-    [SerializeField] protected bool isValueInPercentage;
-
-    [HideInInspector]
-    [Tooltip("Este valor va entre 0 y 100 siendo esto un porcentaje")]
-    [SerializeField] [Range(0, 100)] protected int valueInPercentage;
-
-    [HideInInspector]
-    [Tooltip("Este valor se usará tal cual.")]
-    [Range(0f, float.MaxValue)]
-    [SerializeField] 
-    protected float value;
-
-    [HideInInspector] public BuffDebuffTypes BuffDebuffTypes { get => buffDebuffType; }
-    [HideInInspector] public float EffectTime { get => effectTime; }
-    [HideInInspector] public float Value { get => value; }
+    [HideInInspector] public EffectTypes EffectType { get => effectType; }
+    [HideInInspector] public float EffectTime { get => effectLifeTime; }
+    //[HideInInspector] public float effectValue { get => Value; }
 
 
     [HideInInspector] protected bool reset = false;

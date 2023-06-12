@@ -15,8 +15,8 @@ namespace Characters
 
         public void ChangeStat(StatModificator statModificator)
         {
-            StateModifier stateModifier = new StateModifier(statModificator);
-            stateModifier.PerformBehaviour(this, statModificator);
+            StatModifier statModifier = new StatModifier(statModificator);
+            statModifier.PerformBehaviour(this, statModificator);
         }
 
         public void ChangeStatPermanent(StatModificator statModificator)
@@ -27,7 +27,11 @@ namespace Characters
         public bool TryAddTemporallyState(DuringTimeEffect duringTimeEffect)
         {
             bool hasBeenAdded = false;
-            DuringTimeEffectDefinition te = model.TimeEffectDefinitions.Where(t => t.BuffDebuffTypes.Equals(duringTimeEffect.BuffDebuffTypes)).FirstOrDefault() as DuringTimeEffectDefinition;
+            /**
+             * TENER EN CUENTA EL TIPO NONE. Este no debe influir a la hora de aplicar o no los efectos.
+             * Siempre se aplicará con el tipo NONE
+             */
+            DuringTimeEffectDefinition te = model.TimeEffectDefinitions.Where(t => t.EffectType.Equals(duringTimeEffect.EffectType)).FirstOrDefault() as DuringTimeEffectDefinition;
             if (te == null)
             {
                 model.TimeEffectDefinitions.Add(duringTimeEffect);
@@ -56,7 +60,7 @@ namespace Characters
         {
             bool hasBeenAdded = false;
 
-            OverTimeEffectDefinition te = model.TimeEffectDefinitions.Where(t => t.BuffDebuffTypes.Equals(overTimeEffect.BuffDebuffTypes)).FirstOrDefault() as OverTimeEffectDefinition;
+            OverTimeEffectDefinition te = model.TimeEffectDefinitions.Where(t => t.EffectType.Equals(overTimeEffect.EffectType)).FirstOrDefault() as OverTimeEffectDefinition;
 
             if (te == null)
             {
@@ -95,6 +99,26 @@ namespace Characters
             model.PerformPercentualHealthChange(statModificator);
         }
 
+        public float GetPermanentStat(StatsEnum stat)
+        {
+            float value = 0;
+
+            switch (stat)
+            {
+                case StatsEnum.MAX_HEALTH:
+                    value = model.MaxHealthWithPermanent;
+                    break;
+                case StatsEnum.SPEED:
+                    value = model.SpeedWithPermanent;
+                    break;
+                /**
+                 * TODO
+                 */
+            }
+
+                    return value;
+        }
+
         public float GetStat(StatsEnum stat)
         {
             float value = 0;
@@ -114,8 +138,8 @@ namespace Characters
                     value = model.Attack;
                     break;
                 /**
-                * TODO
-                */
+                 * TODO
+                 */
             }
 
             return value;

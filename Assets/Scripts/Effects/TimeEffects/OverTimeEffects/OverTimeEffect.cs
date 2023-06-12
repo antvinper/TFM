@@ -27,13 +27,21 @@ public class OverTimeEffect : TimeEffectDefinition
             Debug.Log(name + " has been applied");
             cancel = false;
             reset = false;
-            Debug.Log("Before apply the Effect, " + statAffected + " " + target.GetStat(statAffected));
+            Debug.Log("Before apply the Effect, " + StatAffected + " " + target.GetStat(StatAffected));
 
             float timeAplyingEffect = 0.0f;
             float actualTimeBetweenApplyEffect = 0.0f;
             
+            /**
+             * TODO
+             * Calcular el porcentaje bien
+             * Si tengo veneno y ese veneno me quita un 10% de la vida,
+             * tiene que ser un 10% de la vida máxima. 
+             * Lo hace??
+             * 
+             */
 
-            while (timeAplyingEffect < effectTime && !cancel)
+            while (timeAplyingEffect < effectLifeTime && !cancel)
             {
                 if (reset)
                 {
@@ -46,7 +54,7 @@ public class OverTimeEffect : TimeEffectDefinition
                 if (actualTimeBetweenApplyEffect >= timeBetweenApplyEffect)
                 {
                     ApplyEffect(target);
-                    Debug.Log("After apply the the Effect, " + statAffected + " " + target.GetStat(statAffected));
+                    Debug.Log("After apply the the Effect, " + StatAffected + " " + target.GetStat(StatAffected));
                     actualTimeBetweenApplyEffect = 0.0f;
                 }
                 timeAplyingEffect += Time.deltaTime;
@@ -57,7 +65,7 @@ public class OverTimeEffect : TimeEffectDefinition
                 
             }
 
-            Debug.Log("Finally apply the Effect, " + statAffected + " " + target.GetStat(statAffected));
+            Debug.Log("Finally apply the Effect, " + StatAffected + " " + target.GetStat(StatAffected));
         }
         else
         {
@@ -65,14 +73,14 @@ public class OverTimeEffect : TimeEffectDefinition
         }
     }
 
-    /**
-     * TODO
-     */
+    
     public override void Cancel()
     {
         cancel = true;
         Debug.Log(this.name + " cancelled.");
     }
+
+    
 
     private void ApplyEffect(Characters.CharacterController target)
     {
@@ -83,13 +91,13 @@ public class OverTimeEffect : TimeEffectDefinition
          */
         if (isValueInPercentage)
         {
-            if (isPositive)
+            if (IsStatIncremented)
             {
-                finalValue = target.GetStat(statAffected) + valueInPercentage;
+                finalValue = target.GetStat(StatAffected) + valueInPercentage;
             }
             else
             {
-                finalValue = target.GetStat(statAffected) - valueInPercentage;
+                finalValue = target.GetStat(StatAffected) - valueInPercentage;
             }
         }
         else
@@ -99,17 +107,22 @@ public class OverTimeEffect : TimeEffectDefinition
              * Obtener el valor bien de value o de un stat en concreto del owner
              * De momento vamos a probar que va con valor
              */
-            if (isPositive)
+            if (IsStatIncremented)
             {
-                finalValue = value;
+                finalValue = Value;
             }
             else
             {
-                finalValue = -value;
+                finalValue = -Value;
             }
         }
         
-        StatModificator statModificator = new StatModificator(statAffected, finalValue, isValueInPercentage, false, buffDebuffType);
+        StatModificator statModificator = new StatModificator(StatAffected, finalValue, isValueInPercentage, false, effectType);
         target.ChangeStat(statModificator);
+    }
+
+    public override Task ProcessEffect(Characters.CharacterController target)
+    {
+        return Task.CompletedTask;
     }
 }

@@ -10,18 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5dc003174a4856f479ea2c452aa282e7, type: 3}
-  m_Name: PoisonEffect1
+  m_Name: OverTimeEffectDefinition
   m_EditorClassIdentifier: 
   effectName: 
   description: 
   isStatIncremented: 0
-  statAffected: 1
-  isValueInPercentage: 0
+  statAffected: 0
+  isValueInPercentage: 1
   statWhatToSee: 0
   isTheOwnerStat: 0
   useOnlyPermanentStatVariations: 0
   valueInPercentage: 0
-  value: 5
+  value: 0
   effectType: 0
   effectLifeTime: 0
-  timeBetweenApplyEffect: 0.5
+  timeBetweenApplyEffect: 0
