@@ -516,7 +516,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   model:
-    maxHealth: 2500
+    maxHealth: 100
     health: 100
     defense: 10
     magicDefense: 10
@@ -529,32 +529,6 @@ MonoBehaviour:
     dodgeChance: 0
     critChance: 0
     critDamageMultiplier: 0
-    statsIncrementPermanent:
-      maxHealth: 0
-      defense: 0
-      magicDefense: 0
-      attack: 0
-      magicAttack: 0
-      speed: 0
-      shield: 0
-      accuracy: 0
-      blockChance: 0
-      dodgeChance: 0
-      critChance: 0
-      critDamageMultiplier: 0
-    statsIncrementTemporally:
-      maxHealth: 0
-      defense: 0
-      magicDefense: 0
-      attack: 0
-      magicAttack: 0
-      speed: 0
-      shield: 0
-      accuracy: 0
-      blockChance: 0
-      dodgeChance: 0
-      critChance: 0
-      critDamageMultiplier: 0
 --- !u!1001 &1494490832
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -980,7 +954,7 @@ PrefabInstance:
     - target: {fileID: 8522391017935463820, guid: a345f673d2230134680375d3ac1d9559, type: 3}
       propertyPath: skills.Array.data[0]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 11400000, guid: fcca93374e3d40246aeb32d34140c2b6, type: 2}
     - target: {fileID: 8522391017935463820, guid: a345f673d2230134680375d3ac1d9559, type: 3}
       propertyPath: skills.Array.data[1]
       value: 

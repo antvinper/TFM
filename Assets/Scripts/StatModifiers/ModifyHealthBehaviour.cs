@@ -1,4 +1,4 @@
-public class ModifyHealthBehaviour : IModifyStateBehaviour
+public class ModifyHealthBehaviour : IModifyStatBehaviour
 {
     public void ExecuteBehaviour(Characters.CharacterController characterController, StatModificator statModificator)
     {

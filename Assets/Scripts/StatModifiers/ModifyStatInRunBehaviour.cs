@@ -1,8 +1,8 @@
-public class ModifyStateTemporallyBehaviour : IModifyStateBehaviour
+public class ModifyStatInRunBehaviour : IModifyStatBehaviour
 {
     public void ExecuteBehaviour(Characters.CharacterController characterController, StatModificator statModificator)
     {
-        characterController.ChangeStatTemporally(statModificator);
+        characterController.ChangeStatInRun(statModificator);
 
     }
 }

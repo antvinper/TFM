@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effectName: 
   description: 
+  applyOnSelf: 0
   isStatIncremented: 0
   statAffected: 0
   isValueInPercentage: 1

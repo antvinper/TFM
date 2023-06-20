@@ -17,20 +17,20 @@ public class InstantEffectPermanentDefinitionEditor : Editor
     private SerializedProperty descriptionProperty;
 
     private SerializedProperty statAffectedInTargetProperty;
-    private SerializedProperty isValueInPercentageProperty;
+    //private SerializedProperty isValueInPercentageProperty;
 
-    private SerializedProperty valueInPercentageProperty;
+    //private SerializedProperty valueInPercentageProperty;
     private SerializedProperty valueProperty;
 
     private void OnEnable()
     {
         nameProperty = serializedObject.FindProperty("effectName");
         descriptionProperty = serializedObject.FindProperty("description");
-        
-        statAffectedInTargetProperty = serializedObject.FindProperty("statAffected");
-        isValueInPercentageProperty = serializedObject.FindProperty("isValueInPercentage");
 
-        valueInPercentageProperty = serializedObject.FindProperty("valueInPercentage");
+        statAffectedInTargetProperty = serializedObject.FindProperty("statAffected");
+        //isValueInPercentageProperty = serializedObject.FindProperty("isValueInPercentage");
+
+        //valueInPercentageProperty = serializedObject.FindProperty("valueInPercentage");
         valueProperty = serializedObject.FindProperty("value");
 
     }
@@ -41,18 +41,20 @@ public class InstantEffectPermanentDefinitionEditor : Editor
 
         EditorGUILayout.PropertyField(nameProperty);
         EditorGUILayout.PropertyField(descriptionProperty);
+
         EditorGUILayout.PropertyField(statAffectedInTargetProperty);
 
-        EditorGUILayout.PropertyField(isValueInPercentageProperty);
+        //EditorGUILayout.PropertyField(isValueInPercentageProperty);
+        EditorGUILayout.PropertyField(valueProperty);
 
-        if (isValueInPercentageProperty.boolValue)
+        /*if (isValueInPercentageProperty.boolValue)
         {
             EditorGUILayout.PropertyField(valueInPercentageProperty);
         }
         else
         {
             EditorGUILayout.PropertyField(valueProperty);
-        }
+        }*/
             
         
 

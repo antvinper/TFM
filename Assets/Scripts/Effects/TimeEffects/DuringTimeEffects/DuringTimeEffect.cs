@@ -9,7 +9,7 @@ using UnityEngine;
 public class DuringTimeEffect : TimeEffectDefinition
 {
     private Characters.CharacterController owner, target;
-    private float finalValue;
+    private int finalValue;
     public override async Task ProcessEffect(Characters.CharacterController owner, Characters.CharacterController target)
     {
         //No sé por qué valen true nada más empezar
@@ -34,16 +34,17 @@ public class DuringTimeEffect : TimeEffectDefinition
              * ¿¿Como puedo saber si obtener el valor del actual o del permanente? Elección de momento.
              */
             
-            if(isValueInPercentage)
+           /* if(isValueInPercentage)
             {
                 finalValue = GetPercentageValue(this.owner, this.target);
             }
             else
             {
                 finalValue = GetValue();
-            }
+            }*/
 
-            
+            finalValue = GetValue();
+
 
             ChangeStat(finalValue, isValueInPercentage);
             Debug.Log("After apply the slowDownapply the Effect, " + StatAffected + " " + target.GetStat(StatAffected));
@@ -88,7 +89,7 @@ public class DuringTimeEffect : TimeEffectDefinition
         Debug.Log("Cancelled apply the Effect, " + StatAffected + " " + target.GetStat(StatAffected));
     }
 
-    private void ChangeStat(float value, bool isPercentual)
+    private void ChangeStat(int value, bool isPercentual)
     {
         StatModificator statModificator = new StatModificator(StatAffected, value, isPercentual, false);
         target.ChangeStat(statModificator);

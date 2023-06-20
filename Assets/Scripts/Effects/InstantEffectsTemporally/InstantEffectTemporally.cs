@@ -15,6 +15,7 @@ public class InstantEffectTemporally : EffectDefinition
         {
             ProcessEffectInReal(owner, target);
         }
+        
 
         return Task.CompletedTask;
     }
@@ -26,7 +27,15 @@ public class InstantEffectTemporally : EffectDefinition
 
     private void ProcessEffectInPercentage(Characters.CharacterController owner, Characters.CharacterController target)
     {
-        float statValue = isTheOwnerStat ? owner.GetStat(statWhatToSee) : target.GetStat(statWhatToSee);
+        /**
+         * TODO
+         * Introducir sólo el valor porcentual, es decir, entre 1 y 100
+         * ya me encargo luego de calcular el valor al obtenerlo
+         */
+
+
+
+        /*float statValue = isTheOwnerStat ? owner.GetStat(statWhatToSee) : target.GetStat(statWhatToSee);
 
         float finalValueInPercentage = (statValue / 100) * valueInPercentage;
 
@@ -40,12 +49,18 @@ public class InstantEffectTemporally : EffectDefinition
         StatModificator statModificator = new StatModificator(StatAffected, finalValueInPercentage, true, false);
         target.ChangeStat(statModificator);
 
+        Debug.Log(StatAffected + " now is: " + target.GetStat(StatAffected));*/
+
+        int finalValue = IsStatIncremented ? valueInPercentage : -valueInPercentage;
+        StatModificator statModificator = new StatModificator(StatAffected, finalValue, true, false);
+        target.ChangeStat(statModificator);
+
         Debug.Log(StatAffected + " now is: " + target.GetStat(StatAffected));
     }
 
     private void ProcessEffectInReal(Characters.CharacterController owner, Characters.CharacterController target)
     {
-        float finalValue = IsStatIncremented ? Value : -Value;
+        int finalValue = IsStatIncremented ? Value : -Value;
 
         StatModificator statModificator = new StatModificator(StatAffected, finalValue, false, false);
         target.ChangeStat(statModificator);

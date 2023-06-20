@@ -8,7 +8,7 @@ namespace Characters
     public abstract class CharacterController : MonoBehaviour
     {
         [SerializeField] protected CharacterMutableModel model;
-        public abstract void ProcessDamage(float value);
+        public abstract void ProcessDamage(int value);
 
         public abstract float GetMyRealDamage();
 
@@ -19,10 +19,19 @@ namespace Characters
             statModifier.PerformBehaviour(this, statModificator);
         }
 
+        //Permanent fuera de la run, se añade siempre
         public void ChangeStatPermanent(StatModificator statModificator)
         {
-            model.PerformPermanentChangeState(statModificator);
+            //model.PerformInstantlyApplyStat(statModificator);
+            model.PerformApplyPermanentStat(statModificator);
         }
+
+        //Permanente SÓLO dentro de la run, al terminar la run no tinenen efecto, pero se añade siempre
+        public void ChangeStatInRun(StatModificator statModificator)
+        {
+            model.PerformApplyStatModifyInRun(statModificator);
+        }
+
 
         public bool TryAddTemporallyState(DuringTimeEffect duringTimeEffect)
         {
@@ -87,8 +96,13 @@ namespace Characters
 
         public void ChangeStatTemporally(StatModificator statModificator)
         {
-            model.PerformTemporallyState(statModificator);
+            model.PerformTemporallyStat(statModificator);
         }
+
+       /* public void ChangeStatInRun(StatModificator statModificator)
+        {
+            model.PerformApplyStatModifyInRun(statModificator);
+        }*/
 
         public void ChangeRealHealth(StatModificator statModificator)
         {
@@ -99,9 +113,9 @@ namespace Characters
             model.PerformPercentualHealthChange(statModificator);
         }
 
-        public float GetPermanentStat(StatsEnum stat)
+        /*public int GetPermanentStat(StatsEnum stat)
         {
-            float value = 0;
+            int value = 0;
 
             switch (stat)
             {
@@ -111,38 +125,14 @@ namespace Characters
                 case StatsEnum.SPEED:
                     value = model.SpeedWithPermanent;
                     break;
-                /**
-                 * TODO
-                 */
             }
 
                     return value;
-        }
+        }*/
 
-        public float GetStat(StatsEnum stat)
+        public int GetStat(StatsEnum stat)
         {
-            float value = 0;
-
-            switch (stat)
-            {
-                case StatsEnum.MAX_HEALTH:
-                    value = model.MaxHealth;
-                    break;
-                case StatsEnum.HEALTH:
-                    value = model.Health;
-                    break;
-                case StatsEnum.SPEED:
-                    value = model.Speed;
-                    break;
-                case StatsEnum.ATTACK:
-                    value = model.Attack;
-                    break;
-                /**
-                 * TODO
-                 */
-            }
-
-            return value;
+            return model.GetStat(stat);
         }
     }
 }

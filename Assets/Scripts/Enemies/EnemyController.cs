@@ -20,7 +20,7 @@ public class EnemyController : Characters.CharacterController
         throw new System.NotImplementedException();
     }
 
-    public override void ProcessDamage(float value)
+    public override void ProcessDamage(int value)
     {
         model.Health -= value;
 

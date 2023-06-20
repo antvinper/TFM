@@ -18,7 +18,7 @@ public class StatModificator
 {
     private EffectTypes buffDebuffType;
     private StatsEnum statToModify;
-    private float value;
+    private int value;
     private bool isPercentual;
     private bool isAttack = false;
     private bool isPermanent;
@@ -27,14 +27,14 @@ public class StatModificator
 
     public EffectTypes BuffDebuffType { get => buffDebuffType; }
     public StatsEnum StatToModify { get => statToModify; }
-    public float Value { get => value; }
+    public int Value { get => value; set => this.value = value; }
     public bool IsPercentual { get => isPercentual; }
     public bool IsAttack { get => isAttack; }
     public bool IsPermanent { get => isPermanent; }
     public float TimeToBeActive { get => timeToBeActive; }
     public bool IsAlive { get => isAlive; set => isAlive = value; }
 
-    public StatModificator(StatsEnum statToModify, float value, bool isPercentual, bool isPermanent, EffectTypes buffDebuffType = EffectTypes.NONE)
+    public StatModificator(StatsEnum statToModify, int value, bool isPercentual, bool isPermanent, EffectTypes buffDebuffType = EffectTypes.NONE)
     {
         if(value < 0 && statToModify.Equals(StatsEnum.HEALTH))
         {

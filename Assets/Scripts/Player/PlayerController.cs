@@ -64,7 +64,7 @@ public class PlayerController : Characters.CharacterController//<PlayerMutableMo
         await new WaitForSeconds(1.0f);
         GameManager.Instance.GameData.PlayerModel = model;
     }
-    public override void ProcessDamage(float value)
+    public override void ProcessDamage(int value)
     {
         Debug.Log("ProcessDamage in player");
     }
@@ -99,8 +99,10 @@ public class PlayerController : Characters.CharacterController//<PlayerMutableMo
                 break;
         }*/
         
-        skill.ProcessSkill(this);
+        //skill.ProcessSkill(this);
+        skill.ProcessSkill(this, this);
         Debug.Log(model.MaxHealth);
+        Debug.Log(model.Health);
     }
 
     /*public void ProcessDamage(float value)

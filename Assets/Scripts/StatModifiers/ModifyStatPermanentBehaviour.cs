@@ -1,4 +1,4 @@
-public class ModifyStatePermanentBehaviour : IModifyStateBehaviour
+public class ModifyStatPermanentBehaviour : IModifyStatBehaviour
 {
     public void ExecuteBehaviour(Characters.CharacterController characterController, StatModificator statModificator)
     {

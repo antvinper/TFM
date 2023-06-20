@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class StatModifier
 {
-    private IModifyStateBehaviour behaviour;
+    private IModifyStatBehaviour behaviour;
 
     public StatModifier(StatModificator statModificator)
     {
@@ -23,11 +23,11 @@ public class StatModifier
     {
         if (isPermanent)
         {
-            behaviour = new ModifyStatePermanentBehaviour();
+            behaviour = new ModifyStatPermanentBehaviour();
         }
         else
         {
-            behaviour = new ModifyStateTemporallyBehaviour();
+            behaviour = new ModifyStatInRunBehaviour();
         }
     }
 

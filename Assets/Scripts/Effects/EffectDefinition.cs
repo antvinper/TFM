@@ -10,11 +10,13 @@ public abstract class EffectDefinition : ScriptableObject, IEffect
 
     [SerializeField] private string effectName;
     [SerializeField] [TextArea] private string description;
+    [Tooltip("¿El efecto será aplicado a sí mismo (true) o al target (false)?.")]
+    [SerializeField] private bool applyOnSelf;
 
     public string EffectName => effectName;
     public string Description => description;
 
-    
+    public bool ApplyOnSelf => applyOnSelf;
 
     [SerializeField]
     [Tooltip("El estado modificado va a ser incrementado o disminuido? Puedo atacar quitando vida o curarme sumando vida.")]
@@ -77,14 +79,14 @@ public abstract class EffectDefinition : ScriptableObject, IEffect
     public abstract Task ProcessEffect(Characters.CharacterController owner, Characters.CharacterController target);
     public abstract Task ProcessEffect(Characters.CharacterController target);
 
-    protected float GetValue()
+    protected int GetValue()
     {
         return isStatIncremented?Value:-Value;
     }
 
-    protected float GetPercentageValue(Characters.CharacterController owner, Characters.CharacterController target)
+    /*protected int GetPercentageValue(Characters.CharacterController owner, Characters.CharacterController target)
     {
-        float finalValueInPercentage;
+        int finalValueInPercentage;
         if (useOnlyPermanentStatVariations)
         {
             finalValueInPercentage = GetPercentageValueFromPermanentStat(owner, target);
@@ -95,16 +97,16 @@ public abstract class EffectDefinition : ScriptableObject, IEffect
         }
 
         return finalValueInPercentage;
-    }
+    }*/
 
     /**
      * Si se le ha reducido la rapidez un 10% nos devolverá el valor SIN la reducción
      */
-    protected float GetPercentageValueFromPermanentStat(Characters.CharacterController owner, Characters.CharacterController target)
+    /*protected int GetPercentageValueFromPermanentStat(Characters.CharacterController owner, Characters.CharacterController target)
     {
-        float finalValueInPercentage;
+        int finalValueInPercentage;
 
-        float statValue = isTheOwnerStat ? owner.GetPermanentStat(statWhatToSee) : target.GetPermanentStat(statWhatToSee);
+        int statValue = isTheOwnerStat ? owner.GetPermanentStat(statWhatToSee) : target.GetPermanentStat(statWhatToSee);
 
         finalValueInPercentage = (statValue / 100) * valueInPercentage;
 
@@ -115,16 +117,16 @@ public abstract class EffectDefinition : ScriptableObject, IEffect
 
 
         return finalValueInPercentage;
-    }
+    }*/
 
     /**
      * Si se le ha reducido la rapidez un 10% nos devolverá el valor CON la reducción
      */
-    protected float GetPercentageValueFromActualStat(Characters.CharacterController owner, Characters.CharacterController target)
+    protected int GetPercentageValueFromActualStat(Characters.CharacterController owner, Characters.CharacterController target)
     {
-        float finalValueInPercentage;
+        int finalValueInPercentage;
 
-        float statValue = isTheOwnerStat ? owner.GetStat(statWhatToSee) : target.GetStat(statWhatToSee);
+        int statValue = isTheOwnerStat ? owner.GetStat(statWhatToSee) : target.GetStat(statWhatToSee);
 
         finalValueInPercentage = (statValue / 100) * valueInPercentage;
 

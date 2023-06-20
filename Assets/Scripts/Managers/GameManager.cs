@@ -5,6 +5,7 @@ using UnityEngine;
 public class GameManager : Singleton<GameManager>
 {
     private bool isGameStarted = false;
+    private bool isGameInRun = false;
     private DataPersistenceManager dataPersistenceManager;
 
     /**
@@ -48,6 +49,11 @@ public class GameManager : Singleton<GameManager>
     {
         get => this.isGameStarted;
         set => isGameStarted = value;
+    }
+    public bool IsGameInRun
+    {
+        get => isGameInRun;
+        set => isGameInRun = value;
     }
 
     public void SaveGame(int slotIndex = 0)

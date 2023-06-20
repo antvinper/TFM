@@ -8,8 +8,8 @@ using System.Linq;
 [Serializable]
 public class CharacterMutableModel : ICharacterModel, ICharacterModelStats
 {
-    [SerializeField] private float maxHealth = 100;
-    [SerializeField] private float health = 100;
+    [SerializeField] private int maxHealth = 100;
+    [SerializeField] private int health = 100;
     [SerializeField] private int defense = 10;
     [SerializeField] private int magicDefense = 10;
     [SerializeField] private int attack = 10;
@@ -22,8 +22,18 @@ public class CharacterMutableModel : ICharacterModel, ICharacterModelStats
     [SerializeField] [Range(0, 100)] private int critChance = 0;
     [SerializeField] [Range(0, 100)] private int critDamageMultiplier = 0;
 
-    [SerializeField] private StatsIncrement statsIncrementPermanent;
-    [SerializeField] private StatsIncrement statsIncrementTemporally;
+#region statsModifiers
+    private StatsModifyInstantPermanently InstantStatsModifyPermanent = new StatsModifyInstantPermanently();
+
+    //Se mantienen durante la run
+    private StatsModifyInstantTemporally InstantStatsModifyInRun = new StatsModifyInstantTemporally();
+    private StatsModifyInstantTemporallyInPercentage InstantStatsModifyPercentageInRun = new StatsModifyInstantTemporallyInPercentage();
+
+    //Terminan tras un tiempo
+    private StatsModifyTime timeStatsModify = new StatsModifyTime();
+    private StatsModifyTimeInPercentage timeStatsModifyPercentage = new StatsModifyTimeInPercentage();
+
+#endregion statsModifiers
 
     [JsonIgnore] private List<TimeEffectDefinition> timeEffectDefinitions = new List<TimeEffectDefinition>();
 
@@ -31,114 +41,238 @@ public class CharacterMutableModel : ICharacterModel, ICharacterModelStats
     [HideInInspector]
     public List<TimeEffectDefinition> TimeEffectDefinitions { get => timeEffectDefinitions; }
 
+    private float CalculateStat(StatsEnum stat, int baseStat)
+    {
+        float value1 = baseStat + InstantStatsModifyPermanent.GetStatValue(stat);
+        float value2 = InstantStatsModifyInRun.GetStatValue(stat) + timeStatsModify.GetStatValue(stat);
+        float value3 = InstantStatsModifyPercentageInRun.GetStatValue(stat) + timeStatsModifyPercentage.GetStatValue(stat);
+
+        float valueCalculated = (value1 + value2) * (1 + (value3 * 0.01f));
+
+        return Math.Clamp(valueCalculated, 0, MaxStatsValues.GetStat(stat));
+    }
+
     [JsonProperty]
-    public float MaxHealth {
-        get => maxHealth + statsIncrementPermanent.MaxHealth + statsIncrementTemporally.MaxHealth;
+    public int MaxHealth {
+        get
+        {
+            return (int)CalculateStat(StatsEnum.MAX_HEALTH, maxHealth);
+        }
+        //get => maxHealth + statsModifyPermanent.MaxHealth + statsModifyTemporally.MaxHealth;
         set => maxHealth = value;
     }
 
     [JsonIgnore]
-    public float Health { 
-        get => health + statsIncrementTemporally.Health; 
+    public int Health {
+        get
+        {
+            return (int)CalculateStat(StatsEnum.HEALTH, health);
+        }
+        //get => health + statsModifyTemporally.Health; 
         set 
         {
             health = value; 
         }
     }
     [JsonProperty]
-    public int Defense { 
-        get => defense + statsIncrementPermanent.Defense + statsIncrementTemporally.Defense; 
+    public int Defense {
+        get
+        {
+            return (int)CalculateStat(StatsEnum.DEFENSE, defense);
+        }
+        //get => defense + statsModifyPermanent.Defense + statsModifyTemporally.Defense; 
         set => defense = value; 
     }
     [JsonProperty]
-    public int MagicDefense { 
-        get => magicDefense + statsIncrementPermanent.MagicDefense + statsIncrementTemporally.MagicDefense; 
+    public int MagicDefense {
+        get
+        {
+            return (int)CalculateStat(StatsEnum.MAGIC_DEFENSE, magicDefense);
+        }
+        //get => magicDefense + statsModifyPermanent.MagicDefense + statsModifyTemporally.MagicDefense; 
         set => magicDefense = value; 
     }
     [JsonProperty]
-    public int Attack { 
-        get => attack + statsIncrementPermanent.Attack + statsIncrementTemporally.Attack; 
+    public int Attack {
+        get
+        {
+            return (int)CalculateStat(StatsEnum.ATTACK, attack);
+        }
+        //get => attack + statsModifyPermanent.Attack + statsModifyTemporally.Attack; 
         set => attack = value; 
     }
     [JsonProperty]
-    public int MagicAttack { 
-        get => magicAttack + statsIncrementPermanent.MagicAttack + statsIncrementTemporally.MagicAttack;
+    public int MagicAttack {
+        get
+        {
+            return (int)CalculateStat(StatsEnum.MAGIC_ATTACK, magicAttack);
+        }
+       // get => magicAttack + statsModifyPermanent.MagicAttack + statsModifyTemporally.MagicAttack;
         set => magicAttack = value;
     }
     [JsonProperty]
-    public int Speed { 
-        get => speed + statsIncrementPermanent.Speed + statsIncrementTemporally.Speed;
+    public int Speed {
+        get
+        {
+            return (int)CalculateStat(StatsEnum.SPEED, speed);
+        }
+        //get => speed + statsModifyPermanent.Speed + statsModifyTemporally.Speed;
         set => speed = value;
     }
     [JsonProperty]
-    public int Shield { 
-        get => shield + statsIncrementPermanent.Shield + statsIncrementTemporally.Shield; 
+    public int Shield {
+        get
+        {
+            return (int)CalculateStat(StatsEnum.SHIELD, shield);
+        }
+        //get => shield + statsModifyPermanent.Shield + statsModifyTemporally.Shield; 
         set => shield = value; 
     }
     [JsonProperty]
-    public int Accuracy { 
-        get => accuracy + statsIncrementPermanent.Accuracy + statsIncrementTemporally.Accuracy; 
+    public int Accuracy {
+        get
+        {
+            return (int)CalculateStat(StatsEnum.ACCURACY, accuracy);
+        }
+        //get => accuracy + statsModifyPermanent.Accuracy + statsModifyTemporally.Accuracy; 
         set => accuracy = value; 
     }
     [JsonProperty]
-    public int BlockChance { 
-        get => blockChance + statsIncrementPermanent.BlockChance + statsIncrementTemporally.BlockChance; 
+    public int BlockChance {
+        get
+        {
+            return (int)CalculateStat(StatsEnum.BLOCK_CHANCE, blockChance);
+        }
+        //get => blockChance + statsModifyPermanent.BlockChance + statsModifyTemporally.BlockChance; 
         set => blockChance = value; 
     }
-    public int DodgeChance { 
-        get => dodgeChance + statsIncrementPermanent.DodgeChance + statsIncrementTemporally.DodgeChance;
+    public int DodgeChance {
+        get
+        {
+            return (int)CalculateStat(StatsEnum.DODGE_CHANCE, dodgeChance);
+        }
+        //get => dodgeChance + statsModifyPermanent.DodgeChance + statsModifyTemporally.DodgeChance;
         set => dodgeChance = value;
     }
     [JsonProperty]
-    public int CritChance { 
-        get => critChance + statsIncrementPermanent.CritChance + statsIncrementTemporally.CritChance; 
+    public int CritChance {
+        get
+        {
+            return (int)CalculateStat(StatsEnum.CRIT_CHANCE, critChance);
+        }
+        //get => critChance + statsModifyPermanent.CritChance + statsModifyTemporally.CritChance; 
         set => critChance = value; 
     }
     [JsonProperty]
-    public int CritDamageMultiplier { 
-        get => critDamageMultiplier + statsIncrementPermanent.CritDamageMultiplier + statsIncrementTemporally.CritDamageMultiplier; 
+    public int CritDamageMultiplier {
+        get
+        {
+            return (int)CalculateStat(StatsEnum.CRIT_DAMAGE_MULTIPLIER, critDamageMultiplier);
+        }
+        //get => critDamageMultiplier + statsModifyPermanent.CritDamageMultiplier + statsModifyTemporally.CritDamageMultiplier; 
         set => critDamageMultiplier = value; 
     }
 
     [JsonProperty]
-    public StatsIncrement StatsIncrement
+    public StatsModifyInstantPermanently StatsIncrement
     {
-        get => statsIncrementPermanent;
-        set => statsIncrementPermanent = value;
+        get => InstantStatsModifyPermanent;
+        set => InstantStatsModifyPermanent = value;
+    }
+    [JsonIgnore]
+    public StatsModifyInstantTemporally StatsModifyInRun
+    {
+        get => InstantStatsModifyInRun;
+        set => InstantStatsModifyInRun = value;
     }
 
     [JsonIgnore]
-    public StatsIncrement StatsIncrementInRun
+    public StatsModifyInstantTemporallyInPercentage StatsModifyPercentageInRun
     {
-        get => statsIncrementTemporally;
-        set => statsIncrementTemporally = value;
+        get => InstantStatsModifyPercentageInRun;
+        set => InstantStatsModifyPercentageInRun = value;
+    }
+
+    [JsonIgnore]
+    public StatsModifyTime StatsIncrementInRun
+    {
+        get => timeStatsModify;
+        set => timeStatsModify = value;
+    }
+    [JsonIgnore]
+    public StatsModifyTimeInPercentage StatsModifyPercentageTemporally
+    {
+        get => timeStatsModifyPercentage;
+        set => timeStatsModifyPercentage = value;
     }
 
     /**
      * TODO 
      * Do it with the rest of the stats
      */
-    [JsonIgnore]
-    public float MaxHealthWithPermanent
+    /*[JsonIgnore]
+    public int MaxHealthWithPermanent
     {
-        get => maxHealth + statsIncrementPermanent.MaxHealth;
+        get => maxHealth + InstantStatsModifyPermanent.MaxHealth;
     }
     [JsonIgnore]
-    public float SpeedWithPermanent
+    public int SpeedWithPermanent
     {
-        get => speed + statsIncrementPermanent.Speed;
+        get => speed + InstantStatsModifyPermanent.Speed;
+    }*/
+
+    public void PerformApplyPermanentStat(StatModificator statModificator)
+    {
+        InstantStatsModifyPermanent.ApplyStat(statModificator);
+    }
+
+    public void PerformApplyStatModifyInRun(StatModificator statModificator)
+    {
+        if (statModificator.IsPercentual)
+        {
+            InstantStatsModifyPercentageInRun.ApplyStat(statModificator);
+        }
+        else
+        {
+            InstantStatsModifyInRun.ApplyStat(statModificator);
+        }
+    }
+
+    public void PerformApplyTimeStatModifyInRun(StatModificator statModificator)
+    {
+        if (statModificator.IsPercentual)
+        {
+            timeStatsModifyPercentage.ApplyStat(statModificator);
+        }
+        else
+        {
+            timeStatsModify.ApplyStat(statModificator);
+        }
     }
 
 
-    public void PerformPermanentChangeState(StatModificator statModificator)
+
+
+    public void PerformInstantlyApplyStat(StatModificator statModificator)
     {
-        statsIncrementPermanent.ChangeStat(statModificator.StatToModify, statModificator.Value);
+        if (GameManager.Instance.IsGameInRun)
+        {
+            //TODO
+            InstantStatsModifyInRun.ApplyStat(statModificator);
+        }
+        else
+        {
+            InstantStatsModifyPermanent.ApplyStat(statModificator);
+            //statsIncrementPermanent.ChangeStat(statModificator.StatToModify, statModificator.Value);
+        }
+        
         
     }
 
-    public void PerformTemporallyState(StatModificator statModificator)
+    public void PerformTemporallyStat(StatModificator statModificator)
     {
-        statsIncrementTemporally.ChangeStat(statModificator.StatToModify, statModificator.Value);
+        timeStatsModify.ApplyStat(statModificator);
+        //statsIncrementTemporally.ChangeStat(statModificator.StatToModify, statModificator.Value);
     }
 
     public void PerformRealHealthChange(StatModificator statModificator)
@@ -169,25 +303,31 @@ public class CharacterMutableModel : ICharacterModel, ICharacterModelStats
     public void TakeDamage(StatModificator statModificator)
     {
         //float realDamage = Defense + statModificator.Value;
-        float realDamage = Math.Abs(statModificator.Value) - Defense;
-        float finalDamage = realDamage < 0 ? 0 : realDamage;
+        int realDamage = Math.Abs(statModificator.Value) - Defense;
+        int finalDamage = realDamage < 0 ? 0 : realDamage;
 
-        statsIncrementTemporally.ChangeStat(statModificator.StatToModify, -finalDamage);
+        statModificator.Value = -finalDamage;
+
+        InstantStatsModifyInRun.ApplyStat(statModificator);
+        //statsIncrementTemporally.ChangeStat(statModificator.StatToModify, -finalDamage);
 
         statModificator.IsAlive = CheckIsAlive();
     }
 
     public void TakeRealDamage(StatModificator statModificator)
     {
-        statsIncrementTemporally.ChangeStat(statModificator.StatToModify, statModificator.Value);
+        InstantStatsModifyInRun.ApplyStat(statModificator);
+        //statsIncrementTemporally.ChangeStat(statModificator.StatToModify, statModificator.Value);
         statModificator.IsAlive = CheckIsAlive();
     }
 
     public void Heal(StatModificator statModificator)
     {
-        float finalHeal = Math.Clamp(statModificator.Value + Health, 0, maxHealth - Health);
+        int finalHeal = Math.Clamp(statModificator.Value + Health, 0, maxHealth - Health);
 
-        statsIncrementTemporally.ChangeStat(statModificator.StatToModify, finalHeal);
+        statModificator.Value = finalHeal;
+        InstantStatsModifyInRun.ApplyStat(statModificator);
+        //statsIncrementTemporally.ChangeStat(statModificator.StatToModify, finalHeal);
     }
 
     private bool CheckIsAlive()
@@ -197,6 +337,56 @@ public class CharacterMutableModel : ICharacterModel, ICharacterModelStats
          * Debería llamar a algún evento de muerte??
          */
         return Health > 0;
+    }
+
+    public int GetStat(StatsEnum stat)
+    {
+        int value = 0;
+
+        switch (stat)
+        {
+            case StatsEnum.MAX_HEALTH:
+                value = MaxHealth;
+                break;
+            case StatsEnum.HEALTH:
+                value = Health;
+                break;
+            case StatsEnum.DEFENSE:
+                value = Defense;
+                break;
+            case StatsEnum.MAGIC_DEFENSE:
+                value = MagicDefense;
+                break;
+            case StatsEnum.ATTACK:
+                value = Attack;
+                break;
+            case StatsEnum.MAGIC_ATTACK:
+                value = MagicAttack;
+                break;
+            case StatsEnum.SPEED:
+                value = Speed;
+                break;
+            case StatsEnum.SHIELD:
+                value = Shield;
+                break;
+            case StatsEnum.ACCURACY:
+                value = Accuracy;
+                break;
+            case StatsEnum.BLOCK_CHANCE:
+                value = BlockChance;
+                break;
+            case StatsEnum.DODGE_CHANCE:
+                value = DodgeChance;
+                break;
+            case StatsEnum.CRIT_CHANCE:
+                value = CritChance;
+                break;
+            case StatsEnum.CRIT_DAMAGE_MULTIPLIER:
+                value = CritDamageMultiplier;
+                break;
+        }
+
+        return value;
     }
 
 }

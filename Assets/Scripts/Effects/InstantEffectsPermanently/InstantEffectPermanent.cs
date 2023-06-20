@@ -19,6 +19,12 @@ public class InstantEffectPermanent : EffectDefinition
 
         StatModificator statModificator = new StatModificator(StatAffected, Value, isValueInPercentage, true);
         target.ChangeStat(statModificator);
+        /*if (StatAffected.Equals(StatsEnum.MAX_HEALTH))
+        {
+            statModificator = new StatModificator(StatsEnum.HEALTH, Value, isValueInPercentage, true);
+            target.ChangeStat(statModificator);
+        }*/
+        
 
         return Task.CompletedTask;
     }

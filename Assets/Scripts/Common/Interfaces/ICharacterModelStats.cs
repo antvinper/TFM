@@ -4,8 +4,8 @@ using UnityEngine;
 
 public interface ICharacterModelStats
 {
-    public float MaxHealth { get; set; }
-    public float Health { get; set; }
+    public int MaxHealth { get; set; }
+    public int Health { get; set; }
     public int Defense { get; set; }
     public int MagicDefense { get; set; }
     public int Attack { get; set; }

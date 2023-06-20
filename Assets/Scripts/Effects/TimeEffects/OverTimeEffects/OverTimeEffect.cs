@@ -84,7 +84,7 @@ public class OverTimeEffect : TimeEffectDefinition
 
     private void ApplyEffect(Characters.CharacterController target)
     {
-        float finalValue;
+        int finalValue;
         /**
          * TODO
          * refactor the if else in a new method to get the finalValue

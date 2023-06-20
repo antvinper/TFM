@@ -15,6 +15,7 @@ public class DuringTimeEffectDefinitionEditor : Editor
 {
     private SerializedProperty nameProperty;
     private SerializedProperty descriptionProperty;
+    private SerializedProperty applyOnSelfProperty;
 
     private SerializedProperty isStatIncrementedProperty;
     private SerializedProperty buffDebuffTypeProperty;
@@ -24,7 +25,7 @@ public class DuringTimeEffectDefinitionEditor : Editor
 
     private SerializedProperty statWhatToSeeProperty;
     private SerializedProperty isTheOwnerStatProperty;
-    private SerializedProperty useOnlyPermanentStatVariationsProperty;
+    //private SerializedProperty useOnlyPermanentStatVariationsProperty;
 
     private SerializedProperty valueInPercentageProperty;
     private SerializedProperty valueProperty;
@@ -33,6 +34,7 @@ public class DuringTimeEffectDefinitionEditor : Editor
     {
         nameProperty = serializedObject.FindProperty("effectName");
         descriptionProperty = serializedObject.FindProperty("description");
+        applyOnSelfProperty = serializedObject.FindProperty("applyOnSelf");
 
         isStatIncrementedProperty = serializedObject.FindProperty("isStatIncremented");
         buffDebuffTypeProperty = serializedObject.FindProperty("effectType");
@@ -43,7 +45,7 @@ public class DuringTimeEffectDefinitionEditor : Editor
 
         statWhatToSeeProperty = serializedObject.FindProperty("statWhatToSee");
         isTheOwnerStatProperty = serializedObject.FindProperty("isTheOwnerStat");
-        useOnlyPermanentStatVariationsProperty = serializedObject.FindProperty("useOnlyPermanentStatVariations");
+        //useOnlyPermanentStatVariationsProperty = serializedObject.FindProperty("useOnlyPermanentStatVariations");
 
         valueInPercentageProperty = serializedObject.FindProperty("valueInPercentage");
         valueProperty = serializedObject.FindProperty("value");
@@ -55,6 +57,7 @@ public class DuringTimeEffectDefinitionEditor : Editor
 
         EditorGUILayout.PropertyField(nameProperty);
         EditorGUILayout.PropertyField(descriptionProperty);
+        EditorGUILayout.PropertyField(applyOnSelfProperty);
 
         EditorGUILayout.PropertyField(buffDebuffTypeProperty);
 
@@ -67,7 +70,7 @@ public class DuringTimeEffectDefinitionEditor : Editor
         {
             EditorGUILayout.PropertyField(statWhatToSeeProperty);
             EditorGUILayout.PropertyField(isTheOwnerStatProperty);
-            EditorGUILayout.PropertyField(useOnlyPermanentStatVariationsProperty);
+           // EditorGUILayout.PropertyField(useOnlyPermanentStatVariationsProperty);
             EditorGUILayout.PropertyField(valueInPercentageProperty);
         }
         else

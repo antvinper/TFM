@@ -15,6 +15,7 @@ public class InstantEffectTemporallyDefinitionEditor : Editor
 {
     private SerializedProperty nameProperty;
     private SerializedProperty descriptionProperty;
+    private SerializedProperty applyOnSelfProperty;
 
     private SerializedProperty isStatIncrementedProperty;
     private SerializedProperty statAffectedInTargetProperty;
@@ -30,6 +31,7 @@ public class InstantEffectTemporallyDefinitionEditor : Editor
     {
         nameProperty = serializedObject.FindProperty("effectName");
         descriptionProperty = serializedObject.FindProperty("description");
+        applyOnSelfProperty = serializedObject.FindProperty("applyOnSelf");
 
         isStatIncrementedProperty = serializedObject.FindProperty("isStatIncremented");
         statAffectedInTargetProperty = serializedObject.FindProperty("statAffected");
@@ -49,6 +51,7 @@ public class InstantEffectTemporallyDefinitionEditor : Editor
 
         EditorGUILayout.PropertyField(nameProperty);
         EditorGUILayout.PropertyField(descriptionProperty);
+        EditorGUILayout.PropertyField(applyOnSelfProperty);
         EditorGUILayout.PropertyField(isStatIncrementedProperty);
         EditorGUILayout.PropertyField(statAffectedInTargetProperty);
         EditorGUILayout.PropertyField(isValueInPercentageProperty);
