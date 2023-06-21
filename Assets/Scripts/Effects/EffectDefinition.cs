@@ -84,20 +84,20 @@ public abstract class EffectDefinition : ScriptableObject, IEffect
         return isStatIncremented?Value:-Value;
     }
 
-    /*protected int GetPercentageValue(Characters.CharacterController owner, Characters.CharacterController target)
+    protected int GetPercentageValue(Characters.CharacterController owner, Characters.CharacterController target)
     {
         int finalValueInPercentage;
-        if (useOnlyPermanentStatVariations)
+        /*if (useOnlyPermanentStatVariations)
         {
             finalValueInPercentage = GetPercentageValueFromPermanentStat(owner, target);
         }
         else
         {
             finalValueInPercentage = GetPercentageValueFromActualStat(owner, target);
-        }
-
+        }*/
+        finalValueInPercentage = GetPercentageValueFromActualStat(owner, target);
         return finalValueInPercentage;
-    }*/
+    }
 
     /**
      * Si se le ha reducido la rapidez un 10% nos devolverá el valor SIN la reducción
@@ -124,11 +124,31 @@ public abstract class EffectDefinition : ScriptableObject, IEffect
      */
     protected int GetPercentageValueFromActualStat(Characters.CharacterController owner, Characters.CharacterController target)
     {
-        int finalValueInPercentage;
+        float finalValueInPercentage;
 
-        int statValue = isTheOwnerStat ? owner.GetStat(statWhatToSee) : target.GetStat(statWhatToSee);
+        int valueSWTS = isTheOwnerStat? owner.GetStat(statWhatToSee) : target.GetStat(statWhatToSee); ;
 
-        finalValueInPercentage = (statValue / 100) * valueInPercentage;
+        //Hay que comprobar si el stat es el mismo o diferente en el owner stat o igual no y se puede
+        //calcular siempre por evitar ifs
+
+        /*if (isTheOwnerStat)
+        {
+            //finalValueInPercentage = valueInPercentage;
+            valueSWTS = owner.GetStat(statWhatToSee);
+        }
+        else
+        {
+            valueSWTS = target.GetStat(statWhatToSee);
+        }*/
+
+        float targetValuePercentual = (valueSWTS * 0.01f) * valueInPercentage;
+        finalValueInPercentage = (targetValuePercentual / owner.GetStat(statAffected))*100;
+
+
+
+        /*int statValue = isTheOwnerStat ? owner.GetStat(statWhatToSee) : target.GetStat(statWhatToSee);
+
+        finalValueInPercentage = (statValue * 0.01f) * valueInPercentage;*/
 
         if (!IsStatIncremented)
         {
@@ -136,6 +156,6 @@ public abstract class EffectDefinition : ScriptableObject, IEffect
         }
 
 
-        return finalValueInPercentage;
+        return (int)finalValueInPercentage;
     }
 }

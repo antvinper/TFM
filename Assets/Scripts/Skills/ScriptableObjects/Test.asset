@@ -9,16 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8ce7d27a895b02428b51755d305ed3c, type: 3}
-  m_Name: AttackByAttackEffect
+  m_Script: {fileID: 11500000, guid: 05fc9090caa00b64f8b347b5ee0f4cc9, type: 3}
+  m_Name: Test
   m_EditorClassIdentifier: 
-  effectName: 
+  name: 0
   description: 
-  isStatIncremented: 0
-  statAffected: 0
-  isValueInPercentage: 1
-  statWhatToSee: 4
-  isTheOwnerStat: 1
-  useOnlyPermanentStatVariations: 0
-  valueInPercentage: 100
-  value: 0
+  temporalInstantEffects:
+  - {fileID: 11400000, guid: ec3cd4ce3b790a048b1de65d5390ca6b, type: 2}
+  permanentInstantEffects: []
+  overTimeEffects: []
+  duringTimeEffects: []

@@ -277,14 +277,23 @@ public class CharacterMutableModel : ICharacterModel, ICharacterModelStats
 
     public void PerformRealHealthChange(StatModificator statModificator)
     {
-        if (statModificator.BuffDebuffType.Equals(EffectTypes.POISON))
+        if(statModificator.Value > 0)
         {
-            TakeRealDamage(statModificator);
+            Heal(statModificator);
         }
-        else if(statModificator.IsAttack)
+        else
         {
-            TakeDamage(statModificator);
+            if (statModificator.BuffDebuffType.Equals(EffectTypes.POISON))
+            {
+                TakeRealDamage(statModificator);
+            }
+            else if (statModificator.IsAttack)
+            {
+                TakeDamage(statModificator);
+            }
         }
+        
+        
     }
      public void PerformPercentualHealthChange(StatModificator statModificator)
     {
@@ -323,7 +332,7 @@ public class CharacterMutableModel : ICharacterModel, ICharacterModelStats
 
     public void Heal(StatModificator statModificator)
     {
-        int finalHeal = Math.Clamp(statModificator.Value + Health, 0, maxHealth - Health);
+        int finalHeal = Math.Clamp(statModificator.Value, 0, maxHealth - Health);
 
         statModificator.Value = finalHeal;
         InstantStatsModifyInRun.ApplyStat(statModificator);

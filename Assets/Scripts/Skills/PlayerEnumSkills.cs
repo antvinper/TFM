@@ -12,5 +12,7 @@ public enum PlayerEnumSkills
     POISON,
     SWORD_BASICCOMBO_1,
     SWORD_BASICCOMBO_2,
-    PERMANENT
+    PERMANENT,
+    DEFFENSE_DOWN,
+    REVITALIA
 }

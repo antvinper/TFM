@@ -22,6 +22,8 @@ public class OverTimeEffect : TimeEffectDefinition
 
     public override async Task ProcessEffect(Characters.CharacterController owner, Characters.CharacterController target)
     {
+        this.owner = owner;
+        this.target = target;
         if (target.TryAddTemporallyState(this))
         {
             Debug.Log(name + " has been applied");
@@ -91,22 +93,25 @@ public class OverTimeEffect : TimeEffectDefinition
          */
         if (isValueInPercentage)
         {
-            if (IsStatIncremented)
-            {
-                finalValue = target.GetStat(StatAffected) + valueInPercentage;
-            }
-            else
-            {
-                finalValue = target.GetStat(StatAffected) - valueInPercentage;
-            }
+            finalValue = GetPercentageValue(this.owner, this.target);
         }
         else
         {
-            /**
-             * TODO
-             * Obtener el valor bien de value o de un stat en concreto del owner
-             * De momento vamos a probar que va con valor
-             */
+            finalValue = GetValue();
+        }
+        /*if (isValueInPercentage)
+        {
+            //1- Obtener valor del statwhat to see. Si es la maxHealth = 100
+            finalValue = target.GetStat(statWhatToSee);
+            //2- Saco el valor porcentaje. Si el porcentaje es 5: finalValue = 100*0.05 = 5
+            float percentual = valueInPercentage * 0.01f;
+            finalValue = Mathf.RoundToInt(IsStatIncremented ? finalValue * percentual : finalValue * -percentual);
+
+
+            finalValue = GetPercentageValueFromActualStat(owner, target);
+        }
+        else
+        {
             if (IsStatIncremented)
             {
                 finalValue = Value;
@@ -115,9 +120,18 @@ public class OverTimeEffect : TimeEffectDefinition
             {
                 finalValue = -Value;
             }
-        }
-        
-        StatModificator statModificator = new StatModificator(StatAffected, finalValue, isValueInPercentage, false, effectType);
+        }*/
+
+        //Siempre será false, puesto que queremos aplicar un efecto instantáneo.
+        //Cómo se va a usar para reducir la vida o aumentarla, no va a volver a su estado inicial.
+        ChangeStat(finalValue, false);
+        /*StatModificator statModificator = new StatModificator(StatAffected, (int)finalValue, isValueInPercentage, false, effectType);
+        target.ChangeStat(statModificator);*/
+    }
+
+    private void ChangeStat(int value, bool isPercentual)
+    {
+        StatModificator statModificator = new StatModificator(StatAffected, value, isPercentual, false, effectType);
         target.ChangeStat(statModificator);
     }
 

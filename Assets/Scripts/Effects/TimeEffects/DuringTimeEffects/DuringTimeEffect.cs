@@ -8,7 +8,7 @@ using UnityEngine;
 //[Serializable]
 public class DuringTimeEffect : TimeEffectDefinition
 {
-    private Characters.CharacterController owner, target;
+    //private Characters.CharacterController owner, target;
     private int finalValue;
     public override async Task ProcessEffect(Characters.CharacterController owner, Characters.CharacterController target)
     {
@@ -34,16 +34,16 @@ public class DuringTimeEffect : TimeEffectDefinition
              * ¿¿Como puedo saber si obtener el valor del actual o del permanente? Elección de momento.
              */
             
-           /* if(isValueInPercentage)
+            if(isValueInPercentage)
             {
                 finalValue = GetPercentageValue(this.owner, this.target);
             }
             else
             {
                 finalValue = GetValue();
-            }*/
+            }
 
-            finalValue = GetValue();
+            //finalValue = GetValue();
 
 
             ChangeStat(finalValue, isValueInPercentage);
@@ -68,8 +68,8 @@ public class DuringTimeEffect : TimeEffectDefinition
              */
             if (!cancel)
             {
-                //Siempre será isPercentual a false, porque tiene que devolver el valor que había en un inicio.
-                ChangeStat(-finalValue, false);
+                
+                ChangeStat(-finalValue, isValueInPercentage);
 
                 Debug.Log("Finally apply the Effect, " + StatAffected + " " + target.GetStat(StatAffected));
             }

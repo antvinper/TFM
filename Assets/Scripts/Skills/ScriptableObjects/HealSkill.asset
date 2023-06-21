@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05fc9090caa00b64f8b347b5ee0f4cc9, type: 3}
   m_Name: HealSkill
   m_EditorClassIdentifier: 
-  name: 4
+  name: 10
   description: 
-  instantEffects:
-  - {fileID: 11400000, guid: cfcd6518bb4bc91479a99875e53f32ab, type: 2}
-  overTimeEffects: []
+  temporalInstantEffects: []
+  permanentInstantEffects: []
+  overTimeEffects:
+  - {fileID: 11400000, guid: 2ce881182773b36448223c7bda20f4b5, type: 2}
   duringTimeEffects: []
