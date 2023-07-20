@@ -516,14 +516,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   model:
-    maxHealth: 100
-    health: 100
-    defense: 10
-    magicDefense: 10
-    attack: 10
-    magicAttack: 10
-    speed: 10
-    shield: 10
+    maxHealth: 3000
+    health: 3000
+    defense: 255
+    magicDefense: 255
+    attack: 255
+    magicAttack: 255
+    speed: 255
+    shield: 255
     accuracy: 100
     blockChance: 0
     dodgeChance: 0
@@ -941,7 +941,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8522391017935463820, guid: a345f673d2230134680375d3ac1d9559, type: 3}
       propertyPath: model.attack
-      value: 25
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 8522391017935463820, guid: a345f673d2230134680375d3ac1d9559, type: 3}
+      propertyPath: model.health
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 8522391017935463820, guid: a345f673d2230134680375d3ac1d9559, type: 3}
+      propertyPath: model.shield
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8522391017935463820, guid: a345f673d2230134680375d3ac1d9559, type: 3}
+      propertyPath: model.defense
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8522391017935463820, guid: a345f673d2230134680375d3ac1d9559, type: 3}
+      propertyPath: model.maxHealth
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 8522391017935463820, guid: a345f673d2230134680375d3ac1d9559, type: 3}
       propertyPath: weaponController
@@ -958,11 +974,11 @@ PrefabInstance:
     - target: {fileID: 8522391017935463820, guid: a345f673d2230134680375d3ac1d9559, type: 3}
       propertyPath: skills.Array.data[1]
       value: 
-      objectReference: {fileID: 11400000, guid: cf1e6b6aefabc1940b6419a56198b37a, type: 2}
+      objectReference: {fileID: 11400000, guid: 40f85d3d800ef8340a8bcf3757a02329, type: 2}
     - target: {fileID: 8522391017935463820, guid: a345f673d2230134680375d3ac1d9559, type: 3}
       propertyPath: skills.Array.data[2]
       value: 
-      objectReference: {fileID: 11400000, guid: 040672ea6b6e16e4fb962d60dcde5f2e, type: 2}
+      objectReference: {fileID: 11400000, guid: 753a6c86758146343a988e79321703d2, type: 2}
     - target: {fileID: 8522391017935463820, guid: a345f673d2230134680375d3ac1d9559, type: 3}
       propertyPath: skills.Array.data[3]
       value: 

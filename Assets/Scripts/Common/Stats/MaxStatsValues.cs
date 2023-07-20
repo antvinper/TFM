@@ -5,7 +5,7 @@ using UnityEngine;
 public static class MaxStatsValues
 {
     private static int maxHealthMax = 9999;
-    private static int healthMax = 255;
+    private static int healthMax = 9999;
     private static int defenseMax = 255;
     private static int magicDefenseMax = 255;
     private static int attackMax = 255;

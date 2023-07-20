@@ -68,7 +68,7 @@ namespace Characters
         public bool TryAddTemporallyState(OverTimeEffect overTimeEffect)
         {
             bool hasBeenAdded = false;
-
+            string error = "";
             OverTimeEffectDefinition te = model.TimeEffectDefinitions.Where(t => t.EffectType.Equals(overTimeEffect.EffectType)).FirstOrDefault() as OverTimeEffectDefinition;
 
             if (te == null)
@@ -78,31 +78,58 @@ namespace Characters
             }
             else
             {
-                if (overTimeEffect.Value.Equals(te.Value) && overTimeEffect.EffectTime.Equals(te.EffectTime) && overTimeEffect.TimeBetweenApplyEffect.Equals(te.TimeBetweenApplyEffect))
+                if (overTimeEffect.IsValueInPercentage)
                 {
-                    te.Reset();
-                }
-                else if (overTimeEffect.Value > te.Value || overTimeEffect.EffectTime > te.EffectTime || overTimeEffect.TimeBetweenApplyEffect < te.TimeBetweenApplyEffect)
+                    if(!te.IsValueInPercentage)
+                    {
+                        SwitchTimeEffect(te, overTimeEffect);
+                        hasBeenAdded = true;
+                    }
+                    else
+                    {
+                        if (overTimeEffect.ValueInPercentage.Equals(te.ValueInPercentage) && overTimeEffect.EffectTime.Equals(te.EffectTime) && overTimeEffect.TimeBetweenApplyEffect.Equals(te.TimeBetweenApplyEffect))
+                        {
+                            te.Reset();
+                            error = overTimeEffect.name + " it's going to be reseted because it is the same effect";
+                        }
+                        else if (overTimeEffect.ValueInPercentage > te.ValueInPercentage || overTimeEffect.EffectTime > te.EffectTime || overTimeEffect.TimeBetweenApplyEffect < te.TimeBetweenApplyEffect)
+                        {
+                            SwitchTimeEffect(te, overTimeEffect);
+                            hasBeenAdded = true;
+
+                            error = overTimeEffect.name + " has been added and the previous effect has been removed.";
+                        }
+                    }
+                } else
                 {
-                    te.Cancel();
-                    model.TimeEffectDefinitions.Remove(te);
-                    model.TimeEffectDefinitions.Add(overTimeEffect);
-                    hasBeenAdded = true;
+                    if (overTimeEffect.Value.Equals(te.Value) && overTimeEffect.EffectTime.Equals(te.EffectTime) && overTimeEffect.TimeBetweenApplyEffect.Equals(te.TimeBetweenApplyEffect))
+                    {
+                        te.Reset();
+                        error = overTimeEffect.name + " it's going to be reseted because it is the same effect";
+                    }
+                    else if (overTimeEffect.Value > te.Value || overTimeEffect.EffectTime > te.EffectTime || overTimeEffect.TimeBetweenApplyEffect < te.TimeBetweenApplyEffect)
+                    {
+                        SwitchTimeEffect(te, overTimeEffect);
+                        hasBeenAdded = true;
+
+                        error = overTimeEffect.name + " has been added and the previous effect has been removed.";
+                    }
                 }
+
+                
+               
             }
 
+            Debug.Log(error);
             return hasBeenAdded;
         }
 
-        public void ChangeStatTemporally(StatModificator statModificator)
+        private void SwitchTimeEffect<T, U>(T actualEffect, U newEffect) where T : TimeEffectDefinition where U : TimeEffectDefinition
         {
-            model.PerformTemporallyStat(statModificator);
+            actualEffect.Cancel();
+            model.TimeEffectDefinitions.Remove(actualEffect);
+            model.TimeEffectDefinitions.Add(newEffect);
         }
-
-       /* public void ChangeStatInRun(StatModificator statModificator)
-        {
-            model.PerformApplyStatModifyInRun(statModificator);
-        }*/
 
         public void ChangeRealHealth(StatModificator statModificator)
         {

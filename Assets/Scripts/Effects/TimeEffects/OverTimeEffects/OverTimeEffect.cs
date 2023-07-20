@@ -23,7 +23,8 @@ public class OverTimeEffect : TimeEffectDefinition
     public override async Task ProcessEffect(Characters.CharacterController owner, Characters.CharacterController target)
     {
         this.owner = owner;
-        this.target = target;
+        this.target = isTheOwnerStat ? owner : target;
+        //this.target = target;
         if (target.TryAddTemporallyState(this))
         {
             Debug.Log(name + " has been applied");

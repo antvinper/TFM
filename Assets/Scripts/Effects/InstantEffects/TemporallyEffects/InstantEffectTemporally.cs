@@ -7,6 +7,8 @@ public class InstantEffectTemporally : EffectDefinition
 {
     public override Task ProcessEffect(Characters.CharacterController owner, Characters.CharacterController target)
     {
+        this.owner = owner;
+        this.target = target;
         if (isValueInPercentage)
         {
             ProcessEffectInPercentage(owner, target);
@@ -51,11 +53,15 @@ public class InstantEffectTemporally : EffectDefinition
 
         Debug.Log(StatAffected + " now is: " + target.GetStat(StatAffected));*/
 
-        int finalValue = IsStatIncremented ? valueInPercentage : -valueInPercentage;
+        int finalValue = GetPercentageValue(owner, target);
+        //int finalValue = IsStatIncremented ? valueInPercentage : -valueInPercentage;
         StatModificator statModificator = new StatModificator(StatAffected, finalValue, true, false);
-        target.ChangeStat(statModificator);
 
-        Debug.Log(StatAffected + " now is: " + target.GetStat(StatAffected));
+        ChangeStat(statModificator);
+
+        //target.ChangeStat(statModificator);
+
+        //Debug.Log(StatAffected + " now is: " + target.GetStat(StatAffected));
     }
 
     private void ProcessEffectInReal(Characters.CharacterController owner, Characters.CharacterController target)
@@ -63,8 +69,20 @@ public class InstantEffectTemporally : EffectDefinition
         int finalValue = IsStatIncremented ? Value : -Value;
 
         StatModificator statModificator = new StatModificator(StatAffected, finalValue, false, false);
-        target.ChangeStat(statModificator);
 
-        Debug.Log(StatAffected + " now is: " + target.GetStat(StatAffected));
+        ChangeStat(statModificator);
+        /*if (ApplyOnSelf)
+        {
+            Debug.Log(StatAffected + " from " + owner.name + " before apply effect is: " + owner.GetStat(StatAffected));
+            owner.ChangeStat(statModificator);
+            Debug.Log(StatAffected + " from " + owner.name +" now is: " + owner.GetStat(StatAffected));
+        }
+        else
+        {
+            Debug.Log(StatAffected + " from " + target.name + " before apply effect is: " + target.GetStat(StatAffected));
+            target.ChangeStat(statModificator);
+            Debug.Log(StatAffected + " from " + target.name + " now is: " + target.GetStat(StatAffected));
+        }*/
+        
     }
 }

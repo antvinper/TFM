@@ -53,13 +53,13 @@ public class PlayerController : Characters.CharacterController//<PlayerMutableMo
         //UseSkill(PlayerEnumSkills.HEAL_BY_MAX_HEALTH_PERCENTAGE, this);
         //UseSkill(PlayerEnumSkills.SLOW_DOWN, enemy);
 
-        UseSkill(PlayerEnumSkills.SINGLE_ATTACK, enemy);
-        UseSkill(PlayerEnumSkills.REVITALIA, enemy);
+        UseSkills(PlayerEnumSkills.SINGLE_ATTACK, enemy);
 
         //UseSkill(PlayerEnumSkills.SLOW_DOWN, this);
         //UseSkill(PlayerEnumSkills.PERMANENT, this);
         //UseSkill(PlayerEnumSkills.DEFFENSE_DOWN, enemy);
     }
+
 
     private async Task SetModel()
     {

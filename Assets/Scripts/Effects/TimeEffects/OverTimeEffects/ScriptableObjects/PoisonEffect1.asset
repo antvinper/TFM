@@ -25,4 +25,4 @@ MonoBehaviour:
   value: 5
   effectType: 2
   effectLifeTime: 5
-  timeBetweenApplyEffect: 0.5
+  timeBetweenApplyEffect: 1

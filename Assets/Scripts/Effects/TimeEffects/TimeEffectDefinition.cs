@@ -6,7 +6,7 @@ using UnityEngine;
 
 public abstract class TimeEffectDefinition : EffectDefinition
 {
-    protected Characters.CharacterController owner, target;
+    //protected Characters.CharacterController owner, target;
     /**
      * Necesito una lista de efectos:
      * - Slow down (dismiunye velocidad)

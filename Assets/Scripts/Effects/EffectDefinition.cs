@@ -5,6 +5,8 @@ using UnityEngine;
 
 public abstract class EffectDefinition : ScriptableObject, IEffect
 {
+    protected Characters.CharacterController owner, target;
+
 
     #region Always
 
@@ -39,6 +41,7 @@ public abstract class EffectDefinition : ScriptableObject, IEffect
     #region IsValueInPercentage
     [Tooltip("¿El estado se va a modificar acorde a un porcentaje?")]
     [SerializeField] protected bool isValueInPercentage;
+    public bool IsValueInPercentage => isValueInPercentage;
 
     [HideInInspector]
     [SerializeField]
@@ -58,8 +61,9 @@ public abstract class EffectDefinition : ScriptableObject, IEffect
     [HideInInspector]
     [SerializeField]
     [Tooltip("Valor en porcentaje que vamos a coger del estado elegido antes.")]
-    [Range(0, 100)]
+    [Range(0, 1000)]
     protected int valueInPercentage;
+    public int ValueInPercentage => valueInPercentage;
     #endregion
 
     /**
@@ -126,7 +130,7 @@ public abstract class EffectDefinition : ScriptableObject, IEffect
     {
         float finalValueInPercentage;
 
-        int valueSWTS = isTheOwnerStat? owner.GetStat(statWhatToSee) : target.GetStat(statWhatToSee); ;
+        int valueSWTS = isTheOwnerStat? owner.GetStat(statWhatToSee) : target.GetStat(statWhatToSee);
 
         //Hay que comprobar si el stat es el mismo o diferente en el owner stat o igual no y se puede
         //calcular siempre por evitar ifs
@@ -141,8 +145,9 @@ public abstract class EffectDefinition : ScriptableObject, IEffect
             valueSWTS = target.GetStat(statWhatToSee);
         }*/
 
-        float targetValuePercentual = (valueSWTS * 0.01f) * valueInPercentage;
-        finalValueInPercentage = (targetValuePercentual / owner.GetStat(statAffected))*100;
+        finalValueInPercentage = (valueSWTS * 0.01f) * valueInPercentage;
+        //RECIÉN QUITADA
+        //finalValueInPercentage = (targetValuePercentual / owner.GetStat(statAffected))*100;
 
 
 
@@ -157,5 +162,21 @@ public abstract class EffectDefinition : ScriptableObject, IEffect
 
 
         return (int)finalValueInPercentage;
+    }
+
+    protected void ChangeStat(StatModificator statModificator)
+    {
+        if (ApplyOnSelf)
+        {
+            Debug.Log(StatAffected + " from " + owner.name + " before apply effect is: " + owner.GetStat(StatAffected));
+            owner.ChangeStat(statModificator);
+            Debug.Log(StatAffected + " from " + owner.name + " now is: " + owner.GetStat(StatAffected));
+        }
+        else
+        {
+            Debug.Log(StatAffected + " from " + target.name + " before apply effect is: " + target.GetStat(StatAffected));
+            target.ChangeStat(statModificator);
+            Debug.Log(StatAffected + " from " + target.name + " now is: " + target.GetStat(StatAffected));
+        }
     }
 }

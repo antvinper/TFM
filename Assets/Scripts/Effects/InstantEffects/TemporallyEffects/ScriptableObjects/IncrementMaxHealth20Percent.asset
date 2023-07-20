@@ -15,10 +15,10 @@ MonoBehaviour:
   effectName: 
   description: 
   applyOnSelf: 1
-  isStatIncremented: 0
+  isStatIncremented: 1
   statAffected: 1
-  isValueInPercentage: 0
-  statWhatToSee: 2
+  isValueInPercentage: 1
+  statWhatToSee: 0
   isTheOwnerStat: 1
   useOnlyPermanentStatVariations: 0
   valueInPercentage: 20

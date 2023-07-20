@@ -12,15 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b412017c4acd13459edac39cc56d685, type: 3}
   m_Name: SlowDownEffect1
   m_EditorClassIdentifier: 
-  myName: 
+  effectName: 
   description: 
+  applyOnSelf: 1
   isStatIncremented: 0
   statAffected: 6
-  isValueInPercentage: 1
+  isValueInPercentage: 0
   statWhatToSee: 6
   isTheOwnerStat: 1
   useOnlyPermanentStatVariations: 1
   valueInPercentage: 10
   value: 5
-  buffDebuffType: 1
-  effectLifeTime: 5
+  effectType: 1
+  effectLifeTime: 2

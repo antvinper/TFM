@@ -41,6 +41,7 @@ public class CharacterMutableModel : ICharacterModel, ICharacterModelStats
     [HideInInspector]
     public List<TimeEffectDefinition> TimeEffectDefinitions { get => timeEffectDefinitions; }
 
+
     private float CalculateStat(StatsEnum stat, int baseStat)
     {
         float value1 = baseStat + InstantStatsModifyPermanent.GetStatValue(stat);
@@ -300,6 +301,10 @@ public class CharacterMutableModel : ICharacterModel, ICharacterModelStats
         if(statModificator.IsAttack)
         {
             TakeRealDamage(statModificator);
+        }
+        else
+        {
+            Heal(statModificator);
         }
     }
 

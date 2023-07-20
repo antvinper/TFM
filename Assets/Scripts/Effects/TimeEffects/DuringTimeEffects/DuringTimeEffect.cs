@@ -16,7 +16,7 @@ public class DuringTimeEffect : TimeEffectDefinition
         cancel = false;
         reset = false;
         this.owner = owner;
-        this.target = target;
+        this.target = isTheOwnerStat ? owner : target;
 
         if (target.TryAddTemporallyState(this))
         {
@@ -68,7 +68,6 @@ public class DuringTimeEffect : TimeEffectDefinition
              */
             if (!cancel)
             {
-                
                 ChangeStat(-finalValue, isValueInPercentage);
 
                 Debug.Log("Finally apply the Effect, " + StatAffected + " " + target.GetStat(StatAffected));
@@ -92,7 +91,9 @@ public class DuringTimeEffect : TimeEffectDefinition
     private void ChangeStat(int value, bool isPercentual)
     {
         StatModificator statModificator = new StatModificator(StatAffected, value, isPercentual, false);
-        target.ChangeStat(statModificator);
+        target.ChangeStatInRun(statModificator);
+        
+        
     }
 
     public override Task ProcessEffect(Characters.CharacterController target)
