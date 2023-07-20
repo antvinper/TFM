@@ -30,7 +30,7 @@ public class OverTimeEffect : TimeEffectDefinition
             Debug.Log(name + " has been applied");
             cancel = false;
             reset = false;
-            Debug.Log("Before apply the Effect, " + StatAffected + " " + target.GetStat(StatAffected));
+            //Debug.Log("Before apply the Effect, " + StatAffected + " " + target.GetStat(StatAffected));
 
             float timeAplyingEffect = 0.0f;
             float actualTimeBetweenApplyEffect = 0.0f;
@@ -57,7 +57,7 @@ public class OverTimeEffect : TimeEffectDefinition
                 if (actualTimeBetweenApplyEffect >= timeBetweenApplyEffect)
                 {
                     ApplyEffect(target);
-                    Debug.Log("After apply the the Effect, " + StatAffected + " " + target.GetStat(StatAffected));
+                   // Debug.Log("After apply the the Effect, " + StatAffected + " " + target.GetStat(StatAffected));
                     actualTimeBetweenApplyEffect = 0.0f;
                 }
                 timeAplyingEffect += Time.deltaTime;
@@ -67,8 +67,15 @@ public class OverTimeEffect : TimeEffectDefinition
                 
                 
             }
-
-            Debug.Log("Finally apply the Effect, " + StatAffected + " " + target.GetStat(StatAffected));
+            if (ApplyOnSelf)
+            {
+                Debug.Log("Finally apply the Effect, " + name + " " + owner.GetStat(StatAffected));
+            }
+            else
+            {
+                Debug.Log("Finally apply the Effect, " + name + " " + target.GetStat(StatAffected));
+            }
+            
         }
         else
         {
@@ -125,15 +132,16 @@ public class OverTimeEffect : TimeEffectDefinition
 
         //Siempre será false, puesto que queremos aplicar un efecto instantáneo.
         //Cómo se va a usar para reducir la vida o aumentarla, no va a volver a su estado inicial.
-        ChangeStat(finalValue, false);
+        ChangeStatOTE(finalValue, false);
         /*StatModificator statModificator = new StatModificator(StatAffected, (int)finalValue, isValueInPercentage, false, effectType);
         target.ChangeStat(statModificator);*/
     }
 
-    private void ChangeStat(int value, bool isPercentual)
+    private void ChangeStatOTE(int value, bool isPercentual)
     {
         StatModificator statModificator = new StatModificator(StatAffected, value, isPercentual, false, effectType);
-        target.ChangeStat(statModificator);
+        //target.ChangeStat(statModificator);
+        ChangeStat(statModificator);
     }
 
     public override Task ProcessEffect(Characters.CharacterController target)
