@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effectName: 
   description: 
-  applyOnSelf: 1
+  applyOnSelf: 0
   isStatIncremented: 0
   statAffected: 6
-  isValueInPercentage: 0
+  isValueInPercentage: 1
   statWhatToSee: 6
-  isTheOwnerStat: 1
+  isTheOwnerStat: 0
   useOnlyPermanentStatVariations: 1
   valueInPercentage: 10
   value: 5

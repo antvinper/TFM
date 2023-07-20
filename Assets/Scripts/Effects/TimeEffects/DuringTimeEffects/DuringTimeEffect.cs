@@ -20,7 +20,7 @@ public class DuringTimeEffect : TimeEffectDefinition
 
         if (target.TryAddTemporallyState(this))
         {
-            Debug.Log("Before apply the Effect, " + StatAffected + " " + target.GetStat(StatAffected));
+            //Debug.Log("Before apply the Effect, " + StatAffected + " " + target.GetStat(StatAffected));
 
             float timeAplyingEffect = 0.0f;
 
@@ -46,8 +46,8 @@ public class DuringTimeEffect : TimeEffectDefinition
             //finalValue = GetValue();
 
 
-            ChangeStat(finalValue, isValueInPercentage);
-            Debug.Log("After apply the slowDownapply the Effect, " + StatAffected + " " + target.GetStat(StatAffected));
+            ChangeStatDTE(finalValue, isValueInPercentage);
+            //Debug.Log("After apply the slowDownapply the Effect, " + StatAffected + " " + target.GetStat(StatAffected));
 
             //Lo dejo así por si se desea dar feedback del tiempo o algo
             while (timeAplyingEffect < effectLifeTime && !cancel)
@@ -68,9 +68,9 @@ public class DuringTimeEffect : TimeEffectDefinition
              */
             if (!cancel)
             {
-                ChangeStat(-finalValue, isValueInPercentage);
+                ChangeStatDTE(-finalValue, isValueInPercentage);
 
-                Debug.Log("Finally apply the Effect, " + StatAffected + " " + target.GetStat(StatAffected));
+                //Debug.Log("Finally apply the Effect, " + StatAffected + " " + target.GetStat(StatAffected));
             }
            
         }
@@ -84,16 +84,15 @@ public class DuringTimeEffect : TimeEffectDefinition
     public override void Cancel()
     {
         cancel = true;
-        ChangeStat(-finalValue, false);
+        ChangeStatDTE(-finalValue, false);
         Debug.Log("Cancelled apply the Effect, " + StatAffected + " " + target.GetStat(StatAffected));
     }
 
-    private void ChangeStat(int value, bool isPercentual)
+    private void ChangeStatDTE(int value, bool isPercentual)
     {
         StatModificator statModificator = new StatModificator(StatAffected, value, isPercentual, false);
-        target.ChangeStatInRun(statModificator);
-        
-        
+        //target.ChangeStatInRun(statModificator);
+        ChangeStat(statModificator);
     }
 
     public override Task ProcessEffect(Characters.CharacterController target)

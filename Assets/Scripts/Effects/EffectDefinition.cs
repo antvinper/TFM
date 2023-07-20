@@ -147,7 +147,17 @@ public abstract class EffectDefinition : ScriptableObject, IEffect
 
         finalValueInPercentage = (valueSWTS * 0.01f) * valueInPercentage;
         //RECIÉN QUITADA
-        //finalValueInPercentage = (targetValuePercentual / owner.GetStat(statAffected))*100;
+        if (isTheOwnerStat)
+        {
+            //finalValueInPercentage = (finalValueInPercentage / owner.GetStat(statAffected)) * 100;
+            finalValueInPercentage = (finalValueInPercentage / owner.GetStat(statWhatToSee)) * 100;
+        }
+        else
+        {
+            //finalValueInPercentage = (finalValueInPercentage / target.GetStat(statAffected)) * 100;
+            finalValueInPercentage = (finalValueInPercentage / target.GetStat(statWhatToSee)) * 100;
+        }
+        
 
 
 

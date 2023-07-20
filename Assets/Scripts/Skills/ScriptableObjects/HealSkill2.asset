@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05fc9090caa00b64f8b347b5ee0f4cc9, type: 3}
   m_Name: HealSkill2
   m_EditorClassIdentifier: 
-  name: 10
+  name: 4
   description: 
   temporalInstantEffects:
   - {fileID: 11400000, guid: 46daa6e8206bd9941a4e4471c37c01ae, type: 2}
