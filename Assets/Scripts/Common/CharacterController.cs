@@ -36,6 +36,7 @@ namespace Characters
         public bool TryAddTemporallyState(DuringTimeEffect duringTimeEffect)
         {
             bool hasBeenAdded = false;
+            string error = "";
             /**
              * TENER EN CUENTA EL TIPO NONE. Este no debe influir a la hora de aplicar o no los efectos.
              * Siempre se aplicará con el tipo NONE
@@ -43,24 +44,50 @@ namespace Characters
             DuringTimeEffectDefinition te = model.TimeEffectDefinitions.Where(t => t.EffectType.Equals(duringTimeEffect.EffectType)).FirstOrDefault() as DuringTimeEffectDefinition;
             if (te == null)
             {
+                error = duringTimeEffect.name + " has been added.";
                 model.TimeEffectDefinitions.Add(duringTimeEffect);
                 hasBeenAdded = true;
             }
             else
             {
-                if (duringTimeEffect.Value.Equals(te.Value) && duringTimeEffect.EffectTime.Equals(te.EffectTime))
+                if (duringTimeEffect.IsValueInPercentage)
                 {
-                    Debug.Log(te.name + " reset");
-                    te.Reset();
+                    if (!te.IsValueInPercentage)
+                    {
+                        error = duringTimeEffect.name + " has been added and the previous effect has been removed.";
+                        SwitchTimeEffect(te, duringTimeEffect);
+                        hasBeenAdded = true;
+                    }
+                    else
+                    {
+                        if (duringTimeEffect.ValueInPercentage.Equals(te.ValueInPercentage) && duringTimeEffect.EffectTime.Equals(te.EffectTime))
+                        {
+                            error = duringTimeEffect.name + " it's going to be reseted because it is the same effect";
+                            te.Reset();
+                        }
+                        else if (duringTimeEffect.ValueInPercentage > te.ValueInPercentage || duringTimeEffect.EffectTime > te.EffectTime)
+                        {
+                            error = duringTimeEffect.name + " has been added and the previous effect has been removed.";
+                            SwitchTimeEffect(te, duringTimeEffect);
+                            hasBeenAdded = true;
+                        }
+                    }
                 }
-                else if (duringTimeEffect.Value > te.Value || duringTimeEffect.EffectTime > te.EffectTime)
+                else
                 {
-                    Debug.Log(te.name + " cancel");
-                    te.Cancel();
-                    model.TimeEffectDefinitions.Remove(te);
-                    model.TimeEffectDefinitions.Add(duringTimeEffect);
-                    hasBeenAdded = true;
+                    if (duringTimeEffect.Value.Equals(te.Value) && duringTimeEffect.EffectTime.Equals(te.EffectTime))
+                    {
+                        error = duringTimeEffect.name + " it's going to be reseted because it is the same effect";
+                        te.Reset();
+                    }
+                    else if (duringTimeEffect.Value > te.Value || duringTimeEffect.EffectTime > te.EffectTime)
+                    {
+                        error = duringTimeEffect.name + " has been added and the previous effect has been removed.";
+                        SwitchTimeEffect(te, duringTimeEffect);
+                        hasBeenAdded = true;
+                    }
                 }
+                
             }
             return hasBeenAdded;
         }
@@ -73,6 +100,7 @@ namespace Characters
 
             if (te == null)
             {
+                error = overTimeEffect.name + " has been added.";
                 model.TimeEffectDefinitions.Add(overTimeEffect);
                 hasBeenAdded = true;
             }
@@ -82,6 +110,7 @@ namespace Characters
                 {
                     if(!te.IsValueInPercentage)
                     {
+                        error = overTimeEffect.name + " has been added and the previous effect has been removed.";
                         SwitchTimeEffect(te, overTimeEffect);
                         hasBeenAdded = true;
                     }
@@ -115,9 +144,6 @@ namespace Characters
                         error = overTimeEffect.name + " has been added and the previous effect has been removed.";
                     }
                 }
-
-                
-               
             }
 
             Debug.Log(error);

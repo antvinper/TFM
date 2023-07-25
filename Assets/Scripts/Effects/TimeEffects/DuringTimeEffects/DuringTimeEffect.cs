@@ -84,7 +84,7 @@ public class DuringTimeEffect : TimeEffectDefinition
     public override void Cancel()
     {
         cancel = true;
-        ChangeStatDTE(-finalValue, false);
+        ChangeStatDTE(-finalValue, isValueInPercentage);
         Debug.Log("Cancelled apply the Effect, " + StatAffected + " " + target.GetStat(StatAffected));
     }
 
