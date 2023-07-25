@@ -49,11 +49,28 @@ public class PlayerController : Characters.CharacterController//<PlayerMutableMo
         GameManager.Instance.SetPlayerController(this);
         weaponController = GetComponent<WeaponController>();
         SetModel();
+
+        //TREE BEHAVIOUR
+        Debug.Log(model.Tree.Slots);
+        for(int i = 0; i < model.Tree.Slots.Count; ++i)
+        {
+            TreeSlotDefinition slot = model.Tree.Slots[i];
+            List<InstantEffectPermanent> effects = model.Tree.Slots[i].Effects;
+            Debug.Log("## Slot: " + i + " ## ");
+            for(int j = 0; j < effects.Count; ++j)
+            {
+                Debug.Log("Effect: " + j + " / " + effects[j].name + " / " + effects[j].Value);
+            }
+            slot.ProcessSlotActivation(this);
+        }
+        model.Tree.Slots[0].ProcessSlotDeActivation();
+
+
         //UseSkill(PlayerEnumSkills.SINGLE_PERCENTAGE_ATTACK, this);
         //UseSkill(PlayerEnumSkills.HEAL_BY_MAX_HEALTH_PERCENTAGE, this);
         //UseSkill(PlayerEnumSkills.SLOW_DOWN, enemy);
 
-        UseSkills(PlayerEnumSkills.SINGLE_ATTACK, enemy);
+        //UseSkills(PlayerEnumSkills.SINGLE_ATTACK, enemy);
 
         //UseSkill(PlayerEnumSkills.SLOW_DOWN, this);
         //UseSkill(PlayerEnumSkills.PERMANENT, this);
@@ -63,7 +80,7 @@ public class PlayerController : Characters.CharacterController//<PlayerMutableMo
 
     private async Task SetModel()
     {
-        await new WaitForSeconds(1.0f);
+        //await new WaitForSeconds(1.0f);
         GameManager.Instance.GameData.PlayerModel = model;
     }
     public override void ProcessDamage(int value)

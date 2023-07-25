@@ -84,7 +84,7 @@ public class OverTimeEffect : TimeEffectDefinition
     }
 
     
-    public override void Cancel()
+    public override async Task RemoveEffect()
     {
         cancel = true;
         Debug.Log(this.name + " cancelled.");

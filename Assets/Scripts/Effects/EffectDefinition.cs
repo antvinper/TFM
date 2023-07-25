@@ -82,6 +82,7 @@ public abstract class EffectDefinition : ScriptableObject, IEffect
 
     public abstract Task ProcessEffect(Characters.CharacterController owner, Characters.CharacterController target);
     public abstract Task ProcessEffect(Characters.CharacterController target);
+    public abstract Task RemoveEffect();
 
     protected int GetValue()
     {

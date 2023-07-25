@@ -32,6 +32,10 @@ namespace Characters
             model.PerformApplyStatModifyInRun(statModificator);
         }
 
+        private TimeEffectDefinition getActualTimeEffect(EffectTypes type)
+        {
+            return model.TimeEffectDefinitions.Where(t => t.EffectType.Equals(type)).FirstOrDefault();
+        }
 
         public bool TryAddTemporallyState(DuringTimeEffect duringTimeEffect)
         {
@@ -41,7 +45,7 @@ namespace Characters
              * TENER EN CUENTA EL TIPO NONE. Este no debe influir a la hora de aplicar o no los efectos.
              * Siempre se aplicará con el tipo NONE
              */
-            DuringTimeEffectDefinition te = model.TimeEffectDefinitions.Where(t => t.EffectType.Equals(duringTimeEffect.EffectType)).FirstOrDefault() as DuringTimeEffectDefinition;
+            DuringTimeEffectDefinition te = getActualTimeEffect(duringTimeEffect.EffectType) as DuringTimeEffectDefinition;
             if (te == null)
             {
                 error = duringTimeEffect.name + " has been added.";
@@ -96,7 +100,7 @@ namespace Characters
         {
             bool hasBeenAdded = false;
             string error = "";
-            OverTimeEffectDefinition te = model.TimeEffectDefinitions.Where(t => t.EffectType.Equals(overTimeEffect.EffectType)).FirstOrDefault() as OverTimeEffectDefinition;
+            OverTimeEffectDefinition te = getActualTimeEffect(overTimeEffect.EffectType) as OverTimeEffectDefinition;
 
             if (te == null)
             {
@@ -152,7 +156,7 @@ namespace Characters
 
         private void SwitchTimeEffect<T, U>(T actualEffect, U newEffect) where T : TimeEffectDefinition where U : TimeEffectDefinition
         {
-            actualEffect.Cancel();
+            actualEffect.RemoveEffect();
             model.TimeEffectDefinitions.Remove(actualEffect);
             model.TimeEffectDefinitions.Add(newEffect);
         }

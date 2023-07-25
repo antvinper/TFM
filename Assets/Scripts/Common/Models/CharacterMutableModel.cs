@@ -21,8 +21,14 @@ public class CharacterMutableModel : ICharacterModel, ICharacterModelStats
     [SerializeField] [Range(0, 100)] private int dodgeChance = 0;
     [SerializeField] [Range(0, 100)] private int critChance = 0;
     [SerializeField] [Range(0, 100)] private int critDamageMultiplier = 0;
+    [SerializeField] private StatsTree tree;
+    
+    public StatsTree Tree
+    {
+        get { return tree; }
+    }
 
-#region statsModifiers
+    #region statsModifiers
     private StatsModifyInstantPermanently InstantStatsModifyPermanent = new StatsModifyInstantPermanently();
 
     //Se mantienen durante la run

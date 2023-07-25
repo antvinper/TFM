@@ -29,7 +29,7 @@ public abstract class TimeEffectDefinition : EffectDefinition
         reset = true;
     }
     [HideInInspector] protected bool cancel = false;
-    public abstract void Cancel();
+    //public abstract void Cancel();
 
 
 }

@@ -529,6 +529,7 @@ MonoBehaviour:
     dodgeChance: 0
     critChance: 0
     critDamageMultiplier: 0
+    tree: {fileID: 0}
 --- !u!1001 &1494490832
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -936,6 +937,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 8522391017935463820, guid: a345f673d2230134680375d3ac1d9559, type: 3}
+      propertyPath: model.tree
+      value: 
+      objectReference: {fileID: 11400000, guid: 6559bb119022108438547b4098326e92, type: 2}
+    - target: {fileID: 8522391017935463820, guid: a345f673d2230134680375d3ac1d9559, type: 3}
       propertyPath: model.speed
       value: 100
       objectReference: {fileID: 0}
@@ -965,12 +970,12 @@ PrefabInstance:
       objectReference: {fileID: 257251307}
     - target: {fileID: 8522391017935463820, guid: a345f673d2230134680375d3ac1d9559, type: 3}
       propertyPath: skills.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8522391017935463820, guid: a345f673d2230134680375d3ac1d9559, type: 3}
       propertyPath: skills.Array.data[0]
       value: 
-      objectReference: {fileID: 11400000, guid: 001fa2db69c6b4542a84b48b26d414ec, type: 2}
+      objectReference: {fileID: 11400000, guid: 7f0c7b909d9be314faeeb925e791faaf, type: 2}
     - target: {fileID: 8522391017935463820, guid: a345f673d2230134680375d3ac1d9559, type: 3}
       propertyPath: skills.Array.data[1]
       value: 

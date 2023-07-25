@@ -10,4 +10,6 @@ public class PlayerMutableModel : CharacterMutableModel
     //[SerializeField] private WeaponController ActiveWeapon;
 
     //[JsonIgnore] public WeaponController activeWeapon { get => ActiveWeapon; }
+
+    
 }

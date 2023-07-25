@@ -80,8 +80,7 @@ public class DuringTimeEffect : TimeEffectDefinition
         }
         
     }
-
-    public override void Cancel()
+    public override async Task RemoveEffect()
     {
         cancel = true;
         ChangeStatDTE(-finalValue, isValueInPercentage);
