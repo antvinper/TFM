@@ -21,7 +21,7 @@ MonoBehaviour:
   statWhatToSee: 6
   isTheOwnerStat: 1
   useOnlyPermanentStatVariations: 0
-  valueInPercentage: 10
+  valueInPercentage: 30
   value: 5
   effectType: 1
-  effectLifeTime: 6
+  effectLifeTime: 10
