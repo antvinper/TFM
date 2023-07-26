@@ -7,6 +7,7 @@ public enum EffectTypes
     NONE,
     SLOW_DOWN,
     POISON,
-    REVITALIA
+    REVITALIA,
+    HURRY_UP
 }
     

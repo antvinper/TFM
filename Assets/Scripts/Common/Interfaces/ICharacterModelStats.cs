@@ -4,7 +4,7 @@ using UnityEngine;
 
 public interface ICharacterModelStats
 {
-    public int MaxHealth { get; set; }
+    //public int MaxHealth { get; set; }
     public int Health { get; set; }
     public int Defense { get; set; }
     public int MagicDefense { get; set; }

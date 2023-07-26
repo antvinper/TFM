@@ -22,10 +22,12 @@ public class EnemyController : Characters.CharacterController
 
     public override void ProcessDamage(int value)
     {
-        model.Health -= value;
+        StatModificator statModificator = new StatModificator(StatsEnum.HEALTH, value, false, false);
+        model.PerformRealHealthChange(statModificator);
+        //model.Health -= value;
 
         Debug.Log("I have received a damage of " + value);
-        Debug.Log("Actual life = " + model.Health);
+        Debug.Log("Actual life = " + model.GetStat(StatsEnum.HEALTH));
     }
 
     /*public override void ProcessEffect(CharacterMutableModel attacker)

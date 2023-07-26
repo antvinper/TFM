@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e8ce7d27a895b02428b51755d305ed3c, type: 3}
-  m_Name: AttackByAttackEffect
+  m_Name: HurryUp_10_self
   m_EditorClassIdentifier: 
   effectName: 
   description: 
   applyOnSelf: 1
-  isStatIncremented: 0
-  statAffected: 0
+  isStatIncremented: 1
+  statAffected: 5
   isValueInPercentage: 0
-  statWhatToSee: 4
-  isTheOwnerStat: 1
+  statWhatToSee: 0
+  isTheOwnerStat: 0
   useOnlyPermanentStatVariations: 0
-  valueInPercentage: 200
-  value: 50
+  valueInPercentage: 0
+  value: 10

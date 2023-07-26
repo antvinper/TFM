@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class MaxStatsValues
+/*public static class MaxStatsValues
 {
     private static int maxHealthMax = 9999;
     private static int healthMax = 9999;
@@ -81,4 +81,4 @@ public static class MaxStatsValues
 
         return value;
     }
-}
+}*/

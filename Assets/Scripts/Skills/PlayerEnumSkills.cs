@@ -14,5 +14,6 @@ public enum PlayerEnumSkills
     SWORD_BASICCOMBO_2,
     PERMANENT,
     DEFFENSE_DOWN,
-    REVITALIA
+    REVITALIA,
+    HURRY_UP
 }

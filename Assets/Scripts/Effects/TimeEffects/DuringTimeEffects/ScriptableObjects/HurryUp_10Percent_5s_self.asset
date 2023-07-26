@@ -9,17 +9,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8ce7d27a895b02428b51755d305ed3c, type: 3}
-  m_Name: AttackByAttackEffect
+  m_Script: {fileID: 11500000, guid: 8b412017c4acd13459edac39cc56d685, type: 3}
+  m_Name: HurryUp_10Percent_5s_self
   m_EditorClassIdentifier: 
   effectName: 
   description: 
   applyOnSelf: 1
-  isStatIncremented: 0
-  statAffected: 0
-  isValueInPercentage: 0
-  statWhatToSee: 4
+  isStatIncremented: 1
+  statAffected: 5
+  isValueInPercentage: 1
+  statWhatToSee: 5
   isTheOwnerStat: 1
   useOnlyPermanentStatVariations: 0
-  valueInPercentage: 200
-  value: 50
+  valueInPercentage: 10
+  value: 0
+  effectType: 4
+  effectLifeTime: 5

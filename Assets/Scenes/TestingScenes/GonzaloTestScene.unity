@@ -516,20 +516,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   model:
-    maxHealth: 3000
-    health: 3000
-    defense: 255
-    magicDefense: 255
-    attack: 255
-    magicAttack: 255
-    speed: 255
-    shield: 255
-    accuracy: 100
-    blockChance: 0
-    dodgeChance: 0
-    critChance: 0
-    critDamageMultiplier: 0
     tree: {fileID: 0}
+    statsDefinitions: {fileID: 0}
 --- !u!1001 &1494490832
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -975,11 +963,11 @@ PrefabInstance:
     - target: {fileID: 8522391017935463820, guid: a345f673d2230134680375d3ac1d9559, type: 3}
       propertyPath: skills.Array.data[0]
       value: 
-      objectReference: {fileID: 11400000, guid: 7f0c7b909d9be314faeeb925e791faaf, type: 2}
+      objectReference: {fileID: 11400000, guid: 3717f084b9a34be43b4300f2d0221e71, type: 2}
     - target: {fileID: 8522391017935463820, guid: a345f673d2230134680375d3ac1d9559, type: 3}
       propertyPath: skills.Array.data[1]
       value: 
-      objectReference: {fileID: 11400000, guid: 753a6c86758146343a988e79321703d2, type: 2}
+      objectReference: {fileID: 11400000, guid: f4693ad505d60df44b7fcb7522bd0f06, type: 2}
     - target: {fileID: 8522391017935463820, guid: a345f673d2230134680375d3ac1d9559, type: 3}
       propertyPath: skills.Array.data[2]
       value: 
@@ -1008,6 +996,30 @@ PrefabInstance:
       propertyPath: skills.Array.data[8]
       value: 
       objectReference: {fileID: 11400000, guid: 01f5da1fd57400148af5524f53a128be, type: 2}
+    - target: {fileID: 8522391017935463820, guid: a345f673d2230134680375d3ac1d9559, type: 3}
+      propertyPath: model.statsDefinitions
+      value: 
+      objectReference: {fileID: 11400000, guid: d21c60ed28f94864680454090584bac4, type: 2}
+    - target: {fileID: 8522391017935463820, guid: a345f673d2230134680375d3ac1d9559, type: 3}
+      propertyPath: model.statsDefinitions.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8522391017935463820, guid: a345f673d2230134680375d3ac1d9559, type: 3}
+      propertyPath: model.statsDefinitions.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 70476df477a4d7b4b9acf0ae9a734253, type: 2}
+    - target: {fileID: 8522391017935463820, guid: a345f673d2230134680375d3ac1d9559, type: 3}
+      propertyPath: model.statsDefinitions.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: d21c60ed28f94864680454090584bac4, type: 2}
+    - target: {fileID: 8522391017935463820, guid: a345f673d2230134680375d3ac1d9559, type: 3}
+      propertyPath: model.statsDefinitions.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: b396a400eea4bbc4bac169949fedce14, type: 2}
+    - target: {fileID: 8522391017935463820, guid: a345f673d2230134680375d3ac1d9559, type: 3}
+      propertyPath: model.statsDefinitions.Array.data[3]
+      value: 
+      objectReference: {fileID: 11400000, guid: 1d0e7bc4ab801cb479d44c7d549a497b, type: 2}
     - target: {fileID: 8522391017935463820, guid: a345f673d2230134680375d3ac1d9559, type: 3}
       propertyPath: skills.Array.data[0].instantEffects.Array.size
       value: 0

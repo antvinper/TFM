@@ -51,7 +51,7 @@ public class PlayerController : Characters.CharacterController//<PlayerMutableMo
         SetModel();
 
         //TREE BEHAVIOUR
-        Debug.Log(model.Tree.Slots);
+        /*Debug.Log(model.Tree.Slots);
         for(int i = 0; i < model.Tree.Slots.Count; ++i)
         {
             TreeSlotDefinition slot = model.Tree.Slots[i];
@@ -63,14 +63,14 @@ public class PlayerController : Characters.CharacterController//<PlayerMutableMo
             }
             slot.ProcessSlotActivation(this);
         }
-        model.Tree.Slots[0].ProcessSlotDeActivation();
+        model.Tree.Slots[0].ProcessSlotDeActivation();*/
 
 
         //UseSkill(PlayerEnumSkills.SINGLE_PERCENTAGE_ATTACK, this);
         //UseSkill(PlayerEnumSkills.HEAL_BY_MAX_HEALTH_PERCENTAGE, this);
         //UseSkill(PlayerEnumSkills.SLOW_DOWN, enemy);
 
-        //UseSkills(PlayerEnumSkills.SINGLE_ATTACK, enemy);
+        UseSkills(PlayerEnumSkills.HURRY_UP, this);
 
         //UseSkill(PlayerEnumSkills.SLOW_DOWN, this);
         //UseSkill(PlayerEnumSkills.PERMANENT, this);
@@ -81,6 +81,7 @@ public class PlayerController : Characters.CharacterController//<PlayerMutableMo
     private async Task SetModel()
     {
         //await new WaitForSeconds(1.0f);
+        model.Setup();
         GameManager.Instance.GameData.PlayerModel = model;
     }
     public override void ProcessDamage(int value)
@@ -94,8 +95,8 @@ public class PlayerController : Characters.CharacterController//<PlayerMutableMo
          * TODO 
          * Calcular correctamente el daño.
          */
-        Debug.Log("My real damage = " + model.Attack);
-        return model.Attack;
+        Debug.Log("My real damage = " + model.GetStat(StatsEnum.ATTACK));
+        return model.GetStat(StatsEnum.ATTACK);
     }
 
     public async Task UseSkills(PlayerEnumSkills skillName, Characters.CharacterController target)
@@ -120,8 +121,8 @@ public class PlayerController : Characters.CharacterController//<PlayerMutableMo
         
         //skill.ProcessSkill(this);
         skill.ProcessSkill(this, target);
-        Debug.Log(model.MaxHealth);
-        Debug.Log(model.Health);
+        //Debug.Log(model.MaxHealth);
+        Debug.Log(model.GetStat(StatsEnum.HEALTH));
     }
 
     /*public void ProcessDamage(float value)

@@ -124,9 +124,9 @@ public class StatsModify : ICharacterModelStats
         int statValue = 0;
         switch (stat)
         {
-            case StatsEnum.MAX_HEALTH:
+            /*case StatsEnum.MAX_HEALTH:
                 statValue = maxHealth;
-                break;
+                break;*/
             case StatsEnum.HEALTH:
                 statValue = health;
                 break;
@@ -172,9 +172,9 @@ public class StatsModify : ICharacterModelStats
     {
         switch (stat)
         {
-            case StatsEnum.MAX_HEALTH:
+            /*case StatsEnum.MAX_HEALTH:
                 maxHealth += value;
-                break;
+                break;*/
             case StatsEnum.HEALTH:
                 health += value;
                 break;

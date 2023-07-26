@@ -8,9 +8,9 @@ public class StatsModifyInstantPermanently : StatsModify
     {
         stats.Add(statModificator);
         ChangeStat(statModificator.StatToModify, statModificator.Value);
-        if (statModificator.StatToModify.Equals(StatsEnum.MAX_HEALTH))
+        /*if (statModificator.StatToModify.Equals(StatsEnum.MAX_HEALTH))
         {
             ChangeStat(StatsEnum.HEALTH, statModificator.Value);
-        }
+        }*/
     }
 }
