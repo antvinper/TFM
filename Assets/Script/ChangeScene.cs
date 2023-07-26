@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ChangeScene : MonoBehaviour
 {
-    public RandomSceneLoader sceneLoader;
+    public LevelGenerator sceneLoader;
 
     private void OnTriggerEnter(Collider other)
     {

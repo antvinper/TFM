@@ -14,7 +14,7 @@ public class LevelGenerator : MonoBehaviour
     private void Start()
     {
         //List to store the index of available scenes
-        availableScenes = = new List<int>();
+        availableScenes = new List<int>();
 
         for (int i = 0; i < SceneManager.sceneCountInBuildSettings; i++)
         {
