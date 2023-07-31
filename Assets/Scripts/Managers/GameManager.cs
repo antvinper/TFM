@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
@@ -32,20 +33,20 @@ public class GameManager : Singleton<GameManager>
 
     private void Start()
     {
-        dataPersistenceManager = new DataPersistenceManager();
+        dataPersistenceManager = null;
 
         string fileName = "GameName_SaveData_";
         string slot = "0";
 
         LoadData(fileName + slot);
 
-        
-
         NewGame();
     }
 
+
     public void NewGame()
     {
+        dataPersistenceManager = new DataPersistenceManager();
         dataPersistenceManager.NewGame();
         isGameStarted = true;
     }
@@ -63,6 +64,7 @@ public class GameManager : Singleton<GameManager>
 
     public void SaveGame(int slotIndex = 0)
     {
+        dataPersistenceManager.gameData.PlayerModel = playerController.Model;
         dataPersistenceManager.SaveGame(slotIndex);
     }
 

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Newtonsoft.Json;
 
 public class Stat
 {
@@ -23,22 +24,27 @@ public class Stat
 
     #region Getters
     //Getters
+    [JsonProperty]
     public StatsEnum Name
     {
         get => name;
     }
+    [JsonProperty]
     public int MaxValue
     {
         get => maxValue;
     }
+    [JsonProperty]
     public int ActualMaxValue
     {
         get => actualMaxValue;
     }
+    [JsonProperty]
     public int Value
     {
         get => value;
     }
+    [JsonProperty]
     public int MinValue
     {
         get => minValue;

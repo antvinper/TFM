@@ -8,6 +8,10 @@ namespace Characters
     public abstract class CharacterController : MonoBehaviour
     {
         [SerializeField] protected CharacterMutableModel model;
+        public CharacterMutableModel Model
+        {
+            get => model;
+        }
         public abstract void ProcessDamage(int value);
 
         public abstract float GetMyRealDamage();

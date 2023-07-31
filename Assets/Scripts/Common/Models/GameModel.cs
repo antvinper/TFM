@@ -79,7 +79,11 @@ public class GameModel
     public CharacterMutableModel PlayerModel
     {
         get => playerModel;
-        set => playerModel = value;
+        set
+        {
+            playerModel = value;
+            Debug.Log("AAAAA");
+        }
     }
 
 

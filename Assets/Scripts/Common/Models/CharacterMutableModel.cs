@@ -18,6 +18,11 @@ public class CharacterMutableModel : ICharacterModel
      */
     private List<Stat> baseStats;
     private List<Stat> instantStatsModifyPermanent;
+    [JsonProperty]
+    public List<Stat> InstantStatsModifyPermanent
+    {
+        get => instantStatsModifyPermanent;
+    }
     private List<Stat> instantStatsModifyInRun;
     private List<Stat> instantStatsModifyPercentageInRun;
 
@@ -27,16 +32,18 @@ public class CharacterMutableModel : ICharacterModel
     [HideInInspector]
     public List<TimeEffectDefinition> TimeEffectDefinitions { get => timeEffectDefinitions; }
 
-    
+    [JsonProperty]
     public StatsTree Tree
     {
         get { return tree; }
     }
+    [JsonProperty]
     public int Rupees
     {
         get => rupees;
         set => rupees = value;
     }
+    [JsonProperty]
     public int SoulFragments
     {
         get => soulFragments;
