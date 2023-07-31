@@ -14,6 +14,7 @@ public class GameManager : Singleton<GameManager>
      * Pero eso en un futuro no debe ser así sino sólo cuando se esté en el lobby.
      */
     private PlayerController playerController;
+    
 
     public GameModel GameData
     {
@@ -23,6 +24,10 @@ public class GameManager : Singleton<GameManager>
     public void SetPlayerController(PlayerController playerController)
     {
         this.playerController = playerController;
+    }
+    public PlayerController GetPlayerController()
+    {
+        return this.playerController;
     }
 
     private void Start()
@@ -70,6 +75,8 @@ public class GameManager : Singleton<GameManager>
     {
         return dataPersistenceManager.GetDataByFileName(fileName);
     }
+
+    
 
     private void OnApplicationQuit()
     {

@@ -18,8 +18,6 @@ public class PlayerController : Characters.CharacterController//<PlayerMutableMo
     public WeaponController weaponController;
 
 
-
-
     /**
      * TODO
      * Borrar de aquí
@@ -82,8 +80,17 @@ public class PlayerController : Characters.CharacterController//<PlayerMutableMo
         //UseSkill(PlayerEnumSkills.SLOW_DOWN, this);
         //UseSkill(PlayerEnumSkills.PERMANENT, this);
         //UseSkill(PlayerEnumSkills.DEFFENSE_DOWN, enemy);
+        GetRoomRewards();
     }
 
+    private async Task GetRoomRewards()
+    {
+        await new WaitForSeconds(2.0f);
+        int rupeesGained = RoomManager.Instance.GetRoomRewards();
+        this.rupees.AddAmount(rupeesGained);
+        this.model.Rupees = this.rupees.Amount;
+        Debug.Log("#Room# Rupees gained: " + rupeesGained);
+    }
 
     private async Task SetModel()
     {

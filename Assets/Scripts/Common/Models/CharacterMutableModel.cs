@@ -27,6 +27,7 @@ public class CharacterMutableModel : ICharacterModel
     [HideInInspector]
     public List<TimeEffectDefinition> TimeEffectDefinitions { get => timeEffectDefinitions; }
 
+    
     public StatsTree Tree
     {
         get { return tree; }
@@ -34,10 +35,12 @@ public class CharacterMutableModel : ICharacterModel
     public int Rupees
     {
         get => rupees;
+        set => rupees = value;
     }
     public int SoulFragments
     {
         get => soulFragments;
+        set => soulFragments = value;
     }
 
     public void Setup()
