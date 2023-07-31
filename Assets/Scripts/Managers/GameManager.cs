@@ -70,6 +70,7 @@ public class GameManager : Singleton<GameManager>
 
     public void LoadData(string fileName)
     {
+        dataPersistenceManager = new DataPersistenceManager();
         dataPersistenceManager.LoadGame(fileName);
     }
 

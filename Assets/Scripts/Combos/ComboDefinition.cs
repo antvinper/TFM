@@ -5,6 +5,16 @@ using UnityEngine;
 
 public abstract class ComboDefinition : ScriptableObject, IComboModel
 {
+    [SerializeField] private string comboName;
+    public string ComboName
+    {
+        get => comboName;
+    }
+    [SerializeField] private bool isActive;
+    public bool IsActive
+    {
+        get => isActive;
+    }
     //public WeaponModel weaponModel;
     public float[] DamageMultiplier;
     public ButtonsXbox[] Buttons;

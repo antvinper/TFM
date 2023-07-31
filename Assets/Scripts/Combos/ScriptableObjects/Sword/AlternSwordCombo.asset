@@ -10,9 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c9686a4c640c7414887742c42f334c45, type: 3}
-  m_Name: DashSwordCombo1
+  m_Name: AlternSwordCombo
   m_EditorClassIdentifier: 
-  damageMultiplier:
-  - 1.1
-  - 1.2
-  buttons: 020000000100000003000000
+  comboName: Ataque alternativo
+  isActive: 0
+  DamageMultiplier:
+  - 1
+  - 1
+  - 1
+  Buttons: 030000000100000003000000

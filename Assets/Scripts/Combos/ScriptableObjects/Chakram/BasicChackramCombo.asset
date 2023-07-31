@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c9686a4c640c7414887742c42f334c45, type: 3}
-  m_Name: FinalSwordCombo
+  m_Name: BasicChackramCombo
   m_EditorClassIdentifier: 
-  damageMultiplier:
+  comboName: "Ataque b\xE1sico"
+  isActive: 1
+  DamageMultiplier:
   - 1.1
   - 1.3
-  - 1.5
-  buttons: 01000000030000000100000003000000
-  activated: 0
+  Buttons: 010000000100000001000000
