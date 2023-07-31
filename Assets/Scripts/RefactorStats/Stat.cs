@@ -6,44 +6,81 @@ public class Stat
 {
     private StatsEnum name;
     private int maxValue;
-    private int actualMaxValue;
+    private int actualMaxValue; //Nunca puede ser superior a maxValue
     private int minValue;
     private int value;
+    //private int actualMaxIncrementInPercentage;
 
-    public Stat(StatsEnum name, int maxValue, int minValue, int value, int actualMaxValue=255)
+    public Stat(StatsEnum name, int maxValue = 0, int minValue = 0, int value = 0, int actualMaxValue=0)
     {
         this.name = name;
         this.actualMaxValue = actualMaxValue;
         this.maxValue = maxValue;
         this.minValue = minValue;
         this.value = value;
+        //this.actualMaxIncrementInPercentage = 0;
     }
 
-    public void IncrementValue(int increment)
-    {
-        value = Mathf.Clamp(value + increment, minValue, maxValue);
-    }
-
-    public void DecrementValue(int decrement)
-    {
-        value = Mathf.Clamp(value - decrement, minValue, maxValue);
-    }
-
+    #region Getters
+    //Getters
     public StatsEnum Name
     {
         get => name;
     }
-
-    public int Value
+    public int MaxValue
     {
-        get => value;
-        set => this.value = value;
+        get => maxValue;
     }
     public int ActualMaxValue
     {
         get => actualMaxValue;
-        set => this.actualMaxValue = value;
     }
+    public int Value
+    {
+        get => value;
+    }
+    public int MinValue
+    {
+        get => minValue;
+    }
+    /*public int ActualMaxIncrementInPercentage
+    {
+        get => actualMaxIncrementInPercentage;
+    }*/
+    #endregion Getters
+    #region Setters
+    //ActualMaxValue
+    /*public void IncrementActualMaxValueWithConstraints(int value)
+    {
+        this.actualMaxValue += Mathf.Clamp(actualMaxValue + value, minValue, maxValue);
+    }*/
+    public void IncrementActualMaxValue(int value)
+    {
+        this.actualMaxValue += value;
+    }
+
+    //MaxValue
+    /*public void IncrementMaxValueWithConstraints(int value)
+    {
+        this.actualMaxValue += Mathf.Clamp(actualMaxValue + value, minValue, maxValue);
+    }*/
+    public void IncrementMaxValue(int increment)
+    {
+        this.maxValue += increment;
+    }
+
+    //Value
+    /*public void IncrementValueWithConstraints(int increment)
+    {
+        value = Mathf.Clamp(value + increment, minValue, maxValue);
+    }*/
+    public void IncrementValue(int value)
+    {
+        this.value += value;
+    }
+
+    #endregion Setters
+
 
     public override string ToString()
     {

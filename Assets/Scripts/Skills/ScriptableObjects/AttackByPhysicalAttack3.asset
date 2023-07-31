@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 05fc9090caa00b64f8b347b5ee0f4cc9, type: 3}
-  m_Name: Increment20MaxHealthPermanent
+  m_Name: AttackByPhysicalAttack3
   m_EditorClassIdentifier: 
-  name: 8
+  name: 11
   description: 
-  temporalInstantEffects: []
-  permanentInstantEffects:
-  - {fileID: 11400000, guid: 4bb9486f0fb99a54d9f5bd3a399902ef, type: 2}
+  temporalInstantEffects:
+  - {fileID: 11400000, guid: 961493cae74e89244b41329a1c1a71d4, type: 2}
+  permanentInstantEffects: []
   overTimeEffects: []
   duringTimeEffects: []

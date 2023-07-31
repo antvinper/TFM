@@ -9,17 +9,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8ce7d27a895b02428b51755d305ed3c, type: 3}
-  m_Name: AttackByAttackEffect
+  m_Script: {fileID: 11500000, guid: 1f71edd1bc32b634eba97351c60f77a0, type: 3}
+  m_Name: Increment200MaxHealth
   m_EditorClassIdentifier: 
   effectName: 
   description: 
-  applyOnSelf: 1
+  applyOnSelf: 0
   isStatIncremented: 1
   statAffected: 0
   isValueInPercentage: 1
   statWhatToSee: 0
-  isTheOwnerStat: 1
+  isTheOwnerStat: 0
   useOnlyPermanentStatVariations: 0
-  valueInPercentage: 10
-  value: 50
+  valueInPercentage: 20
+  value: 200

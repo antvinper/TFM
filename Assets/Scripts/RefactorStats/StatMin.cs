@@ -6,8 +6,9 @@ public class StatMin
 {
     private StatsEnum name;
     private int value;
+    private int actualMaxValue;
 
-    public StatMin(StatsEnum name, int value = 0)
+    public StatMin(StatsEnum name, int maxValue, int value = 0)
     {
         this.name = name;
         this.value = value;
@@ -26,5 +27,10 @@ public class StatMin
     public void AddValue(int value)
     {
         this.value += value;
+    }
+
+    public void AddMaxValue(int value)
+    {
+        this.actualMaxValue += value;
     }
 }

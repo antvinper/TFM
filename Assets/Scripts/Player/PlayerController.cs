@@ -95,8 +95,8 @@ public class PlayerController : Characters.CharacterController//<PlayerMutableMo
          * TODO 
          * Calcular correctamente el daño.
          */
-        Debug.Log("My real damage = " + model.GetStat(StatsEnum.ATTACK));
-        return model.GetStat(StatsEnum.ATTACK);
+        Debug.Log("My real damage = " + model.GetStatValue(StatsEnum.ATTACK));
+        return model.GetStatValue(StatsEnum.ATTACK);
     }
 
     public async Task UseSkills(PlayerEnumSkills skillName, Characters.CharacterController target)
@@ -104,25 +104,31 @@ public class PlayerController : Characters.CharacterController//<PlayerMutableMo
         foreach(SkillDefinition sd in skills)
         {
             await new WaitForSeconds(2);
+            //Instant, During, Over
             sd.ProcessSkill(this, target);
+            //Permanent
+            sd.ProcessSkill(this);
         }
+
+        
     }
 
-    public void UseSkill(PlayerEnumSkills skillName, Characters.CharacterController target)
+    public async Task UseSkill(PlayerEnumSkills skillName, Characters.CharacterController target)
     {
         Debug.Log("Using: " + skillName);
         SkillDefinition skill = skills.Where(s => s.name.Equals(skillName)).FirstOrDefault();
+        await new WaitForSeconds(6);
         /*switch (skillName)
         {
             case PlayerEnumSkillsTest.SINGLE_ATTACK:
 
                 break;
         }*/
-        
+
         //skill.ProcessSkill(this);
         skill.ProcessSkill(this, target);
         //Debug.Log(model.MaxHealth);
-        Debug.Log(model.GetStat(StatsEnum.HEALTH));
+        Debug.Log(model.GetStatValue(StatsEnum.HEALTH));
     }
 
     /*public void ProcessDamage(float value)

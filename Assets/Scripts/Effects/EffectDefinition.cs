@@ -100,7 +100,15 @@ public abstract class EffectDefinition : ScriptableObject, IEffect
         {
             finalValueInPercentage = GetPercentageValueFromActualStat(owner, target);
         }*/
-        finalValueInPercentage = GetPercentageValueFromActualStat(owner, target);
+        if(this.statWhatToSee.Equals(StatsEnum.MAX_HEALTH))
+        {
+            finalValueInPercentage = isStatIncremented? valueInPercentage:-valueInPercentage;
+        }
+        else
+        {
+            finalValueInPercentage = GetPercentageValueFromActualStat(owner, target);
+        }
+        
         return finalValueInPercentage;
     }
 
@@ -122,6 +130,13 @@ public abstract class EffectDefinition : ScriptableObject, IEffect
 
 
         return finalValueInPercentage;
+    }*/
+
+    /*protected int GetPercentageValueFromActualMaxStat(Characters.CharacterController owner, Characters.CharacterController target)
+    {
+        float finalValueInPercentage;
+
+        int valueSWTS = isTheOwnerStat ? owner.GetActualMaxStat(statWhatToSee) : target.GetActualMaxStat(statWhatToSee);
     }*/
 
     /**

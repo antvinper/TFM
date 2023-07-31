@@ -189,7 +189,12 @@ namespace Characters
 
         public int GetStat(StatsEnum stat)
         {
-            return model.GetStat(stat);
+            return model.GetStatValue(stat);
+        }
+
+        public int GetActualMaxStat(StatsEnum stat)
+        {
+            return model.GetActualMaxStatValue(stat);
         }
     }
 }

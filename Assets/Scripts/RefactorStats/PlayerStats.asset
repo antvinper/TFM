@@ -13,16 +13,11 @@ MonoBehaviour:
   m_Name: PlayerStats
   m_EditorClassIdentifier: 
   stats:
-  - name: 0
+  - name: 1
     maxValue: 9999
     actualMaxValue: 320
     minValue: 0
     value: 320
-  - name: 1
-    maxValue: 255
-    actualMaxValue: 255
-    minValue: 0
-    value: 10
   - name: 2
     maxValue: 255
     actualMaxValue: 255
@@ -44,20 +39,20 @@ MonoBehaviour:
     minValue: 0
     value: 10
   - name: 6
+    maxValue: 255
+    actualMaxValue: 255
+    minValue: 0
+    value: 10
+  - name: 7
     maxValue: 5000
     actualMaxValue: 120
     minValue: 0
     value: 0
-  - name: 7
-    maxValue: 100
-    actualMaxValue: 100
-    minValue: 0
-    value: 60
   - name: 8
     maxValue: 100
     actualMaxValue: 100
     minValue: 0
-    value: 1
+    value: 60
   - name: 9
     maxValue: 100
     actualMaxValue: 100
@@ -67,8 +62,13 @@ MonoBehaviour:
     maxValue: 100
     actualMaxValue: 100
     minValue: 0
-    value: 2
+    value: 1
   - name: 11
+    maxValue: 100
+    actualMaxValue: 100
+    minValue: 0
+    value: 2
+  - name: 12
     maxValue: 1000
     actualMaxValue: 1000
     minValue: 0

@@ -5,17 +5,17 @@ using UnityEngine;
 public interface ICharacterModelStats
 {
     //public int MaxHealth { get; set; }
-    public int Health { get; set; }
-    public int Defense { get; set; }
-    public int MagicDefense { get; set; }
-    public int Attack { get; set; }
-    public int MagicAttack { get; set; }
-    public int Speed { get; set; }
-    public int Shield { get; set; }
-    public int Accuracy { get; set; }
-    public int BlockChance { get; set; }
-    public int DodgeChance { get; set; }
-    public int CritChance { get; set; }
-    public int CritDamageMultiplier { get; set; }
+    public int Health { get; }
+    public int Defense { get; }
+    public int MagicDefense { get; }
+    public int Attack { get; }
+    public int MagicAttack { get; }
+    public int Speed { get; }
+    public int Shield { get; }
+    public int Accuracy { get; }
+    public int BlockChance { get;}
+    public int DodgeChance { get; }
+    public int CritChance { get; }
+    public int CritDamageMultiplier { get; }
 
 }

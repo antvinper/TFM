@@ -27,7 +27,7 @@ public class EnemyController : Characters.CharacterController
         //model.Health -= value;
 
         Debug.Log("I have received a damage of " + value);
-        Debug.Log("Actual life = " + model.GetStat(StatsEnum.HEALTH));
+        Debug.Log("Actual life = " + model.GetStatValue(StatsEnum.HEALTH));
     }
 
     /*public override void ProcessEffect(CharacterMutableModel attacker)
