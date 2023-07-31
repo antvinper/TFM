@@ -8,6 +8,8 @@ public class CharacterMutableModel : ICharacterModel
 {
     [SerializeField] private StatsTree tree;
     [SerializeField] private StatsDefinition statsDefinitions;
+    private int soulFragments;
+    private int rupees;
 
     /**
      * HACER LAS VARIABLES PÚBLICAS QUE SERÁN DE JSON PROPERTY?
@@ -19,10 +21,23 @@ public class CharacterMutableModel : ICharacterModel
     private List<Stat> instantStatsModifyInRun;
     private List<Stat> instantStatsModifyPercentageInRun;
 
+    [JsonIgnore] private List<TimeEffectDefinition> timeEffectDefinitions = new List<TimeEffectDefinition>();
+
+    [JsonIgnore]
+    [HideInInspector]
+    public List<TimeEffectDefinition> TimeEffectDefinitions { get => timeEffectDefinitions; }
 
     public StatsTree Tree
     {
         get { return tree; }
+    }
+    public int Rupees
+    {
+        get => rupees;
+    }
+    public int SoulFragments
+    {
+        get => soulFragments;
     }
 
     public void Setup()
@@ -43,11 +58,7 @@ public class CharacterMutableModel : ICharacterModel
     }
 
 
-    [JsonIgnore] private List<TimeEffectDefinition> timeEffectDefinitions = new List<TimeEffectDefinition>();
-
-    [JsonIgnore]
-    [HideInInspector]
-    public List<TimeEffectDefinition> TimeEffectDefinitions { get => timeEffectDefinitions; }
+    
     
     //Se le pasa el valor máximo del stat?
     //Creo una función recursiva?

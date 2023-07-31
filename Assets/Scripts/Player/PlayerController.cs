@@ -12,6 +12,8 @@ public class PlayerController : Characters.CharacterController//<PlayerMutableMo
      */
     //[SerializeField] PlayerMutableModel model;
     [SerializeField] List<SkillDefinition> skills = new List<SkillDefinition>();
+    private SoulFragment soulFragment;
+    private Rupee rupees;
 
     public WeaponController weaponController;
 
@@ -49,6 +51,11 @@ public class PlayerController : Characters.CharacterController//<PlayerMutableMo
         GameManager.Instance.SetPlayerController(this);
         weaponController = GetComponent<WeaponController>();
         SetModel();
+        //Obtener del modelo la cantidad de rupias y fragmentos que tiene
+        this.rupees = new Rupee(model.Rupees);
+        this.soulFragment = new SoulFragment(model.SoulFragments);
+
+
 
         //TREE BEHAVIOUR
         /*Debug.Log(model.Tree.Slots);
