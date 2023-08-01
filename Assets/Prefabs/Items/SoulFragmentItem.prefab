@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &3704425904594936100
+--- !u!1 &5603686419366221287
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,42 +8,45 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3704425904594936102}
-  - component: {fileID: 5550090612371455117}
+  - component: {fileID: 5603686419366221285}
+  - component: {fileID: 5603686419366221286}
   m_Layer: 0
-  m_Name: Potion_25_Percent
+  m_Name: SoulFragmentItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3704425904594936102
+--- !u!4 &5603686419366221285
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3704425904594936100}
+  m_GameObject: {fileID: 5603686419366221287}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 440.0173, y: 208.37877, z: 3.8935547}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5550090612371455117
+--- !u!114 &5603686419366221286
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3704425904594936100}
+  m_GameObject: {fileID: 5603686419366221287}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d831632b5c0a957438d04e370009a1ed, type: 3}
+  m_Script: {fileID: 11500000, guid: b67b0f74c8ae57b4493b880ef81c8960, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  price: 50
-  sprite: {fileID: 21300000, guid: 6fac4e39926fd9c4ca2ba4416160a857, type: 3}
-  effect: {fileID: 11400000, guid: 1704a342e6ca1254198924490d6d2003, type: 2}
+  price: 100
+  sprite: {fileID: 21300000, guid: fd098fb4cf57bad419701c802e442b7e, type: 3}
+  name: Soul Fragments
+  description: "Fragmentos de alma que mejorar\xE1n tus poderes."
+  minSoulFragment: 1
+  maxSoulFragment: 3

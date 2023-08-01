@@ -8,6 +8,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 3212922387767648638, guid: ae2e6c05aea45fa4e8bef4b3d99a14c5, type: 3}
+      propertyPath: name
+      value: HighPotion
+      objectReference: {fileID: 0}
+    - target: {fileID: 3212922387767648638, guid: ae2e6c05aea45fa4e8bef4b3d99a14c5, type: 3}
       propertyPath: price
       value: 130
       objectReference: {fileID: 0}
@@ -15,6 +19,10 @@ PrefabInstance:
       propertyPath: effect
       value: 
       objectReference: {fileID: 11400000, guid: 27f4140801bb78949bbbe09e36af80d8, type: 2}
+    - target: {fileID: 3212922387767648638, guid: ae2e6c05aea45fa4e8bef4b3d99a14c5, type: 3}
+      propertyPath: description
+      value: Recupera un 75% de la salud.
+      objectReference: {fileID: 0}
     - target: {fileID: 5979573426523339989, guid: ae2e6c05aea45fa4e8bef4b3d99a14c5, type: 3}
       propertyPath: m_RootOrder
       value: 0

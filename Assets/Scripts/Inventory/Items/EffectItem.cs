@@ -8,7 +8,21 @@ public class EffectItem : Item
 
     public void Setup()
     {
-        name = GetEffectName();
+        //name = GetEffectName();
+        finalPrice = price;
+        nameSufix = "";
+
+        if (IsValueInPercentage())
+        {
+            int value = GetEffectValueInPercentage();
+            //nameSufix = ": " + value + "%";
+        }
+        else
+        {
+            int value = GetEffectValue();
+            //nameSufix = ": " + value;
+        }
+
         description = GetEffectDescription();
     }
 

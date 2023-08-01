@@ -1465,6 +1465,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 986424271}
     - target: {fileID: 9048941013558122177, guid: 9ecc25b5ea9bd904ea57d6e6782ba727, type: 3}
+      propertyPath: slotCurrencyPrefab
+      value: 
+      objectReference: {fileID: 1857951456341146721, guid: d881eda3b8dcad1418a90b6ac64288ac, type: 3}
+    - target: {fileID: 9048941013558122177, guid: 9ecc25b5ea9bd904ea57d6e6782ba727, type: 3}
       propertyPath: shopSlots.Array.size
       value: 3
       objectReference: {fileID: 0}
@@ -1480,6 +1484,14 @@ PrefabInstance:
       propertyPath: shopSlots.Array.data[2]
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 9048941013558122177, guid: 9ecc25b5ea9bd904ea57d6e6782ba727, type: 3}
+      propertyPath: currencyPrefabs.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9048941013558122177, guid: 9ecc25b5ea9bd904ea57d6e6782ba727, type: 3}
+      propertyPath: currencyPrefabs.Array.data[0]
+      value: 
+      objectReference: {fileID: 5603686419366221287, guid: 5192a1111d81aab4f82929d762925c6b, type: 3}
     - target: {fileID: 9048941013558122190, guid: 9ecc25b5ea9bd904ea57d6e6782ba727, type: 3}
       propertyPath: m_Name
       value: Shop

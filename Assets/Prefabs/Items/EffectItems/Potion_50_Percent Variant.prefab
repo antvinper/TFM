@@ -68,6 +68,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5550090612371455117, guid: be52a6ff11a95cf46af49441a024db08, type: 3}
+      propertyPath: name
+      value: SuperPotion
+      objectReference: {fileID: 0}
+    - target: {fileID: 5550090612371455117, guid: be52a6ff11a95cf46af49441a024db08, type: 3}
       propertyPath: price
       value: 95
       objectReference: {fileID: 0}
@@ -75,5 +79,9 @@ PrefabInstance:
       propertyPath: effect
       value: 
       objectReference: {fileID: 11400000, guid: a9f47dd53526222418f9e546551103e2, type: 2}
+    - target: {fileID: 5550090612371455117, guid: be52a6ff11a95cf46af49441a024db08, type: 3}
+      propertyPath: description
+      value: Recupera un 50% de la salud.
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: be52a6ff11a95cf46af49441a024db08, type: 3}

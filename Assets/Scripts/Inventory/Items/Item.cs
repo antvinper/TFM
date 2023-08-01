@@ -5,10 +5,13 @@ using UnityEngine;
 public class Item : MonoBehaviour
 {
     [SerializeField] protected int price;
+    protected int finalPrice = 0;
     [SerializeField] protected Sprite sprite;
 
-    protected string name;
-    protected string description;
+    [SerializeField] protected new string name;
+    [SerializeField] protected string description;
+
+    protected string nameSufix = "";
 
     public string Name
     {
@@ -19,10 +22,21 @@ public class Item : MonoBehaviour
     {
         get => description;
     }
-    public int Price
+    /*public int Price
     {
         get => price;
+    }*/
+    public int FinalPrice
+    {
+        get => finalPrice;
     }
+
+    public string NameSufix
+    {
+        get => nameSufix;
+        //set => nameSufix = value;
+    }
+
 
     public Sprite Sprite
     {

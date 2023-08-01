@@ -23,8 +23,8 @@ public class ShopSlot : MonoBehaviour
 
     public void Setup(Item item)
     {
-        this.price = item.Price;
-        this.name.text = item.Name;
+        this.price = item.FinalPrice;
+        this.name.text = item.Name + item.NameSufix;
         this.description.text = item.Description;
         this.image.sprite = item.Sprite;
         purchaseButton.GetComponentInChildren<TextMeshProUGUI>().text ="Buy " + this.price + "Rp";

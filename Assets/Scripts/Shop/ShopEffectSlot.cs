@@ -9,16 +9,16 @@ public class ShopEffectSlot : ShopSlot
         //string name = effectItem.GetEffectName();
         //string description = effectItem.GetEffectDescription();
 
-        if (effectItem.IsValueInPercentage())
+        /*if (effectItem.IsValueInPercentage())
         {
             int value = effectItem.GetEffectValueInPercentage();
-            effectItem.Name += ": " + value + "%";
+            effectItem.NameSufix = ": " + value + "%";
         }
         else
         {
             int value = effectItem.GetEffectValue();
-            effectItem.Name += ": " + value;
-        }
+            effectItem.NameSufix += ": " + value;
+        }*/
 
         this.index = index;
         base.Setup(effectItem);
