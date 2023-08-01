@@ -21,6 +21,33 @@ EditorBuildSettings:
     path: Assets/Scenes/HouseHall4Level1.unity
     guid: 3e1222fadffebf045916ec248b0fed71
   - enabled: 1
+    path: Assets/Scenes/HouseHall5Level1.unity
+    guid: ff37a6d397ec37146b02c35fcdd5e870
+  - enabled: 1
+    path: Assets/Scenes/HouseHall6Level1.unity
+    guid: 88ddff4d8a873474ca3140bad84473c4
+  - enabled: 1
+    path: Assets/Scenes/Improvement2RoomLevel1.unity
+    guid: ec8f4378762e61341a0e220e42b4e4ee
+  - enabled: 1
+    path: Assets/Scenes/HouseHall9Level1.unity
+    guid: 16130943aec391641bbeb3238c52c4f5
+  - enabled: 1
+    path: Assets/Scenes/HouseHall10Level1.unity
+    guid: 9387100f669e60f4582ffbb86cfcba82
+  - enabled: 1
+    path: Assets/Scenes/HouseHall11Level1.unity
+    guid: 020c0d63fbe12274c92edde3c154018a
+  - enabled: 1
+    path: Assets/Scenes/HouseHall12Level1.unity
+    guid: 7655939648bc73a44871822628a3abf4
+  - enabled: 1
+    path: Assets/Scenes/Improvement1RoomLevel1.unity
+    guid: 759bb719389ffc3408bff5e1910fdd2f
+  - enabled: 1
+    path: Assets/Scenes/ObjectStore.unity
+    guid: a79189ce8aab08f45a88dc50ad09cc23
+  - enabled: 1
     path: Assets/Scenes/HouseHall14Level1.unity
     guid: fd80e6a6dda613d46afac938c55f4e24
   m_configObjects: {}
