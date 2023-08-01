@@ -5,8 +5,12 @@ using UnityEngine;
 public class ShopManager : Singleton<ShopManager>
 {
     [SerializeField] private Shop shop;
-    public void CreateShop(WeaponController weaponController)
+    public Shop Shop
     {
-        shop.CreateShop(weaponController);
+        get => shop;
+    }
+    public void CreateShop(PlayerController playerController)
+    {
+        shop.CreateShop(playerController);
     }
 }

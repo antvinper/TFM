@@ -82,7 +82,6 @@ public class GameModel
         set
         {
             playerModel = value;
-            Debug.Log("AAAAA");
         }
     }
 

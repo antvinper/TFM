@@ -54,7 +54,7 @@ public class PlayerController : Characters.CharacterController//<PlayerMutableMo
         this.soulFragment = new SoulFragment(model.SoulFragments);
 
         //Shop
-        ShopManager.Instance.CreateShop(weaponController);
+        ShopManager.Instance.CreateShop(this);
 
         //TREE BEHAVIOUR
         /*Debug.Log(model.Tree.Slots);

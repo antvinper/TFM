@@ -24,9 +24,18 @@ public class Shop: MonoBehaviour
     [SerializeField] private int minSoulFragment;
     [SerializeField] private int maxSoulFragment;
 
-
-    public void CreateShop(WeaponController weaponController)
+    private PlayerController playerController;
+    public PlayerController PlayerController
     {
+        get => playerController;
+    }
+
+
+    public void CreateShop(PlayerController playerController)
+    {
+        this.playerController = playerController;
+        WeaponController weaponController = playerController.weaponController;
+
         int soulFragments = (Random.Range(minSoulFragment, maxSoulFragment + 1));
         int soulFragmentsPrice = soulFragments * soulFragmentPricePerUnit;
 
