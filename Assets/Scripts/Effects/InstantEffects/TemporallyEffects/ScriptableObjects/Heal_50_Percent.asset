@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8ce7d27a895b02428b51755d305ed3c, type: 3}
   m_Name: Heal_50_Percent
   m_EditorClassIdentifier: 
-  effectName: 
-  description: 
+  effectName: Potion
+  description: Recupera un 50% de la salud.
   applyOnSelf: 1
   isStatIncremented: 1
   statAffected: 1

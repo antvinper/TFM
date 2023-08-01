@@ -24,6 +24,17 @@ public class InstantEffectTemporally : EffectDefinition
 
     public override Task ProcessEffect(Characters.CharacterController target)
     {
+        this.owner = target;
+        this.target = target;
+        if (isValueInPercentage)
+        {
+            ProcessEffectInPercentage(owner, target);
+        }
+        else
+        {
+            ProcessEffectInReal(owner, target);
+        }
+
         return Task.CompletedTask;
     }
 

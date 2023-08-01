@@ -5,8 +5,13 @@ using UnityEngine;
 //[System.Serializable]
 public class Shop: MonoBehaviour
 {
+    [SerializeField] Canvas shoppingCanvas;
+    [SerializeField] GameObject panelSlots;
+    [SerializeField] GameObject slotEffectPrefab;
+
+    [SerializeField] List<GameObject> shopSlots;
     //Lista de pociones 25%, 50%, 75%
-    [SerializeField] private List<GameObject> potions;
+    [SerializeField] private List<GameObject> potionsPrefabs;
     //Lista de combos. Están todas las listas.
     //En función de qué arma tenga el personaje, seleccionará una lista u otra
     //Y de esa lista, sólo seleccionará los combos no activados.
@@ -23,7 +28,7 @@ public class Shop: MonoBehaviour
     public void CreateShop(WeaponController weaponController)
     {
         int soulFragments = (Random.Range(minSoulFragment, maxSoulFragment + 1));
-        int price = soulFragments * soulFragmentPricePerUnit;
+        int soulFragmentsPrice = soulFragments * soulFragmentPricePerUnit;
 
         if(weaponController is SwordController)
         {
@@ -32,5 +37,28 @@ public class Shop: MonoBehaviour
         {
             combosInShop = chackramCombos;
         }
+
+        int i = 0;
+        if(potionsPrefabs.Count > 0)
+        {
+            shopSlots = new List<GameObject>();
+        }
+        foreach(GameObject potion in potionsPrefabs)
+        {
+            EffectItem pot = potion.GetComponent<EffectItem>();
+
+            GameObject go = Instantiate(slotEffectPrefab, panelSlots.transform);
+            shopSlots.Add(go);
+
+
+            shopSlots[i].GetComponent<ShopEffectSlot>().Setup(pot, i++);
+        }
+
+        shoppingCanvas.gameObject.SetActive(true);
+    }
+
+    public void DeActivateSlot(int index)
+    {
+        shopSlots[index].gameObject.SetActive(false);
     }
 }
