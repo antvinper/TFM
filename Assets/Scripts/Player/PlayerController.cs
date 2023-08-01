@@ -53,8 +53,7 @@ public class PlayerController : Characters.CharacterController//<PlayerMutableMo
         this.rupees = new Rupee(model.Rupees);
         this.soulFragment = new SoulFragment(model.SoulFragments);
 
-        //Shop
-        ShopManager.Instance.CreateShop(this);
+        
 
         //TREE BEHAVIOUR
         /*Debug.Log(model.Tree.Slots);
@@ -91,6 +90,8 @@ public class PlayerController : Characters.CharacterController//<PlayerMutableMo
         this.rupees.AddAmount(rupeesGained);
         this.model.Rupees = this.rupees.Amount;
         Debug.Log("#Room# Rupees gained: " + rupeesGained);
+        //Shop
+        ShopManager.Instance.CreateShop(this);
     }
 
     private async Task SetModel()

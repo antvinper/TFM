@@ -6,19 +6,34 @@ public class EffectItem : Item
 {
     [SerializeField] protected InstantEffectTemporally effect;
 
+    public void Setup()
+    {
+        name = GetEffectName();
+        description = GetEffectDescription();
+    }
+
     public string GetEffectName()
     {
-        return this.effect.EffectName;
+        return effect.EffectName;
     }
 
     public string GetEffectDescription()
     {
-        return this.effect.Description;
+        return effect.Description;
     }
 
     public int GetEffectValueInPercentage()
     {
-        return this.effect.ValueInPercentage;
+        return effect.ValueInPercentage;
+    }
+    public int GetEffectValue()
+    {
+        return effect.Value;
+    }
+
+    public bool IsValueInPercentage()
+    {
+        return effect.IsValueInPercentage;
     }
 
     public void UseItem(Characters.CharacterController target)

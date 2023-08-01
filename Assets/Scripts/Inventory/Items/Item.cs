@@ -7,6 +7,18 @@ public class Item : MonoBehaviour
     [SerializeField] protected int price;
     [SerializeField] protected Sprite sprite;
 
+    protected string name;
+    protected string description;
+
+    public string Name
+    {
+        get => name;
+        set => name = value;
+    }
+    public string Description
+    {
+        get => description;
+    }
     public int Price
     {
         get => price;

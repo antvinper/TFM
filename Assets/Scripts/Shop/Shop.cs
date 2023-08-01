@@ -48,22 +48,31 @@ public class Shop: MonoBehaviour
         }
 
         int i = 0;
-        if(potionsPrefabs.Count > 0)
+        i = CreateEffectSlots(i);
+
+        //Crear resto de slots
+
+        shoppingCanvas.gameObject.SetActive(true);
+    }
+
+    private int CreateEffectSlots(int i)
+    {
+        if (potionsPrefabs.Count > 0)
         {
             shopSlots = new List<GameObject>();
         }
-        foreach(GameObject potion in potionsPrefabs)
+        foreach (GameObject potion in potionsPrefabs)
         {
-            EffectItem pot = potion.GetComponent<EffectItem>();
-
             GameObject go = Instantiate(slotEffectPrefab, panelSlots.transform);
             shopSlots.Add(go);
 
-
-            shopSlots[i].GetComponent<ShopEffectSlot>().Setup(pot, i++);
+            EffectItem effectItem = potion.GetComponent<EffectItem>();
+            effectItem.Setup();
+            shopSlots[i].GetComponent<ShopEffectSlot>().Setup(effectItem, i++);
+            
         }
 
-        shoppingCanvas.gameObject.SetActive(true);
+        return i;
     }
 
     public void DeActivateSlot(int index)
