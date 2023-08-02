@@ -82,14 +82,28 @@ public class PlayerController : Characters.CharacterController//<PlayerMutableMo
         //UseSkill(PlayerEnumSkills.DEFFENSE_DOWN, enemy);
         GetRoomRewards();
     }
+    public void AddRupees(int value)
+    {
+        this.rupees.AddAmount(value);
+        this.model.Rupees = this.rupees.Amount;
+        Debug.Log("#Room# Rupees gained: " + value);
+        Debug.Log("#Room# Actual rupees: " + this.model.Rupees);
+
+        //model.Rupees += value;
+    }
+    public void AddSoulFragments(int value)
+    {
+        model.SoulFragments += value;
+    }
 
     private async Task GetRoomRewards()
     {
         await new WaitForSeconds(2.0f);
         int rupeesGained = RoomManager.Instance.GetRoomRewards();
-        this.rupees.AddAmount(rupeesGained);
-        this.model.Rupees = this.rupees.Amount;
-        Debug.Log("#Room# Rupees gained: " + rupeesGained);
+
+        AddRupees(rupeesGained);
+        
+
         //Shop
         ShopManager.Instance.CreateShop(this);
     }

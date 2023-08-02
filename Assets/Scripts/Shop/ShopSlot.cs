@@ -16,12 +16,12 @@ public class ShopSlot : MonoBehaviour
     [SerializeField] private TextMeshProUGUI name;
     [SerializeField] private TextMeshProUGUI description;
     [SerializeField] protected Button purchaseButton;
-
     protected int index;
-
     private int price;
 
-    public void Setup(Item item)
+    private Shop shop;
+
+    public void Setup(Item item, Shop shop)
     {
         this.price = item.FinalPrice;
         this.name.text = item.Name + item.NameSufix;
@@ -29,17 +29,24 @@ public class ShopSlot : MonoBehaviour
         this.image.sprite = item.Sprite;
         purchaseButton.GetComponentInChildren<TextMeshProUGUI>().text ="Buy " + this.price + "Rp";
 
+        this.shop = shop;
+
         gameObject.SetActive(true);
 
-        //boton
-        if (price > GameManager.Instance.GetPlayerController().Model.Rupees)
-        {
-            purchaseButton.interactable = false;
-        }
+        CheckButtonInteractability();
     }
 
     public void Purchase()
     {
         Debug.Log(name.text + ": purchased");
+        shop.ApplyPurchase(price);
+    }
+
+    public void CheckButtonInteractability()
+    {
+        if (price > GameManager.Instance.GetPlayerController().Model.Rupees)
+        {
+            purchaseButton.interactable = false;
+        }
     }
 }

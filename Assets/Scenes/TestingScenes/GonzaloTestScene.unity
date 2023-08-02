@@ -347,8 +347,8 @@ MonoBehaviour:
   model:
     roomType: 0
     enemiesPrefabs: []
-    rupeesMinAmount: 50
-    rupeesMaxAmount: 150
+    rupeesMinAmount: 300
+    rupeesMaxAmount: 500
 --- !u!4 &389669659
 Transform:
   m_ObjectHideFlags: 0

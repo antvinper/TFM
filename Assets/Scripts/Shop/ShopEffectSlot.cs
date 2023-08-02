@@ -2,26 +2,12 @@
 public class ShopEffectSlot : ShopSlot
 {
     private EffectItem effectItem;
-    public void Setup(EffectItem effectItem, int index)
+    public void Setup(EffectItem effectItem, int index, Shop shop)
     {
         this.effectItem = effectItem;
 
-        //string name = effectItem.GetEffectName();
-        //string description = effectItem.GetEffectDescription();
-
-        /*if (effectItem.IsValueInPercentage())
-        {
-            int value = effectItem.GetEffectValueInPercentage();
-            effectItem.NameSufix = ": " + value + "%";
-        }
-        else
-        {
-            int value = effectItem.GetEffectValue();
-            effectItem.NameSufix += ": " + value;
-        }*/
-
         this.index = index;
-        base.Setup(effectItem);
+        base.Setup(effectItem, shop);
     }
 
     public void Purchase()

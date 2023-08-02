@@ -4,9 +4,19 @@ using UnityEngine;
 
 public class ShopCurrencySlot : ShopSlot
 {
-    public void Setup(CurrencyItem currencyItem, int index)
+    public void Setup(CurrencyItem currencyItem, int index, Shop shop)
     {
         this.index = index;
-        base.Setup(currencyItem);
+        base.Setup(currencyItem, shop);
     }
+    public void Purchase()
+    {
+        /*
+         * TODO
+         * Get the SoulFragments
+         */
+        base.Purchase();
+    }
+
 }
+

@@ -98,6 +98,14 @@ PrefabInstance:
     - target: {fileID: 5975259682640806901, guid: c4ff8e4fb7608224986bcd89e5ff82fb, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
+      objectReference: {fileID: -8627203736003393889}
+    - target: {fileID: 5975259682640806901, guid: c4ff8e4fb7608224986bcd89e5ff82fb, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Purchase
+      objectReference: {fileID: 0}
+    - target: {fileID: 5975259682640806901, guid: c4ff8e4fb7608224986bcd89e5ff82fb, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: ShopComboSlot, Assembly-CSharp
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5975259681136757655, guid: c4ff8e4fb7608224986bcd89e5ff82fb, type: 3}
