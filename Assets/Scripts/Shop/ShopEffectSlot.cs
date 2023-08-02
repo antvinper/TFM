@@ -13,7 +13,6 @@ public class ShopEffectSlot : ShopSlot
     public void Purchase()
     {
         base.Purchase();
-        this.effectItem.UseItem(ShopManager.Instance.Shop.PlayerController);
-        GetComponentInParent<Shop>().DeActivateSlot(index);
+        shop.ApplyEffectPurchase(price, effectItem, index);;
     }
 }

@@ -17,9 +17,9 @@ public class ShopSlot : MonoBehaviour
     [SerializeField] private TextMeshProUGUI description;
     [SerializeField] protected Button purchaseButton;
     protected int index;
-    private int price;
+    protected int price;
 
-    private Shop shop;
+    protected Shop shop;
 
     public void Setup(Item item, Shop shop)
     {
@@ -39,7 +39,6 @@ public class ShopSlot : MonoBehaviour
     public void Purchase()
     {
         Debug.Log(name.text + ": purchased");
-        shop.ApplyPurchase(price);
     }
 
     public void CheckButtonInteractability()

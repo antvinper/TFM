@@ -15,7 +15,23 @@ public class ShopManager : Singleton<ShopManager>
         shop.CreateShop(playerController);
     }
 
-    public void ApplyPurchase(int price)
+    public void ApplySoulFragmentPurchase(int price, int soulFragmentsToAdd)
+    {
+        GameManager.Instance.GetPlayerController().AddSoulFragments(soulFragmentsToAdd);
+        PayRupees(price);
+    }
+
+    public void ApplyComboPurchase(int price)
+    {
+        PayRupees(price);
+    }
+
+    public void ApplyEffectPurchase(int price)
+    {
+        PayRupees(price);
+    }
+
+    private void PayRupees(int price)
     {
         GameManager.Instance.GetPlayerController().AddRupees(-price);
     }

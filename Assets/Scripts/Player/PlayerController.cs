@@ -93,7 +93,10 @@ public class PlayerController : Characters.CharacterController//<PlayerMutableMo
     }
     public void AddSoulFragments(int value)
     {
-        model.SoulFragments += value;
+        this.soulFragment.AddAmount(value);
+        this.model.SoulFragments = this.soulFragment.Amount;
+        Debug.Log("#Room# SoulFragments gained: " + value);
+        Debug.Log("#Room# Actual SoulFragments: " + this.model.SoulFragments);
     }
 
     private async Task GetRoomRewards()

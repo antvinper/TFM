@@ -99,12 +99,34 @@ public class Shop: MonoBehaviour
         shopSlots[index].gameObject.SetActive(false);
     }
 
-    public void ApplyPurchase(int price)
+    public void ApplySoulFragmentPurchase(int price, int soulFragmentsToAdd, int index)
     {
-        ShopManager.Instance.ApplyPurchase(price);
+        ShopManager.Instance.ApplySoulFragmentPurchase(price, soulFragmentsToAdd);
         foreach(GameObject go in shopSlots)
         {
             go.GetComponent<ShopSlot>().CheckButtonInteractability();
         }
+        DeActivateSlot(index);
+    }
+
+    public void ApplyComboPurchase(int price)
+    {
+        ShopManager.Instance.ApplyComboPurchase(price);
+        foreach(GameObject go in shopSlots)
+        {
+            go.GetComponent<ShopSlot>().CheckButtonInteractability();
+        }
+        //DeActivateSlot(index);
+    }
+
+    public void ApplyEffectPurchase(int price, EffectItem effectItem, int index)
+    {
+        effectItem.UseItem(ShopManager.Instance.Shop.PlayerController);
+        ShopManager.Instance.ApplyEffectPurchase(price);
+        foreach(GameObject go in shopSlots)
+        {
+            go.GetComponent<ShopSlot>().CheckButtonInteractability();
+        }
+        DeActivateSlot(index);
     }
 }
