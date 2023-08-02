@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class WeaponController: MonoBehaviour
@@ -155,5 +157,19 @@ public class WeaponController: MonoBehaviour
             yield return new WaitForSeconds(Time.deltaTime);
         }
 
+    }
+
+    public List<BasicComboDefinition> GetActiveCombos()
+    {
+        List<BasicComboDefinition> activeCombos = new List<BasicComboDefinition>();
+        activeCombos = model.BasicComboDefinitions.ToList();
+        return activeCombos.Where(t => t.IsActive).ToList();
+    }
+
+    internal List<BasicComboDefinition> GetInactiveCombos()
+    {
+        List<BasicComboDefinition> activeCombos = new List<BasicComboDefinition>();
+        activeCombos = model.BasicComboDefinitions.ToList();
+        return activeCombos.Where(t => !t.IsActive).ToList();
     }
 }

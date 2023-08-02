@@ -13,13 +13,8 @@ public class ShopCurrencySlot : ShopSlot
     }
     public void Purchase()
     {
-        /*
-         * TODO
-         * Get the SoulFragments
-         */
         shop.ApplySoulFragmentPurchase(price, soulFragments, this.index);
         base.Purchase();
-        //shop.ApplySoulFragmentPurchase(price)
     }
 
 }

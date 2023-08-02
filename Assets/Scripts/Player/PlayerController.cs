@@ -108,7 +108,10 @@ public class PlayerController : Characters.CharacterController//<PlayerMutableMo
         
 
         //Shop
-        ShopManager.Instance.CreateShop(this);
+        //Al gameManager
+        ShopManager.Instance.CreateShop();
+
+        GetActiveCombos();
     }
 
     private async Task SetModel()
@@ -188,5 +191,25 @@ public class PlayerController : Characters.CharacterController//<PlayerMutableMo
     public void StopCharging()
     {
         weaponController.StopCharging();
+    }
+
+    public List<BasicComboDefinition> GetActiveCombos()
+    {
+        List<BasicComboDefinition> activeCombos = weaponController.GetActiveCombos();
+        foreach(BasicComboDefinition comb in activeCombos)
+        {
+            Debug.Log("Active Combo: " + comb.Name);
+        }
+        return activeCombos;
+    }
+
+    public List<BasicComboDefinition> GetInactiveCombos()
+    {
+        List<BasicComboDefinition> inactiveCombos = weaponController.GetInactiveCombos();
+        foreach (BasicComboDefinition comb in inactiveCombos)
+        {
+            Debug.Log("Inactive Combo: " + comb.Name);
+        }
+        return inactiveCombos;
     }
 }

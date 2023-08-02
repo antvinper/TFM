@@ -5,6 +5,7 @@ using UnityEngine;
 public class ComboItem : Item
 {
     [SerializeField] private BasicComboDefinition combo;
+    public BasicComboDefinition Combo => combo;
 
     public void Setup(BasicComboDefinition combo)
     {

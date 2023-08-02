@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 //[System.Serializable]
@@ -15,30 +16,25 @@ public class Shop: MonoBehaviour
     [SerializeField] private List<GameObject> potionsPrefabs;
     [SerializeField] private List<GameObject> currencyPrefabs;
 
-    [SerializeField] private List<BasicComboDefinition> swordCombos;
-    [SerializeField] private List<BasicComboDefinition> chackramCombos;
+    /*[SerializeField] private List<BasicComboDefinition> swordCombos;
+    [SerializeField] private List<BasicComboDefinition> chackramCombos;*/
     [SerializeField] private List<BasicComboDefinition> combosInShop;
 
-    private PlayerController playerController;
-    public PlayerController PlayerController
+    public void CreateShop()
     {
-        get => playerController;
-    }
+        //this.playerController = playerController;
+        /*this.playerController = playerController;
+        WeaponController weaponController = playerController.weaponController;*/
 
+        combosInShop = ShopManager.Instance.GetInactiveCombos();
 
-    public void CreateShop(PlayerController playerController)
-    {
-        this.playerController = playerController;
-        WeaponController weaponController = playerController.weaponController;
-
-
-        if(weaponController is SwordController)
+        /*if(weaponController is SwordController)
         {
             combosInShop = swordCombos;
         } else if(weaponController is ChackramController)
         {
             combosInShop = chackramCombos;
-        }
+        }*/
 
         shopSlots = new List<GameObject>();
         int i = 0;
@@ -61,7 +57,7 @@ public class Shop: MonoBehaviour
         BasicComboDefinition bcd = combosInShop[indexCombo];
         ComboItem comboItem = new ComboItem();
         comboItem.Setup(bcd);
-        shopSlots[i].GetComponent<ShopComboSlot>().Setup(comboItem, i++, this);
+        shopSlots[i].GetComponent<ShopComboSlot>().Setup(comboItem, i, this);
     }
 
     private int CreateCurrencySlots(int i)
@@ -99,6 +95,16 @@ public class Shop: MonoBehaviour
         shopSlots[index].gameObject.SetActive(false);
     }
 
+    public void DeActivateEffectSlots()
+    {
+        List<GameObject> effectSlots = shopSlots.Where(t => t.GetComponent<ShopEffectSlot>()).ToList();
+
+        foreach(GameObject go in effectSlots)
+        {
+            DeActivateSlot(go.GetComponent<ShopEffectSlot>().Index);
+        }
+    }
+
     public void ApplySoulFragmentPurchase(int price, int soulFragmentsToAdd, int index)
     {
         ShopManager.Instance.ApplySoulFragmentPurchase(price, soulFragmentsToAdd);
@@ -109,24 +115,25 @@ public class Shop: MonoBehaviour
         DeActivateSlot(index);
     }
 
-    public void ApplyComboPurchase(int price)
+    public void ApplyComboPurchase(int price, BasicComboDefinition combo, int index)
     {
+        combo.SetActive(true);
         ShopManager.Instance.ApplyComboPurchase(price);
         foreach(GameObject go in shopSlots)
         {
             go.GetComponent<ShopSlot>().CheckButtonInteractability();
         }
-        //DeActivateSlot(index);
+        DeActivateSlot(index);
     }
 
     public void ApplyEffectPurchase(int price, EffectItem effectItem, int index)
     {
-        effectItem.UseItem(ShopManager.Instance.Shop.PlayerController);
+        effectItem.UseItem(ShopManager.Instance.GetPlayerController());
         ShopManager.Instance.ApplyEffectPurchase(price);
         foreach(GameObject go in shopSlots)
         {
             go.GetComponent<ShopSlot>().CheckButtonInteractability();
         }
-        DeActivateSlot(index);
+        DeActivateEffectSlots();
     }
 }

@@ -17,6 +17,7 @@ public class ShopSlot : MonoBehaviour
     [SerializeField] private TextMeshProUGUI description;
     [SerializeField] protected Button purchaseButton;
     protected int index;
+    public int Index => index;
     protected int price;
 
     protected Shop shop;

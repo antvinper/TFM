@@ -12,7 +12,7 @@ public class ShopEffectSlot : ShopSlot
 
     public void Purchase()
     {
-        base.Purchase();
         shop.ApplyEffectPurchase(price, effectItem, index);;
+        base.Purchase();
     }
 }

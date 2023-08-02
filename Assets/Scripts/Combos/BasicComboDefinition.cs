@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -23,6 +24,11 @@ public class BasicComboDefinition : ComboDefinition
         }
 
         return activated;
+    }
+
+    internal void SetActive(bool isActive)
+    {
+        this.isActive = isActive;
     }
 
     public bool ContinueCombo(ButtonsXbox buttonPressed)
