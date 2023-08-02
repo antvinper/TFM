@@ -18,7 +18,7 @@ MonoBehaviour:
   - 0.75
   - 1
   - 1.25
-  isActive: 1
+  startsActive: 1
   buttons: 010000000100000001000000
   comboFinished: 0
   price: 0

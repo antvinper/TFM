@@ -11,6 +11,7 @@ public class BasicComboDefinition : ComboDefinition
     public void SetUp(WeaponController weaponController)
     {
         this.weaponController = weaponController;
+        isActive = startsActive;
     }
 
     public bool StartCombo(ButtonsXbox buttonPressed)

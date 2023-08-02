@@ -16,8 +16,10 @@ public abstract class ComboDefinition : ScriptableObject//, IComboModel
     [SerializeField] protected float[] damageMultiplier;
     public float[] DamageMultiplier => damageMultiplier;
 
-    [SerializeField] protected bool isActive;
+    protected bool isActive;
     public bool IsActive => isActive;
+    [SerializeField] protected bool startsActive;
+    public bool StartsActive => startsActive;
 
     [SerializeField] protected ButtonsXbox[] buttons;
     public ButtonsXbox[] Buttons => buttons;
