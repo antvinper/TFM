@@ -3,34 +3,38 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public abstract class ComboDefinition : ScriptableObject, IComboModel
+public abstract class ComboDefinition : ScriptableObject//, IComboModel
 {
-    [SerializeField] private string comboName;
-    public string ComboName
+    [SerializeField] protected string name;
+    public string Name
     {
-        get => comboName;
+        get => name;
     }
-    [SerializeField] private bool isActive;
-    public bool IsActive
+    [SerializeField] protected string description;
+    public string Description => description;
+
+    [SerializeField] protected float[] damageMultiplier;
+    public float[] DamageMultiplier => damageMultiplier;
+
+    [SerializeField] protected bool isActive;
+    public bool IsActive => isActive;
+
+    [SerializeField] protected ButtonsXbox[] buttons;
+    public ButtonsXbox[] Buttons => buttons;
+
+    [SerializeField] protected bool comboFinished = false;
+    public bool ComboFinished
     {
-        get => isActive;
+        get => comboFinished;
+        set => comboFinished = value;
     }
-    //public WeaponModel weaponModel;
-    public float[] DamageMultiplier;
-    public ButtonsXbox[] Buttons;
-    //public bool Activated = false;
-    protected bool ComboFinished = false;
 
-    //protected bool doingCombo = false;
-    //public WeaponModel WeaponModel => weaponModel;
+    [SerializeField] protected int price;
+    public int Price => price;
 
-    public float[] damageMultiplier => DamageMultiplier;
-    public ButtonsXbox[] buttons => Buttons;
-    //public bool activated { get => Activated; set => Activated = value; }
-    public bool comboFinished { get => ComboFinished; set => ComboFinished = value; }
+    [SerializeField] protected Sprite sprite;
+    public Sprite Sprite => sprite;
 
-    /*private void Awake()
-    {
-        activated = false;
-    }*/
+
+
 }

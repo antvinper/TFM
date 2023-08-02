@@ -2,17 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShopComboSlot : MonoBehaviour
+public class ShopComboSlot : ShopSlot
 {
-    // Start is called before the first frame update
-    void Start()
+    public void Setup(ComboItem comboItem, int i)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        this.index = i;
+        base.Setup(comboItem);
     }
 }

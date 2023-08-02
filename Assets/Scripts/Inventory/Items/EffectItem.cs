@@ -4,24 +4,12 @@ using UnityEngine;
 
 public class EffectItem : Item
 {
-    [SerializeField] protected InstantEffectTemporally effect;
+    [SerializeField] private InstantEffectTemporally effect;
 
     public void Setup()
     {
-        //name = GetEffectName();
         finalPrice = price;
         nameSufix = "";
-
-        if (IsValueInPercentage())
-        {
-            int value = GetEffectValueInPercentage();
-            //nameSufix = ": " + value + "%";
-        }
-        else
-        {
-            int value = GetEffectValue();
-            //nameSufix = ": " + value;
-        }
 
         description = GetEffectDescription();
     }

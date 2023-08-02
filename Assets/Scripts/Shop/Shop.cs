@@ -9,6 +9,7 @@ public class Shop: MonoBehaviour
     [SerializeField] GameObject panelSlots;
     [SerializeField] GameObject slotEffectPrefab;
     [SerializeField] GameObject slotCurrencyPrefab;
+    [SerializeField] GameObject slotComboPrefab;
 
     [SerializeField] List<GameObject> shopSlots;
     //Lista de pociones 25%, 50%, 75%
@@ -52,16 +53,26 @@ public class Shop: MonoBehaviour
         int i = 0;
         i = CreateEffectSlots(i);
 
-        //Crear resto de slots
-        i = CreateCurrencySlots(i);
         
+        i = CreateCurrencySlots(i);
+
+        //Crear resto de slots
+        CreateComboSlot(i);
 
         shoppingCanvas.gameObject.SetActive(true);
     }
 
-    private void CreateComboSlots(int i)
+    private void CreateComboSlot(int i)
     {
+        //TODO
+        GameObject go = Instantiate(slotComboPrefab, panelSlots.transform);
+        shopSlots.Add(go);
 
+        int indexCombo = Random.Range(0, combosInShop.Count);
+        BasicComboDefinition bcd = combosInShop[indexCombo];
+        ComboItem comboItem = new ComboItem();
+        comboItem.Setup(bcd);
+        shopSlots[i].GetComponent<ShopComboSlot>().Setup(comboItem, i++);
     }
 
     private int CreateCurrencySlots(int i)

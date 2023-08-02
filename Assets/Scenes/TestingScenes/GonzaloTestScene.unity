@@ -1465,6 +1465,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 986424271}
     - target: {fileID: 9048941013558122177, guid: 9ecc25b5ea9bd904ea57d6e6782ba727, type: 3}
+      propertyPath: slotComboPrefab
+      value: 
+      objectReference: {fileID: 2842798051933306295, guid: f1d50a27faebd3d42b4eb0062b91347c, type: 3}
+    - target: {fileID: 9048941013558122177, guid: 9ecc25b5ea9bd904ea57d6e6782ba727, type: 3}
       propertyPath: slotCurrencyPrefab
       value: 
       objectReference: {fileID: 1857951456341146721, guid: d881eda3b8dcad1418a90b6ac64288ac, type: 3}

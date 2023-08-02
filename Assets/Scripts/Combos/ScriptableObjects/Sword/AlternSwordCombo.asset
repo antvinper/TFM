@@ -12,10 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9686a4c640c7414887742c42f334c45, type: 3}
   m_Name: AlternSwordCombo
   m_EditorClassIdentifier: 
-  comboName: Ataque alternativo
+  name: Altern Combo
+  description: Altern Combo description
+  damageMultiplier:
+  - 1
+  - 1.2
+  - 1.5
   isActive: 0
-  DamageMultiplier:
-  - 1
-  - 1
-  - 1
-  Buttons: 030000000100000003000000
+  buttons: 030000000100000003000000
+  comboFinished: 0
+  price: 100
+  sprite: {fileID: 21300000, guid: 9e9474494461bd048803b48e391ef0f6, type: 3}
