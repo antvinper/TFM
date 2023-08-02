@@ -3763,7 +3763,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b3b34b1956d55040948e109f7f37f30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneLoader: {fileID: 1789773136}
 --- !u!65 &1770699213
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3822,7 +3821,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b3b34b1956d55040948e109f7f37f30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneLoader: {fileID: 1789773136}
 --- !u!65 &1779568034
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3863,7 +3861,7 @@ GameObject:
   - component: {fileID: 1789773136}
   m_Layer: 0
   m_Name: SceneLoader
-  m_TagString: Untagged
+  m_TagString: SceneLoader
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class LevelGenerator : MonoBehaviour
 {
     private List<int> availableScenes;
-    private int numRooms = 12;
+    private int numRooms = 13;
     private int storeSceneIndex = 13;
     private int bossSceneIndex = 14;
     private int countRooms = 0;
@@ -20,7 +20,7 @@ public class LevelGenerator : MonoBehaviour
         {
             availableScenes.Add(i);
         }
-
+        DontDestroyOnLoad(gameObject);
     }
 
     public void ChangeToRandomScene()
