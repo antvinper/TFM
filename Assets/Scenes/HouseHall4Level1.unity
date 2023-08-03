@@ -2587,6 +2587,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b3b34b1956d55040948e109f7f37f30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sceneLoader: {fileID: 951772675}
 --- !u!65 &765071416
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3482,6 +3483,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b3b34b1956d55040948e109f7f37f30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sceneLoader: {fileID: 951772675}
 --- !u!65 &973494793
 BoxCollider:
   m_ObjectHideFlags: 0

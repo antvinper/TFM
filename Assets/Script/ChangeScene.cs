@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class ChangeScene : MonoBehaviour
 {
-    private LevelGenerator sceneLoader;
+    [SerializeField] private LevelGenerator sceneLoader;
+    /*
+    private GameObject sceneLoaderObject;
 
     private string sceneLoaderTag = "SceneLoader";
 
     private void Start()
     {
-        GameObject sceneLoaderObject = GameObject.FindGameObjectWithTag(sceneLoaderTag);
+        sceneLoaderObject = GameObject.FindGameObjectWithTag(sceneLoaderTag);
         if (sceneLoaderObject != null)
         {
             sceneLoader = sceneLoaderObject.GetComponent<LevelGenerator>();
@@ -20,6 +22,7 @@ public class ChangeScene : MonoBehaviour
             Debug.LogError("No se encontro el GameObject con la etiqueta SceneController. Asegurate de que el GameObject SceneController esta presente en la escena.");
         }
     }
+    */
 
     private void OnTriggerEnter(Collider other)
     {

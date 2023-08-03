@@ -5,11 +5,23 @@ using UnityEngine.SceneManagement;
 
 public class LevelGenerator : MonoBehaviour
 {
-    private List<int> availableScenes;
+    public static LevelGenerator levelGenerator;
+    private List<int> availableScenes;    
     private int numRooms = 13;
-    private int storeSceneIndex = 13;
-    private int bossSceneIndex = 14;
     private int countRooms = 0;
+
+    private void Awake()
+    {
+        if (levelGenerator == null)
+        {
+            levelGenerator = this;
+            DontDestroyOnLoad(gameObject);
+        } else if (levelGenerator != this)
+        {
+            Destroy(gameObject);
+        }
+        
+    }
 
     private void Start()
     {
@@ -20,12 +32,12 @@ public class LevelGenerator : MonoBehaviour
         {
             availableScenes.Add(i);
         }
-        DontDestroyOnLoad(gameObject);
     }
 
     public void ChangeToRandomScene()
     {
-        countRooms = 1;
+        countRooms++;
+        Debug.Log(countRooms);
         if (availableScenes.Count > 0)
         {
             if (countRooms == 7)
