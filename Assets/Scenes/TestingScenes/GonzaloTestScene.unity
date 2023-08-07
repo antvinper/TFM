@@ -625,9 +625,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc6a4e7911f4525439079f4a373c6904, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  model:
-    tree: {fileID: 0}
-    statsDefinitions: {fileID: 0}
+  model: {fileID: 0}
 --- !u!1 &1140250968
 GameObject:
   m_ObjectHideFlags: 0
@@ -1274,7 +1272,7 @@ PrefabInstance:
     - target: {fileID: 8522391017935463820, guid: a345f673d2230134680375d3ac1d9559, type: 3}
       propertyPath: skills.Array.data[1]
       value: 
-      objectReference: {fileID: 11400000, guid: bb9f2a9936c6b4048a35bd1f4a80fd5d, type: 2}
+      objectReference: {fileID: 11400000, guid: 3717f084b9a34be43b4300f2d0221e71, type: 2}
     - target: {fileID: 8522391017935463820, guid: a345f673d2230134680375d3ac1d9559, type: 3}
       propertyPath: skills.Array.data[2]
       value: 

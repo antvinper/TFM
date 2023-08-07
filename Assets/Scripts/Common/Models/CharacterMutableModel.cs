@@ -4,10 +4,11 @@ using Newtonsoft.Json;
 using System;
 
 [Serializable]
-public class CharacterMutableModel : ICharacterModel
+public class CharacterMutableModel : MonoBehaviour, ICharacterModel
 {
-    [SerializeField] private StatsTree tree;
-    [SerializeField] private StatsDefinition statsDefinitions;
+    /*[SerializeField] private StatsTree tree;
+    [SerializeField] private StatsDefinition statsDefinitions;*/
+    [SerializeField] private CharacterModelDefinition characterModelDef;
     private int soulFragments;
     private int rupees;
 
@@ -35,7 +36,7 @@ public class CharacterMutableModel : ICharacterModel
     [JsonProperty]
     public StatsTree Tree
     {
-        get { return tree; }
+        get { return characterModelDef.Tree; }
     }
     [JsonProperty]
     public int Rupees
@@ -57,7 +58,7 @@ public class CharacterMutableModel : ICharacterModel
         instantStatsModifyInRun = new List<Stat>();
         instantStatsModifyPercentageInRun = new List<Stat>();
 
-        foreach(StatDefinition sd in statsDefinitions.stats)
+        foreach(StatDefinition sd in characterModelDef.StatsDefinitions.stats)
         {
             baseStats.Add(new Stat(sd.name, sd.maxValue, sd.minValue, sd.value, sd.actualMaxValue));
 
