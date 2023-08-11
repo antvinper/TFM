@@ -4,12 +4,12 @@ using Newtonsoft.Json;
 using System;
 
 [Serializable]
-public class CharacterMutableModel : MonoBehaviour, ICharacterModel
+public class CharacterMutableModel : ICharacterModel
 {
-    /*[SerializeField] private StatsTree tree;
-    [SerializeField] private StatsDefinition statsDefinitions;*/
+    private StatsTree tree;
+    private StatsDefinition statsDefinitions;
 
-    [SerializeField] protected CharacterModelDefinition characterModelDef;
+    //[SerializeField] protected CharacterModelDefinition characterModelDef;
     private int soulFragments;
     private int rupees;
 
@@ -35,12 +35,11 @@ public class CharacterMutableModel : MonoBehaviour, ICharacterModel
     public List<TimeEffectDefinition> TimeEffectDefinitions { get => timeEffectDefinitions; }
 
 
-    //[JsonProperty]
-    /*public StatsTree Tree
+    [JsonProperty]
+    public StatsTree Tree
     {
-        get => characterModelDef.Tree;
-        //set => characterModelDef.Tree = value;
-    }*/
+        get => tree;
+    }
     [JsonProperty]
     public int Rupees
     {
@@ -54,14 +53,17 @@ public class CharacterMutableModel : MonoBehaviour, ICharacterModel
         set => soulFragments = value;
     }
 
-    public void Setup()
+    public void Setup(StatsTree tree, StatsDefinition statsDefinitions)
     {
+        this.tree = tree;
+        this.statsDefinitions = statsDefinitions;
+
         baseStats = new List<Stat>();
         instantStatsModifyPermanent = new List<Stat>();
         instantStatsModifyInRun = new List<Stat>();
         instantStatsModifyPercentageInRun = new List<Stat>();
 
-        foreach(StatDefinition sd in characterModelDef.StatsDefinitions.stats)
+        foreach(StatDefinition sd in statsDefinitions.stats)
         {
             baseStats.Add(new Stat(sd.name, sd.maxValue, sd.minValue, sd.value, sd.actualMaxValue));
 

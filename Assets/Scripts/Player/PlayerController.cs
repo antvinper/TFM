@@ -17,7 +17,8 @@ public class PlayerController : Characters.CharacterController//<PlayerMutableMo
 
     public WeaponController weaponController;
 
-
+    [SerializeField] private StatsTree tree;
+    [SerializeField] private StatsDefinition statsDefinitions;
     /**
      * TODO
      * Borrar de aquí
@@ -117,8 +118,9 @@ public class PlayerController : Characters.CharacterController//<PlayerMutableMo
 
     private async Task SetModel()
     {
+        model = new CharacterMutableModel();
         //await new WaitForSeconds(1.0f);
-        model.Setup();
+        model.Setup(tree, statsDefinitions);
         GameManager.Instance.GameData.PlayerModel = model;
     }
     public override void ProcessDamage(int value)

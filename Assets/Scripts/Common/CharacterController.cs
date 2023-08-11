@@ -7,7 +7,7 @@ namespace Characters
 {
     public abstract class CharacterController : MonoBehaviour
     {
-        [SerializeField] protected CharacterMutableModel model;
+        protected CharacterMutableModel model;
         public CharacterMutableModel Model
         {
             get => model;

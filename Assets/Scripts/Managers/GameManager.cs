@@ -36,9 +36,9 @@ public class GameManager : Singleton<GameManager>
     {
         dataPersistenceManager = new DataPersistenceManager();
 
-       
 
-        NewGame();
+        LoadData();
+        //NewGame();
     }
 
 
