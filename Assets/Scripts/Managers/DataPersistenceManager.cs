@@ -43,6 +43,7 @@ public class DataPersistenceManager// : Singleton<DataPersistenceManager>
     public void LoadGame(string fileName)
     {
         this.gameData = GetDataByFileName(fileName);
+        Debug.Log("HLA");
     }
 
     /*

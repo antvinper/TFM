@@ -5,6 +5,9 @@ using System.Linq;
 
 public class PlayerController : Characters.CharacterController//<PlayerMutableModel>
 {
+    [SerializeField] private StatsTree tree;
+    [SerializeField] private StatsDefinition statsDefinitions;
+
     private PlayerController instance;
     /**
      * TODO
@@ -116,8 +119,9 @@ public class PlayerController : Characters.CharacterController//<PlayerMutableMo
 
     private async Task SetModel()
     {
+        model = new CharacterMutableModel();
         //await new WaitForSeconds(1.0f);
-        model.Setup();
+        model.Setup(tree, statsDefinitions);
         GameManager.Instance.GameData.PlayerModel = model;
     }
     public override void ProcessDamage(int value)

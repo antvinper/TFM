@@ -6,8 +6,8 @@ using System;
 [Serializable]
 public class CharacterMutableModel : ICharacterModel
 {
-    [SerializeField] private StatsTree tree;
-    [SerializeField] private StatsDefinition statsDefinitions;
+    private StatsTree tree;
+    private StatsDefinition statsDefinitions;
     private int soulFragments;
     private int rupees;
 
@@ -50,8 +50,11 @@ public class CharacterMutableModel : ICharacterModel
         set => soulFragments = value;
     }
 
-    public void Setup()
+    public void Setup(StatsTree tree, StatsDefinition statsDefinition)
     {
+        this.tree = tree;
+        this.statsDefinitions = statsDefinition;
+
         baseStats = new List<Stat>();
         instantStatsModifyPermanent = new List<Stat>();
         instantStatsModifyInRun = new List<Stat>();
