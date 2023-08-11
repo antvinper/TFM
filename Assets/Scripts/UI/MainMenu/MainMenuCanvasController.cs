@@ -1,0 +1,18 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class MainMenuCanvasController : MonoBehaviour
+{
+
+    [SerializeField] private MainMenuCanvasView mainMenuCanvasView;
+    public void LoadPanelLoad()
+    {
+        mainMenuCanvasView.LoadPanelLoad();
+    }
+
+    public void LoadMainMenuPanel()
+    {
+        mainMenuCanvasView.LoadMainMenuPanel();
+    }
+}

@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class SceneManager : MonoBehaviour
@@ -30,5 +31,15 @@ public class SceneManager : MonoBehaviour
                 UnityEngine.SceneManagement.SceneManager.LoadScene("HouseHall4Level1");
             }
         }
+    }
+
+    public async Task LoadMenuScene()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadSceneAsync("");
+    }
+
+    public async Task LoadLobbyScene()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadSceneAsync("LevelSelector");
     }
 }
