@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class PanelController : MonoBehaviour
+public abstract class PanelController : MonoBehaviour
 {
     [SerializeField] protected EventSystem eventSystem;
     [SerializeField] protected PanelView panelView;
@@ -13,8 +13,15 @@ public class PanelController : MonoBehaviour
         eventSystem.SetSelectedGameObject(panelView.FirstSlotActive);
     }
 
-    protected void Setup()
+    public virtual void Setup() 
     {
         SetFirstActiveSlot();
     }
+
+    public virtual void Setup<T>(List<T> models)
+    {
+        SetFirstActiveSlot();
+    }
+
+    //public virtual void Setup<T>(List<T> models) { }
 }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class DataPersistenceManager// : Singleton<DataPersistenceManager>
@@ -40,9 +41,9 @@ public class DataPersistenceManager// : Singleton<DataPersistenceManager>
         dataHandler.SaveGame(gameData);
     }
 
-    public void LoadGame(string fileName)
+    public async Task LoadGame(string fileName)
     {
-        this.gameData = GetDataByFileName(fileName);
+        this.gameData = await GetDataByFileName(fileName);
     }
 
     /*
@@ -53,8 +54,14 @@ public class DataPersistenceManager// : Singleton<DataPersistenceManager>
         return dataHandler.GetAllFilesForLoad();
     }
 
-    public GameModel GetDataByFileName(string fileName)
+
+    public async Task<GameModel> GetDataByFileName(string fileName)
     {
-        return dataHandler.GetDataByFileName(fileName);
+        return await dataHandler.GetDataByFileName(fileName);
+    }
+
+    public GameMinModel GetMinDataByFileName(string fileName)
+    {
+        return dataHandler.GetMinDataFromSavedFile(fileName);
     }
 }

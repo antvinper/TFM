@@ -5,12 +5,15 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class FileDataHandler
 {
     private string dataDirPath = "";
     private string fileName = "";
+
+    private GameModel gameModel;
 
     public FileDataHandler(string dataDirPath, string fileName)
     {
@@ -44,11 +47,40 @@ public class FileDataHandler
         }
     }
 
-    public GameModel GetDataByFileName(string fileName)
+    public async Task<GameModel> GetDataByFileName(string fileName)
     {
         //string fullPath = Path.Combine(dataDirPath, fileName);
-        string fullPath = dataDirPath + "/" +  fileName + ".game";
-        GameModel loadedData = null;
+        string fullPath = dataDirPath + "/" + fileName + ".game";
+        //GameModel loadedData = null;
+
+        if (File.Exists(fullPath))
+        {
+            try
+            {
+                string dataToLoad = "";
+                using (FileStream stream = new FileStream(fullPath, FileMode.Open))
+                {
+                    using (StreamReader reader = new StreamReader(stream))
+                    {
+                        dataToLoad = reader.ReadToEnd();
+                    }
+                }
+                gameModel = JsonConvert.DeserializeObject<GameModel>(dataToLoad);
+            }
+            catch (Exception e)
+            {
+                Debug.LogError("Error ocurred when trying to load data from file: " + fullPath + "\n" + e);
+                Debug.LogException(e);
+            }
+        }
+
+        return gameModel;
+    }
+
+    public GameMinModel GetMinDataFromSavedFile(string fileName)
+    {
+        string fullPath = dataDirPath + "/" + fileName;// + ".game";
+        GameMinModel minData = null;
 
         if (File.Exists(fullPath))
         {
@@ -63,7 +95,7 @@ public class FileDataHandler
                     }
                 }
 
-                loadedData = JsonConvert.DeserializeObject<GameModel>(dataToLoad);
+                minData = JsonConvert.DeserializeObject<GameMinModel>(dataToLoad);
             }
             catch (Exception e)
             {
@@ -72,7 +104,7 @@ public class FileDataHandler
             }
         }
 
-        return loadedData;
+        return minData;
     }
 
     public List<string> GetAllFilesForLoad()

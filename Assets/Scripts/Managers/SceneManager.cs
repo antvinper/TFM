@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using UnityEngine;
 
-public class SceneManager : MonoBehaviour
+public class SceneManager : Singleton<SceneManager>
 {
     private int numScene;
 

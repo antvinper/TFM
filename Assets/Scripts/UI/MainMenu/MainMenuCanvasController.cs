@@ -8,7 +8,7 @@ public class MainMenuCanvasController : MonoBehaviour
     [SerializeField] private MainMenuCanvasView mainMenuCanvasView;
     public void LoadPanelLoad()
     {
-        mainMenuCanvasView.LoadPanelLoad();
+        mainMenuCanvasView.LoadPanelLoad(MainMenuManager.Instance.GetAllDataSaved());
     }
 
     public void LoadMainMenuPanel()

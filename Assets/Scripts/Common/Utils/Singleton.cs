@@ -9,7 +9,7 @@ public class Singleton<T> : DontDestroyOnLoad where T:MonoBehaviour
 
     private void Awake()
     {
-        if (Instance != null && Instance != this)
+        if (instance != null && instance != this)
         {
             Destroy(this);
         }

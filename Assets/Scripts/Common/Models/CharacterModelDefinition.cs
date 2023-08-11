@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 [CreateAssetMenu(fileName = "Character Model Definition", menuName = "Characters/CharacterModelDefinition")]
 public class CharacterModelDefinition : ScriptableObject
 {
@@ -15,5 +16,6 @@ public class CharacterModelDefinition : ScriptableObject
     public StatsTree Tree
     {
         get { return tree; }
+        set { tree = value; }
     }
 }

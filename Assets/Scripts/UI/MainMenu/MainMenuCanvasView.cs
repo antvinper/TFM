@@ -7,10 +7,11 @@ public class MainMenuCanvasView : MonoBehaviour
     [SerializeField] private GameObject LoadPanel;
     [SerializeField] private GameObject MainMenuPanel;
 
-    public void LoadPanelLoad()
+    public void LoadPanelLoad(List<GameMinModel> savedData)
     {
         UnloadMainMenuPanel();
         LoadPanel.SetActive(true);
+        LoadPanel.GetComponent<PanelController>().Setup<GameMinModel>(savedData);
     }
 
     public void LoadMainMenuPanel()

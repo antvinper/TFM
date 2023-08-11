@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class GameModel
 {
-    private int slotIndex = 0;
-    private int characterLevel = 1;
+    private int slotIndex;
+    private int characterLevel;
     private TimeSpan totalPlayTime;
-    private int coins = 0;
+    //TODO remove
+    private int coins;
     private float positionX;
     private float positionY;
     private float positionZ;
@@ -15,6 +16,7 @@ public class GameModel
     private float rotationY;
     private float rotationZ;
     private float rotationW;
+
     private CharacterMutableModel playerModel;
     //private Quaternion rotation;
 

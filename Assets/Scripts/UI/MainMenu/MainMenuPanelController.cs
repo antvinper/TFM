@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class MainMenuPanelController : PanelController
 {
+    
     private void OnEnable()
     {
         Setup();

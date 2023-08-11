@@ -8,7 +8,8 @@ public class CharacterMutableModel : MonoBehaviour, ICharacterModel
 {
     /*[SerializeField] private StatsTree tree;
     [SerializeField] private StatsDefinition statsDefinitions;*/
-    [SerializeField] private CharacterModelDefinition characterModelDef;
+
+    [SerializeField] protected CharacterModelDefinition characterModelDef;
     private int soulFragments;
     private int rupees;
 
@@ -33,11 +34,13 @@ public class CharacterMutableModel : MonoBehaviour, ICharacterModel
     [HideInInspector]
     public List<TimeEffectDefinition> TimeEffectDefinitions { get => timeEffectDefinitions; }
 
-    [JsonProperty]
-    public StatsTree Tree
+
+    //[JsonProperty]
+    /*public StatsTree Tree
     {
-        get { return characterModelDef.Tree; }
-    }
+        get => characterModelDef.Tree;
+        //set => characterModelDef.Tree = value;
+    }*/
     [JsonProperty]
     public int Rupees
     {

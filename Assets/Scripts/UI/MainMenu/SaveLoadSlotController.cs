@@ -6,8 +6,8 @@ public class SaveLoadSlotController : MonoBehaviour
 {
     [SerializeField] private SaveLoadSlotView view;
 
-    public void Setup(string time, string slotName)
+    public void Setup(GameMinModel minModel, int n)
     {
-        view.Setup(time, slotName);
+        view.Setup(minModel, n);
     }
 }

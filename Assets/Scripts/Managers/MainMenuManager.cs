@@ -4,9 +4,23 @@ using UnityEngine;
 
 public class MainMenuManager : MonoBehaviour
 {
-    public void StartGame()
+    private static MainMenuManager instance;
+    public static MainMenuManager Instance => instance;
+
+    private void Awake()
     {
-        Debug.Log("Starting Game...");
+        instance = this;
+    }
+
+    public void NewGame()
+    {
+        Debug.Log("Initiating New Game...");
+        GameManager.Instance.NewGame();
+    }
+
+    public List<GameMinModel> GetAllDataSaved()
+    {
+        return GameManager.Instance.GetAllFilesForLoad();
     }
 
     public void LoadGame()
@@ -15,6 +29,6 @@ public class MainMenuManager : MonoBehaviour
     }
     public void ExitGame()
     {
-        Debug.Log("Exiting Game...");
+        Application.Quit();
     }
 }

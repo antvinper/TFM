@@ -34,12 +34,9 @@ public class GameManager : Singleton<GameManager>
 
     private void Start()
     {
-        dataPersistenceManager = null;
+        dataPersistenceManager = new DataPersistenceManager();
 
-        string fileName = "GameName_SaveData_";
-        string slot = "0";
-
-        LoadData(fileName + slot);
+       
 
         NewGame();
     }
@@ -47,9 +44,11 @@ public class GameManager : Singleton<GameManager>
 
     public void NewGame()
     {
-        dataPersistenceManager = new DataPersistenceManager();
+        
         dataPersistenceManager.NewGame();
         isGameStarted = true;
+
+        //SceneManager.Instance.LoadLobbyScene();
     }
 
     public bool IsGameStarted
@@ -69,15 +68,37 @@ public class GameManager : Singleton<GameManager>
         dataPersistenceManager.SaveGame(slotIndex);
     }
 
+    public void LoadData()
+    {
+        string fileName = "GameName_SaveData_";
+        string slot = "0";
+
+        LoadData(fileName + slot);
+    }
+
     public void LoadData(string fileName)
     {
-        dataPersistenceManager = new DataPersistenceManager();
+        //dataPersistenceManager = new DataPersistenceManager();
+
         dataPersistenceManager.LoadGame(fileName);
     }
 
-    public GameModel GetDataByFileName(string fileName)
+    public async Task<GameModel> GetDataByFileName(string fileName)
     {
-        return dataPersistenceManager.GetDataByFileName(fileName);
+        return await dataPersistenceManager.GetDataByFileName(fileName);
+    }
+
+    public List<GameMinModel> GetAllFilesForLoad()
+    {
+        List<string> filesNames = new List<string>(dataPersistenceManager.GetAllFilesForLoad());
+        List<GameMinModel> gameModelsSaved = new List<GameMinModel>();
+
+        foreach(string fileName in filesNames)
+        {
+            gameModelsSaved.Add(dataPersistenceManager.GetMinDataByFileName(fileName));
+        }
+
+        return gameModelsSaved;
     }
 
     

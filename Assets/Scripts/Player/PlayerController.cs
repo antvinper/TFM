@@ -49,6 +49,7 @@ public class PlayerController : Characters.CharacterController//<PlayerMutableMo
         GameManager.Instance.SetPlayerController(this);
         //weaponController = GetComponent<WeaponController>();
         SetModel();
+        //GameManager.Instance.LoadData();
         //Obtener del modelo la cantidad de rupias y fragmentos que tiene
         this.rupees = new Rupee(model.Rupees);
         this.soulFragment = new SoulFragment(model.SoulFragments);
