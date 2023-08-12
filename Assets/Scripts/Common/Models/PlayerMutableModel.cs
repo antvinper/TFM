@@ -11,20 +11,6 @@ public class PlayerMutableModel : CharacterMutableModel
     {
         get => tree;
     }
-    private int soulFragments;
-    private int rupees;
-    [JsonProperty]
-    public int Rupees
-    {
-        get => rupees;
-        set => rupees = value;
-    }
-    [JsonProperty]
-    public int SoulFragments
-    {
-        get => soulFragments;
-        set => soulFragments = value;
-    }
 
     public PlayerMutableModel(StatsTree tree)
     {
