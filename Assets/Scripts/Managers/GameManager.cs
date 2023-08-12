@@ -64,7 +64,7 @@ public class GameManager : Singleton<GameManager>
 
     public void SaveGame(int slotIndex = 0)
     {
-        dataPersistenceManager.gameData.PlayerModel = playerController.Model;
+        dataPersistenceManager.gameData.PlayerModel = playerController.Model as PlayerMutableModel;
         dataPersistenceManager.SaveGame(slotIndex);
     }
 
@@ -72,7 +72,7 @@ public class GameManager : Singleton<GameManager>
     {
         string fileName = "GameName_SaveData_";
         string slot = "0";
-
+        isGameStarted = true;
         LoadData(fileName + slot);
     }
 

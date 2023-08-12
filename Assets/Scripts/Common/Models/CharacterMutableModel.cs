@@ -6,10 +6,8 @@ using System;
 [Serializable]
 public class CharacterMutableModel : ICharacterModel
 {
-    private StatsTree tree;
     private StatsDefinition statsDefinitions;
 
-    //[SerializeField] protected CharacterModelDefinition characterModelDef;
     private int soulFragments;
     private int rupees;
 
@@ -34,12 +32,6 @@ public class CharacterMutableModel : ICharacterModel
     [HideInInspector]
     public List<TimeEffectDefinition> TimeEffectDefinitions { get => timeEffectDefinitions; }
 
-
-    [JsonProperty]
-    public StatsTree Tree
-    {
-        get => tree;
-    }
     [JsonProperty]
     public int Rupees
     {
@@ -53,9 +45,8 @@ public class CharacterMutableModel : ICharacterModel
         set => soulFragments = value;
     }
 
-    public void Setup(StatsTree tree, StatsDefinition statsDefinitions)
+    public void Setup(StatsDefinition statsDefinitions)
     {
-        this.tree = tree;
         this.statsDefinitions = statsDefinitions;
 
         baseStats = new List<Stat>();

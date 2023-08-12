@@ -118,10 +118,10 @@ public class PlayerController : Characters.CharacterController//<PlayerMutableMo
 
     private async Task SetModel()
     {
-        model = new CharacterMutableModel();
+        model = new PlayerMutableModel(tree);
         //await new WaitForSeconds(1.0f);
-        model.Setup(tree, statsDefinitions);
-        GameManager.Instance.GameData.PlayerModel = model;
+        model.Setup(statsDefinitions);
+        GameManager.Instance.GameData.PlayerModel = model as PlayerMutableModel;
     }
     public override void ProcessDamage(int value)
     {

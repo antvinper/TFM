@@ -8,7 +8,7 @@ public class GameModel
     private int characterLevel;
     private TimeSpan totalPlayTime;
     //TODO remove
-    private int coins;
+    //private int coins;
     private float positionX;
     private float positionY;
     private float positionZ;
@@ -17,7 +17,7 @@ public class GameModel
     private float rotationZ;
     private float rotationW;
 
-    private CharacterMutableModel playerModel;
+    private PlayerMutableModel playerModel;
     //private Quaternion rotation;
 
 
@@ -37,11 +37,11 @@ public class GameModel
         get => slotIndex; 
         set => slotIndex = value; 
     }
-    public int Coins
+    /*public int Coins
     {
         get => coins;
         set => coins = value;
-    }
+    }*/
     public float PositionX
     {
         get => positionX;
@@ -78,7 +78,7 @@ public class GameModel
         set => rotationZ = value;
     }
 
-    public CharacterMutableModel PlayerModel
+    public PlayerMutableModel PlayerModel
     {
         get => playerModel;
         set

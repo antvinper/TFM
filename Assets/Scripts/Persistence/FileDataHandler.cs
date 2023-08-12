@@ -30,8 +30,10 @@ public class FileDataHandler
         {
             Directory.CreateDirectory(Path.GetDirectoryName(fullPath));
 
-            VersionConverter converter = new VersionConverter();
-            string dataToStore = JsonConvert.SerializeObject(data, converter);
+            JsonSerializerSettings settings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
+
+            //VersionConverter converter = new VersionConverter();
+            string dataToStore = JsonConvert.SerializeObject(data, settings);
 
             using (FileStream stream = new FileStream(fullPath, FileMode.Create))
             {
@@ -65,7 +67,8 @@ public class FileDataHandler
                         dataToLoad = reader.ReadToEnd();
                     }
                 }
-                gameModel = JsonConvert.DeserializeObject<GameModel>(dataToLoad);
+                JsonSerializerSettings settings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
+                gameModel = JsonConvert.DeserializeObject<GameModel>(dataToLoad, settings);
             }
             catch (Exception e)
             {
