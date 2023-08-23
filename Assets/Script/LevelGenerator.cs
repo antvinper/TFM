@@ -7,8 +7,8 @@ public class LevelGenerator : MonoBehaviour
 {
     public static LevelGenerator levelGenerator;
     private List<int> availableScenes;    
-    private int numRooms = 13;
-    private int countRooms = 0;
+    private int numRooms = 12;
+    private int countRooms = 1;
 
     private void Awake()
     {
@@ -40,26 +40,32 @@ public class LevelGenerator : MonoBehaviour
         Debug.Log(countRooms);
         if (availableScenes.Count > 0)
         {
-            if (countRooms == 7)
+            if (countRooms == 7 || countRooms == 13 || countRooms == 14)
             {
-                SceneManager.LoadScene("Improvement1RoomLevel1");
-            }
+                switch (countRooms)
+                {
+                    case 7:
+                        SceneManager.LoadScene("Improvement1RoomLevel1");
+                        break;
 
-            if (countRooms == 13)
+                    case 13:
+                        SceneManager.LoadScene("ObjectStore");
+                        break;
+
+                    case 14:
+                        SceneManager.LoadScene("HouseHall14Level1");
+                        break;
+                }
+            }
+            else
             {
-                SceneManager.LoadScene("ObjectStore");
+                //Get random index
+                int randomIndex = Random.Range(1, availableScenes.Count);
+                int sceneToLoad = availableScenes[randomIndex];
+                availableScenes.RemoveAt(randomIndex);
+                SceneManager.LoadScene(sceneToLoad);
             }
-
-            if (countRooms == 14)
-            {
-                SceneManager.LoadScene("HouseHall14Level1");
-            }
-
-            //Get random index
-            int randomIndex = Random.Range(1, availableScenes.Count);
-            int sceneToLoad = availableScenes[randomIndex];
-            availableScenes.RemoveAt(randomIndex);
-            SceneManager.LoadScene(sceneToLoad);
+                       
         }
         else
         {

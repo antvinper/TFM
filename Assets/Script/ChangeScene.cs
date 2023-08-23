@@ -8,21 +8,21 @@ public class ChangeScene : MonoBehaviour
     
     private GameObject sceneLoaderObject;
     
-    private string sceneLoaderTag = "SceneLoader";
+    //Sprivate string sceneLoaderTag = "SceneLoader";
     
     private void Start()
     {
-        //sceneLoader = GetComponentInParent<LevelGenerator>();
-        
-        sceneLoaderObject = GameObject.FindGameObjectWithTag(sceneLoaderTag);
+        //sceneLoader = GetComponentInChildren<LevelGenerator>();
+
+        sceneLoaderObject = GameObject.Find("SceneLoader");
+            //FindGameObjectWithTag(sceneLoaderTag);
         if (sceneLoaderObject != null)
         {
-    
             sceneLoader = sceneLoaderObject.GetComponent<LevelGenerator>();
         }
         else
         {
-            Debug.LogError("No se encontro el GameObject con la etiqueta SceneController. Asegurate de que el GameObject SceneController esta presente en la escena.");
+            Debug.Log("No se encontro el GameObject con la etiqueta SceneController. Asegurate de que el GameObject SceneController esta presente en la escena.");
         }
     }
     
