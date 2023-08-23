@@ -743,7 +743,7 @@ Transform:
   - {fileID: 515267221}
   - {fileID: 1864905312}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &303653118
 GameObject:
@@ -1712,7 +1712,7 @@ Transform:
   - {fileID: 651451405}
   - {fileID: 1225360958}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &651451405 stripped
 Transform:
@@ -3832,9 +3832,10 @@ Transform:
   m_LocalPosition: {x: 13.32, y: 2.42, z: 24.53}
   m_LocalScale: {x: 1, y: 2.7817, z: 1.8684}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1346153137}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: -90.309, z: 0}
 --- !u!114 &1299566222
 MonoBehaviour:
@@ -3848,7 +3849,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b3b34b1956d55040948e109f7f37f30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneLoader: {fileID: 1346153136}
+  sceneLoader: {fileID: 0}
 --- !u!1001 &1335440493
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4042,13 +4043,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1346153135}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.915266, y: -3.2471027, z: 22.668322}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: 0.70901096, z: -0, w: 0.70519745}
+  m_LocalPosition: {x: -1.8432902, y: -2.0372803, z: 1.8276196}
+  m_LocalScale: {x: 0.53522456, y: 0.3594924, z: 0.9999748}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_Father: {fileID: 1299566221}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1464563370
 GameObject:
@@ -4178,7 +4179,7 @@ Transform:
   - {fileID: 1185894352}
   - {fileID: 1655138640}
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1495763474
 GameObject:
@@ -5654,7 +5655,7 @@ Transform:
   - {fileID: 250353412}
   - {fileID: 1723629787}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2067972431
 PrefabInstance:
