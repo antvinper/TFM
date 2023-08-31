@@ -629,7 +629,6 @@ GameObject:
   - component: {fileID: 833025631728410715}
   - component: {fileID: 833025631728410716}
   - component: {fileID: 833025631728410717}
-  - component: {fileID: 833025631728410718}
   m_Layer: 0
   m_Name: BhutaTesting
   m_TagString: Untagged
@@ -741,19 +740,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53dd563e6379b9447aeb0b1a72940edd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  life: 0
-  strength: 0
-  defense: 0
---- !u!114 &833025631728410718
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 833025631728410719}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0320812ddb54ceb42a37b4dc658f8412, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  actualFloorColliderInstanceId: 0
+  characterModelDef: {fileID: 0}
