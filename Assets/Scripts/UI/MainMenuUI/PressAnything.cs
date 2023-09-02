@@ -5,13 +5,16 @@ using UnityEngine.UI;
 
 public class PressAnything : MonoBehaviour
 {
-    [SerializeField] GameObject uiToHide;
+    [SerializeField] GameObject[] uisToHide;
     [SerializeField] GameObject uiToShow;
     void Update()
     {
         if (Input.anyKeyDown)
         {
-            uiToHide.SetActive(false);
+            foreach(GameObject ui in uisToHide)
+            {
+                ui.SetActive(false);
+            }
             uiToShow.SetActive(true);
         }
         
