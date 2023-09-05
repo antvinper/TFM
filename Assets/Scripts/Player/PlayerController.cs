@@ -6,6 +6,12 @@ using System.Linq;
 public class PlayerController : Characters.CharacterController//<PlayerMutableModel>
 {
     private PlayerController instance;
+    private new PlayerMutableModel model;
+    public PlayerMutableModel Model
+    {
+        get => model;
+        set => model = value;
+    }
     /**
      * TODO
      * No sé si vale la pena separar enemy y player models

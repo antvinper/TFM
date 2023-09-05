@@ -8,12 +8,14 @@ using UnityEngine;
  */
 public class EnemyController : Characters.CharacterController
 {
+    protected new EnemyMutableModel model { get; set; }
+
     /**
      * TODO
      * No sé si vale la pena separar enemy y player models
      */
     //[SerializeField] private EnemyMutableModel model;
-    
+
 
     public override float GetMyRealDamage()
     {

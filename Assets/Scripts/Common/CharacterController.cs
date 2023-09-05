@@ -8,10 +8,12 @@ namespace Characters
     public abstract class CharacterController : MonoBehaviour
     {
         protected CharacterMutableModel model;
-        public CharacterMutableModel Model
+        /*public virtual CharacterMutableModel Model
         {
             get => model;
-        }
+            set => model = value;
+        }*/
+        //public virtual CharacterMutableModel Model { get; set; }
         public abstract void ProcessDamage(int value);
 
         public abstract float GetMyRealDamage();
