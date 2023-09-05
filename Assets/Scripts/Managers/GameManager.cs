@@ -18,9 +18,9 @@ public class GameManager : Singleton<GameManager>
     private PlayerController playerController;
     
 
-    public GameModel GameData
+    public GameModel GameModel
     {
-        get => dataPersistenceManager.gameData;
+        get => dataPersistenceManager.gameModel;
     }
 
     public void SetPlayerController(PlayerController playerController)
@@ -37,17 +37,15 @@ public class GameManager : Singleton<GameManager>
         dataPersistenceManager = new DataPersistenceManager();
 
 
-        LoadData();
+        //LoadData();
         //NewGame();
     }
 
 
-    public void NewGame()
+    public void NewGame(int slotIndex)
     {
-        
-        dataPersistenceManager.NewGame();
+        dataPersistenceManager.NewGame(slotIndex);
         isGameStarted = true;
-
         //SceneManager.Instance.LoadLobbyScene();
     }
 
@@ -56,16 +54,30 @@ public class GameManager : Singleton<GameManager>
         get => this.isGameStarted;
         set => isGameStarted = value;
     }
+
+    internal void LoadGame(GameModel gameModel)
+    {
+        dataPersistenceManager.gameModel = gameModel;
+        Debug.Log("Game loaded in slot " + dataPersistenceManager.gameModel.SlotIndex + ", now should be change scene");
+    }
+
     public bool IsGameInRun
     {
         get => isGameInRun;
         set => isGameInRun = value;
     }
 
-    public void SaveGame(int slotIndex = 0)
+    public void SaveGame()
     {
-        dataPersistenceManager.gameData.PlayerModel = playerController.Model as PlayerMutableModel;
-        dataPersistenceManager.SaveGame(slotIndex);
+        if(dataPersistenceManager.gameModel.PlayerModel != null)
+        {
+            dataPersistenceManager.gameModel.PlayerModel = playerController.Model as PlayerMutableModel;
+            dataPersistenceManager.SaveGame();
+        }
+        else
+        {
+            Debug.Log("Couldn't be saved in slot " + dataPersistenceManager.gameModel.SlotIndex + " because, player doesn't exists");
+        }
     }
 
     public void LoadData()
@@ -88,14 +100,15 @@ public class GameManager : Singleton<GameManager>
         return await dataPersistenceManager.GetDataByFileName(fileName);
     }
 
-    public List<GameMinModel> GetAllFilesForLoad()
+    public async Task<List<GameModel>> GetAllFilesForLoad()
     {
         List<string> filesNames = new List<string>(dataPersistenceManager.GetAllFilesForLoad());
-        List<GameMinModel> gameModelsSaved = new List<GameMinModel>();
+        List<GameModel> gameModelsSaved = new List<GameModel>();
 
         foreach(string fileName in filesNames)
         {
-            gameModelsSaved.Add(dataPersistenceManager.GetMinDataByFileName(fileName));
+            GameModel model = await dataPersistenceManager.GetDataByFileName(fileName);
+            gameModelsSaved.Add(model);
         }
 
         return gameModelsSaved;
@@ -111,9 +124,9 @@ public class GameManager : Singleton<GameManager>
              * TODO
              * Get the player quaternion to save the data
              */
-            SavePlayerLocation();
-
-            SaveGame(0);
+            //SavePlayerLocation();
+            Debug.Log("Here should save when application quit");
+            SaveGame();
         }
     }
 
@@ -126,18 +139,18 @@ public class GameManager : Singleton<GameManager>
     private void SavePlayerPosition()
     {
         Vector3 position = playerController.gameObject.transform.position;
-        dataPersistenceManager.gameData.PositionX = position.x;
-        dataPersistenceManager.gameData.PositionY = position.y;
-        dataPersistenceManager.gameData.PositionZ = position.z;
+        dataPersistenceManager.gameModel.PositionX = position.x;
+        dataPersistenceManager.gameModel.PositionY = position.y;
+        dataPersistenceManager.gameModel.PositionZ = position.z;
     }
 
     private void SavePlayerRotation()
     {
         Quaternion rotation = playerController.gameObject.transform.rotation;
 
-        dataPersistenceManager.gameData.RotationX = rotation.x;
-        dataPersistenceManager.gameData.RotationY = rotation.y;
-        dataPersistenceManager.gameData.RotationZ = rotation.z;
-        dataPersistenceManager.gameData.RotationW = rotation.w;
+        dataPersistenceManager.gameModel.RotationX = rotation.x;
+        dataPersistenceManager.gameModel.RotationY = rotation.y;
+        dataPersistenceManager.gameModel.RotationZ = rotation.z;
+        dataPersistenceManager.gameModel.RotationW = rotation.w;
     }
 }

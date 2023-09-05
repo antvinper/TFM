@@ -127,7 +127,7 @@ public class PlayerController : Characters.CharacterController//<PlayerMutableMo
         model = new PlayerMutableModel(tree);
         //await new WaitForSeconds(1.0f);
         model.Setup(statsDefinitions);
-        GameManager.Instance.GameData.PlayerModel = model as PlayerMutableModel;
+        GameManager.Instance.GameModel.PlayerModel = model as PlayerMutableModel;
     }
     public override void ProcessDamage(int value)
     {

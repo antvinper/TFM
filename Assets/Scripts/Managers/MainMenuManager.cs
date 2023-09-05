@@ -1,9 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 
 public class MainMenuManager : MonoBehaviour
 {
+    [SerializeField] private FileSelect fileSelect;
+
+    public InputActionReference submitReference;
+    [SerializeField] protected EventSystem eventSystem;
+
     private static MainMenuManager instance;
     public static MainMenuManager Instance => instance;
 
@@ -12,15 +20,20 @@ public class MainMenuManager : MonoBehaviour
         instance = this;
     }
 
-    public void NewGame()
+    private void Start()
     {
-        Debug.Log("Initiating New Game...");
-        GameManager.Instance.NewGame();
+        Debug.Log("Starting MainMenuMager...");
+        submitReference.action.performed += context =>
+        {
+            eventSystem.currentSelectedGameObject.GetComponentInParent<FileFolder>().StartGame();
+        };
     }
 
-    public List<GameMinModel> GetAllDataSaved()
+    
+
+    public async Task<List<GameModel>> GetAllDataSaved()
     {
-        return GameManager.Instance.GetAllFilesForLoad();
+        return await GameManager.Instance.GetAllFilesForLoad();
     }
 
     public void LoadGame()

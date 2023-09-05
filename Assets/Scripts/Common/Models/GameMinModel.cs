@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class GameMinModel : MonoBehaviour
 {
+    public int slotIndex;
     public int characterLevel;
     public TimeSpan totalPlayTime;
     public int soulFragments;

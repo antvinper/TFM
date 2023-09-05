@@ -88,13 +88,15 @@ public class GameModel
     }
 
 
-    public void Setup()
+    public void Setup(int slotIndex)
     {
         /**
          * TODO:
          * All setup needed
          */
         totalPlayTime = TimeSpan.Zero;
+        this.slotIndex = slotIndex;
+        Debug.Log("New Game Started in slot: " + this.slotIndex);
     }
 
     public TimeSpan GetSessionPlayTime()

@@ -6,7 +6,7 @@ using UnityEngine;
 public class DataPersistenceManager// : Singleton<DataPersistenceManager>
 {
     public string fileName;
-    public GameModel gameData;
+    public GameModel gameModel;
     private FileDataHandler dataHandler;
 
     public DataPersistenceManager()
@@ -21,29 +21,29 @@ public class DataPersistenceManager// : Singleton<DataPersistenceManager>
         this.dataHandler = new FileDataHandler(Application.persistentDataPath, fileName);
     }*/
 
-    public void NewGame()
+    public void NewGame(int slotIndex)
     {
-        this.gameData = new GameModel();
-        this.gameData.Setup();
+        this.gameModel = new GameModel();
+        this.gameModel.Setup(slotIndex);
 
         /*
          * TODO
          * Iniciar Cuando se empiece juego o se cargue partida
          *
          */
-        this.gameData.startSessionTime = System.DateTime.Now;
+        this.gameModel.startSessionTime = System.DateTime.Now;
     }
 
-    public void SaveGame(int slotIndex = 0)
+    public void SaveGame()
     {
-        System.TimeSpan t = this.gameData.GetTotalPlayTime();
-        gameData.SlotIndex = slotIndex;
-        dataHandler.SaveGame(gameData);
+        System.TimeSpan t = this.gameModel.GetTotalPlayTime();
+        //gameModel.SlotIndex = slotIndex;
+        dataHandler.SaveGame(gameModel);
     }
 
     public async Task LoadGame(string fileName)
     {
-        this.gameData = await GetDataByFileName(fileName);
+        this.gameModel = await GetDataByFileName(fileName);
     }
 
     /*
