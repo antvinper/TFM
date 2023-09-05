@@ -69,7 +69,7 @@ public class GameManager : Singleton<GameManager>
 
     public void SaveGame()
     {
-        if(dataPersistenceManager.gameModel.PlayerModel != null)
+        if(dataPersistenceManager.gameModel.PlayerModel != null && playerController != null)
         {
             dataPersistenceManager.gameModel.PlayerModel = playerController.Model as PlayerMutableModel;
             dataPersistenceManager.SaveGame();
