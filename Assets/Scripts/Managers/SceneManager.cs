@@ -4,14 +4,14 @@ using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class SceneManager:MonoBehaviour// : Singleton<SceneManager>
+public class SceneManager: SingletonMonoBehaviour<SceneManager>
 {
     private List<int> availableScenes;    
     private int numRooms = 12;
     private int countRooms = 1;
-    private SceneManager instance;
-    public static SceneManager Instance;
-    private void Awake()
+    //private SceneManager instance;
+    //public static SceneManager Instance;
+    /*private void Awake()
     {
         if (instance != null && instance != this)
         {
@@ -23,7 +23,7 @@ public class SceneManager:MonoBehaviour// : Singleton<SceneManager>
             DontDestroyOnLoad(this);
             //NotDestroy();
         }
-    }
+    }*/
 
     private void Start()
     {

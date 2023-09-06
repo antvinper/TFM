@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 
-public class GameManager : Singleton<GameManager>
+public class GameManager : SingletonMonoBehaviour<GameManager>
 {
     private bool isGameStarted = false;
     private bool isGameInRun = false;

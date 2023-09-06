@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MovePlayer : Singleton<MovePlayer>
+public class MovePlayer : SingletonMonoBehaviour<MovePlayer>
 {
     private float horizontalMove;
     private float verticalMove;
