@@ -16,6 +16,7 @@ public class Singleton<T> : DontDestroyOnLoad where T:MonoBehaviour
         else
         {
             Instance = this as T;
+            NotDestroy();
         }
     }
 }

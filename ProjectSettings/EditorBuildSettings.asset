@@ -6,27 +6,57 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/TestingScenes/MainMenu_Gonzalo.unity
-    guid: bd6e8536461f9bb44969d0a104a8034e
-  - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: 9e90016975fce0e4f824b6001a874511
+  - enabled: 0
     path: Assets/Scenes/LevelSelector.unity
     guid: fe291c93b805d0b41b0064ce3c709793
   - enabled: 1
     path: Assets/Scenes/HouseHall1Level1.unity
-    guid: 4996e2b6212694849bc73dc26760333c
+    guid: 10553e6d6b21005419effb568a79f244
   - enabled: 1
     path: Assets/Scenes/HouseHall2Level1.unity
-    guid: 4c3c25c70c6fe1f4ba3b3bb77baba924
+    guid: 6b47c44a4653d5f4bb85e9a1a7ee62e7
   - enabled: 1
     path: Assets/Scenes/HouseHall3Level1.unity
-    guid: b4c62f9999ca9a446b385831f5849e50
+    guid: d573de02d6fee744ea56c9fd5e33cacd
   - enabled: 1
     path: Assets/Scenes/HouseHall4Level1.unity
-    guid: fd80e6a6dda613d46afac938c55f4e24
+    guid: c462aa813c8b46548865f0b2ff4339ce
+  - enabled: 1
+    path: Assets/Scenes/HouseHall5Level1.unity
+    guid: ff37a6d397ec37146b02c35fcdd5e870
+  - enabled: 1
+    path: Assets/Scenes/HouseHall6Level1.unity
+    guid: 88ddff4d8a873474ca3140bad84473c4
+  - enabled: 1
+    path: Assets/Scenes/HouseHall9Level1.unity
+    guid: 16130943aec391641bbeb3238c52c4f5
+  - enabled: 1
+    path: Assets/Scenes/HouseHall10Level1.unity
+    guid: 9387100f669e60f4582ffbb86cfcba82
+  - enabled: 1
+    path: Assets/Scenes/HouseHall11Level1.unity
+    guid: 020c0d63fbe12274c92edde3c154018a
+  - enabled: 1
+    path: Assets/Scenes/HouseHall12Level1.unity
+    guid: 7655939648bc73a44871822628a3abf4
+  - enabled: 1
+    path: Assets/Scenes/Improvement1RoomLevel1.unity
+    guid: 759bb719389ffc3408bff5e1910fdd2f
+  - enabled: 1
+    path: Assets/Scenes/ObjectStore.unity
+    guid: a79189ce8aab08f45a88dc50ad09cc23
+  - enabled: 1
+    path: Assets/Scenes/Improvement2RoomLevel1.unity
+    guid: ec8f4378762e61341a0e220e42b4e4ee
+  - enabled: 1
+    path: Assets/Scenes/HouseHall14Level1.unity
+    guid: 7cc50cff722096f4ea1ec0c33fbc4313
   - enabled: 1
     path: Assets/Scenes/TestingScenes/GonzaloTestScene.unity
     guid: c381c9a9a63248a4fbe3522255af26e7
   - enabled: 1
-    path: Assets/Scenes/TestingScenes/HouseHall1Level1 Testing.unity
-    guid: 2c8d746d2f7636e41a6975b1f3a8d9cc
+    path: Assets/Scenes/TestingScenes/MainMenu_Gonzalo.unity
+    guid: bd6e8536461f9bb44969d0a104a8034e
   m_configObjects: {}
