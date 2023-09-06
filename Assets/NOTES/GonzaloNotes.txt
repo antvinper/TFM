@@ -1,0 +1,2 @@
+- Hacer la combinación de teclas.
+- Tener en cuenta que no se puedan pulsar 2 teclas a la vez. Hasta que no se haga el release de la pulsada que no se pueda pulsar ni hacer release de otra.

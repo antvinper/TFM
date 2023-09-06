@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05fc9090caa00b64f8b347b5ee0f4cc9, type: 3}
+  m_Name: AttackByPhysicalAttack
+  m_EditorClassIdentifier: 
+  name: 11
+  description: 
+  temporalInstantEffects:
+  - {fileID: 11400000, guid: ec3cd4ce3b790a048b1de65d5390ca6b, type: 2}
+  permanentInstantEffects: []
+  overTimeEffects: []
+  duringTimeEffects: []
