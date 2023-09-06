@@ -1,34 +1,65 @@
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SceneManager : Singleton<SceneManager>
 {
-    private int numScene;
+    private List<int> availableScenes;    
+    private int numRooms = 12;
+    private int countRooms = 1;
 
-    private void OnTriggerEnter(Collider other)
-    {        
-        if (other.tag == "Player")
+    private void Start()
+    {
+        //List to store the index of available scenes
+        availableScenes = new List<int>();
+
+        for (int i = 1; i < numRooms; i++)
         {
-            numScene = Random.Range(1, 5);
+            availableScenes.Add(i);
+        }
+    }
 
-            if (numScene == 1)
+    public void ChangeToRandomScene()
+    {
+        countRooms++;
+        Debug.Log(countRooms);
+        if (availableScenes.Count > 0)
+        {
+            if (countRooms == 7 || countRooms == 13 || countRooms == 14)
             {
-                UnityEngine.SceneManagement.SceneManager.LoadScene("HouseHall1Level1");
+                switch (countRooms)
+                {
+                    case 7:
+                        LoadScene("Improvement1RoomLevel1");
+                        break;
+
+                    case 13:
+                        LoadScene("ObjectStore");
+                        break;
+
+                    case 14:
+                        LoadScene("HouseHall14Level1");
+                        break;
+                }
             }
-
-            if (numScene == 2)
+            else
             {
-                UnityEngine.SceneManagement.SceneManager.LoadScene("HouseHall2Level1");
+                //Get random index
+                int randomIndex = Random.Range(1, availableScenes.Count);
+                int sceneToLoad = availableScenes[randomIndex];
+                availableScenes.RemoveAt(randomIndex);
+                UnityEngine.SceneManagement.SceneManager.LoadScene(sceneToLoad);
             }
-
-            if (numScene == 3)
+                       
+        }
+        else
+        {
+            //If all scenes have been visited, we reset the list to play again.
+            for (int i = 1; i < numRooms; i++)
             {
-                UnityEngine.SceneManagement.SceneManager.LoadScene("HouseHall3Level1");
-            }
-
-            if (numScene == 4)
-            {
-                UnityEngine.SceneManagement.SceneManager.LoadScene("HouseHall4Level1");
+                availableScenes.Add(i);
             }
         }
     }
@@ -41,5 +72,10 @@ public class SceneManager : Singleton<SceneManager>
     public async Task LoadLobbyScene()
     {
         UnityEngine.SceneManagement.SceneManager.LoadSceneAsync("LevelSelector");
+    }
+
+    private async Task LoadScene(string scene)
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(scene);
     }
 }
