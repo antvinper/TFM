@@ -2,18 +2,22 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using UnityEngine;
 
 public class WeaponController: MonoBehaviour
 {
     protected float actualTimeCharging = 0;
+    private bool isPreCharging = false;
     protected bool isCharging = false;
     protected int actualIndex = 0;
     protected bool doingCombo = false;
     protected bool canCancelCombo = false;
     protected bool comboStarted;
     protected bool canAttack;
+
+    private CancellationTokenSource tokenCancelComboAfterTime;
 
     private List<ButtonsXbox> actualActionStack;
 
@@ -23,7 +27,7 @@ public class WeaponController: MonoBehaviour
 
     //TODO
     //Quizás sea necesario crear una lista de estas corrutinas.
-    Coroutine cancelComboAfterTime;
+    //Coroutine cancelComboAfterTime;
 
     WeaponModel model;
 
@@ -68,21 +72,15 @@ public class WeaponController: MonoBehaviour
         actualActionStack.Clear();
     }
 
-    public void FinishCombo()
+    public async Task FinishCombo()
     {
-        StartCoroutine(FinishingCombo());
-    }
-
-
-    IEnumerator FinishingCombo()
-    {
-        StopCoroutine(cancelComboAfterTime);
+        tokenCancelComboAfterTime.Cancel();
         DoingCombo = false;
         comboStarted = false;
         ActualIndex = 0;
 
         canAttack = false;
-        yield return new WaitForSeconds(0.5f);
+        await new WaitForSeconds(0.5f);
         canAttack = true;
 
     }
@@ -90,24 +88,25 @@ public class WeaponController: MonoBehaviour
     
     //TODO
     //Cambiar esta función por un animationEvent que invoque el ResetCombo cuando corresponda.
-    IEnumerator CancelComboAfterTime()
+    async Task CancelComboAfterTime()
     {
+        tokenCancelComboAfterTime = new CancellationTokenSource();
         Debug.Log("#COMBO# Starting Cancel Coroutine");
         float timeBetweenAtacks = 0.0f;
 
-        while(timeBetweenAtacks <= 0.5f)
+        while (timeBetweenAtacks <= 1f)
         {
-            yield return new WaitForSeconds(Time.deltaTime);
+            int t = (int)(Time.deltaTime * 1000);
+            await Task.Delay(t, tokenCancelComboAfterTime.Token);
             timeBetweenAtacks += Time.deltaTime;
         }
 
-        if(timeBetweenAtacks >= 0.5f)
+        if (timeBetweenAtacks >= 1f)
         {
             CancelCombo();
         }
 
         Debug.Log("#COMBO# Coroutine ended");
-        
     }
 
     public void DoCombo(ButtonsXbox buttonPressed)
@@ -123,8 +122,6 @@ public class WeaponController: MonoBehaviour
             {
                 ContinueCombo(buttonPressed);
             }
-            
-            Debug.Log("Button: " + actualActionStack[0]);
         }
         
     }
@@ -135,7 +132,7 @@ public class WeaponController: MonoBehaviour
             if (model.BasicComboDefinitions[i].StartCombo(buttonPressed))
             {
                 comboStarted = true;
-                cancelComboAfterTime = StartCoroutine(CancelComboAfterTime());
+                CancelComboAfterTime();
                 NextComboStep(buttonPressed);
                 break;
             }
@@ -145,17 +142,25 @@ public class WeaponController: MonoBehaviour
     private void ContinueCombo(ButtonsXbox buttonPressed)
     {
         //TODO
-
+        bool isComboContinued = false;
         for(int i = 0; i < model.BasicComboDefinitions.Length; ++i)
         {
-            if (model.BasicComboDefinitions[i].ContinueCombo(buttonPressed, actualActionStack))
+            doingCombo = model.BasicComboDefinitions[i].ContinueCombo(buttonPressed, actualActionStack);
+            if(doingCombo)
             {
                 //cancelamos la corrutina y empezamos otra
-                StopCoroutine(cancelComboAfterTime);
-                cancelComboAfterTime = StartCoroutine(CancelComboAfterTime());
+                tokenCancelComboAfterTime.Cancel();
+                CancelComboAfterTime();
                 NextComboStep(buttonPressed);
+                isComboContinued = true;
                 break;
             }
+        }
+
+        if (!isComboContinued)
+        {
+            CancelCombo();
+            tokenCancelComboAfterTime.Cancel();
         }
     }
 
@@ -168,29 +173,25 @@ public class WeaponController: MonoBehaviour
 
     public void StopCharging()
     {
+        isPreCharging = false;
         isCharging = false;
         actualTimeCharging = 0;
     }
 
-    /*public async Task StartCharging()
+    public async Task StartCharging()
     {
-
-    }*/
-
-    public IEnumerator StartCharging()
-    {
-        if(this.ActualIndex == 0)
+        isPreCharging = true;
+        await new WaitForSeconds(0.2f);
+        if (isPreCharging && this.actualIndex == 1)
         {
             isCharging = true;
             while (isCharging && actualTimeCharging < model.MaxTimeCharge)
             {
                 actualTimeCharging += Time.deltaTime;
                 Debug.Log("Time recharging = " + actualTimeCharging);
-                yield return new WaitForSeconds(Time.deltaTime);
+                await new WaitForSeconds(Time.deltaTime);
             }
         }
-        
-
     }
 
     public List<BasicComboDefinition> GetActiveCombos()

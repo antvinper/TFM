@@ -193,7 +193,8 @@ public class PlayerController : Characters.CharacterController//<PlayerMutableMo
 
     public void StartCharging()
     {
-        StartCoroutine(weaponController.StartCharging());
+        weaponController.StartCharging();
+        //StartCoroutine(weaponController.StartCharging());
     }
 
     public void StopCharging()

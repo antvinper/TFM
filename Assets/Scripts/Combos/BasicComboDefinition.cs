@@ -45,8 +45,6 @@ public class BasicComboDefinition : ComboDefinition
                 break;
             }
         }
-        
-        
 
         if(isThisCombo && buttonPressed == buttons[weaponController.ActualIndex])
         {
