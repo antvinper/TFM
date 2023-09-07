@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2657a4a052c8c524f8bd2b90217cec2a, type: 3}
-  m_Name: PlayerStats
+  m_Name: BhutaStats
   m_EditorClassIdentifier: 
   stats:
   - name: 1
@@ -32,7 +32,7 @@ MonoBehaviour:
     maxValue: 255
     actualMaxValue: 255
     minValue: 0
-    value: 50
+    value: 10
   - name: 5
     maxValue: 255
     actualMaxValue: 255

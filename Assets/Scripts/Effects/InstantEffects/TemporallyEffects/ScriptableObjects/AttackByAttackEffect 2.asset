@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e8ce7d27a895b02428b51755d305ed3c, type: 3}
-  m_Name: AttackByAttackEffect
+  m_Name: AttackByAttackEffect 2
   m_EditorClassIdentifier: 
   effectName: 
   description: 
@@ -21,5 +21,5 @@ MonoBehaviour:
   statWhatToSee: 4
   isTheOwnerStat: 1
   useOnlyPermanentStatVariations: 0
-  valueInPercentage: 75
+  valueInPercentage: 125
   value: 50

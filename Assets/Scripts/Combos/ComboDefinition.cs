@@ -16,6 +16,9 @@ public abstract class ComboDefinition : ScriptableObject//, IComboModel
     [SerializeField] protected float[] damageMultiplier;
     public float[] DamageMultiplier => damageMultiplier;
 
+    [SerializeField] protected List<SkillDefinition> skills = new List<SkillDefinition>();
+    public List<SkillDefinition> Skills => skills;
+
     protected bool isActive;
     public bool IsActive => isActive;
     [SerializeField] protected bool startsActive;

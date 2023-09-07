@@ -6,12 +6,12 @@ using System.Linq;
 public class PlayerController : Characters.CharacterController//<PlayerMutableModel>
 {
     private PlayerController instance;
-    private new PlayerMutableModel model;
+    /*private new PlayerMutableModel model;
     public PlayerMutableModel Model
     {
         get => model;
         set => model = value;
-    }
+    }*/
     
     [SerializeField] List<SkillDefinition> skills = new List<SkillDefinition>();
     private SoulFragment soulFragment;
@@ -20,7 +20,7 @@ public class PlayerController : Characters.CharacterController//<PlayerMutableMo
     public WeaponController weaponController;
 
     [SerializeField] private StatsTree tree;
-    [SerializeField] private StatsDefinition statsDefinitions;
+    //[SerializeField] private StatsDefinition statsDefinitions;
     /**
      * TODO
      * Borrar de aquí

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 
@@ -8,7 +9,7 @@ using UnityEngine;
  */
 public class EnemyController : Characters.CharacterController
 {
-    protected new EnemyMutableModel model { get; set; }
+    //protected new EnemyMutableModel model { get; set; }
 
     /**
      * TODO
@@ -16,6 +17,16 @@ public class EnemyController : Characters.CharacterController
      */
     //[SerializeField] private EnemyMutableModel model;
 
+    private void Start()
+    {
+        SetModel();
+    }
+
+    private async Task SetModel()
+    {
+        model = new EnemyMutableModel();
+        model.Setup(statsDefinitions);
+    }
 
     public override float GetMyRealDamage()
     {

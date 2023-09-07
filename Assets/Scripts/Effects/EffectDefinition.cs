@@ -163,6 +163,32 @@ public abstract class EffectDefinition : ScriptableObject, IEffect
 
         finalValueInPercentage = (valueSWTS * 0.01f) * valueInPercentage;
         //RECIÉN QUITADA
+
+        /*if (isTheOwnerStat)
+        {
+            if(statWhatToSee != StatsEnum.ATTACK && statWhatToSee != StatsEnum.MAGIC_ATTACK)
+            {
+                //finalValueInPercentage = (finalValueInPercentage / owner.GetStat(statAffected)) * 100;
+                finalValueInPercentage = (finalValueInPercentage / owner.GetStat(statWhatToSee)) * 100;
+            }
+            else
+            {
+                this.isValueInPercentage = false;
+            }
+        }
+        else
+        {
+            if(statWhatToSee != StatsEnum.ATTACK && statWhatToSee != StatsEnum.MAGIC_ATTACK)
+            {
+                //finalValueInPercentage = (finalValueInPercentage / target.GetStat(statAffected)) * 100;
+                finalValueInPercentage = (finalValueInPercentage / target.GetStat(statWhatToSee)) * 100;
+            }
+            else
+            {
+                this.isValueInPercentage = false;
+            }
+        }*/
+
         if (isTheOwnerStat)
         {
             //finalValueInPercentage = (finalValueInPercentage / owner.GetStat(statAffected)) * 100;
@@ -173,8 +199,6 @@ public abstract class EffectDefinition : ScriptableObject, IEffect
             //finalValueInPercentage = (finalValueInPercentage / target.GetStat(statAffected)) * 100;
             finalValueInPercentage = (finalValueInPercentage / target.GetStat(statWhatToSee)) * 100;
         }
-        
-
 
 
         /*int statValue = isTheOwnerStat ? owner.GetStat(statWhatToSee) : target.GetStat(statWhatToSee);

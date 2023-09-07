@@ -40,8 +40,19 @@ public class InstantEffectTemporally : EffectDefinition
 
     private void ProcessEffectInPercentage(Characters.CharacterController owner, Characters.CharacterController target)
     {
-        int finalValue = GetPercentageValue(owner, target);
-        StatModificator statModificator = new StatModificator(StatAffected, finalValue, true, false);
+        int finalValueInPercentage = GetPercentageValue(owner, target);
+        StatModificator statModificator;
+        if (statWhatToSee != StatsEnum.MAX_HEALTH && statWhatToSee != StatsEnum.HEALTH)
+        {
+            int valueSWTS = isTheOwnerStat ? owner.GetStat(statWhatToSee) : target.GetStat(statWhatToSee);
+            int finalValue = (int)((valueSWTS * 0.01f) * finalValueInPercentage);
+            Debug.Log("Value: " + finalValue);
+            statModificator = new StatModificator(StatAffected, finalValue, false, false);
+        }
+        else
+        {
+            statModificator = new StatModificator(StatAffected, finalValueInPercentage, true, false);
+        }
 
         ChangeStat(statModificator);
 
