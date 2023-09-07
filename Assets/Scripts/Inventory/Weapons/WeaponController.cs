@@ -137,7 +137,7 @@ public class WeaponController: MonoBehaviour
         comboStarted = false;
         canAttack = false;
         animator.SetTrigger("finishCombo");
-        await new WaitForSeconds(0.5f);
+        await new WaitForSeconds(0.2f);
         actualActionStack.Clear();
         actualIndex = 0;
         canAttack = true;

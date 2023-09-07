@@ -12,7 +12,6 @@ public class BasicComboDefinition : ComboDefinition
 
     public void SetUp(WeaponController weaponController)
     {
-        Debug.Log("#SKILL# reset actual index");
         actualIndex = 0;
         this.weaponController = weaponController;
         isActive = startsActive;
@@ -39,11 +38,9 @@ public class BasicComboDefinition : ComboDefinition
 
     public async Task UseSkill(Characters.CharacterController owner, Characters.CharacterController target)
     {
-        Debug.Log("#SKILL# Actual index skill: " + actualIndex);
         skills[actualIndex++].ProcessSkill(owner, target);
         if (weaponController.ActualIndex == buttons.Length)
         {
-            Debug.Log("#SKILL# reset actual index");
             actualIndex = 0;
         }
     }
@@ -89,7 +86,6 @@ public class BasicComboDefinition : ComboDefinition
         }
         else
         {
-            Debug.Log("#SKILL# reset actual index");
             actualIndex = 0;
         }
 
