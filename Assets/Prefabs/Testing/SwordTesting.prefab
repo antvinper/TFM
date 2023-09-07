@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6816182895891712673}
   - component: {fileID: 2716602360406223197}
   - component: {fileID: 257251307}
+  - component: {fileID: 6760386132327604127}
   m_Layer: 0
   m_Name: SwordTesting
   m_TagString: Untagged
@@ -111,6 +112,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d56550e76921ba4888ee5272be97c06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 6760386132327604127}
   swordModel:
     name: Sword
     damage: 20
@@ -121,3 +123,23 @@ MonoBehaviour:
     - {fileID: 11400000, guid: c595f628fad7c4446be92e74912512b4, type: 2}
     - {fileID: 11400000, guid: af5c073261f0abe4e80c0cd313b222e0, type: 2}
     - {fileID: 11400000, guid: 8305376819db7e948a2e208961f8f92e, type: 2}
+--- !u!95 &6760386132327604127
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2162050470827708545}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 071477d7b7f88f2469899510ed2ee920, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

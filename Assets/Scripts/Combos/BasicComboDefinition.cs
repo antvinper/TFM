@@ -50,6 +50,7 @@ public class BasicComboDefinition : ComboDefinition
         {
             if(weaponController.ActualIndex == buttons.Length-1)
             {
+                weaponController.ContinueAnimationCombo();
                 comboFinished = true;
                 weaponController.FinishCombo();
                 Debug.Log("#COMBO# Combo Finished: " + this.name + " button: " + buttons[weaponController.ActualIndex]);

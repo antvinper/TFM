@@ -37,6 +37,7 @@ public abstract class ComboDefinition : ScriptableObject//, IComboModel
     [SerializeField] protected Sprite sprite;
     public Sprite Sprite => sprite;
 
-
+    [SerializeField] protected string animationTriggerToStart;
+    public string AnimationTriggerToStart => animationTriggerToStart;
 
 }
