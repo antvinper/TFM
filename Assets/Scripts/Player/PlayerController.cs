@@ -12,11 +12,7 @@ public class PlayerController : Characters.CharacterController//<PlayerMutableMo
         get => model;
         set => model = value;
     }
-    /**
-     * TODO
-     * No sé si vale la pena separar enemy y player models
-     */
-    //[SerializeField] PlayerMutableModel model;
+    
     [SerializeField] List<SkillDefinition> skills = new List<SkillDefinition>();
     private SoulFragment soulFragment;
     private Rupee rupees;
@@ -29,7 +25,7 @@ public class PlayerController : Characters.CharacterController//<PlayerMutableMo
      * TODO
      * Borrar de aquí
      */
-    public Characters.CharacterController enemy;
+    //public Characters.CharacterController enemy;
 
     private void Awake()
     {
@@ -53,10 +49,13 @@ public class PlayerController : Characters.CharacterController//<PlayerMutableMo
      */
     private void Start()
     {
+        /**
+         * TODO
+         * Refactor all the Start Method
+         */
         GameManager.Instance.SetPlayerController(this);
-        //weaponController = GetComponent<WeaponController>();
         SetModel();
-        //GameManager.Instance.LoadData();
+
         //Obtener del modelo la cantidad de rupias y fragmentos que tiene
         this.rupees = new Rupee(model.Rupees);
         this.soulFragment = new SoulFragment(model.SoulFragments);
@@ -83,12 +82,12 @@ public class PlayerController : Characters.CharacterController//<PlayerMutableMo
         //UseSkill(PlayerEnumSkills.HEAL_BY_MAX_HEALTH_PERCENTAGE, this);
         //UseSkill(PlayerEnumSkills.SLOW_DOWN, enemy);
 
-        UseSkills(PlayerEnumSkills.HURRY_UP, this);
+        //UseSkills(PlayerEnumSkills.HURRY_UP, this);
 
         //UseSkill(PlayerEnumSkills.SLOW_DOWN, this);
         //UseSkill(PlayerEnumSkills.PERMANENT, this);
         //UseSkill(PlayerEnumSkills.DEFFENSE_DOWN, enemy);
-        GetRoomRewards();
+        //GetRoomRewards();
     }
     public void AddRupees(int value)
     {

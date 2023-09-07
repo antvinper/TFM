@@ -17,11 +17,11 @@ public class BasicComboDefinition : ComboDefinition
     public bool StartCombo(ButtonsXbox buttonPressed)
     {
         bool activated = false;
-        if (buttonPressed == buttons[weaponController.actualIndex])
+        if (buttonPressed == buttons[weaponController.ActualIndex])
         {
-            Debug.Log("#COMBO# Combo Started: " + this.name + " button: " + buttons[weaponController.actualIndex]);
+            Debug.Log("#COMBO# Combo Started: " + this.name + " button: " + buttons[weaponController.ActualIndex]);
             activated = true;
-            ++weaponController.actualIndex;
+            //++weaponController.ActualIndex;
         }
 
         return activated;
@@ -32,28 +32,45 @@ public class BasicComboDefinition : ComboDefinition
         this.isActive = isActive;
     }
 
-    public bool ContinueCombo(ButtonsXbox buttonPressed)
+    public bool ContinueCombo(ButtonsXbox buttonPressed, List<ButtonsXbox> actualActionStack)
     {
         bool comboContinued = false;
 
-        if(buttonPressed == buttons[weaponController.actualIndex])
+        bool isThisCombo = true;
+        for(int i = 0; i < actualActionStack.Count; ++i)
         {
-            if(weaponController.actualIndex == buttons.Length-1)
+            if(actualActionStack[i] != buttons[i])
+            {
+                isThisCombo = false;
+                break;
+            }
+        }
+        
+        
+
+        if(isThisCombo && buttonPressed == buttons[weaponController.ActualIndex])
+        {
+            if(weaponController.ActualIndex == buttons.Length-1)
             {
                 comboFinished = true;
                 weaponController.FinishCombo();
-                Debug.Log("#COMBO# Combo Finished: " + this.name + " button: " + buttons[weaponController.actualIndex]);
+                Debug.Log("#COMBO# Combo Finished: " + this.name + " button: " + buttons[weaponController.ActualIndex]);
             }
             else
             {
                 comboContinued = true;
-                Debug.Log("#COMBO# Combo Continued: " + this.name + " actualIndex = " + weaponController.actualIndex + " button: " + buttons[weaponController.actualIndex]);
-                ++weaponController.actualIndex;
+                Debug.Log("#COMBO# Combo Continued: " + this.name + " actualIndex = " + weaponController.ActualIndex + " button: " + buttons[weaponController.ActualIndex]);
+                //++weaponController.ActualIndex;
             }
 
-            weaponController.doingCombo = true;
+            weaponController.DoingCombo = true;
         }
 
         return comboContinued;
+    }
+
+    public int GetComboLength()
+    {
+        return buttons.Length;
     }
 }

@@ -2,21 +2,24 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class WeaponController: MonoBehaviour
 {
     protected float actualTimeCharging = 0;
     protected bool isCharging = false;
-    protected int ActualIndex = 0;
-    protected bool DoingCombo = false;
-    protected bool CanCancelCombo = false;
+    protected int actualIndex = 0;
+    protected bool doingCombo = false;
+    protected bool canCancelCombo = false;
     protected bool comboStarted;
     protected bool canAttack;
 
-    public int actualIndex { get => ActualIndex; set => ActualIndex = value; }
-    public bool doingCombo { get => DoingCombo; set => DoingCombo = value; }
-    public bool canCancelCombo { get => CanCancelCombo; set => CanCancelCombo = value; }
+    private List<ButtonsXbox> actualActionStack;
+
+    public int ActualIndex { get => actualIndex; set => actualIndex = value; }
+    public bool DoingCombo { get => doingCombo; set => doingCombo = value; }
+    public bool CanCancelCombo { get => canCancelCombo; set => canCancelCombo = value; }
 
     //TODO
     //Quizás sea necesario crear una lista de estas corrutinas.
@@ -26,17 +29,25 @@ public class WeaponController: MonoBehaviour
 
     private void Start()
     {
+        
     }
 
     public void Setup(WeaponModel model)
     {
+        
+
         this.model = model;
 
         canAttack = true;
+        int maxComboLength = 0;
         foreach (BasicComboDefinition basicComboDefinition in this.model.BasicComboDefinitions)
         {
             basicComboDefinition.SetUp(this);
+            int comboLength = basicComboDefinition.GetComboLength();
+            maxComboLength = comboLength > maxComboLength ? comboLength : maxComboLength;
         }
+        actualActionStack = new List<ButtonsXbox>();
+        //actualActionStack = new ButtonsXbox[maxComboLength];
     }
 
 
@@ -51,9 +62,10 @@ public class WeaponController: MonoBehaviour
     public void CancelCombo()
     {
         Debug.Log("#COMBO# Combo Canceled");
-        doingCombo = false;
+        DoingCombo = false;
         comboStarted = false;
-        actualIndex = 0;
+        ActualIndex = 0;
+        actualActionStack.Clear();
     }
 
     public void FinishCombo()
@@ -65,9 +77,9 @@ public class WeaponController: MonoBehaviour
     IEnumerator FinishingCombo()
     {
         StopCoroutine(cancelComboAfterTime);
-        doingCombo = false;
+        DoingCombo = false;
         comboStarted = false;
-        actualIndex = 0;
+        ActualIndex = 0;
 
         canAttack = false;
         yield return new WaitForSeconds(0.5f);
@@ -100,7 +112,8 @@ public class WeaponController: MonoBehaviour
 
     public void DoCombo(ButtonsXbox buttonPressed)
     {
-        if(canAttack)
+        Debug.Log("Button pressed: " + buttonPressed);
+        if (canAttack && !isCharging)
         {
             if (!comboStarted)
             {
@@ -110,6 +123,8 @@ public class WeaponController: MonoBehaviour
             {
                 ContinueCombo(buttonPressed);
             }
+            
+            Debug.Log("Button: " + actualActionStack[0]);
         }
         
     }
@@ -121,6 +136,8 @@ public class WeaponController: MonoBehaviour
             {
                 comboStarted = true;
                 cancelComboAfterTime = StartCoroutine(CancelComboAfterTime());
+                NextComboStep(buttonPressed);
+                break;
             }
         }
 
@@ -131,13 +148,21 @@ public class WeaponController: MonoBehaviour
 
         for(int i = 0; i < model.BasicComboDefinitions.Length; ++i)
         {
-            if (model.BasicComboDefinitions[i].ContinueCombo(buttonPressed))
+            if (model.BasicComboDefinitions[i].ContinueCombo(buttonPressed, actualActionStack))
             {
                 //cancelamos la corrutina y empezamos otra
                 StopCoroutine(cancelComboAfterTime);
                 cancelComboAfterTime = StartCoroutine(CancelComboAfterTime());
+                NextComboStep(buttonPressed);
+                break;
             }
         }
+    }
+
+    private void NextComboStep(ButtonsXbox buttonPressed)
+    {
+        actualActionStack.Add(buttonPressed);
+        ++actualIndex;
     }
     
 
@@ -147,15 +172,24 @@ public class WeaponController: MonoBehaviour
         actualTimeCharging = 0;
     }
 
+    /*public async Task StartCharging()
+    {
+
+    }*/
+
     public IEnumerator StartCharging()
     {
-        isCharging = true;
-        while(isCharging && actualTimeCharging < model.MaxTimeCharge)
+        if(this.ActualIndex == 0)
         {
-            actualTimeCharging += Time.deltaTime;
-            Debug.Log("Time recharging = " + actualTimeCharging);
-            yield return new WaitForSeconds(Time.deltaTime);
+            isCharging = true;
+            while (isCharging && actualTimeCharging < model.MaxTimeCharge)
+            {
+                actualTimeCharging += Time.deltaTime;
+                Debug.Log("Time recharging = " + actualTimeCharging);
+                yield return new WaitForSeconds(Time.deltaTime);
+            }
         }
+        
 
     }
 
