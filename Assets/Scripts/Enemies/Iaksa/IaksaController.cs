@@ -15,6 +15,9 @@ public class IaksaController : MonoBehaviour
     private Vector3 movementDir;
     private Vector3 speedDir;
 
+    private bool hasObjective = false;
+    private GameObject objective;
+
     public IaksaModel Model { get => model; }
 
     // TO DO: añadir los efectos de buff/debuff cuando salta al lado de otro personaje
@@ -55,19 +58,38 @@ public class IaksaController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player")) //añadir aquí el tag que lleven los enemigos
+        if (!hasObjective)
         {
-            calculateObjectiveVector(other.transform.position);
-            latestChangeTime = Time.time;
-            animator.Play("Armature|Run");
+            if (other.CompareTag("Player") || other.CompareTag("Enemy"))
+            {
+                objective = other.gameObject;
+                calculateObjectiveVector(other.transform.position);
+                latestChangeTime = Time.time;
+                animator.Play("Armature|Run");
+            }
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (hasObjective && (objective.gameObject == other.gameObject))
+        {
+            if (other.CompareTag("Player") || other.CompareTag("Enemy"))
+            {
+                objective = null;
+                hasObjective = false;
+            }
         }
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.collider.CompareTag("Player")) //añadir aquí el tag que lleven los enemigos
+        if (hasObjective && (objective.gameObject == collision.collider.gameObject))
         {
-            animator.Play("Armature|Action");
+            if (collision.collider.CompareTag("Player") || collision.collider.CompareTag("Enemy"))
+            {
+                animator.Play("Armature|Action");
+            }
         }
     }
 }
