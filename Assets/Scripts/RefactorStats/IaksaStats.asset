@@ -1,0 +1,75 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2657a4a052c8c524f8bd2b90217cec2a, type: 3}
+  m_Name: IaksaStats
+  m_EditorClassIdentifier: 
+  stats:
+  - name: 1
+    maxValue: 9999
+    actualMaxValue: 1
+    minValue: 0
+    value: 1
+  - name: 2
+    maxValue: 255
+    actualMaxValue: 1
+    minValue: 0
+    value: 1
+  - name: 3
+    maxValue: 255
+    actualMaxValue: 1
+    minValue: 0
+    value: 1
+  - name: 4
+    maxValue: 255
+    actualMaxValue: 1
+    minValue: 0
+    value: 1
+  - name: 5
+    maxValue: 255
+    actualMaxValue: 1
+    minValue: 0
+    value: 1
+  - name: 6
+    maxValue: 255
+    actualMaxValue: 255
+    minValue: 0
+    value: 10
+  - name: 7
+    maxValue: 5000
+    actualMaxValue: 120
+    minValue: 0
+    value: 0
+  - name: 8
+    maxValue: 100
+    actualMaxValue: 100
+    minValue: 0
+    value: 60
+  - name: 9
+    maxValue: 100
+    actualMaxValue: 100
+    minValue: 0
+    value: 1
+  - name: 10
+    maxValue: 100
+    actualMaxValue: 100
+    minValue: 0
+    value: 0
+  - name: 11
+    maxValue: 100
+    actualMaxValue: 100
+    minValue: 0
+    value: 0
+  - name: 12
+    maxValue: 1000
+    actualMaxValue: 1000
+    minValue: 0
+    value: 0
