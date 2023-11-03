@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
-public class MovePlayer : SingletonMonoBehaviour<MovePlayer>
+public class MovePlayer : MonoBehaviour//SingletonMonoBehaviour<MovePlayer>
 {
     private float horizontalMove;
     private float verticalMove;
@@ -12,6 +13,7 @@ public class MovePlayer : SingletonMonoBehaviour<MovePlayer>
     [SerializeField] private float playerSpeed = 10;
 
     private Vector3 movePlayer;
+
 
     void Start()
     {

@@ -4,8 +4,5 @@ using UnityEngine;
 
 public class DontDestroyOnLoad : MonoBehaviour
 {
-    protected void NotDestroy()
-    {
-        DontDestroyOnLoad(this);
-    }
+    
 }

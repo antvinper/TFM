@@ -32,14 +32,14 @@ namespace Characters
             statModifier.PerformBehaviour(this, statModificator);
         }
 
-        //Permanent fuera de la run, se añade siempre
+        //Permanent fuera de la run, se aï¿½ade siempre
         public void ChangeStatPermanent(StatModificator statModificator)
         {
             //model.PerformInstantlyApplyStat(statModificator);
             model.PerformApplyPermanentStat(statModificator);
         }
 
-        //Permanente SÓLO dentro de la run, al terminar la run no tinenen efecto, pero se añade siempre
+        //Permanente Sï¿½LO dentro de la run, al terminar la run no tinenen efecto, pero se aï¿½ade siempre
         public void ChangeStatInRun(StatModificator statModificator)
         {
             model.PerformApplyStatModifyInRun(statModificator);
@@ -56,7 +56,7 @@ namespace Characters
             string error = "";
             /**
              * TENER EN CUENTA EL TIPO NONE. Este no debe influir a la hora de aplicar o no los efectos.
-             * Siempre se aplicará con el tipo NONE
+             * Siempre se aplicarï¿½ con el tipo NONE
              */
             DuringTimeEffectDefinition te = getActualTimeEffect(duringTimeEffect.EffectType) as DuringTimeEffectDefinition;
             if (te == null)
