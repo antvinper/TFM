@@ -38,18 +38,18 @@ public class SingletonMonoBehaviour<T> : MonoBehaviour where T : SingletonMonoBe
 
     public virtual void Awake()
     {
-        //check if instance already exists when reloading original scene
-        if (instance != null)
-        {
-            DestroyImmediate(gameObject);
-        }
 
         if (Application.isPlaying)
         {
             DontDestroyOnLoad(this);
         }
 
-        
+        //check if instance already exists when reloading original scene
+        if (instance != null)
+        {
+            DestroyImmediate(gameObject);
+        }
+
     }
 
     protected bool initialized;
