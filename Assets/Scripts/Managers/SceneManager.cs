@@ -62,7 +62,7 @@ public class SceneManager: SingletonMonoBehaviour<SceneManager>
             else
             {
                 //Get random index
-                int randomIndex = Random.Range(1, availableScenes.Count);
+                int randomIndex = Random.Range(2, availableScenes.Count);
                 int sceneToLoad = availableScenes[randomIndex];
                 availableScenes.RemoveAt(randomIndex);
                 UnityEngine.SceneManagement.SceneManager.LoadScene(sceneToLoad);

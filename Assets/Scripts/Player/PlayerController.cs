@@ -23,7 +23,7 @@ public class PlayerController : Characters.CharacterController//<PlayerMutableMo
     //[SerializeField] private StatsDefinition statsDefinitions;
     /**
      * TODO
-     * Borrar de aquí
+     * Borrar de aquï¿½
      */
     //public Characters.CharacterController enemy;
 
@@ -42,8 +42,8 @@ public class PlayerController : Characters.CharacterController//<PlayerMutableMo
     /**
      * TODO
      * borrar este start y ponerlo donde toque
-     * El weapon controller se obtendrá de un menú antes de iniciar el nivel
-     * que es donde se elegirá el arma. Por tanto, el PlayerController tiene 2 opciones:
+     * El weapon controller se obtendrï¿½ de un menï¿½ antes de iniciar el nivel
+     * que es donde se elegirï¿½ el arma. Por tanto, el PlayerController tiene 2 opciones:
      * 1- Tener todas las armas como hijas y activar la que necesite
      * 2- Instanciar el arma y hacerla hija
      */
@@ -87,7 +87,7 @@ public class PlayerController : Characters.CharacterController//<PlayerMutableMo
         //UseSkill(PlayerEnumSkills.SLOW_DOWN, this);
         //UseSkill(PlayerEnumSkills.PERMANENT, this);
         //UseSkill(PlayerEnumSkills.DEFFENSE_DOWN, enemy);
-        //GetRoomRewards();
+        GetRoomRewards();
     }
     public void AddRupees(int value)
     {
@@ -137,7 +137,7 @@ public class PlayerController : Characters.CharacterController//<PlayerMutableMo
     {
         /**
          * TODO 
-         * Calcular correctamente el daño.
+         * Calcular correctamente el daï¿½o.
          */
         Debug.Log("My real damage = " + model.GetStatValue(StatsEnum.ATTACK));
         return model.GetStatValue(StatsEnum.ATTACK);

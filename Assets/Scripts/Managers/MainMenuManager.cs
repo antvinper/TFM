@@ -23,13 +23,18 @@ public class MainMenuManager : MonoBehaviour
     private void Start()
     {
         Debug.Log("Starting MainMenuMager...");
-        submitReference.action.performed += context =>
-        {
-            eventSystem.currentSelectedGameObject.GetComponentInParent<FileFolder>().StartGame();
-        };
+        submitReference.action.performed += this.StartGameAction;
     }
 
-    
+    private void StartGameAction(InputAction.CallbackContext context)
+    {
+        eventSystem.currentSelectedGameObject.GetComponentInParent<FileFolder>().StartGame();
+    }
+
+    private void OnDestroy()
+    {
+        submitReference.action.performed -= this.StartGameAction;
+    }
 
     public async Task<List<GameModel>> GetAllDataSaved()
     {

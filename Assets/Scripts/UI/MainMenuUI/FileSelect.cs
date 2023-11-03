@@ -29,8 +29,6 @@ public class FileSelect : MonoBehaviour
         {
             fileFolders[i].FillFileFolderForNewGame(i);
         }
-
-        Debug.Log("HOLA");
     }
 
     // Update is called once per frame

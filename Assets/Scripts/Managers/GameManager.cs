@@ -12,8 +12,8 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
     /**
      * TODO
-     * Quizás borrar. Ahora se usa en el application quit para almacenar la localización del personaje
-     * Pero eso en un futuro no debe ser así sino sólo cuando se esté en el lobby.
+     * Quizï¿½s borrar. Ahora se usa en el application quit para almacenar la localizaciï¿½n del personaje
+     * Pero eso en un futuro no debe ser asï¿½ sino sï¿½lo cuando se estï¿½ en el lobby.
      */
     private PlayerController playerController;
     
@@ -46,7 +46,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     {
         dataPersistenceManager.NewGame(slotIndex);
         isGameStarted = true;
-        //SceneManager.Instance.LoadLobbyScene();
+        SceneManager.Instance.LoadLobbyScene();
     }
 
     public bool IsGameStarted
@@ -59,6 +59,12 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     {
         dataPersistenceManager.gameModel = gameModel;
         Debug.Log("Game loaded in slot " + dataPersistenceManager.gameModel.SlotIndex + ", now should be change scene");
+    }
+
+    public async Task StartRun()
+    {
+        Debug.Log("Starting run...");
+        SceneManager.Instance.ChangeToRandomScene();
     }
 
     public bool IsGameInRun
