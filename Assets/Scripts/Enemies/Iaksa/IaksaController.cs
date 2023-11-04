@@ -18,6 +18,8 @@ public class IaksaController : MonoBehaviour
     public IaksaModel Model { get => model; }
 
     // TO DO: añadir los efectos de buff/debuff cuando salta al lado de otro personaje
+    public float max_health;
+    public float cur_health = 0f;
     void Start()
     {
         model = new IaksaModel();
@@ -51,6 +53,24 @@ public class IaksaController : MonoBehaviour
 
         rb.velocity = speedDir;
         
+    }
+
+    public void TakeDamage(float amount)
+    {
+        if (cur_health > 0)
+        {
+            cur_health -= amount;
+        }
+        else
+        {
+            DestroyEnemy();
+        }
+
+    }
+
+    private void DestroyEnemy()
+    {
+        Destroy(gameObject);
     }
 
     private void OnTriggerEnter(Collider other)
