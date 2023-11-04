@@ -12,6 +12,7 @@ public class MovePlayer : MonoBehaviour//SingletonMonoBehaviour<MovePlayer>
     private Animator anim;
     public float gravity = 9.8f;
 
+
     bool imAttacking;
 
     [SerializeField] private float playerSpeed;
@@ -44,6 +45,7 @@ public class MovePlayer : MonoBehaviour//SingletonMonoBehaviour<MovePlayer>
 
         player.Move(movePlayer * Time.deltaTime);
 
+        /*
         if (Input.GetMouseButtonDown(0))
         {
             anim.SetBool("isAttack", true);
@@ -52,6 +54,7 @@ public class MovePlayer : MonoBehaviour//SingletonMonoBehaviour<MovePlayer>
         {
             anim.SetBool("isAttack", false);
         }
+        */
     }
 
     void SetGravity()

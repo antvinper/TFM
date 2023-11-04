@@ -7,6 +7,14 @@ public class PlayerInputManager : MonoBehaviour
 {
     [SerializeField] PlayerController playerController;
 
+    private void Update()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            playerController.DoCombo(ButtonsXbox.X);
+        }
+    }
+
     public void GetInput(InputAction.CallbackContext callbackContext)
     {
         if (callbackContext.phase.Equals(InputActionPhase.Performed))
@@ -14,6 +22,7 @@ public class PlayerInputManager : MonoBehaviour
             if (callbackContext.action.activeControl.ToString().Contains("buttonWest"))
             {
                 playerController.DoCombo(ButtonsXbox.X);
+
                 //Debug.Log("West or X Pressed");
                 //TODO
             }
