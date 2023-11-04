@@ -55,7 +55,7 @@ public class IaksaController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player")) //aÒadir aquÌ el tag que lleven los enemigos
+        if (other.CompareTag("Player")) //aÒadir aquÅEel tag que lleven los enemigos
         {
             calculateObjectiveVector(other.transform.position);
             latestChangeTime = Time.time;
@@ -65,7 +65,7 @@ public class IaksaController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.collider.CompareTag("Player")) //aÒadir aquÌ el tag que lleven los enemigos
+        if (collision.collider.CompareTag("Player")) //aÒadir aquÅEel tag que lleven los enemigos
         {
             animator.Play("Armature|Action");
         }

@@ -2729,7 +2729,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ce59f596362381445bc554eaf2fcc551, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.3
+      value: 3.09
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ce59f596362381445bc554eaf2fcc551, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2765,6 +2765,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: ce59f596362381445bc554eaf2fcc551, type: 3}
       propertyPath: m_Name
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ce59f596362381445bc554eaf2fcc551, type: 3}
+      propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -2868,6 +2872,55 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51f8de03578e51f48a62bfaa0f63a0f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1035570377
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1035570371}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c2efc3ee0bd63d4b8f3005b65938b9d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gravity: 9.8
+  playerSpeed: 10
+  fallVelocity: 5
+--- !u!95 &1035570378
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1035570371}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ed2413418fb092042bc10c0aacfc46d1, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!136 &1035570379
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1035570371}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.6939254
+  m_Height: 4.163621
+  m_Direction: 1
+  m_Center: {x: -0.0000000051706186, y: -0.16238557, z: 0.1939251}
 --- !u!1001 &1064763947
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4771,6 +4824,25 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2740093626515919124, guid: e6ae1b2523142a94797ab44e46647cdb, type: 3}
   m_PrefabInstance: {fileID: 1915021918}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1644127107 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -4075501202721619045, guid: ce59f596362381445bc554eaf2fcc551, type: 3}
+  m_PrefabInstance: {fileID: 1035570370}
+  m_PrefabAsset: {fileID: 0}
+--- !u!64 &1644127111
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1644127107}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 2534964839176971238, guid: ce59f596362381445bc554eaf2fcc551, type: 3}
 --- !u!1001 &1654546137
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5398,8 +5470,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 20.94556, y: 1.7782822, z: 18.708862}
-  m_Center: {x: 0.30308315, y: 0.3891412, z: 4.050846}
+  m_Size: {x: 20.94556, y: 2.179859, z: 18.70886}
+  m_Center: {x: 0.30308315, y: 0.5899291, z: 4.050846}
 --- !u!1 &1920064637
 GameObject:
   m_ObjectHideFlags: 0
@@ -6740,7 +6812,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c2efc3ee0bd63d4b8f3005b65938b9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gravity: 9.8
   playerSpeed: 5
+  fallVelocity: 0
 --- !u!4 &1234559621934046403
 Transform:
   m_ObjectHideFlags: 0

@@ -9,8 +9,11 @@ public class MovePlayer : MonoBehaviour//SingletonMonoBehaviour<MovePlayer>
     private float verticalMove;
     private Vector3 playerInput;
     private CharacterController player;
+    private Animator anim;
+    public float gravity = 9.8f;
 
-    [SerializeField] private float playerSpeed = 10;
+    [SerializeField] private float playerSpeed;
+    [SerializeField] private float fallVelocity;
 
     private Vector3 movePlayer;
 
@@ -18,10 +21,13 @@ public class MovePlayer : MonoBehaviour//SingletonMonoBehaviour<MovePlayer>
     void Start()
     {
         player = GetComponent<CharacterController>();
+        anim = GetComponent<Animator>();
     }
 
     void Update()
     {
+        bool isWalking = anim.GetBool("isWalking");
+
         horizontalMove = Input.GetAxis("Horizontal");
         verticalMove = Input.GetAxis("Vertical");
 
@@ -32,6 +38,24 @@ public class MovePlayer : MonoBehaviour//SingletonMonoBehaviour<MovePlayer>
 
         player.transform.position = player.transform.position + movePlayer;
 
+        SetGravity();
+
         player.Move(movePlayer * Time.deltaTime);
+
+        
+    }
+
+    void SetGravity()
+    {
+        if (player.isGrounded)
+        {
+            fallVelocity = -gravity * Time.deltaTime;
+            movePlayer.y = fallVelocity;
+        }
+        else
+        {
+            fallVelocity -= gravity * Time.deltaTime;
+            movePlayer.y = fallVelocity;
+        }
     }
 }
