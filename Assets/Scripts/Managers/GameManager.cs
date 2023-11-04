@@ -64,7 +64,8 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     public async Task StartRun()
     {
         Debug.Log("Starting run...");
-        SceneManager.Instance.ChangeToRandomScene();
+        //SceneManager.Instance.ChangeToRandomScene();
+        UnityEngine.SceneManagement.SceneManager.LoadSceneAsync("HouseHall5Level1");
     }
 
     public bool IsGameInRun
