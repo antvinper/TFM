@@ -8341,7 +8341,7 @@ PrefabInstance:
     - target: {fileID: 9193472159107253290, guid: 0b018ba710f6da3489a8c02fc417509a, type: 3}
       propertyPath: weaponController
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 971775155}
     - target: {fileID: 9193472159107253290, guid: 0b018ba710f6da3489a8c02fc417509a, type: 3}
       propertyPath: skills.Array.size
       value: 1
