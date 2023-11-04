@@ -12,6 +12,8 @@ public class MovePlayer : MonoBehaviour//SingletonMonoBehaviour<MovePlayer>
     private Animator anim;
     public float gravity = 9.8f;
 
+    bool imAttacking;
+
     [SerializeField] private float playerSpeed;
     [SerializeField] private float fallVelocity;
 
@@ -26,13 +28,13 @@ public class MovePlayer : MonoBehaviour//SingletonMonoBehaviour<MovePlayer>
 
     void Update()
     {
-        bool isWalking = anim.GetBool("isWalking");
-
         horizontalMove = Input.GetAxis("Horizontal");
         verticalMove = Input.GetAxis("Vertical");
 
         playerInput = new Vector3(horizontalMove, 0.0f, verticalMove);
         playerInput = Vector3.ClampMagnitude(playerInput, 1);
+
+        anim.SetFloat("isWalking", playerInput.magnitude * playerSpeed);
 
         movePlayer = playerInput * playerSpeed;
 
@@ -42,7 +44,14 @@ public class MovePlayer : MonoBehaviour//SingletonMonoBehaviour<MovePlayer>
 
         player.Move(movePlayer * Time.deltaTime);
 
-        
+        if (Input.GetMouseButtonDown(0))
+        {
+            anim.SetBool("isAttack", true);
+        }
+        if (Input.GetMouseButtonUp(0))
+        {
+            anim.SetBool("isAttack", false);
+        }
     }
 
     void SetGravity()
