@@ -12,7 +12,7 @@ public abstract class EffectDefinition : ScriptableObject, IEffect
 
     [SerializeField] private string effectName;
     [SerializeField] [TextArea] private string description;
-    [Tooltip("¿El efecto será aplicado a sí mismo (true) o al target (false)?.")]
+    [Tooltip("ï¿½El efecto serï¿½ aplicado a sï¿½ mismo (true) o al target (false)?.")]
     [SerializeField] private bool applyOnSelf;
 
     public string EffectName => effectName;
@@ -25,7 +25,7 @@ public abstract class EffectDefinition : ScriptableObject, IEffect
     private bool isStatIncremented;
     public bool IsStatIncremented => isStatIncremented;
 
-    [Tooltip("Estado en el target al cual se le va a aplicar el efecto. Si ataco, el estado afectado en el target será la vida.")]
+    [Tooltip("Estado en el target al cual se le va a aplicar el efecto. Si ataco, el estado afectado en el target serï¿½ la vida.")]
     [SerializeField] private StatsEnum statAffected;
     public StatsEnum StatAffected => statAffected;
 
@@ -34,28 +34,28 @@ public abstract class EffectDefinition : ScriptableObject, IEffect
 
     /**
      * Si el valor es en porcentaje necesito:
-     * - El estado qué vamos a mirar pertenece al owner o al target?
+     * - El estado quï¿½ vamos a mirar pertenece al owner o al target?
      * - El estado del cual sacar ese porcentaje. Por ejemplo queremos un 10% de la velocidad
      * - El valor del porcentaje
      */
     #region IsValueInPercentage
-    [Tooltip("¿El estado se va a modificar acorde a un porcentaje?")]
+    [Tooltip("ï¿½El estado se va a modificar acorde a un porcentaje?")]
     [SerializeField] protected bool isValueInPercentage;
     public bool IsValueInPercentage => isValueInPercentage;
 
     [HideInInspector]
     [SerializeField]
-    [Tooltip("Este será el estado del cual sacar el porcentaje. Por ejemplo: queremos hacer un daño porcentual en función de la vida del atacante o del target.")]
+    [Tooltip("Este serï¿½ el estado del cual sacar el porcentaje. Por ejemplo: queremos hacer un daï¿½o porcentual en funciï¿½n de la vida del atacante o del target.")]
     protected StatsEnum statWhatToSee;
 
     [HideInInspector]
     [SerializeField]
-    [Tooltip("¿De quién voy a coger el estado por el cual calcular el porcentaje? Siendo owner el dueño de la skil que tiene este efecto. Por ejemplo: quiero curarme un 20% de mi MaxHealth o quiero causar un daño en el enemigo de un 20% de su MaxHealth")]
+    [Tooltip("ï¿½De quiï¿½n voy a coger el estado por el cual calcular el porcentaje? Siendo owner el dueï¿½o de la skil que tiene este efecto. Por ejemplo: quiero curarme un 20% de mi MaxHealth o quiero causar un daï¿½o en el enemigo de un 20% de su MaxHealth")]
     protected bool isTheOwnerStat;
 
     [HideInInspector]
     [SerializeField]
-    [Tooltip("¿En qué me voy a basar para coger el estado? ¿En el valor base + las variaciones permanentes = false? ¿En el valor base + todas las variaciones? = true")]
+    [Tooltip("ï¿½En quï¿½ me voy a basar para coger el estado? ï¿½En el valor base + las variaciones permanentes = false? ï¿½En el valor base + todas las variaciones? = true")]
     protected bool useOnlyPermanentStatVariations;
 
     [HideInInspector]
@@ -113,7 +113,7 @@ public abstract class EffectDefinition : ScriptableObject, IEffect
     }
 
     /**
-     * Si se le ha reducido la rapidez un 10% nos devolverá el valor SIN la reducción
+     * Si se le ha reducido la rapidez un 10% nos devolverï¿½ el valor SIN la reducciï¿½n
      */
     /*protected int GetPercentageValueFromPermanentStat(Characters.CharacterController owner, Characters.CharacterController target)
     {
@@ -140,7 +140,7 @@ public abstract class EffectDefinition : ScriptableObject, IEffect
     }*/
 
     /**
-     * Si se le ha reducido la rapidez un 10% nos devolverá el valor CON la reducción
+     * Si se le ha reducido la rapidez un 10% nos devolverï¿½ el valor CON la reducciï¿½n
      */
     protected int GetPercentageValueFromActualStat(Characters.CharacterController owner, Characters.CharacterController target)
     {
@@ -162,7 +162,7 @@ public abstract class EffectDefinition : ScriptableObject, IEffect
         }*/
 
         finalValueInPercentage = (valueSWTS * 0.01f) * valueInPercentage;
-        //RECIÉN QUITADA
+        //RECIï¿½N QUITADA
 
         /*if (isTheOwnerStat)
         {

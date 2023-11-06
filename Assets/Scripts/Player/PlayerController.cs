@@ -221,4 +221,32 @@ public class PlayerController : Characters.CharacterController//<PlayerMutableMo
         }
         return inactiveCombos;
     }
+
+
+    #region AnimEvents
+    public void CanContinueComboAnimEvent()
+    {
+        weaponController.CanContinueCombo();
+    }
+    public void CanNotContinueComboAnimEvent()
+    {
+        weaponController.CanNotContinueCombo();
+    }
+    public void CancelComboAnimEvent()
+    {
+        weaponController.CancelComboFromAnim();
+    }
+    public void CanMakeDamageAnimEvent()
+    {
+        weaponController.CanMakeDamage();
+    }
+    public void CanNotMakeDamageAnimEvent()
+    {
+        weaponController.CanNotMakeDamage();
+    }
+    public void FinishComboAnimEvent()
+    {
+        weaponController.FinishCombo();
+    }
+    #endregion
 }

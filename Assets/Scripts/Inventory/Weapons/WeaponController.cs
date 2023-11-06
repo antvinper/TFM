@@ -33,7 +33,7 @@ public class WeaponController: MonoBehaviour
     [SerializeField] private Animator animator;
 
     //TODO
-    //Quizás sea necesario crear una lista de estas corrutinas.
+    //Quizï¿½s sea necesario crear una lista de estas corrutinas.
     //Coroutine cancelComboAfterTime;
 
     WeaponModel model;
@@ -79,33 +79,23 @@ public class WeaponController: MonoBehaviour
     }
 
     /*
-     * 1- Aprieto botón bueno: Se inicia corrutina de cancelación
-     *      2A- Aprieto botón continuación combo: Se cancela corrutina
-     *      2B- Aprieto botón malo: Se cancela corrutina y se cancela el combo
+     * 1- Aprieto botï¿½n bueno: Se inicia corrutina de cancelaciï¿½n
+     *      2A- Aprieto botï¿½n continuaciï¿½n combo: Se cancela corrutina
+     *      2B- Aprieto botï¿½n malo: Se cancela corrutina y se cancela el combo
      *      2C- No aprieto nada durante el tiempo de la corrutina: Se cancela el combo.
      *      
      */
 
-    public void CanContinueComboAnimEvent()
+    public void CanContinueCombo()
     {
         canContinueCombo = true;
     }
-    public void CanNotContinueComboAnimEvent()
+    public void CanNotContinueCombo()
     {
         canContinueCombo = false;
     }
 
-    public void CancelEventAnimCombo()
-    {
-        Debug.Log(doingCombo + " " + actualIndex);
-        if (!doingCombo || actualIndex == 0)
-        {
-            canContinueCombo = false;
-            doingCombo = false;
-            CancelCombo();
-        }
-        
-    }
+    
 
     private void ResetCombos()
     {
@@ -114,7 +104,17 @@ public class WeaponController: MonoBehaviour
             combo.ResetActualIndex();
         }
     }
+    public void CancelComboFromAnim()
+    {
+        Debug.Log(doingCombo + " " + actualIndex);
+        if (!doingCombo || actualIndex == 0)
+        {
+            canContinueCombo = false;
+            doingCombo = false;
+            CancelCombo();
+        }
 
+    }
     public void CancelCombo()
     {
         if (!doingCombo && !isComboFinished)
@@ -148,7 +148,7 @@ public class WeaponController: MonoBehaviour
 
     
     //TODO
-    //Cambiar esta función por un animationEvent que invoque el ResetCombo cuando corresponda.
+    //Cambiar esta funciï¿½n por un animationEvent que invoque el ResetCombo cuando corresponda.
     /*async Task CancelComboAfterTime()
     {
         tokenCancelComboAfterTime = new CancellationTokenSource();

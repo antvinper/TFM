@@ -5,7 +5,7 @@ using UnityEngine;
 
 
 /*
- * Clase para métodos genéricos en cualquier Controlador de enemigo.
+ * Clase para mï¿½todos genï¿½ricos en cualquier Controlador de enemigo.
  */
 public class EnemyController : Characters.CharacterController
 {
@@ -13,7 +13,7 @@ public class EnemyController : Characters.CharacterController
 
     /**
      * TODO
-     * No sé si vale la pena separar enemy y player models
+     * No sï¿½ si vale la pena separar enemy y player models
      */
     //[SerializeField] private EnemyMutableModel model;
 
