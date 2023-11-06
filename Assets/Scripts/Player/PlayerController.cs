@@ -128,7 +128,7 @@ public class PlayerController : Characters.CharacterController//<PlayerMutableMo
         model.Setup(statsDefinitions);
         GameManager.Instance.GameModel.PlayerModel = model as PlayerMutableModel;
     }
-    public override void ProcessDamage(int value)
+    public override void ProcessDamage(StatModificator statModificator)
     {
         Debug.Log("ProcessDamage in player");
     }

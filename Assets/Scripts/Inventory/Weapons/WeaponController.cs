@@ -72,7 +72,7 @@ public class WeaponController: MonoBehaviour
             EnemyController target = other.GetComponentInParent<EnemyController>();
             if(owner != null && target != null)
             {
-                model.BasicComboDefinitions[comboIndex++].UseSkill(owner, other.gameObject.GetComponent<EnemyController>());
+                model.BasicComboDefinitions[comboIndex++].UseSkill(owner, target);
             }
             
         }

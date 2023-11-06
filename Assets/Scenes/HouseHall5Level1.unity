@@ -2434,6 +2434,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2050708853417886103, guid: dd225e2935d66ba468d5e07c93c07f18, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2050708853417886103, guid: dd225e2935d66ba468d5e07c93c07f18, type: 3}
+      propertyPath: statsDefinitions
+      value: 
+      objectReference: {fileID: 11400000, guid: 6c05ec5503e6b47488ec7b4104edb081, type: 2}
     - target: {fileID: 2050708853417886105, guid: dd225e2935d66ba468d5e07c93c07f18, type: 3}
       propertyPath: m_Name
       value: Iaksa
@@ -8251,7 +8259,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8655776944345146311, guid: 0b018ba710f6da3489a8c02fc417509a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.09
+      value: 2.38
       objectReference: {fileID: 0}
     - target: {fileID: 8655776944345146311, guid: 0b018ba710f6da3489a8c02fc417509a, type: 3}
       propertyPath: m_LocalPosition.z

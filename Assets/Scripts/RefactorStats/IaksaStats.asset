@@ -15,9 +15,9 @@ MonoBehaviour:
   stats:
   - name: 1
     maxValue: 9999
-    actualMaxValue: 1
+    actualMaxValue: 150
     minValue: 0
-    value: 1
+    value: 150
   - name: 2
     maxValue: 255
     actualMaxValue: 1

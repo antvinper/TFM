@@ -12,7 +12,7 @@ public class CharacterMutableModel : ICharacterModel
     private int rupees;
 
     /**
-     * HACER LAS VARIABLES PÚBLICAS QUE SERÁN DE JSON PROPERTY?
+     * HACER LAS VARIABLES Pï¿½BLICAS QUE SERï¿½N DE JSON PROPERTY?
      * o
      * LLEVARLO A UNA CLASE APARTE?
      */
@@ -67,8 +67,8 @@ public class CharacterMutableModel : ICharacterModel
 
     
     
-    //Se le pasa el valor máximo del stat?
-    //Creo una función recursiva?
+    //Se le pasa el valor mï¿½ximo del stat?
+    //Creo una funciï¿½n recursiva?
     private int CalculateStat(StatsEnum stat)
     {
         float value1 = GetStatValueFromList(baseStats, stat) + GetStatValueFromList(instantStatsModifyPermanent, stat);
@@ -99,7 +99,7 @@ public class CharacterMutableModel : ICharacterModel
         return list.Find(t => t.Name.Equals(stat)).MinValue;
     }
 
-    //Servirá para feedback en la UI sobre todo
+    //Servirï¿½ para feedback en la UI sobre todo
     public int GetActualMaxStatValue(StatsEnum stat)
     {
         float maxValue1 = GetActualMaxStatValueFromList(baseStats, stat) + GetActualMaxStatValueFromList(instantStatsModifyPermanent, stat);
@@ -151,9 +151,9 @@ public class CharacterMutableModel : ICharacterModel
      * TODO refactor
      * 
      * Para poder incremental cualquier maxValue
-     * También habría que añadir un nuevo check en los efectos que haga referencia
-     * a los max values. Así el statusEnum dejaría de tener MAX_HEALTH y no
-     * habría que hardcodear aquí el statEnum Health
+     * Tambiï¿½n habrï¿½a que aï¿½adir un nuevo check en los efectos que haga referencia
+     * a los max values. Asï¿½ el statusEnum dejarï¿½a de tener MAX_HEALTH y no
+     * habrï¿½a que hardcodear aquï¿½ el statEnum Health
      */
     public void PerformApplyStatModifyInRun(StatModificator statModificator)
     {
@@ -182,23 +182,25 @@ public class CharacterMutableModel : ICharacterModel
         
     }
 
-    public void PerformRealHealthChange(StatModificator statModificator)
+    public StatModificator PerformRealHealthChange(StatModificator statModificator)
     {
         if(statModificator.Value > 0)
         {
-            Heal(statModificator);
+            statModificator = Heal(statModificator);
         }
         else
         {
             if (statModificator.BuffDebuffType.Equals(EffectTypes.POISON))
             {
-                TakeRealDamage(statModificator);
+                statModificator = TakeRealDamage(statModificator);
             }
             else if (statModificator.IsAttack)
             {
-                TakeDamage(statModificator);
+                statModificator = TakeDamage(statModificator);
             }
         }
+
+        return statModificator;
     }
     public void PerformPercentualHealthChange(StatModificator statModificator)
     {
@@ -218,7 +220,7 @@ public class CharacterMutableModel : ICharacterModel
      * Si el TakeDamage fuese diferente en el personaje y en los enemigos
      * debe implementarse en cada uno por separado
      */
-    public void TakeDamage(StatModificator statModificator)
+    public StatModificator TakeDamage(StatModificator statModificator)
     {
         
         int defense = GetStatValue(StatsEnum.DEFENSE);
@@ -230,15 +232,19 @@ public class CharacterMutableModel : ICharacterModel
         PerformApplyStatModifyInRun(statModificator);
 
         statModificator.IsAlive = CheckIsAlive();
+
+        return statModificator;
     }
 
-    public void TakeRealDamage(StatModificator statModificator)
+    public StatModificator TakeRealDamage(StatModificator statModificator)
     {
         PerformApplyStatModifyInRun(statModificator);
         statModificator.IsAlive = CheckIsAlive();
+
+        return statModificator;
     }
 
-    public void Heal(StatModificator statModificator)
+    public StatModificator Heal(StatModificator statModificator)
     {
         int maxHealth = GetActualBaseMaxStat(statModificator.StatToModify);
         int health = GetStatValue(statModificator.StatToModify);
@@ -246,15 +252,24 @@ public class CharacterMutableModel : ICharacterModel
 
         statModificator.Value = finalHeal;
         PerformApplyStatModifyInRun(statModificator);
+
+        return statModificator;
     }
 
     private bool CheckIsAlive()
     {
         /**
          * TODO
-         * Debería llamar a algún evento de muerte??
+         * Deberï¿½a llamar a algï¿½n evento de muerte??
          */
-        return GetStatValue(StatsEnum.HEALTH) > 0;
+        bool isAlive = GetStatValue(StatsEnum.HEALTH) > 0;
+        
+        if(!isAlive)
+        {
+            Debug.Log("DIE!");
+        }
+        
+        return isAlive;
     }
 
 

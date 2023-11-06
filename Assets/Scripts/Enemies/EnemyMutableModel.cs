@@ -6,6 +6,6 @@ public class EnemyMutableModel : CharacterMutableModel
 {
     /*
      * TODO
-     * Imagino que habrá que almacenar aquí al player y ciertas cosas
+     * Imagino que habrï¿½ que almacenar aquï¿½ al player y ciertas cosas
      */
 }

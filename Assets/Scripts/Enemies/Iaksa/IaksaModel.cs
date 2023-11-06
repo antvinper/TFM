@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IaksaModel : EnemyMutableModel
+public class IaksaModel : CharacterMutableModel
 {
     
 }

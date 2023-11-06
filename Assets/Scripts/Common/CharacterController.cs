@@ -21,7 +21,7 @@ namespace Characters
             set => model = value;
         }*/
         //public virtual CharacterMutableModel Model { get; set; }
-        public abstract void ProcessDamage(int value);
+        public abstract void ProcessDamage(StatModificator statModificator);
 
         public abstract float GetMyRealDamage();
 
@@ -174,9 +174,13 @@ namespace Characters
             model.TimeEffectDefinitions.Add(newEffect);
         }
 
-        public void ChangeRealHealth(StatModificator statModificator)
+        public virtual void ChangeRealHealth(StatModificator statModificator)
         {
-            model.PerformRealHealthChange(statModificator);
+            statModificator = model.PerformRealHealthChange(statModificator);
+            if (!statModificator.IsAlive)
+            {
+                Debug.Log("TODO -> Character dies");
+            }
         }
         public void ChangePercentualHealth(StatModificator statModificator)
         {
@@ -202,6 +206,8 @@ namespace Characters
 
         public int GetStat(StatsEnum stat)
         {
+            int statValue = 0;
+            statValue = model.GetStatValue(stat);
             return model.GetStatValue(stat);
         }
 

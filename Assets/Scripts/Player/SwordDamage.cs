@@ -7,9 +7,9 @@ public class SwordDamage : MonoBehaviour
     [SerializeField] private float damage = 20f;
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Enemy")) //añadir aquEel tag que lleven los enemigos
+        if (other.CompareTag("Enemy")) //aï¿½adir aquï¿½Eel tag que lleven los enemigos
         {
-            other.gameObject.GetComponent<IaksaController>().TakeDamage(damage);
+            //other.gameObject.GetComponent<IaksaController>().TakeDamage(damage);
         }
     }
 }
