@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2050708853417886097}
   m_Layer: 0
   m_Name: Iaksa
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -47,8 +47,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 3, y: 3, z: 3}
-  m_Center: {x: 0, y: 2, z: 0}
+  m_Size: {x: 2.900088, y: 3, z: 0.9337455}
+  m_Center: {x: 0.049955066, y: 1.9999628, z: 0.102292955}
 --- !u!114 &2050708853417886103
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -63,6 +63,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 2050708853417886102}
   animator: {fileID: 2050708853450596499}
+  max_health: 100
+  cur_health: 0
 --- !u!54 &2050708853417886102
 Rigidbody:
   m_ObjectHideFlags: 0
