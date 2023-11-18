@@ -11,15 +11,26 @@ public class MovePlayer : MonoBehaviour//SingletonMonoBehaviour<MovePlayer>
     private CharacterController player;
     private Animator anim;
     public float gravity = 9.8f;
+    public float targetRotation = 9.8f;
+    public float RotationSmoothTime = 0.12f;
+    private GameObject _mainCamera;
+    private float angulo;
 
 
     bool imAttacking;
 
     [SerializeField] private float playerSpeed;
     [SerializeField] private float fallVelocity;
+    [SerializeField] private float rotationSpeed;
 
     private Vector3 movePlayer;
-
+    private void Awake()
+    {
+        if (_mainCamera == null)
+        {
+            _mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
+        }
+    }
 
     void Start()
     {
@@ -35,15 +46,22 @@ public class MovePlayer : MonoBehaviour//SingletonMonoBehaviour<MovePlayer>
         playerInput = new Vector3(horizontalMove, 0.0f, verticalMove);
         playerInput = Vector3.ClampMagnitude(playerInput, 1);
 
-        anim.SetFloat("isWalking", playerInput.magnitude * playerSpeed);
-
         movePlayer = playerInput * playerSpeed;
 
         player.transform.position = player.transform.position + movePlayer;
 
+        anim.SetFloat("isWalking", playerInput.magnitude * playerSpeed);
+
         SetGravity();
 
         player.Move(movePlayer * Time.deltaTime);
+
+        //Rotacion del personaje segun hacia donde mira
+        if (movePlayer != Vector3.zero)
+        {
+            Quaternion rotation = Quaternion.LookRotation(playerInput, Vector3.up);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, rotation, rotationSpeed);
+        }
 
         /*
         if (Input.GetMouseButtonDown(0))
