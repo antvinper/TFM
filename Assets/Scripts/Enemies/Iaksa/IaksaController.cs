@@ -33,7 +33,7 @@ public class IaksaController : EnemyController
         this.SetModel(model);
 
         latestChangeTime = 0f;
-
+        calculateRandomVector();
     }
 
     void calculateRandomVector()
@@ -52,16 +52,18 @@ public class IaksaController : EnemyController
 
     void Update()
     {
-        inAlert = Physics.CheckSphere(transform.position, alertRange, maskPlayer);
+        //inAlert = Physics.CheckSphere(transform.position, alertRange, maskPlayer);
 
-        if (inAlert == true)
+        //Si el enemigo detecta al jugador
+        /*if (inAlert == true)
         {
             //calculateObjectiveVector(player.transform.position);
+            //MOverse hacia el jugador
             transform.LookAt(new Vector3(player.position.x, transform.position.y, player.position.z));
             transform.position = Vector3.MoveTowards(transform.position, new Vector3(player.position.x, transform.position.y, player.position.z), runSpeed * Time.deltaTime);
-            //latestChangeTime = Time.time;
+            latestChangeTime = Time.time;
             animator.Play("Armature|Run");
-        }
+        }*/
 
         if(Time.time - latestChangeTime > changeTime)
         {
@@ -98,11 +100,6 @@ public class IaksaController : EnemyController
         Gizmos.DrawWireSphere(transform.position, alertRange);
     }
 
-    IEnumerator TimeToRun()
-    {
-        yield return new WaitForSeconds(20f);
-    }
-
     /*
     private void OnTriggerEnter(Collider other)
     {
@@ -124,9 +121,25 @@ public class IaksaController : EnemyController
     }
     */
 
-    
     private void OnTriggerEnter(Collider other)
     {
-        animator.Play("Armature|Action");
+        if (other.CompareTag("Player") || other.CompareTag("Enemy"))
+        {
+            //MOverse hacia el jugador
+            transform.LookAt(new Vector3(other.transform.position.x, transform.position.y, other.transform.position.z));
+            //transform.position = Vector3.MoveTowards(transform.position, new Vector3(player.position.x, transform.position.y, player.position.z), runSpeed * Time.deltaTime);
+            calculateObjectiveVector(other.transform.position);
+            latestChangeTime = Time.time;
+            animator.Play("Armature|Run");
+        }
+    }
+
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.collider.CompareTag("Player") || collision.collider.CompareTag("Enemy"))
+        {
+            animator.Play("Armature|Action");
+        }
     }
 }
