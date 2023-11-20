@@ -6,11 +6,12 @@ TagManager:
   tags:
   - SceneLoader
   - Enemy
+  - Iaksa
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player
   - Water
   - UI
   - 

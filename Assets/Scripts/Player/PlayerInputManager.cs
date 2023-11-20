@@ -12,7 +12,9 @@ public class PlayerInputManager : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             playerController.DoCombo(ButtonsXbox.X);
+            dealingDamage();
         }
+        notDealingDamage();
     }
 
     public void GetInput(InputAction.CallbackContext callbackContext)
@@ -52,5 +54,17 @@ public class PlayerInputManager : MonoBehaviour
                 playerController.StopCharging();
             }
         }
+    }
+
+    void dealingDamage()
+    {
+        GetComponentInChildren<SwordController>().atacando = true;
+
+    }
+
+    void notDealingDamage()
+    {
+        GetComponentInChildren<SwordController>().atacando = false;
+
     }
 }

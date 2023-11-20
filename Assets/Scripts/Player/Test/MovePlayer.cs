@@ -88,4 +88,6 @@ public class MovePlayer : MonoBehaviour//SingletonMonoBehaviour<MovePlayer>
             movePlayer.y = fallVelocity;
         }
     }
+
+    
 }
