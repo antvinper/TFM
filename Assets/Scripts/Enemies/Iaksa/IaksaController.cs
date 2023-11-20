@@ -20,9 +20,6 @@ public class IaksaController : EnemyController
     [SerializeField] private float alertRange;
     [SerializeField] private LayerMask maskPlayer;
     [SerializeField] private Transform player;
-    private bool inAlert;
-   
- 
 
     // TO DO: anyadir los efectos de buff/debuff cuando salta al lado de otro personaje
     //public float max_health;
@@ -33,6 +30,7 @@ public class IaksaController : EnemyController
         this.SetModel(model);
 
         latestChangeTime = 0f;
+
         calculateRandomVector();
     }
 
@@ -52,19 +50,6 @@ public class IaksaController : EnemyController
 
     void Update()
     {
-        //inAlert = Physics.CheckSphere(transform.position, alertRange, maskPlayer);
-
-        //Si el enemigo detecta al jugador
-        /*if (inAlert == true)
-        {
-            //calculateObjectiveVector(player.transform.position);
-            //MOverse hacia el jugador
-            transform.LookAt(new Vector3(player.position.x, transform.position.y, player.position.z));
-            transform.position = Vector3.MoveTowards(transform.position, new Vector3(player.position.x, transform.position.y, player.position.z), runSpeed * Time.deltaTime);
-            latestChangeTime = Time.time;
-            animator.Play("Armature|Run");
-        }*/
-
         if(Time.time - latestChangeTime > changeTime)
         {
             latestChangeTime = Time.time;
@@ -125,9 +110,8 @@ public class IaksaController : EnemyController
     {
         if (other.CompareTag("Player") || other.CompareTag("Enemy"))
         {
-            //MOverse hacia el jugador
+            //Moverse hacia el jugador
             transform.LookAt(new Vector3(other.transform.position.x, transform.position.y, other.transform.position.z));
-            //transform.position = Vector3.MoveTowards(transform.position, new Vector3(player.position.x, transform.position.y, player.position.z), runSpeed * Time.deltaTime);
             calculateObjectiveVector(other.transform.position);
             latestChangeTime = Time.time;
             animator.Play("Armature|Run");
