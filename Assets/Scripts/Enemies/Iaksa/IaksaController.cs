@@ -9,6 +9,7 @@ public class IaksaController : EnemyController
 
     [SerializeField] private Rigidbody rb;
     [SerializeField] private Animator animator;
+    [SerializeField] private DuringTimeEffectDefinition effect;
 
     private float latestChangeTime;
     private readonly float changeTime = 3f;
@@ -78,13 +79,6 @@ public class IaksaController : EnemyController
         Destroy(gameObject);
     }
 
-    private void OnDrawGizmos()
-    {
-        //Dibujamos una esfera que indique el rango en el que se detecta al jugador
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, alertRange);
-    }
-
     /*
     private void OnTriggerEnter(Collider other)
     {
@@ -108,6 +102,7 @@ public class IaksaController : EnemyController
 
     private void OnTriggerEnter(Collider other)
     {
+        //Si el jugador/enemigo entra en contacto con "Sphere Collider", ira a por el
         if (other.CompareTag("Player") || other.CompareTag("Enemy"))
         {
             //Moverse hacia el jugador
@@ -121,6 +116,7 @@ public class IaksaController : EnemyController
 
     private void OnCollisionEnter(Collision collision)
     {
+        //Si el jugador/enemigo entra en contacto con "Box Collider", activara la animacion "Action" para pegar un saltito y aplicar el buff/debuff
         if (collision.collider.CompareTag("Player") || collision.collider.CompareTag("Enemy"))
         {
             animator.Play("Armature|Action");

@@ -3780,6 +3780,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2050708853417886103, guid: dd225e2935d66ba468d5e07c93c07f18, type: 3}
+      propertyPath: effect
+      value: 
+      objectReference: {fileID: 11400000, guid: 4aeff75be0f8eae44a1e1ebe6c558fb7, type: 2}
+    - target: {fileID: 2050708853417886103, guid: dd225e2935d66ba468d5e07c93c07f18, type: 3}
       propertyPath: player
       value: 
       objectReference: {fileID: 1211695406}
@@ -9205,6 +9209,7 @@ MonoBehaviour:
   gravity: 9.8
   targetRotation: 9.8
   RotationSmoothTime: 0.12
+  player_health: 100
   playerSpeed: 5
   fallVelocity: 0
   rotationSpeed: 0

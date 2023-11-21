@@ -12,7 +12,7 @@ public class DuringTimeEffect : TimeEffectDefinition
     private int finalValue;
     public override async Task ProcessEffect(Characters.CharacterController owner, Characters.CharacterController target)
     {
-        //No sÈ por quÈ valen true nada m·s empezar
+        //No sÅEpor quÅEvalen true nada m·s empezar
         cancel = false;
         reset = false;
         this.owner = owner;
@@ -29,7 +29,7 @@ public class DuringTimeEffect : TimeEffectDefinition
              * ADD PERCENTUAL CHANGE
              * Puede ser que se le reduzca la velocidad un 10%, la defensa un 15%
              * Pero siempre del total sin tener en cuenta los cambios temporales.
-             * Si se reduce la defensa 2 veces un 10%, siempre ser· respecto al valor Permanent
+             * Si se reduce la defensa 2 veces un 10%, siempre serÅErespecto al valor Permanent
              * 
              * øøComo puedo saber si obtener el valor del actual o del permanente? ElecciÛn de momento.
              */
@@ -49,7 +49,7 @@ public class DuringTimeEffect : TimeEffectDefinition
             ChangeStatDTE(finalValue, isValueInPercentage);
             //Debug.Log("After apply the slowDownapply the Effect, " + StatAffected + " " + target.GetStat(StatAffected));
 
-            //Lo dejo asÌ por si se desea dar feedback del tiempo o algo
+            //Lo dejo asÅEpor si se desea dar feedback del tiempo o algo
             while (timeAplyingEffect < effectLifeTime && !cancel)
             {
                 if (reset)

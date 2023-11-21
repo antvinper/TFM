@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -13,9 +14,8 @@ public class MovePlayer : MonoBehaviour//SingletonMonoBehaviour<MovePlayer>
     public float gravity = 9.8f;
     public float targetRotation = 9.8f;
     public float RotationSmoothTime = 0.12f;
+    public float player_health = 100f;
     private GameObject _mainCamera;
-    private float angulo;
-
 
     bool imAttacking;
 
@@ -89,5 +89,9 @@ public class MovePlayer : MonoBehaviour//SingletonMonoBehaviour<MovePlayer>
         }
     }
 
-    
+    public void TakeDamage(float amount)
+    {
+        player_health = Math.Max(player_health - amount, 0);
+    }
+
 }
