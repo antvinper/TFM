@@ -21,7 +21,7 @@ public class SimpleCharacterMotor : MonoBehaviour
     [Header("Smoothing")]
     public float movementAcceleration = 1;
 
-    CompanyCharacterController controller;
+    UnityEngine.CharacterController controller;
     Vector3 movement, finalMovement;
     float speed;
     Quaternion targetRotation, targetPivotRotation;
@@ -29,7 +29,7 @@ public class SimpleCharacterMotor : MonoBehaviour
 
     void Awake()
     {
-        controller = GetComponent<CompanyCharacterController>();
+        controller = GetComponent<UnityEngine.CharacterController>();
         Cursor.lockState = cursorLockMode;
         Cursor.visible = cursorVisible;
         targetRotation = targetPivotRotation = Quaternion.identity;

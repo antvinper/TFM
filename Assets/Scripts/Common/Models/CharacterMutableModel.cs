@@ -15,23 +15,23 @@ public class CharacterMutableModel// : ICharacterModel
     private int rupees;
 
 
-    private List<Stat> instantStatsModifyPermanent;
+    /*private List<Stat> instantStatsModifyPermanent;
     [JsonProperty]
     public List<Stat> InstantStatsModifyPermanent
     {
         get => instantStatsModifyPermanent;
-    }
-    private List<Stat> instantStatsModifyInRun;
-    private List<Stat> instantStatsModifyPercentageInRun;
+    }*/
+    private List<StatModificationPermanent> statsModificationPermanent;
+    //private List<Stat> instantStatsModifyPercentageInRun;
 
     [JsonIgnore] private List<OverTimeEffectDefinition> overTimeEffects;
     [JsonIgnore] private List<DuringTimeEffectDefinition> duringTimeEffects;
-    [JsonIgnore] private List<InstantEffectPermanentDefinition> permanentEffects;
+    //[JsonIgnore] private List<InstantEffectPermanentDefinition> permanentEffects;
     [JsonIgnore] private List<InstantEffectTemporallyDefinition> temporallyEffects;
 
     [JsonIgnore] public List<OverTimeEffectDefinition> OverTimeEffects { get => overTimeEffects; }
     [JsonIgnore] public List<DuringTimeEffectDefinition> DuringTimeEffects { get => duringTimeEffects; }
-    [JsonIgnore] public List<InstantEffectPermanentDefinition> PermanentEffects { get => permanentEffects; }
+    //[JsonIgnore] public List<InstantEffectPermanentDefinition> PermanentEffects { get => permanentEffects; }
     [JsonIgnore] public List<InstantEffectTemporallyDefinition> TemporallyEffects { get => temporallyEffects; }
 
     [JsonProperty]
@@ -53,7 +53,8 @@ public class CharacterMutableModel// : ICharacterModel
         stats = new List<Stat>();
         overTimeEffects = new List<OverTimeEffectDefinition>();
         duringTimeEffects = new List<DuringTimeEffectDefinition>();
-        permanentEffects = new List<InstantEffectPermanentDefinition>();
+        statsModificationPermanent = new List<StatModificationPermanent>();
+        //permanentEffects = new List<InstantEffectPermanentDefinition>();
         temporallyEffects = new List<InstantEffectTemporallyDefinition>();
         /*baseStats = new List<Stat>();
         instantStatsModifyPermanent = new List<Stat>();
@@ -131,12 +132,12 @@ public class CharacterMutableModel// : ICharacterModel
         /*
          * 1º se calculan los cambios permanentes no porcentuales
          */
-        List<InstantEffectPermanentDefinition> permEffectsRealValue = permanentEffects.Where(e => e.StatAffected.Equals(statName) && !e.IsValueInPercentage).ToList();
-        foreach (InstantEffectPermanentDefinition permanentEffect in permEffectsRealValue)
+        List<StatModificationPermanent> statsModificationPermanentRealValue = statsModificationPermanent.Where(e => e.StatAffected.Equals(statName) && !e.IsValueInPercentage).ToList();
+        foreach (StatModificationPermanent statModificationPermanentRealValue in statsModificationPermanentRealValue)
         {
 
-            notPercentualValue += permanentEffect.GetRealValue();
-            ChangeStat(permanentEffect);
+            notPercentualValue += statModificationPermanentRealValue.GetRealValue();
+            ChangeStat(statModificationPermanentRealValue);
         }
 
         /*
@@ -152,11 +153,11 @@ public class CharacterMutableModel// : ICharacterModel
         /*
          * 3º se calculan los cambios permanentes porcentuales
          */
-        List<InstantEffectPermanentDefinition> permEffectsPercentageValue = permanentEffects.Where(e => e.StatAffected.Equals(statName) && e.IsValueInPercentage).ToList();
-        foreach (InstantEffectPermanentDefinition permanentEffect in permEffectsPercentageValue)
+        List<StatModificationPermanent> permEffectsPercentageValue = statsModificationPermanent.Where(e => e.StatAffected.Equals(statName) && e.IsValueInPercentage).ToList();
+        foreach (StatModificationPermanent permanentEffect in permEffectsPercentageValue)
         {
             //TODO Mejora: Poder incrementar porcentualmente en función de otros stats (StatWhatToSee)
-            permanentEffect.CalculateRealPercentage();
+            permanentEffect.CalculateRealPercentage(GetStatValue(permanentEffect.StatWhatToSee, permanentEffect.StatWhatToSeeStatPart));
             //percentualValue += permanentEffect.GetRealValue();
             ChangeStat(permanentEffect);
         }
@@ -199,6 +200,39 @@ public class CharacterMutableModel// : ICharacterModel
         }*/
     }
 
+    public void ChangeStat(StatModificationPermanent statModification)
+    {
+        Stat stat = GetStatFromName(statModification.StatAffected);
+        int value = statModification.Value;
+        /*if(timesApplied > 0)
+        {
+            value = effect.Value * timesApplied;
+        }*/
+        switch (statModification.StatPart)
+        {
+            case StatParts.ACTUAL_MAX_VALUE:
+                if (statModification.IsStatIncremented)
+                {
+                    stat.IncreaseActualMaxValue(value);
+                }
+                else
+                {
+                    stat.DecreaseActualMaxValue(value);
+                }
+                break;
+            case StatParts.ACTUAL_VALUE:
+                if (statModification.IsStatIncremented)
+                {
+                    stat.IncreaseValue(value);
+                }
+                else
+                {
+                    stat.DecreaseValue(value);
+                }
+                break;
+        }
+    }
+
     #region StatChanges
     public void ChangeStat(EffectDefinition effect, int timesApplied = 0)
     {
@@ -232,6 +266,8 @@ public class CharacterMutableModel// : ICharacterModel
                 break;
         }
     }
+
+
 
 
 
@@ -320,7 +356,6 @@ public class CharacterMutableModel// : ICharacterModel
         return overTimeEffect;
     }
 
-
     public bool TryAddEffect(EffectDefinition effect)
     {
         bool hasBeenAdded = false;
@@ -337,7 +372,9 @@ public class CharacterMutableModel// : ICharacterModel
         }
         else if (effect is InstantEffectPermanentDefinition)
         {
-            permanentEffects.Add(effect as InstantEffectPermanentDefinition);
+            StatModificationPermanent statModificationPermanent = new StatModificationPermanent(effect as InstantEffectPermanentDefinition);
+            statsModificationPermanent.Add(statModificationPermanent);
+            //permanentEffects.Add(effect as InstantEffectPermanentDefinition);
             hasBeenAdded = true;
         }
         else if (effect is InstantEffectTemporallyDefinition)

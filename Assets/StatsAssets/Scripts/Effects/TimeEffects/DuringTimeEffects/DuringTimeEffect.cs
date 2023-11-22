@@ -134,7 +134,6 @@ namespace CompanyStats
 
         private void AddEffectToTarget(bool isReadded)
         {
-            target.effectName.text = this.EffectName;
             if (!isReadded)
             {
                 Stat stat = target.GetStatFromName(StatAffected);
@@ -166,7 +165,6 @@ namespace CompanyStats
                 //Debug.Log("Time effect applied: ");
                 await new WaitForSeconds(Time.deltaTime);
                 actualTimeEffectApplied += Time.deltaTime;
-                target.timer.text = actualTimeEffectApplied + "s";
                 if (resetEffect)
                 {
                     Debug.Log("#TIMER Reset effect");

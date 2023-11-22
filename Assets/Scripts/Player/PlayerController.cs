@@ -61,7 +61,7 @@ public class PlayerController : CompanyCharacterController//<PlayerMutableModel>
         this.rupees = new Rupee(model.Rupees);
         this.soulFragment = new SoulFragment(model.SoulFragments);
 
-        
+
 
         //TREE BEHAVIOUR
         /*Debug.Log(model.Tree.Slots);
@@ -88,7 +88,9 @@ public class PlayerController : CompanyCharacterController//<PlayerMutableModel>
         //UseSkill(PlayerEnumSkills.SLOW_DOWN, this);
         //UseSkill(PlayerEnumSkills.PERMANENT, this);
         //UseSkill(PlayerEnumSkills.DEFFENSE_DOWN, enemy);
-        GetRoomRewards();
+        //GetRoomRewards();
+
+        ApplySkill();
     }
     public void AddRupees(int value)
     {
@@ -146,6 +148,20 @@ public class PlayerController : CompanyCharacterController//<PlayerMutableModel>
         Debug.Log("My real damage = " + model.GetStatValue(StatsEnum.ATTACK));
         return model.GetStatValue(StatsEnum.ATTACK);
     }*/
+
+    public async Task ApplySkill()
+    {
+        foreach (SkillDefinition skill in skills)
+        {
+            skill.ProcessSkill(this, this);
+            await new WaitForSeconds(3.0f);
+        }
+        foreach (SkillDefinition skill in skills)
+        {
+            skill.ProcessSkill(this);
+            await new WaitForSeconds(3.0f);
+        }
+    }
 
     public async Task UseSkills(List<SkillDefinition> skillName, CompanyCharacterController target)
     {

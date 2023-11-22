@@ -19,6 +19,8 @@ namespace CompanyStats
         private SerializedProperty statPartAffectedProperty;
         private SerializedProperty isStatIncrementedProperty;
         private SerializedProperty isValueInPercentageProperty;
+        private SerializedProperty statWhatToSeeProperty;
+        private SerializedProperty statWhatToSeeStatPartAffectedProperty;
 
         private SerializedProperty valueInPercentageProperty;
         private SerializedProperty valueProperty;
@@ -32,6 +34,8 @@ namespace CompanyStats
             statPartAffectedProperty = serializedObject.FindProperty("statPart");
             isStatIncrementedProperty = serializedObject.FindProperty("isStatIncremented");
             isValueInPercentageProperty = serializedObject.FindProperty("isValueInPercentage");
+            statWhatToSeeProperty = serializedObject.FindProperty("statWhatToSee");
+            statWhatToSeeStatPartAffectedProperty = serializedObject.FindProperty("statWhatToSeeStatPart");
 
             valueInPercentageProperty = serializedObject.FindProperty("valueInPercentage");
             valueProperty = serializedObject.FindProperty("value");
@@ -53,6 +57,8 @@ namespace CompanyStats
 
             if (isValueInPercentageProperty.boolValue)
             {
+                EditorGUILayout.PropertyField(statWhatToSeeProperty);
+                EditorGUILayout.PropertyField(statWhatToSeeStatPartAffectedProperty);
                 EditorGUILayout.PropertyField(valueInPercentageProperty);
             }
             else

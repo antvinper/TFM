@@ -615,7 +615,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc6a4e7911f4525439079f4a373c6904, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  statsDefinitions: {fileID: 11400000, guid: 407fec4cf49ec8148ac3b5fca88995af, type: 2}
+  characterStatsDefinition: {fileID: 0}
 --- !u!54 &1080338672
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1153,6 +1153,14 @@ PrefabInstance:
       propertyPath: statsDefinitions
       value: 
       objectReference: {fileID: 11400000, guid: d21c60ed28f94864680454090584bac4, type: 2}
+    - target: {fileID: 8522391017935463820, guid: a345f673d2230134680375d3ac1d9559, type: 3}
+      propertyPath: skills.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 4284667cabd4f054796633b6722626b1, type: 2}
+    - target: {fileID: 8522391017935463820, guid: a345f673d2230134680375d3ac1d9559, type: 3}
+      propertyPath: characterStatsDefinition
+      value: 
+      objectReference: {fileID: 11400000, guid: 7ea7a417acd57ab41baa2df352edc074, type: 2}
     - target: {fileID: 9065858292567471612, guid: a345f673d2230134680375d3ac1d9559, type: 3}
       propertyPath: m_IsActive
       value: 0
