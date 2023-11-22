@@ -1,3 +1,4 @@
+using CompanyStats;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -7,7 +8,7 @@ using UnityEngine;
 /*
  * Clase para m�todos gen�ricos en cualquier Controlador de enemigo.
  */
-public class EnemyController : Characters.CharacterController
+public class EnemyController : CompanyCharacterController
 {
     //protected new EnemyMutableModel model { get; set; }
 
@@ -25,17 +26,17 @@ public class EnemyController : Characters.CharacterController
     protected async Task SetModel(CharacterMutableModel model)
     {
         this.model = model;
-        this.model.Setup(statsDefinitions);
+        this.model.Setup(characterStatsDefinition);
         //model = new EnemyMutableModel();
         //model.Setup(statsDefinitions);
     }
 
-    public override float GetMyRealDamage()
+    /*public override float GetMyRealDamage()
     {
         throw new System.NotImplementedException();
-    }
+    }*/
 
-    public override void ChangeRealHealth(StatModificator statModificator)
+    /*public override void ChangeRealHealth(StatModificator statModificator)
     {
         if(statModificator.Value < 0)
         {
@@ -45,24 +46,18 @@ public class EnemyController : Characters.CharacterController
         {
             Debug.Log("TODO -> Heal");
         }
-        /*statModificator = model.PerformRealHealthChange(statModificator);
+    }*/
 
-        if (!statModificator.IsAlive)
-        {
-            Destroy(transform.gameObject);
-        }*/
-    }
-
-    public override void ProcessDamage(StatModificator statModificator)
+    public override void ApplyDamage(Strike strike)
     {
-        //StatModificator statModificator = new StatModificator(StatsEnum.HEALTH, value, false, false);
-        statModificator = model.PerformRealHealthChange(statModificator);
-        //model.Health -= value;
+        Debug.Log("Health before damage = " + model.GetStatValue(StatNames.HEALTH, StatParts.ACTUAL_VALUE));
+        bool isAlive = model.ApplyDamage(strike);
+        Debug.Log("Applied an attack of: " + strike.FinalValue + " points");
+        Debug.Log("Health after damage = " + model.GetStatValue(StatNames.HEALTH, StatParts.ACTUAL_VALUE));
 
-        Debug.Log("I have received a damage of " + statModificator.Value);
-        Debug.Log("Actual life = " + model.GetStatValue(StatsEnum.HEALTH));
-        if (!statModificator.IsAlive)
+        if (!isAlive)
         {
+            Debug.Log("TODO -> Behaviour when dies.");
             Destroy(transform.gameObject);
         }
     }

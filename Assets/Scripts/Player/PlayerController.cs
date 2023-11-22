@@ -2,8 +2,9 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 using System.Linq;
+using CompanyStats;
 
-public class PlayerController : Characters.CharacterController//<PlayerMutableModel>
+public class PlayerController : CompanyCharacterController//<PlayerMutableModel>
 {
     private PlayerController instance;
     /*private new PlayerMutableModel model;
@@ -124,40 +125,43 @@ public class PlayerController : Characters.CharacterController//<PlayerMutableMo
     private async Task SetModel()
     {
         model = new PlayerMutableModel(tree);
-        //await new WaitForSeconds(1.0f);
-        model.Setup(statsDefinitions);
+        model.Setup(characterStatsDefinition);
         GameManager.Instance.GameModel.PlayerModel = model as PlayerMutableModel;
     }
-    public override void ProcessDamage(StatModificator statModificator)
+    public override void ApplyDamage(Strike strike)
     {
-        Debug.Log("ProcessDamage in player");
+        Debug.Log("Health before damage = " + model.GetStatValue(StatNames.HEALTH, StatParts.ACTUAL_VALUE));
+        bool isAlive = model.ApplyDamage(strike);
+        Debug.Log("Applied an attack of: " + strike.FinalValue + " points");
+        Debug.Log("Health after damage = " + model.GetStatValue(StatNames.HEALTH, StatParts.ACTUAL_VALUE));
+
+        if (!isAlive)
+        {
+            Debug.Log("TODO -> Behaviour when dies. Maybe should override method if enemy or player");
+        }
     }
 
-    public override float GetMyRealDamage()
+    /*public override float GetMyRealDamage()
     {
-        /**
-         * TODO 
-         * Calcular correctamente el da�o.
-         */
         Debug.Log("My real damage = " + model.GetStatValue(StatsEnum.ATTACK));
         return model.GetStatValue(StatsEnum.ATTACK);
-    }
+    }*/
 
-    public async Task UseSkills(PlayerEnumSkills skillName, Characters.CharacterController target)
+    public async Task UseSkills(List<SkillDefinition> skillName, CompanyCharacterController target)
     {
         foreach(SkillDefinition sd in skills)
         {
             await new WaitForSeconds(2);
             //Instant, During, Over
-            sd.ProcessSkill(this, target);
+            //sd.ProcessSkill(this, target);
             //Permanent
-            sd.ProcessSkill(this);
+            //sd.ProcessSkill(this);
         }
 
         
     }
 
-    public async Task UseSkill(PlayerEnumSkills skillName, Characters.CharacterController target)
+    public async Task UseSkill(SkillDefinition skillName, CompanyCharacterController target)
     {
         Debug.Log("Using: " + skillName);
         SkillDefinition skill = skills.Where(s => s.name.Equals(skillName)).FirstOrDefault();
@@ -170,9 +174,9 @@ public class PlayerController : Characters.CharacterController//<PlayerMutableMo
         }*/
 
         //skill.ProcessSkill(this);
-        skill.ProcessSkill(this, target);
+        //skill.ProcessSkill(this, target);
         //Debug.Log(model.MaxHealth);
-        Debug.Log(model.GetStatValue(StatsEnum.HEALTH));
+        //Debug.Log(model.GetStatValue(StatsEnum.HEALTH));
     }
 
     /*public void ProcessDamage(float value)

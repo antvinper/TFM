@@ -1,3 +1,4 @@
+using CompanyStats;
 using Newtonsoft.Json;
 using System.Collections;
 using System.Collections.Generic;
@@ -23,7 +24,7 @@ public class TreeSlotDefinition : ScriptableObject
         set => isActive = value;
     }
 
-    public async Task ProcessSlotActivation(Characters.CharacterController target)
+    public async Task ProcessSlotActivation(CompanyCharacterController target)
     {
         foreach(InstantEffectPermanent effect in effects)
         {
@@ -32,11 +33,11 @@ public class TreeSlotDefinition : ScriptableObject
         isActive = true;
     }
 
-    public async Task ProcessSlotDeActivation()
+    public async Task ProcessSlotDeActivation(CompanyCharacterController target)
     {
         foreach (InstantEffectPermanent effect in effects)
         {
-            effect.RemoveEffect();
+            effect.RemoveEffect(target);
         }
         isActive = false;
     }

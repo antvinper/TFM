@@ -1,3 +1,4 @@
+using CompanyStats;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -38,8 +39,8 @@ public class EffectItem : Item
         return effect.IsValueInPercentage;
     }
 
-    public void UseItem(Characters.CharacterController target)
+    public void UseItem(CompanyCharacterController target)
     {
-        effect.ProcessEffect(target);
+        effect.ProcessEffect(target, target);
     }
 }

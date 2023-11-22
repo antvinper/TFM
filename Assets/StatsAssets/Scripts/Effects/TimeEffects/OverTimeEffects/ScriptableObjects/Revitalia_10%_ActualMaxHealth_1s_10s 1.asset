@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e66f751f6d8098a4bb6d0d678c70983f, type: 3}
+  m_Name: Revitalia_10%_ActualMaxHealth_1s_10s 1
+  m_EditorClassIdentifier: 
+  effectName: Revitalia_10%_ActualMaxHealth_1s_10s 1
+  effectType: 2
+  description: 
+  applyOnSelf: 1
+  isStatIncremented: 1
+  statAffected: 0
+  statPart: 1
+  isValueInPercentage: 1
+  statWhatToSee: 0
+  isTheOwnerStat: 0
+  statWhatToSeeStatPart: 2
+  valueInPercentage: 10
+  value: 15
+  effectLifeTime: 10
+  timesApplied: 2
+  timeBetweenApplyEffect: 1

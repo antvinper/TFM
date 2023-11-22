@@ -36,7 +36,7 @@ public class BasicComboDefinition : ComboDefinition
         return activated;
     }
 
-    public async Task UseSkill(Characters.CharacterController owner, Characters.CharacterController target)
+    public async Task UseSkill(CompanyCharacterController owner, CompanyCharacterController target)
     {
         skills[actualIndex++].ProcessSkill(owner, target);
         if (weaponController.ActualIndex == buttons.Length)

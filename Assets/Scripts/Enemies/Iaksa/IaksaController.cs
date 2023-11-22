@@ -9,7 +9,6 @@ public class IaksaController : EnemyController
 
     [SerializeField] private Rigidbody rb;
     [SerializeField] private Animator animator;
-    [SerializeField] private DuringTimeEffectDefinition effect;
 
     private float latestChangeTime;
     private readonly float changeTime = 3f;

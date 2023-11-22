@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d446c1fd301a8fe42ac37df0911aee5b, type: 3}
+  m_Name: Increment_10%_Attack_From_Speed
+  m_EditorClassIdentifier: 
+  effectName: Increment_10%_Attack_From_Speed
+  effectType: 17
+  description: 
+  applyOnSelf: 1
+  isStatIncremented: 1
+  statAffected: 2
+  statPart: 1
+  isValueInPercentage: 1
+  statWhatToSee: 6
+  isTheOwnerStat: 1
+  statWhatToSeeStatPart: 1
+  valueInPercentage: 10
+  value: 0

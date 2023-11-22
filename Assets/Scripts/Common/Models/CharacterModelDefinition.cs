@@ -1,3 +1,4 @@
+using CompanyStats;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,12 +7,12 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Character Model Definition", menuName = "Characters/CharacterModelDefinition")]
 public class CharacterModelDefinition : ScriptableObject
 {
-    [SerializeField] private StatsDefinition statsDefinitions;
+    [SerializeField] private CharacterStatsDefinition characterStatsDefinitions;
     [SerializeField] private StatsTree tree;
 
-    public StatsDefinition StatsDefinitions
+    public CharacterStatsDefinition CharacterStatsDefinitions
     {
-        get { return statsDefinitions; }
+        get { return characterStatsDefinitions; }
     }
     public StatsTree Tree
     {

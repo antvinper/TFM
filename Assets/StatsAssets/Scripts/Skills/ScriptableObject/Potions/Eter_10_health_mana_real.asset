@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f097c9abb95d1d949bc93b53fa7cde90, type: 3}
+  m_Name: Eter_10_health_mana_real
+  m_EditorClassIdentifier: 
+  name: Eter
+  description: Heal 10 points of actual health
+  temporalInstantEffects:
+  - {fileID: 11400000, guid: d02b53e73f10ac847b1ceaaadd770486, type: 2}
+  permanentInstantEffects: []
+  overTimeEffects: []
+  duringTimeEffects: []
