@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace CompanyStats
 {
@@ -62,29 +63,94 @@ namespace CompanyStats
         [SerializeField] private int value;
 
         #endregion
-
         protected bool hasBeenApplied = false;
+        [JsonProperty]
         public bool HasBeenApplied { get => hasBeenApplied; set => hasBeenApplied = value; }
 
-        public string EffectName => effectName;
-        public EffectTypesEnum EffectType => effectType;
+        [JsonProperty]
+        public string EffectName
+        {
+            get => effectName;
+            set => effectName = value;
+        }
+        [JsonProperty]
+        public EffectTypesEnum EffectType
+        {
+            get => effectType;
+            set => effectType = value;
+        }
 
-        public string Description => description;
+        [JsonProperty]
+        public string Description
+        {
+            get => description;
+            set => description = value;
+        }
 
-        public bool ApplyOnSelf => applyOnSelf;
+        [JsonProperty]
+        public bool ApplyOnSelf
+        {
+            get => applyOnSelf;
+            set => applyOnSelf = value;
+        }
 
-        public bool IsStatIncremented => isStatIncremented;
+        [JsonProperty]
+        public bool IsStatIncremented
+        {
+            get => isStatIncremented;
+            set => isStatIncremented = value;
+        }
 
-        public StatNames StatAffected => statAffected;
-        public StatParts StatPart => statPart;
-        public StatParts StatWhatToSeeStatPart => statWhatToSeeStatPart;
+        [JsonProperty]
+        public StatNames StatAffected
+        {
+            get => statAffected;
+            set => statAffected = value;
+        }
+        [JsonProperty]
+        public StatParts StatPart
+        {
+            get => statPart;
+            set => statPart = value;
+        }
+        [JsonProperty]
+        public StatParts StatWhatToSeeStatPart
+        {
+            get => statWhatToSeeStatPart;
+            set => statWhatToSeeStatPart = value;
+        }
+        [JsonProperty]
+        public int Value
+        {
+            get => value;
+            set => this.value = value;
+        }
+        [JsonProperty]
+        public bool IsValueInPercentage
+        {
+            get => isValueInPercentage;
+            set => isValueInPercentage = value;
+        }
+        [JsonProperty]
+        public int ValueInPercentage
+        {
+            get => valueInPercentage;
+            set => valueInPercentage = value;
+        }
 
-        public int Value => value;
-        public bool IsValueInPercentage => isValueInPercentage;
-        public int ValueInPercentage => valueInPercentage;
-        public bool IsTheOwnerStat => isTheOwnerStat;
-        public StatNames StatWhatToSee => statWhatToSee;
-        
+        [JsonProperty]
+        public bool IsTheOwnerStat
+        {
+            get => isTheOwnerStat;
+            set => isTheOwnerStat = value;
+        }
+        [JsonProperty]
+        public StatNames StatWhatToSee
+        {
+            get => statWhatToSee;
+            set => statWhatToSee = value;
+        }
+
         public int GetRealValue()
         {
             int realValue = value;

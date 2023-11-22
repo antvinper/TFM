@@ -55,7 +55,7 @@ public class PlayerController : CompanyCharacterController//<PlayerMutableModel>
          * Refactor all the Start Method
          */
         GameManager.Instance.SetPlayerController(this);
-        SetModel();
+        //SetNewModel();
 
         //Obtener del modelo la cantidad de rupias y fragmentos que tiene
         this.rupees = new Rupee(model.Rupees);
@@ -124,7 +124,13 @@ public class PlayerController : CompanyCharacterController//<PlayerMutableModel>
         GetActiveCombos();
     }
 
-    private async Task SetModel()
+    public async Task SetModel(PlayerMutableModel model)
+    {
+        this.model = model;
+        this.model.Setup(characterStatsDefinition);
+    }
+
+    public async Task SetNewModel()
     {
         model = new PlayerMutableModel(tree);
         model.Setup(characterStatsDefinition);

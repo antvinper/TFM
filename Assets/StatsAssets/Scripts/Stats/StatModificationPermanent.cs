@@ -9,6 +9,7 @@ namespace CompanyStats
     public class StatModificationPermanent
     {
         [JsonIgnore] private Guid id;
+        [JsonIgnore] private string name;
         [JsonIgnore] private bool isStatIncremented;
         [JsonIgnore] private StatNames statAffected;
         [JsonIgnore] private StatParts statPart;
@@ -19,8 +20,14 @@ namespace CompanyStats
         [JsonIgnore] private int valueInPercentage;
         [JsonIgnore] private int value;
 
+        public StatModificationPermanent()
+        {
+
+        }
+
         public StatModificationPermanent(InstantEffectPermanentDefinition permanentEffect)
         {
+            name = permanentEffect.EffectName;
             isStatIncremented = permanentEffect.IsStatIncremented;
             statAffected = permanentEffect.StatAffected;
             statPart = permanentEffect.StatPart;
@@ -36,51 +43,61 @@ namespace CompanyStats
         public Guid Id
         {
             get => id;
+            set => id = value;
         }
         [JsonProperty]
         public bool IsStatIncremented
         {
             get => isStatIncremented;
+            set => isStatIncremented = value;
         }
         [JsonProperty]
         public bool IsValueInPercentage
         {
             get => isValueInPercentage;
+            set => isValueInPercentage = value;
         }
         [JsonProperty]
         public bool IsTheOwnerStat
         {
             get => isTheOwnerStat;
+            set => isTheOwnerStat = value;
         }
         [JsonProperty]
         public StatNames StatAffected
         {
             get => statAffected;
+            set => statAffected = value;
         }
         [JsonProperty]
         public StatNames StatWhatToSee
         {
             get => statWhatToSee;
+            set => statWhatToSee = value;
         }
         [JsonProperty]
         public StatParts StatPart
         {
             get => statPart;
+            set => statPart = value;
         }
         [JsonProperty]
         public StatParts StatWhatToSeeStatPart
         {
             get => statWhatToSeeStatPart;
+            set => statWhatToSeeStatPart = value;
         }
         [JsonProperty]
         public int ValueInPercentage
         {
             get => valueInPercentage;
+            set => valueInPercentage = value;
         }
         [JsonProperty]
         public int Value
         {
             get => value;
+            set => this.value = value;
         }
 
         public int GetRealValue()

@@ -25,6 +25,14 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
     public void SetPlayerController(PlayerController playerController)
     {
+        if (dataPersistenceManager.IsDataLoaded)
+        {
+            playerController.SetModel(GameModel.PlayerModel);
+        }
+        else
+        {
+            playerController.SetNewModel();
+        }
         this.playerController = playerController;
     }
     public PlayerController GetPlayerController()
@@ -37,16 +45,17 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         dataPersistenceManager = new DataPersistenceManager();
 
 
-        //LoadData();
-        //NewGame();
+        //LoadDataTesting();
+        //NewGame(99);
     }
 
 
     public void NewGame(int slotIndex)
     {
+
         dataPersistenceManager.NewGame(slotIndex);
         isGameStarted = true;
-        SceneManager.Instance.LoadLobbyScene();
+        //SceneManager.Instance.LoadLobbyScene();
     }
 
     public bool IsGameStarted
@@ -87,10 +96,10 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         }
     }
 
-    public void LoadData()
+    public void LoadDataTesting()
     {
         string fileName = "GameName_SaveData_";
-        string slot = "0";
+        string slot = "99";
         isGameStarted = true;
         LoadData(fileName + slot);
     }

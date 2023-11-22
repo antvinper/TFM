@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: TreeSlot_10Attack
   m_EditorClassIdentifier: 
   effects:
-  - {fileID: 11400000, guid: fc0d81d4e7e30284ab382e7c48a58af9, type: 2}
+  - {fileID: 11400000, guid: 17e04ae0294c1cc47a7e8f6a01cf5e79, type: 2}
+  isActive: 0

@@ -8,7 +8,9 @@ public class DataPersistenceManager// : Singleton<DataPersistenceManager>
     public string fileName;
     public GameModel gameModel;
     private FileDataHandler dataHandler;
-
+    private bool isDataLoaded = false;
+    
+    public bool IsDataLoaded { get => isDataLoaded; }
     public DataPersistenceManager()
     {
         fileName = "GameName_SaveData";
@@ -44,6 +46,10 @@ public class DataPersistenceManager// : Singleton<DataPersistenceManager>
     public async Task LoadGame(string fileName)
     {
         this.gameModel = await GetDataByFileName(fileName);
+        if(this.gameModel != null)
+        {
+            isDataLoaded = true;
+        }
     }
 
     /*

@@ -21,7 +21,8 @@ public class CharacterMutableModel// : ICharacterModel
     {
         get => instantStatsModifyPermanent;
     }*/
-    private List<StatModificationPermanent> statsModificationPermanent;
+    [JsonIgnore] private List<StatModificationPermanent> statsModificationPermanent;
+    [JsonIgnore] protected List<StatModificationPermanent> statsModificationPermanentFromTree;
     //private List<Stat> instantStatsModifyPercentageInRun;
 
     [JsonIgnore] private List<OverTimeEffectDefinition> overTimeEffects;
@@ -46,14 +47,25 @@ public class CharacterMutableModel// : ICharacterModel
         get => soulFragments;
         set => soulFragments = value;
     }
+    [JsonProperty]
+    public List<StatModificationPermanent> StatsModificationPermanent
+    {
+        get => statsModificationPermanent;
+        set => statsModificationPermanent = value;
+    }
+     
 
-    public void Setup(CharacterStatsDefinition characterStatsDefinition)
+    public virtual void Setup(CharacterStatsDefinition characterStatsDefinition)
     {
         this.characterStatsDefinition = characterStatsDefinition;
         stats = new List<Stat>();
         overTimeEffects = new List<OverTimeEffectDefinition>();
         duringTimeEffects = new List<DuringTimeEffectDefinition>();
-        statsModificationPermanent = new List<StatModificationPermanent>();
+        if(statsModificationPermanent == null)
+        {
+            statsModificationPermanent = new List<StatModificationPermanent>();
+        }
+        
         //permanentEffects = new List<InstantEffectPermanentDefinition>();
         temporallyEffects = new List<InstantEffectTemporallyDefinition>();
         /*baseStats = new List<Stat>();
@@ -65,7 +77,10 @@ public class CharacterMutableModel// : ICharacterModel
         {
             Stat stat = new Stat(sd.name, sd.value, sd.actualMaxValue, sd.maxValue, sd.minValue, sd.isVolatil);
             stats.Add(stat);
-
+            CalculateStat(sd.name, StatParts.MIN_VALUE);
+            CalculateStat(sd.name, StatParts.MAX_VALUE);
+            CalculateStat(sd.name, StatParts.ACTUAL_MAX_VALUE);
+            CalculateStat(sd.name, StatParts.ACTUAL_VALUE);
             /*baseStats.Add(new Stat(sd.name, sd.maxValue, sd.minValue, sd.value, sd.actualMaxValue));
 
             instantStatsModifyInRun.Add(new Stat(sd.name));
@@ -80,6 +95,7 @@ public class CharacterMutableModel// : ICharacterModel
     }
     public int GetStatValue(StatNames statName, StatParts statPart)
     {
+        //CalculateStat(statName, statPart);
         int value = 0;
         Stat stat = GetStatFromName(statName);
 
@@ -140,6 +156,18 @@ public class CharacterMutableModel// : ICharacterModel
             ChangeStat(statModificationPermanentRealValue);
         }
 
+        if(statsModificationPermanentFromTree != null)
+        {
+            List<StatModificationPermanent> statsModificationPermanentRealValueFromTree = statsModificationPermanentFromTree.Where(e => e.StatAffected.Equals(statName) && !e.IsValueInPercentage).ToList();
+            foreach (StatModificationPermanent statModificationPermanentRealValue in statsModificationPermanentRealValueFromTree)
+            {
+
+                notPercentualValue += statModificationPermanentRealValue.GetRealValue();
+                ChangeStat(statModificationPermanentRealValue);
+            }
+        }
+        
+
         /*
          * 2º Se calculan los cambios temporales no porcentuales
          */
@@ -161,6 +189,17 @@ public class CharacterMutableModel// : ICharacterModel
             //percentualValue += permanentEffect.GetRealValue();
             ChangeStat(permanentEffect);
         }
+
+        if(statsModificationPermanentFromTree != null)
+        {
+            List<StatModificationPermanent> statsModificationPermanentPercentageValueFromTree = statsModificationPermanentFromTree.Where(e => e.StatAffected.Equals(statName) && e.IsValueInPercentage).ToList();
+            foreach (StatModificationPermanent statModificationPermanentRealValue in statsModificationPermanentPercentageValueFromTree)
+            {
+                statModificationPermanentRealValue.CalculateRealPercentage(GetStatValue(statModificationPermanentRealValue.StatWhatToSee, statModificationPermanentRealValue.StatWhatToSeeStatPart));
+                ChangeStat(statModificationPermanentRealValue);
+            }
+        }
+        
 
         /*
          * 4º Se calculan los cambios temporales porcentuales
