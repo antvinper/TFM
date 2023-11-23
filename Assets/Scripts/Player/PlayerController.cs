@@ -28,6 +28,8 @@ public class PlayerController : CompanyCharacterController//<PlayerMutableModel>
      */
     //public Characters.CharacterController enemy;
 
+    StatsCanvasSupport statsCanvas;
+
     private void Awake()
     {
         if (instance != null && instance != this)
@@ -90,8 +92,37 @@ public class PlayerController : CompanyCharacterController//<PlayerMutableModel>
         //UseSkill(PlayerEnumSkills.DEFFENSE_DOWN, enemy);
         //GetRoomRewards();
 
-        ApplySkill();
+        //ApplySkill();
+
+
+        statsCanvas = FindObjectOfType<StatsCanvasSupport>();
+        WriteStats();
+        ActiveSlotTree(1);
     }
+
+    //TODO to erase
+    private void WriteStats()
+    {
+        statsCanvas.statsPanelSupport.healthText.text = StatNames.HEALTH + ": " + model.GetStatValue(StatNames.HEALTH, StatParts.ACTUAL_VALUE);
+        statsCanvas.statsPanelSupport.manaText.text = StatNames.MANA + ": " + model.GetStatValue(StatNames.MANA, StatParts.ACTUAL_VALUE);
+        statsCanvas.statsPanelSupport.attackText.text = StatNames.ATTACK + ": " + model.GetStatValue(StatNames.ATTACK, StatParts.ACTUAL_VALUE);
+        statsCanvas.statsPanelSupport.magicalAttackText.text = StatNames.MAGICAL_ATTACK + ": " + model.GetStatValue(StatNames.MAGICAL_ATTACK, StatParts.ACTUAL_VALUE);
+        statsCanvas.statsPanelSupport.defenseText.text = StatNames.DEFENSE + ": " + model.GetStatValue(StatNames.DEFENSE, StatParts.ACTUAL_VALUE);
+        statsCanvas.statsPanelSupport.magicalDefenseText.text = StatNames.MAGICAL_DEFENSE + ": " + model.GetStatValue(StatNames.MAGICAL_DEFENSE, StatParts.ACTUAL_VALUE);
+        statsCanvas.statsPanelSupport.speedText.text = StatNames.SPEED + ": " + model.GetStatValue(StatNames.SPEED, StatParts.ACTUAL_VALUE);
+        statsCanvas.statsPanelSupport.evasionText.text = StatNames.EVASION + ": " + model.GetStatValue(StatNames.EVASION, StatParts.ACTUAL_VALUE);
+        statsCanvas.statsPanelSupport.critChanceText.text = StatNames.CRIT_CHANCE + ": " + model.GetStatValue(StatNames.CRIT_CHANCE, StatParts.ACTUAL_VALUE);
+        statsCanvas.statsPanelSupport.dodgeChanceText.text = StatNames.DODGE_CHANCE + ": " + model.GetStatValue(StatNames.DODGE_CHANCE, StatParts.ACTUAL_VALUE);
+    }
+
+    public async Task ActiveSlotTree(int index)
+    {
+        await new WaitForSeconds(2.0f);
+        PlayerMutableModel model = this.model as PlayerMutableModel;
+        model.ProcessSlotTreeActivation(index);
+        WriteStats();
+    }
+
     public void AddRupees(int value)
     {
         this.rupees.AddAmount(value);
@@ -147,6 +178,7 @@ public class PlayerController : CompanyCharacterController//<PlayerMutableModel>
         {
             Debug.Log("TODO -> Behaviour when dies. Maybe should override method if enemy or player");
         }
+        WriteStats();
     }
 
     /*public override float GetMyRealDamage()

@@ -16,9 +16,9 @@ using UnityEngine;
             set => model = value;
         }
 
-        public bool TryAddEffect(EffectDefinition effectDefinition, CompanyCharacterController effectOwner)
+        public bool TryAddEffect(EffectDefinition effectDefinition, CompanyCharacterController effectOwner, bool isFromTree = false, int index = -1)
         {
-            return this.model.TryAddEffect(effectDefinition);
+            return this.model.TryAddEffect(effectDefinition, isFromTree, index);
         }
 
         public bool TryRemoveEffect(EffectDefinition effectDefinition)

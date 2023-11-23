@@ -13,26 +13,17 @@ public class CharacterMutableModel// : ICharacterModel
 
     private int soulFragments;
     private int rupees;
+    
+    protected List<TreeForModelStruct> treeForModelStructs;
 
+    [JsonIgnore] protected List<StatModificationPermanent> statsModificationPermanent;
 
-    /*private List<Stat> instantStatsModifyPermanent;
-    [JsonProperty]
-    public List<Stat> InstantStatsModifyPermanent
-    {
-        get => instantStatsModifyPermanent;
-    }*/
-    [JsonIgnore] private List<StatModificationPermanent> statsModificationPermanent;
-    [JsonIgnore] protected List<StatModificationPermanent> statsModificationPermanentFromTree;
-    //private List<Stat> instantStatsModifyPercentageInRun;
-
-    [JsonIgnore] private List<OverTimeEffectDefinition> overTimeEffects;
-    [JsonIgnore] private List<DuringTimeEffectDefinition> duringTimeEffects;
-    //[JsonIgnore] private List<InstantEffectPermanentDefinition> permanentEffects;
-    [JsonIgnore] private List<InstantEffectTemporallyDefinition> temporallyEffects;
+    [JsonIgnore] protected List<OverTimeEffectDefinition> overTimeEffects;
+    [JsonIgnore] protected List<DuringTimeEffectDefinition> duringTimeEffects;
+    [JsonIgnore] protected List<InstantEffectTemporallyDefinition> temporallyEffects;
 
     [JsonIgnore] public List<OverTimeEffectDefinition> OverTimeEffects { get => overTimeEffects; }
     [JsonIgnore] public List<DuringTimeEffectDefinition> DuringTimeEffects { get => duringTimeEffects; }
-    //[JsonIgnore] public List<InstantEffectPermanentDefinition> PermanentEffects { get => permanentEffects; }
     [JsonIgnore] public List<InstantEffectTemporallyDefinition> TemporallyEffects { get => temporallyEffects; }
 
     [JsonProperty]
@@ -66,26 +57,24 @@ public class CharacterMutableModel// : ICharacterModel
             statsModificationPermanent = new List<StatModificationPermanent>();
         }
         
-        //permanentEffects = new List<InstantEffectPermanentDefinition>();
         temporallyEffects = new List<InstantEffectTemporallyDefinition>();
-        /*baseStats = new List<Stat>();
-        instantStatsModifyPermanent = new List<Stat>();
-        instantStatsModifyInRun = new List<Stat>();
-        instantStatsModifyPercentageInRun = new List<Stat>();*/
 
         foreach(StatDefinition sd in characterStatsDefinition.statsDefinition.stats)
         {
             Stat stat = new Stat(sd.name, sd.value, sd.actualMaxValue, sd.maxValue, sd.minValue, sd.isVolatil);
             stats.Add(stat);
-            CalculateStat(sd.name, StatParts.MIN_VALUE);
-            CalculateStat(sd.name, StatParts.MAX_VALUE);
-            CalculateStat(sd.name, StatParts.ACTUAL_MAX_VALUE);
-            CalculateStat(sd.name, StatParts.ACTUAL_VALUE);
-            /*baseStats.Add(new Stat(sd.name, sd.maxValue, sd.minValue, sd.value, sd.actualMaxValue));
+        }
+        CalculateStats();
+    }
 
-            instantStatsModifyInRun.Add(new Stat(sd.name));
-            instantStatsModifyPercentageInRun.Add(new Stat(sd.name));
-            instantStatsModifyPermanent.Add(new Stat(sd.name));*/
+    protected void CalculateStats()
+    {
+        foreach(Stat stat in stats)
+        {
+            CalculateStat(stat.StatName, StatParts.MIN_VALUE);
+            CalculateStat(stat.StatName, StatParts.MAX_VALUE);
+            CalculateStat(stat.StatName, StatParts.ACTUAL_MAX_VALUE);
+            CalculateStat(stat.StatName, StatParts.ACTUAL_VALUE);
         }
     }
 
@@ -95,7 +84,6 @@ public class CharacterMutableModel// : ICharacterModel
     }
     public int GetStatValue(StatNames statName, StatParts statPart)
     {
-        //CalculateStat(statName, statPart);
         int value = 0;
         Stat stat = GetStatFromName(statName);
 
@@ -118,13 +106,7 @@ public class CharacterMutableModel// : ICharacterModel
         return value;
     }
 
-    /**
-     * 2 opciones:
-     * - Calcular los stats cada vez que se quiera obtener uno. Más pesado
-     * - Calcular los stats cada vez que se añade un efecto.
-     * MAKE IT PRIVATE!
-     */
-    public void CalculateStat(StatNames statName, StatParts statPart)
+    public virtual void CalculateStat(StatNames statName, StatParts statPart)
     {
         GetStatFromName(statName).ResetStat();
 
@@ -134,97 +116,41 @@ public class CharacterMutableModel// : ICharacterModel
          * 2º Calcular valor añadido no porcentual de los time effects
          * 3º Calcular valor añadido porcentual (en porcentaje) permanente y temporal
          * 4º Calcular valor añadido porcentual de los time effects
-         * 
-         * 5º Sumar todos los no porcentuales
-         * 6º Sumar todos los porcentuales
-         * 
-         * 7º añadir los no porcentuales
-         * 8º añadir los porcentuales
          */
-        int notPercentualValue = 0;
-        int percentualValue = 0;
 
 
         /*
          * 1º se calculan los cambios permanentes no porcentuales
          */
-        List<StatModificationPermanent> statsModificationPermanentRealValue = statsModificationPermanent.Where(e => e.StatAffected.Equals(statName) && !e.IsValueInPercentage).ToList();
-        foreach (StatModificationPermanent statModificationPermanentRealValue in statsModificationPermanentRealValue)
-        {
+        CalculateNotPercentualPermanents(statName);
 
-            notPercentualValue += statModificationPermanentRealValue.GetRealValue();
-            ChangeStat(statModificationPermanentRealValue);
-        }
-
-        if(statsModificationPermanentFromTree != null)
-        {
-            List<StatModificationPermanent> statsModificationPermanentRealValueFromTree = statsModificationPermanentFromTree.Where(e => e.StatAffected.Equals(statName) && !e.IsValueInPercentage).ToList();
-            foreach (StatModificationPermanent statModificationPermanentRealValue in statsModificationPermanentRealValueFromTree)
-            {
-
-                notPercentualValue += statModificationPermanentRealValue.GetRealValue();
-                ChangeStat(statModificationPermanentRealValue);
-            }
-        }
-        
 
         /*
          * 2º Se calculan los cambios temporales no porcentuales
          */
-        List<InstantEffectTemporallyDefinition> tempEffectsRealValue = temporallyEffects.Where(e => e.StatAffected.Equals(statName) && !e.IsValueInPercentage).ToList();
-        foreach (InstantEffectTemporallyDefinition temporallyEffect in tempEffectsRealValue)
-        {
-            //notPercentualValue += temporallyEffect.GetRealValue();
-            ChangeStat(temporallyEffect);
-        }
+        CalculateNotPercentualTemporally(statName);
 
         /*
          * 3º se calculan los cambios permanentes porcentuales
          */
-        List<StatModificationPermanent> permEffectsPercentageValue = statsModificationPermanent.Where(e => e.StatAffected.Equals(statName) && e.IsValueInPercentage).ToList();
-        foreach (StatModificationPermanent permanentEffect in permEffectsPercentageValue)
-        {
-            //TODO Mejora: Poder incrementar porcentualmente en función de otros stats (StatWhatToSee)
-            permanentEffect.CalculateRealPercentage(GetStatValue(permanentEffect.StatWhatToSee, permanentEffect.StatWhatToSeeStatPart));
-            //percentualValue += permanentEffect.GetRealValue();
-            ChangeStat(permanentEffect);
-        }
-
-        if(statsModificationPermanentFromTree != null)
-        {
-            List<StatModificationPermanent> statsModificationPermanentPercentageValueFromTree = statsModificationPermanentFromTree.Where(e => e.StatAffected.Equals(statName) && e.IsValueInPercentage).ToList();
-            foreach (StatModificationPermanent statModificationPermanentRealValue in statsModificationPermanentPercentageValueFromTree)
-            {
-                statModificationPermanentRealValue.CalculateRealPercentage(GetStatValue(statModificationPermanentRealValue.StatWhatToSee, statModificationPermanentRealValue.StatWhatToSeeStatPart));
-                ChangeStat(statModificationPermanentRealValue);
-            }
-        }
-        
+        CalculatePercentualPermanents(statName);
 
         /*
          * 4º Se calculan los cambios temporales porcentuales
          */
-        List<InstantEffectTemporallyDefinition> tempEffectsPercentValue = temporallyEffects.Where(e => e.StatAffected.Equals(statName) && e.IsValueInPercentage).ToList();
-        foreach (InstantEffectTemporallyDefinition temporallyEffect in tempEffectsPercentValue)
-        {
-            temporallyEffect.CalculateRealPercentage();
-            ChangeStat(temporallyEffect);
-        }
+        CalculatePercentualTemporally(statName);
 
         /*
          * 5º Se calculan los Duringtimeffect cambios temporales
          */
-        foreach (DuringTimeEffectDefinition duringTimeEffect in duringTimeEffects)
-        {
-            if (duringTimeEffect.IsValueInPercentage)
-            {
-                duringTimeEffect.CalculateRealPercentage();
-            }
-            ChangeStat(duringTimeEffect);
-        }
+        CalculateDuringTimeEffects();
 
-        /*
+        /* TODO
          * 7º Se calculan los Overtimeffect cambios temporales
+         * Conviene usarlo para, por ejemplo, reducir la velocidad de golpe 10 puntos,
+         * e ir incrementándola poco a poco hasta volver a la original. Esto se haría
+         * combinando un instant effect temporally que reduzca 10 puntos
+         * junto con un overtimeEffect que vaya aumentando cada x tiempo y puntos.
          */
         /*foreach (OverTimeEffectDefinition overTimeEffect in overTimeEffects)
         {
@@ -239,14 +165,64 @@ public class CharacterMutableModel// : ICharacterModel
         }*/
     }
 
+    protected void CalculateDuringTimeEffects()
+    {
+        foreach (DuringTimeEffectDefinition duringTimeEffect in duringTimeEffects)
+        {
+            if (duringTimeEffect.IsValueInPercentage)
+            {
+                duringTimeEffect.CalculateRealPercentage();
+            }
+            ChangeStat(duringTimeEffect);
+        }
+    }
+
+    protected void CalculatePercentualTemporally(StatNames statName)
+    {
+        List<InstantEffectTemporallyDefinition> tempEffectsPercentValue = temporallyEffects.Where(e => e.StatAffected.Equals(statName) && e.IsValueInPercentage).ToList();
+        foreach (InstantEffectTemporallyDefinition temporallyEffect in tempEffectsPercentValue)
+        {
+            temporallyEffect.CalculateRealPercentage();
+            ChangeStat(temporallyEffect);
+        }
+    }
+
+
+    protected void CalculatePercentualPermanents(StatNames statName)
+    {
+        List<StatModificationPermanent> permEffectsPercentageValue = statsModificationPermanent.Where(e => e.StatAffected.Equals(statName) && e.IsValueInPercentage).ToList();
+        foreach (StatModificationPermanent permanentEffect in permEffectsPercentageValue)
+        {
+            //TODO Mejora: Poder incrementar porcentualmente en función de otros stats (StatWhatToSee)
+            permanentEffect.CalculateRealPercentage(GetStatValue(permanentEffect.StatWhatToSee, permanentEffect.StatWhatToSeeStatPart));
+            ChangeStat(permanentEffect);
+        }
+    }
+
+    protected void CalculateNotPercentualTemporally(StatNames statName)
+    {
+        List<InstantEffectTemporallyDefinition> tempEffectsRealValue = temporallyEffects.Where(e => e.StatAffected.Equals(statName) && !e.IsValueInPercentage).ToList();
+        foreach (InstantEffectTemporallyDefinition temporallyEffect in tempEffectsRealValue)
+        {
+            ChangeStat(temporallyEffect);
+        }
+    }
+
+
+    protected void CalculateNotPercentualPermanents(StatNames statName)
+    {
+        List<StatModificationPermanent> statsModificationPermanentRealValue = statsModificationPermanent.Where(e => e.StatAffected.Equals(statName) && !e.IsValueInPercentage).ToList();
+        foreach (StatModificationPermanent statModificationPermanentRealValue in statsModificationPermanentRealValue)
+        {
+            statModificationPermanentRealValue.GetRealValue();
+            ChangeStat(statModificationPermanentRealValue);
+        }
+    }
+
     public void ChangeStat(StatModificationPermanent statModification)
     {
         Stat stat = GetStatFromName(statModification.StatAffected);
         int value = statModification.Value;
-        /*if(timesApplied > 0)
-        {
-            value = effect.Value * timesApplied;
-        }*/
         switch (statModification.StatPart)
         {
             case StatParts.ACTUAL_MAX_VALUE:
@@ -277,10 +253,6 @@ public class CharacterMutableModel// : ICharacterModel
     {
         Stat stat = GetStatFromName(effect.StatAffected);
         int value = effect.Value;
-        /*if(timesApplied > 0)
-        {
-            value = effect.Value * timesApplied;
-        }*/
         switch (effect.StatPart)
         {
             case StatParts.ACTUAL_MAX_VALUE:
@@ -306,15 +278,10 @@ public class CharacterMutableModel// : ICharacterModel
         }
     }
 
-
-
-
-
-    //public void ChangeActualStat(StatNames statName, int value)
     public void ChangeActualStat(EffectDefinition effect)
     {
         /**
-         * Hacer esto en el process effect!!!!!
+         * Hacer esto en el process effect!!!!!??????
          * Si se va a añadir valor realizar las comprobaciones pertinentes en algunos casos.
          * Si se va a quitar valor (es decir, valor negativo), se busca
          * un efecto con esas características en la lista que corresponda.
@@ -395,7 +362,7 @@ public class CharacterMutableModel// : ICharacterModel
         return overTimeEffect;
     }
 
-    public bool TryAddEffect(EffectDefinition effect)
+    public virtual bool TryAddEffect(EffectDefinition effect, bool isFromTree = false, int index = -1)
     {
         bool hasBeenAdded = false;
         if (effect is OverTimeEffectDefinition)
@@ -407,13 +374,19 @@ public class CharacterMutableModel// : ICharacterModel
         {
             duringTimeEffects.Add(effect as DuringTimeEffectDefinition);
             hasBeenAdded = true;
-
         }
         else if (effect is InstantEffectPermanentDefinition)
         {
             StatModificationPermanent statModificationPermanent = new StatModificationPermanent(effect as InstantEffectPermanentDefinition);
-            statsModificationPermanent.Add(statModificationPermanent);
-            //permanentEffects.Add(effect as InstantEffectPermanentDefinition);
+            if (isFromTree)
+            {
+                TreeForModelStruct treeStruct = treeForModelStructs.Where(t => t.index.Equals(index)).FirstOrDefault();
+                treeStruct.isActive = true;
+            }
+            else
+            {
+                statsModificationPermanent.Add(statModificationPermanent);
+            }
             hasBeenAdded = true;
         }
         else if (effect is InstantEffectTemporallyDefinition)
@@ -422,7 +395,7 @@ public class CharacterMutableModel// : ICharacterModel
             hasBeenAdded = true;
         }
 
-        CalculateStat(effect.StatAffected, effect.StatPart);
+        CalculateStats();
         return hasBeenAdded;
     }
 
@@ -450,7 +423,7 @@ public class CharacterMutableModel// : ICharacterModel
         }
         else if (effect is InstantEffectPermanentDefinition)
         {
-            Debug.Log("TODO remove InstantEffectPermanentDefinition");
+            Debug.Log("TODO remove InstantEffectPermanentDefinition from tree");
         }
         else if (effect is InstantEffectTemporallyDefinition)
         {
@@ -468,210 +441,7 @@ public class CharacterMutableModel// : ICharacterModel
             }
         }
 
-        CalculateStat(effect.StatAffected, effect.StatPart);
+        CalculateStats();
         return hasBeenRemoved;
     }
 }
-
-    
-    
-    //Se le pasa el valor m�ximo del stat?
-    //Creo una funci�n recursiva?
-    /*private int CalculateStat(StatsEnum stat)
-    {
-        float value1 = GetStatValueFromList(baseStats, stat) + GetStatValueFromList(instantStatsModifyPermanent, stat);
-        float value2 = GetStatValueFromList(instantStatsModifyInRun, stat);
-        float value3 = 1 + (GetStatValueFromList(instantStatsModifyPercentageInRun, stat) * 0.01f);
-        float valueCalculated = (value1 + value2) * value3;
-
-        valueCalculated = Mathf.Clamp(valueCalculated, baseStats.Find(t => t.Name.Equals(stat)).MinValue, GetActualMaxStatValue(stat));
-
-        //return Math.Clamp(valueCalculated, 0, MaxStatsValues.GetStat(stat));
-        return (int)valueCalculated;
-    }*/
-
-    /*private int GetStatValueFromList(List<Stat> list, StatsEnum stat)
-    {
-        return list.Find(t => t.Name.Equals(stat)).Value;
-    }
-    private int GetActualMaxStatValueFromList(List<Stat> list, StatsEnum stat)
-    {
-        return list.Find(t => t.Name.Equals(stat)).ActualMaxValue;
-    }
-    private int GetMaxStatValueFromList(List<Stat> list, StatsEnum stat)
-    {
-        return list.Find(t => t.Name.Equals(stat)).MaxValue;
-    }
-    private int GetActualMinStatValueFromList(List<Stat> list, StatsEnum stat)
-    {
-        return list.Find(t => t.Name.Equals(stat)).MinValue;
-    }
-
-    //Servir� para feedback en la UI sobre todo
-    public int GetActualMaxStatValue(StatsEnum stat)
-    {
-        float maxValue1 = GetActualMaxStatValueFromList(baseStats, stat) + GetActualMaxStatValueFromList(instantStatsModifyPermanent, stat);
-        float maxValue2 = GetActualMaxStatValueFromList(instantStatsModifyInRun, stat);
-        float maxValue3 = 1 + (GetActualMaxStatValueFromList(instantStatsModifyPercentageInRun, stat) * 0.01f);
-        float actualMaxValueCalculated = (maxValue1 + maxValue2) * maxValue3;
-
-        return (int)actualMaxValueCalculated;
-    }
-    //Si es porcentual, siempre se devuelve el actualMaxValue
-    public int GetStatValue(StatsEnum stat)
-    {
-        int statValue;
-        if (stat.Equals(StatsEnum.MAX_HEALTH))
-        {
-            statValue = GetActualMaxStatValue(StatsEnum.HEALTH);
-        }
-        else
-        {
-            statValue = CalculateStat(stat);
-        }
-        return statValue;
-    }
-    
-    public int GetActualBaseMaxStat(StatsEnum stat)
-    {
-        return baseStats.Find(t => t.Name.Equals(stat)).ActualMaxValue;
-    }
-    
-    
-
-    public void PerformApplyPermanentStat(StatModificator statModificator)
-    {
-        if (statModificator.StatToModify.Equals(StatsEnum.MAX_HEALTH))
-        {
-            instantStatsModifyPermanent.Find(t => t.Name.Equals(StatsEnum.HEALTH)).IncrementActualMaxValue(statModificator.Value);
-        }
-        else
-        {
-            instantStatsModifyPermanent.Find(t => t.Name.Equals(statModificator.StatToModify)).IncrementValue(statModificator.Value);
-        }
-    }*/
-
-    /**
-     * TODO refactor
-     * 
-     * Para poder incrementar cualquier maxValue
-     * Tambi�n habr�a que a�adir un nuevo check en los efectos que haga referencia
-     * a los max values. As� el statusEnum dejar�a de tener MAX_HEALTH y no
-     * habr�a que hardcodear aqu� el statEnum Health
-     */
-    /*public void PerformApplyStatModifyInRun(StatModificator statModificator)
-    {
-        if (statModificator.StatToModify.Equals(StatsEnum.MAX_HEALTH))
-        {
-            if (statModificator.IsPercentual)
-            {
-                instantStatsModifyPercentageInRun.Find(t => t.Name.Equals(StatsEnum.HEALTH)).IncrementActualMaxValue(statModificator.Value);
-            }
-            else
-            {
-                instantStatsModifyInRun.Find(t => t.Name.Equals(StatsEnum.HEALTH)).IncrementActualMaxValue(statModificator.Value);
-            }
-        }
-        else
-        {
-            if (statModificator.IsPercentual)
-            {
-                instantStatsModifyPercentageInRun.Find(t => t.Name.Equals(statModificator.StatToModify)).IncrementValue(statModificator.Value);
-            }
-            else
-            {
-                instantStatsModifyInRun.Find(t => t.Name.Equals(statModificator.StatToModify)).IncrementValue(statModificator.Value);
-            }
-        }
-        
-    }
-
-    public StatModificator PerformRealHealthChange(StatModificator statModificator)
-    {
-        if(statModificator.Value > 0)
-        {
-            statModificator = Heal(statModificator);
-        }
-        else
-        {
-            if (statModificator.BuffDebuffType.Equals(EffectTypes.POISON))
-            {
-                statModificator = TakeRealDamage(statModificator);
-            }
-            else if (statModificator.IsAttack)
-            {
-                statModificator = TakeDamage(statModificator);
-            }
-        }
-
-        return statModificator;
-    }
-    public void PerformPercentualHealthChange(StatModificator statModificator)
-    {
-        if(statModificator.IsAttack)
-        {
-            TakeRealDamage(statModificator);
-        }
-        else
-        {
-            Heal(statModificator);
-        }
-    }*/
-
-
-    /**
-     * TODO ?
-     * Si el TakeDamage fuese diferente en el personaje y en los enemigos
-     * debe implementarse en cada uno por separado
-     */
-    /*public StatModificator TakeDamage(StatModificator statModificator)
-    {
-        
-        int defense = GetStatValue(StatsEnum.DEFENSE);
-        int realDamage = Math.Abs(statModificator.Value) - defense;
-        int finalDamage = realDamage < 0 ? 0 : realDamage;
-
-        statModificator.Value = -finalDamage;
-
-        PerformApplyStatModifyInRun(statModificator);
-
-        statModificator.IsAlive = CheckIsAlive();
-
-        return statModificator;
-    }
-
-    public StatModificator TakeRealDamage(StatModificator statModificator)
-    {
-        PerformApplyStatModifyInRun(statModificator);
-        statModificator.IsAlive = CheckIsAlive();
-
-        return statModificator;
-    }
-
-    public StatModificator Heal(StatModificator statModificator)
-    {
-        int maxHealth = GetActualBaseMaxStat(statModificator.StatToModify);
-        int health = GetStatValue(statModificator.StatToModify);
-        int finalHeal = Math.Clamp(statModificator.Value, 0, maxHealth - health);
-
-        statModificator.Value = finalHeal;
-        PerformApplyStatModifyInRun(statModificator);
-
-        return statModificator;
-    }*/
-
-    /*private bool CheckIsAlive()
-    {
-
-        bool isAlive = GetStatValue(StatsEnum.HEALTH) > 0;
-        
-        if(!isAlive)
-        {
-            Debug.Log("DIE!");
-        }
-        
-        return isAlive;
-    }*/
-
-
-
