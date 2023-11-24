@@ -35,6 +35,7 @@ namespace CompanyStats
                     break;
             }
             Debug.Log("TODO -> Apply dodge, critial, evasion...");
+            Debug.Log("TODO -> Si tal buscar de hacer lo de la postura. Cuando se le rompa la postura, pierde stats y ganas facilidad de crítico....");
 
             int preValue = Mathf.Abs(effect.Value);
             if (!effect.IsValueInPercentage)

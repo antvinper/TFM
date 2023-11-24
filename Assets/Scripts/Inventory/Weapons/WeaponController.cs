@@ -1,3 +1,4 @@
+using CompanyStats;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -25,6 +26,7 @@ public class WeaponController: MonoBehaviour
     //private CancellationTokenSource tokenCancelComboAfterTime;
 
     private List<ButtonsXbox> actualActionStack;
+    [SerializeField] protected SkillDefinition chargedSkill;
 
     public int ActualIndex { get => actualIndex; set => actualIndex = value; }
     public bool DoingCombo { get => doingCombo; set => doingCombo = value; }
@@ -252,6 +254,8 @@ public class WeaponController: MonoBehaviour
         isPreCharging = false;
         isCharging = false;
         actualTimeCharging = 0;
+        //TODO Ataque cargado.
+        //chargedSkill.ProcessSkill(owner, target);
     }
 
     public async Task StartCharging()

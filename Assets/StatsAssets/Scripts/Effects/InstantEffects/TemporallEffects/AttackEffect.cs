@@ -13,6 +13,11 @@ namespace CompanyStats
         {
             Debug.Log(this.effectDefinition.EffectName);
 
+            if (effectDefinition.IsValueInPercentage)
+            {
+                effectDefinition.CalculateRealPercentage();
+            }
+
             Strike strike = new Strike(owner, target, effectDefinition);
             strike.ProcessStrike();
             target.ApplyDamage(strike);

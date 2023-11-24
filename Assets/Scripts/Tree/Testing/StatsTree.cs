@@ -10,6 +10,13 @@ using CompanyStats;
 [CreateAssetMenu(fileName = "Tree Definition", menuName = "Tree/Tree Definition")]
 public class StatsTree : ScriptableObject
 {
+    /**
+     * TODO
+     * VER DOCUMENTO Enemigos y Personaje
+     * Para ver cómo está diseñado e implementar lo que sea
+     * necesario para que vaya-
+     */
+
     [SerializeField] private List<TreeSlotDefinition> slots;
     [JsonProperty]
     public List<TreeSlotDefinition> Slots

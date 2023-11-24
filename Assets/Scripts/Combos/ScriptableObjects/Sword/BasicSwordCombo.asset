@@ -19,9 +19,9 @@ MonoBehaviour:
   - 1
   - 1.25
   skills:
-  - {fileID: 11400000, guid: 3717f084b9a34be43b4300f2d0221e71, type: 2}
-  - {fileID: 11400000, guid: bb9f2a9936c6b4048a35bd1f4a80fd5d, type: 2}
-  - {fileID: 11400000, guid: 8c93d710566329948adf23c8e0a3822f, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   startsActive: 1
   buttons: 010000000100000001000000
   comboFinished: 0

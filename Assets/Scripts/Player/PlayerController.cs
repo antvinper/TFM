@@ -97,7 +97,8 @@ public class PlayerController : CompanyCharacterController//<PlayerMutableModel>
 
         statsCanvas = FindObjectOfType<StatsCanvasSupport>();
         WriteStats();
-        ActiveSlotTree(1);
+        //ActiveSlotTree(1);
+        ApplySkill();
     }
 
     //TODO to erase
@@ -189,6 +190,7 @@ public class PlayerController : CompanyCharacterController//<PlayerMutableModel>
 
     public async Task ApplySkill()
     {
+        await new WaitForSeconds(2.0f);
         foreach (SkillDefinition skill in skills)
         {
             skill.ProcessSkill(this, this);

@@ -14,8 +14,8 @@ public abstract class ComboDefinition : ScriptableObject//, IComboModel
     [SerializeField] protected string description;
     public string Description => description;
 
-    [SerializeField] protected float[] damageMultiplier;
-    public float[] DamageMultiplier => damageMultiplier;
+    //[SerializeField] protected float[] damageMultiplier;
+    //public float[] DamageMultiplier => damageMultiplier;
 
     [SerializeField] protected List<SkillDefinition> skills = new List<SkillDefinition>();
     public List<SkillDefinition> Skills => skills;
@@ -41,6 +41,10 @@ public abstract class ComboDefinition : ScriptableObject//, IComboModel
     [SerializeField] protected Sprite sprite;
     public Sprite Sprite => sprite;
 
+    /**
+     * TODO
+     * MAKE AN ENUM
+     */
     [SerializeField] protected string animationTriggerToStart;
     public string AnimationTriggerToStart => animationTriggerToStart;
 
