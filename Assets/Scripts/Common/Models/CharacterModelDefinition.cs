@@ -8,13 +8,13 @@ using UnityEngine;
 public class CharacterModelDefinition : ScriptableObject
 {
     [SerializeField] private CharacterStatsDefinition characterStatsDefinitions;
-    [SerializeField] private StatsTree tree;
+    [SerializeField] private StatsTreeDefinition tree;
 
     public CharacterStatsDefinition CharacterStatsDefinitions
     {
         get { return characterStatsDefinitions; }
     }
-    public StatsTree Tree
+    public StatsTreeDefinition Tree
     {
         get { return tree; }
         set { tree = value; }

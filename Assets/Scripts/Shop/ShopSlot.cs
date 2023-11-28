@@ -7,7 +7,7 @@ using TMPro;
 //Este shopSlot tiene que ser una especie de factory
 //Puedo comprar efectos, combos y monedas
 //Cada slot tiene uno de ellos y al hacer el purchase
-//Se hará una cosa u otra.
+//Se harï¿½ una cosa u otra.
 //Igual con simple herencia se puede.
 
 public class ShopSlot : MonoBehaviour
@@ -44,7 +44,7 @@ public class ShopSlot : MonoBehaviour
 
     public void CheckButtonInteractability()
     {
-        if (price > GameManager.Instance.GetPlayerController().Model.Rupees)
+        if (price > GameManager.Instance.GetPlayerController().Rupees.Amount)
         {
             purchaseButton.interactable = false;
         }

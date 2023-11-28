@@ -11,8 +11,7 @@ public class CharacterMutableModel// : ICharacterModel
     private CharacterStatsDefinition characterStatsDefinition;
     private List<Stat> stats;
 
-    private int soulFragments;
-    private int rupees;
+    
     
     protected List<TreeForModelStruct> treeForModelStructs;
 
@@ -26,18 +25,7 @@ public class CharacterMutableModel// : ICharacterModel
     [JsonIgnore] public List<DuringTimeEffectDefinition> DuringTimeEffects { get => duringTimeEffects; }
     [JsonIgnore] public List<InstantEffectTemporallyDefinition> TemporallyEffects { get => temporallyEffects; }
 
-    [JsonProperty]
-    public int Rupees
-    {
-        get => rupees;
-        set => rupees = value;
-    }
-    [JsonProperty]
-    public int SoulFragments
-    {
-        get => soulFragments;
-        set => soulFragments = value;
-    }
+    
     [JsonProperty]
     public List<StatModificationPermanent> StatsModificationPermanent
     {

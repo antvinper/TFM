@@ -7,26 +7,42 @@ using CompanyStats;
 public class PlayerController : CompanyCharacterController//<PlayerMutableModel>
 {
     private PlayerController instance;
+    new private PlayerMutableModel model;
+    /*public PlayerMutableModel Model
+    {
+        get => model;
+        set => model = value;
+    }*/
     /*private new PlayerMutableModel model;
     public PlayerMutableModel Model
     {
         get => model;
         set => model = value;
     }*/
-    
+
     [SerializeField] List<SkillDefinition> skills = new List<SkillDefinition>();
-    private SoulFragment soulFragment;
+    private SoulFragment soulFragments;
     private Rupee rupees;
+
+    public SoulFragment SoulFragments
+    {
+        get => soulFragments;
+    }
+    public Rupee Rupees
+    {
+        get => rupees;
+    }
 
     public WeaponController weaponController;
 
-    [SerializeField] private StatsTree tree;
+    [SerializeField] private StatsTreeDefinition tree;
     //[SerializeField] private StatsDefinition statsDefinitions;
     /**
      * TODO
      * Borrar de aqu�
      */
     //public Characters.CharacterController enemy;
+    public CanvasTreeManager canvasTreeManager;
 
     StatsCanvasSupport statsCanvas;
 
@@ -61,7 +77,7 @@ public class PlayerController : CompanyCharacterController//<PlayerMutableModel>
 
         //Obtener del modelo la cantidad de rupias y fragmentos que tiene
         this.rupees = new Rupee(model.Rupees);
-        this.soulFragment = new SoulFragment(model.SoulFragments);
+        this.soulFragments = new SoulFragment(model.SoulFragments);
 
 
 
@@ -99,6 +115,9 @@ public class PlayerController : CompanyCharacterController//<PlayerMutableModel>
         WriteStats();
         //ActiveSlotTree(1);
         ApplySkill();
+        canvasTreeManager.Setup(model.Tree.Slots);
+
+        AddSoulFragments(100);
     }
 
     //TODO to erase
@@ -119,10 +138,18 @@ public class PlayerController : CompanyCharacterController//<PlayerMutableModel>
     public async Task ActiveSlotTree(int index)
     {
         await new WaitForSeconds(2.0f);
-        PlayerMutableModel model = this.model as PlayerMutableModel;
+        //PlayerMutableModel model = this.model as PlayerMutableModel;
         model.ProcessSlotTreeActivation(index);
         WriteStats();
     }
+
+    public async Task ActiveSlotTree(TreeSlot slot)
+    {
+        //PlayerMutableModel model = this.model as PlayerMutableModel;
+        model.ProcessSlotTreeActivation(slot);
+        WriteStats();
+    }
+
 
     public void AddRupees(int value)
     {
@@ -135,11 +162,20 @@ public class PlayerController : CompanyCharacterController//<PlayerMutableModel>
     }
     public void AddSoulFragments(int value)
     {
-        this.soulFragment.AddAmount(value);
-        this.model.SoulFragments = this.soulFragment.Amount;
+        if(value > 0)
+        {
+            this.soulFragments.AddAmount(value);
+        }
+        else
+        {
+            this.soulFragments.RemoveAmount(-value);
+        }
+        
+        this.model.SoulFragments = this.soulFragments.Amount;
         Debug.Log("#Room# SoulFragments gained: " + value);
         Debug.Log("#Room# Actual SoulFragments: " + this.model.SoulFragments);
     }
+
 
     private async Task GetRoomRewards()
     {

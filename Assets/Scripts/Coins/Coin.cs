@@ -24,6 +24,7 @@ public class Coin
 
     public void RemoveAmount(int value)
     {
-        Mathf.Clamp(amount - value, 0, amount);
+        //Mathf.Clamp(amount - value, 0, amount);
+        amount -= value;
     }
 }

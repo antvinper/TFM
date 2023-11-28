@@ -7,6 +7,21 @@ using System.Linq;
 
 public class PlayerMutableModel : CharacterMutableModel
 {
+    private int soulFragments;
+    private int rupees;
+    [JsonProperty]
+    public int Rupees
+    {
+        get => rupees;
+        set => rupees = value;
+    }
+    [JsonProperty]
+    public int SoulFragments
+    {
+        get => soulFragments;
+        set => soulFragments = value;
+    }
+
     private StatsTree tree;
     [JsonProperty]
     public StatsTree Tree
@@ -16,25 +31,35 @@ public class PlayerMutableModel : CharacterMutableModel
     }
     [JsonIgnore] private List<StatModificationPermanent> statsModificationPermanentFromTree;
 
-    public PlayerMutableModel(StatsTree tree)
+    public PlayerMutableModel(StatsTreeDefinition treeDef)
     {
-        this.tree = tree;
+        tree = new StatsTree(treeDef);
+        this.soulFragments = 0;
+        this.rupees = 0;
     }
 
     public void ProcessSlotTreeActivation(int index)
     {
-        TreeSlotDefinition slot = tree.Slots[index];
-        tree.ProcessSlotActivation(slot);
+        tree.ProcessSlotActivation(tree.Slots[index]);
         FillStatsModificationPermanentFromTree();
         CalculateStats();
     }
-    public void ProcessSlotTreeDeActivation(int index)
+
+    public void ProcessSlotTreeActivation(TreeSlot slot)
+    {
+        /*TreeSlotDefinition slotToActive = tree.Slots.Where(s => s.Equals(slot)).FirstOrDefault();*/
+        tree.ProcessSlotActivation(slot);
+        FillStatsModificationPermanentFromTree();
+        CalculateStats();
+
+    }
+    /*public void ProcessSlotTreeDeActivation(int index)
     {
         TreeSlotDefinition slot = tree.Slots[index];
         tree.ProcessSlotDeActivation(slot);
         FillStatsModificationPermanentFromTree();
         CalculateStats();
-    }
+    }*/
 
     public override void Setup(CharacterStatsDefinition characterStatsDefinition)
     {
@@ -50,11 +75,11 @@ public class PlayerMutableModel : CharacterMutableModel
         statsModificationPermanentFromTree.Clear();
         for (int i = 0; i < tree.Slots.Count; ++i)
         {
-            if (tree.Slots[i].IsActive)
+            if (tree.Slots[i].ActualActives > 0)
             {
-                foreach (InstantEffectPermanent effect in tree.Slots[i].Effects)
+                StatModificationPermanent statModificationPermanent = new StatModificationPermanent(tree.Slots[i].Effect as InstantEffectPermanentDefinition);
+                for (int j = 0; j < tree.Slots[i].ActualActives; ++j)
                 {
-                    StatModificationPermanent statModificationPermanent = new StatModificationPermanent(effect as InstantEffectPermanentDefinition);
                     statsModificationPermanentFromTree.Add(statModificationPermanent);
                 }
             }
