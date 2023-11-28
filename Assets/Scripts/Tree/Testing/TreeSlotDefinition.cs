@@ -47,6 +47,11 @@ public class TreeSlotDefinition : ScriptableObject
         set => effect = value;
     }
 
+    public int PercentualCostPerIncrement
+    {
+        get => percentualCostPerIncrement;
+    }
+
     //[JsonIgnore]
     /*public int ActualCost
     {

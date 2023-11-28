@@ -37,6 +37,7 @@ public class TreeSlot
         actualActives = treeSlotDefinition.ActualActives;
         maxActives = treeSlotDefinition.MaxActives;
         price = treeSlotDefinition.Price;
+        percentualCostPerIncrement = treeSlotDefinition.PercentualCostPerIncrement;
     }
 
     public int GetActualPrice()
