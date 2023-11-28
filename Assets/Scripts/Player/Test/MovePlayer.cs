@@ -9,7 +9,7 @@ public class MovePlayer : MonoBehaviour//SingletonMonoBehaviour<MovePlayer>
     private float horizontalMove;
     private float verticalMove;
     private Vector3 playerInput;
-    private UnityEngine.CharacterController player;
+    private CharacterController player;
     private Animator anim;
     public float gravity = 9.8f;
     public float targetRotation = 9.8f;
@@ -34,7 +34,7 @@ public class MovePlayer : MonoBehaviour//SingletonMonoBehaviour<MovePlayer>
 
     void Start()
     {
-        player = GetComponent<UnityEngine.CharacterController>();
+        player = GetComponent<CharacterController>();
         anim = GetComponent<Animator>();
     }
 

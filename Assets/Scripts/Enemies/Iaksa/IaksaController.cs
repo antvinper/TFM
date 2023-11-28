@@ -1,5 +1,7 @@
+using CompanyStats;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class IaksaController : EnemyController
@@ -9,6 +11,7 @@ public class IaksaController : EnemyController
 
     [SerializeField] private Rigidbody rb;
     [SerializeField] private Animator animator;
+    [SerializeField] List<SkillDefinition> skills = new List<SkillDefinition>();
 
     private float latestChangeTime;
     private readonly float changeTime = 3f;
@@ -16,16 +19,19 @@ public class IaksaController : EnemyController
     private float runSpeed = 5f;
     private Vector3 movementDir;
     private Vector3 speedDir;
+    private PlayerController player;
 
     [SerializeField] private float alertRange;
     [SerializeField] private LayerMask maskPlayer;
-    [SerializeField] private Transform player;
+    //[SerializeField] private Transform player;
 
     // TO DO: anyadir los efectos de buff/debuff cuando salta al lado de otro personaje
     //public float max_health;
     //public float cur_health = 0f;
     void Start()
     {
+        player = GetComponent<PlayerController>();
+
         model = new IaksaModel();
         this.SetModel(model);
 
@@ -73,6 +79,14 @@ public class IaksaController : EnemyController
 
     }*/
 
+    public async Task ApplySkill()
+    {
+        foreach (SkillDefinition skill in skills)
+        {
+            skill.ProcessSkill(this, player);
+        }
+    }
+
     public void DestroyEnemy()
     {
         Destroy(gameObject);
@@ -86,15 +100,6 @@ public class IaksaController : EnemyController
             calculateObjectiveVector(other.transform.position);
             latestChangeTime = Time.time;
             animator.Play("Armature|Run");
-        }
-    }
-    
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.collider.CompareTag("Player") || collision.collider.CompareTag("Enemy"))
-        {
-            animator.Play("Armature|Action");
         }
     }
     */
@@ -119,6 +124,7 @@ public class IaksaController : EnemyController
         if (collision.collider.CompareTag("Player") || collision.collider.CompareTag("Enemy"))
         {
             animator.Play("Armature|Action");
+            ApplySkill();
         }
     }
 }
