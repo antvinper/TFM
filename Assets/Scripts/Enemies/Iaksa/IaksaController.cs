@@ -19,7 +19,9 @@ public class IaksaController : EnemyController
     private float runSpeed = 5f;
     private Vector3 movementDir;
     private Vector3 speedDir;
-    private PlayerController player;
+    private float timeBetweenAttack = 2f;
+    private float actualTimeBetweenAttack = 0;
+    private bool canAttack = true;
 
     [SerializeField] private float alertRange;
     [SerializeField] private LayerMask maskPlayer;
@@ -30,8 +32,6 @@ public class IaksaController : EnemyController
     //public float cur_health = 0f;
     void Start()
     {
-        player = GetComponent<PlayerController>();
-
         model = new IaksaModel();
         this.SetModel(model);
 
@@ -78,12 +78,24 @@ public class IaksaController : EnemyController
         }
 
     }*/
+    public async Task ResetAttack()
+    {
+        while (actualTimeBetweenAttack < timeBetweenAttack)
+        {
+            canAttack = false;
+            await new WaitForSeconds(Time.deltaTime);
+            actualTimeBetweenAttack += Time.deltaTime;
+        }
 
-    public async Task ApplySkill()
+        canAttack = true;
+    }
+
+
+    public async Task ApplySkill(CompanyCharacterController target)
     {
         foreach (SkillDefinition skill in skills)
         {
-            skill.ProcessSkill(this, player);
+            skill.ProcessSkill(this, target);
         }
     }
 
@@ -121,10 +133,11 @@ public class IaksaController : EnemyController
     private void OnCollisionEnter(Collision collision)
     {
         //Si el jugador/enemigo entra en contacto con "Box Collider", activara la animacion "Action" para pegar un saltito y aplicar el buff/debuff
-        if (collision.collider.CompareTag("Player") || collision.collider.CompareTag("Enemy"))
+        if ((collision.collider.CompareTag("Player") || collision.collider.CompareTag("Enemy")) && canAttack)
         {
             animator.Play("Armature|Action");
-            ApplySkill();
+            PlayerController playerController = collision.collider.GetComponent<PlayerController>();
+            ApplySkill(playerController);
         }
     }
 }

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using CompanyStats;
 using UnityEngine;
 
 public class MovePlayer : MonoBehaviour//SingletonMonoBehaviour<MovePlayer>
@@ -17,9 +18,9 @@ public class MovePlayer : MonoBehaviour//SingletonMonoBehaviour<MovePlayer>
     public float player_health = 100f;
     private GameObject _mainCamera;
 
-    bool imAttacking;
-
+    [SerializeField] PlayerController playerController;
     [SerializeField] private float playerSpeed;
+
     [SerializeField] private float fallVelocity;
     [SerializeField] private float rotationSpeed;
 
@@ -40,6 +41,8 @@ public class MovePlayer : MonoBehaviour//SingletonMonoBehaviour<MovePlayer>
 
     void Update()
     {
+        playerSpeed = playerController.GetStatValue(StatNames.SPEED, StatParts.ACTUAL_VALUE);
+
         horizontalMove = Input.GetAxis("Horizontal");
         verticalMove = Input.GetAxis("Vertical");
 

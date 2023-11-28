@@ -44,7 +44,7 @@ namespace CompanyStats
                 {
                     if (previousDuringTimeEffect.Equals(this))
                     {
-                        Debug.Log("They are equals. Restarting effect...");
+                        Debug.Log("#TIMER They are equals. Restarting effect...");
                         previousDuringTimeEffect.AddEffectToTarget(true);
                         previousDuringTimeEffect.RestartEffect();
                     }
@@ -100,18 +100,18 @@ namespace CompanyStats
             float previousValue = previousDuringTimeEffect.Value;
             if(this.Value < previousValue || this.effectLifeTime < previousEffectLifeTime)
             {
-                Debug.Log("Caso 1: El efecto no se debe aplicar");
+                Debug.Log("#TIMER Caso 1: El efecto no se debe aplicar");
                 effectCase = 1;
             }
             if(this.Value > previousValue || this.effectLifeTime > previousEffectLifeTime)
             {
-                Debug.Log("Caso 2: El efecto reemplaza");
+                Debug.Log("#TIMER Caso 2: El efecto reemplaza");
                 effectCase = 2;
             }
             if((this.Value > previousValue && this.effectLifeTime < previousEffectLifeTime) || 
                 (this.Value < previousValue && this.effectLifeTime > previousEffectLifeTime))
             {
-                Debug.Log("Caso 3: El efecto se reemplaza");
+                Debug.Log("#TIMER Caso 3: El efecto se reemplaza");
                 effectCase = 3;
             }
 
@@ -137,12 +137,12 @@ namespace CompanyStats
             if (!isReadded)
             {
                 Stat stat = target.GetStatFromName(StatAffected);
-                Debug.Log(stat.StatName + "." + StatPart + " value before apply the effect " + name + ": " + target.GetStatValue(stat.StatName, StatPart));
-                Debug.Log("TODO Add during time effect");
+                Debug.Log("#TIMER " + stat.StatName + "." + StatPart + " value before apply the effect " + name + ": " + target.GetStatValue(stat.StatName, StatPart));
+                Debug.Log("#TIMER TODO Add during time effect");
                 if (target.TryAddEffect(this, owner))
                 {
-                    Debug.Log("Effect applied correctly");
-                    Debug.Log(stat.StatName + "." + StatPart + " value after apply the effect " + name + ": " + target.GetStatValue(stat.StatName, StatPart));
+                    Debug.Log("#TIMER Effect applied correctly");
+                    Debug.Log("#TIMER " + stat.StatName + "." + StatPart + " value after apply the effect " + name + ": " + target.GetStatValue(stat.StatName, StatPart));
                     StartTimer();
                 }
             }
@@ -150,7 +150,7 @@ namespace CompanyStats
             {
                 if(target.TryAddEffect(this, owner))
                 {
-                    Debug.Log("Effect reApplied correctly");
+                    Debug.Log("#TIMER Effect reApplied correctly");
                 }
             }
             
