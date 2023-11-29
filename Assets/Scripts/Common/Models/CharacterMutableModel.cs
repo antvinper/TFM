@@ -33,6 +33,7 @@ public class CharacterMutableModel// : ICharacterModel
         set => statsModificationPermanent = value;
     }
      
+    public CharacterMutableModel() { }
 
     public virtual void Setup(CharacterStatsDefinition characterStatsDefinition)
     {

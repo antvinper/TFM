@@ -1,14 +1,33 @@
+using Newtonsoft.Json;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 
+//[System.Serializable]
 public class StatsTree
 {
+    //[JsonIgnore] 
     private List<TreeSlot> slots;
+    //[JsonProperty]
     public List<TreeSlot> Slots
     {
         get => slots;
+    }
+
+    public StatsTree(StatsTree statsTree) 
+    {
+        this.slots = statsTree.Slots;
+    }
+
+    public StatsTree(List<TreeSlot> slots)
+    {
+        this.slots = slots;
+    }
+
+    public StatsTree() 
+    {
+        Debug.Log("Empty Constructor");
     }
 
     public StatsTree(StatsTreeDefinition statsTreeDefinition)

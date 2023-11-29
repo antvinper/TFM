@@ -10,7 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b9d4ad1931286854d9a6bb45c5167307, type: 3}
-  m_Name: TreeSlot_20MaxHealth
+  m_Name: TreeSlot_10MaxHealth
   m_EditorClassIdentifier: 
-  effects:
-  - {fileID: 11400000, guid: 4bb9486f0fb99a54d9f5bd3a399902ef, type: 2}
+  effect: {fileID: 11400000, guid: 5cedc29de9ca41244b1e21009c669d8d, type: 2}
+  actualActives: 0
+  maxActives: 10
+  price: 20
+  percentualCostPerIncrement: 30

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
+[System.Serializable]
 public class PlayerMutableModel : CharacterMutableModel
 {
     private int soulFragments;
@@ -23,19 +24,52 @@ public class PlayerMutableModel : CharacterMutableModel
     }
 
     private StatsTree tree;
-    [JsonProperty]
+    //[JsonProperty]
+    [JsonIgnore]
     public StatsTree Tree
     {
         get => tree;
         set => tree = value;
     }
+
+    private List<TreeStruct> treeStructList;
+    [JsonProperty]
+    public List<TreeStruct> TreeStructList
+    {
+        get => treeStructList;
+        set => treeStructList = value;
+    }
+
     [JsonIgnore] private List<StatModificationPermanent> statsModificationPermanentFromTree;
 
-    public PlayerMutableModel(StatsTreeDefinition treeDef)
+    public PlayerMutableModel()
     {
-        tree = new StatsTree(treeDef);
+
+    }
+
+    public PlayerMutableModel(List<TreeStruct> treeStructList)
+    {
+        this.treeStructList = treeStructList;
+    }
+
+    public PlayerMutableModel(StatsTree tree)
+    {
+        this.tree = tree;
         this.soulFragments = 0;
         this.rupees = 0;
+        SetTreeStruct();
+    }
+
+    private void SetTreeStruct()
+    {
+        treeStructList = new List<TreeStruct>();
+        for(int i = 0; i < tree.Slots.Count; ++i)
+        {
+            TreeStruct ts = new TreeStruct();
+            ts.actualActives = tree.Slots[i].ActualActives;
+            ts.arrayIndex = i;
+            treeStructList.Add(ts);
+        }
     }
 
     public void ProcessSlotTreeActivation(int index)
@@ -43,6 +77,7 @@ public class PlayerMutableModel : CharacterMutableModel
         tree.ProcessSlotActivation(tree.Slots[index]);
         FillStatsModificationPermanentFromTree();
         CalculateStats();
+        SetTreeStruct();
     }
 
     public void ProcessSlotTreeActivation(TreeSlot slot)
@@ -51,6 +86,7 @@ public class PlayerMutableModel : CharacterMutableModel
         tree.ProcessSlotActivation(slot);
         FillStatsModificationPermanentFromTree();
         CalculateStats();
+        SetTreeStruct();
 
     }
     /*public void ProcessSlotTreeDeActivation(int index)
@@ -61,8 +97,17 @@ public class PlayerMutableModel : CharacterMutableModel
         CalculateStats();
     }*/
 
+    private void SetupTree()
+    {
+        foreach(TreeStruct treeStruct in treeStructList)
+        {
+            tree.Slots[treeStruct.arrayIndex].ActualActives = treeStruct.actualActives;
+        }
+    }
+
     public override void Setup(CharacterStatsDefinition characterStatsDefinition)
     {
+        SetupTree();
         statsModificationPermanentFromTree = new List<StatModificationPermanent>();
 
         FillStatsModificationPermanentFromTree();

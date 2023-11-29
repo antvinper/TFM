@@ -7,12 +7,13 @@ using CompanyStats;
 public class PlayerController : CompanyCharacterController//<PlayerMutableModel>
 {
     private PlayerController instance;
-    new private PlayerMutableModel model;
-    /*public PlayerMutableModel Model
+
+    protected new PlayerMutableModel model;
+    new public PlayerMutableModel Model
     {
-        get => model;
-        set => model = value;
-    }*/
+        get => this.model;
+        set => this.model = value;
+    }
     /*private new PlayerMutableModel model;
     public PlayerMutableModel Model
     {
@@ -44,7 +45,9 @@ public class PlayerController : CompanyCharacterController//<PlayerMutableModel>
     //public Characters.CharacterController enemy;
     public CanvasTreeManager canvasTreeManager;
 
+
     StatsCanvasSupport statsCanvas;
+
 
     private void Awake()
     {
@@ -56,6 +59,23 @@ public class PlayerController : CompanyCharacterController//<PlayerMutableModel>
         {
             instance = this;
         }
+    }
+
+    public async Task SetModel(PlayerMutableModel model)
+    {
+        this.model = model;
+        StatsTree t = new StatsTree(tree);
+        this.model.Tree = t;
+        this.model.Setup(characterStatsDefinition);
+    }
+
+    public async Task SetNewModel()
+    {
+        StatsTree t = new StatsTree(tree);
+        model = new PlayerMutableModel(t);
+        model.Setup(characterStatsDefinition);
+        GameManager.Instance.GameModel.PlayerModel = model as PlayerMutableModel;
+
     }
 
     /**
@@ -74,6 +94,7 @@ public class PlayerController : CompanyCharacterController//<PlayerMutableModel>
          */
         GameManager.Instance.SetPlayerController(this);
         //SetNewModel();
+
 
         //Obtener del modelo la cantidad de rupias y fragmentos que tiene
         this.rupees = new Rupee(model.Rupees);
@@ -111,6 +132,7 @@ public class PlayerController : CompanyCharacterController//<PlayerMutableModel>
         //ApplySkill();
 
 
+
         statsCanvas = FindObjectOfType<StatsCanvasSupport>();
         WriteStats();
         //ActiveSlotTree(1);
@@ -124,6 +146,7 @@ public class PlayerController : CompanyCharacterController//<PlayerMutableModel>
     private void WriteStats()
     {
         statsCanvas.statsPanelSupport.healthText.text = StatNames.HEALTH + ": " + model.GetStatValue(StatNames.HEALTH, StatParts.ACTUAL_VALUE);
+        statsCanvas.statsPanelSupport.actualMaxHealthText.text = StatNames.HEALTH + " ACTUAL MAX: " + model.GetStatValue(StatNames.HEALTH, StatParts.ACTUAL_MAX_VALUE);
         statsCanvas.statsPanelSupport.manaText.text = StatNames.MANA + ": " + model.GetStatValue(StatNames.MANA, StatParts.ACTUAL_VALUE);
         statsCanvas.statsPanelSupport.attackText.text = StatNames.ATTACK + ": " + model.GetStatValue(StatNames.ATTACK, StatParts.ACTUAL_VALUE);
         statsCanvas.statsPanelSupport.magicalAttackText.text = StatNames.MAGICAL_ATTACK + ": " + model.GetStatValue(StatNames.MAGICAL_ATTACK, StatParts.ACTUAL_VALUE);
@@ -192,18 +215,7 @@ public class PlayerController : CompanyCharacterController//<PlayerMutableModel>
         GetActiveCombos();
     }
 
-    public async Task SetModel(PlayerMutableModel model)
-    {
-        this.model = model;
-        this.model.Setup(characterStatsDefinition);
-    }
-
-    public async Task SetNewModel()
-    {
-        model = new PlayerMutableModel(tree);
-        model.Setup(characterStatsDefinition);
-        GameManager.Instance.GameModel.PlayerModel = model as PlayerMutableModel;
-    }
+    
     public override void ApplyDamage(Strike strike)
     {
         Debug.Log("Health before damage = " + model.GetStatValue(StatNames.HEALTH, StatParts.ACTUAL_VALUE));
