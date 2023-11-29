@@ -61,7 +61,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44453b082288b8f48a5cc282c97b9a11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterStatsDefinition: {fileID: 0}
+  characterStatsDefinition: {fileID: 11400000, guid: 70c4fb5aab6aa364d895211c2614d110, type: 2}
   rb: {fileID: 2050708853417886102}
   animator: {fileID: 2050708853450596499}
   skills:
@@ -70,7 +70,6 @@ MonoBehaviour:
   maskPlayer:
     serializedVersion: 2
     m_Bits: 8
-  player: {fileID: 0}
 --- !u!54 &2050708853417886102
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -99,7 +98,7 @@ SphereCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 3
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 1.75, z: 0}
 --- !u!1001 &2050708853450596497
 PrefabInstance:
   m_ObjectHideFlags: 0

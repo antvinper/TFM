@@ -15,7 +15,7 @@ public class SwordController : WeaponController
         Setup(swordModel);
     }
 
-    private void OnTriggerEnter(Collider other)
+    /*private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Iaksa"))
         {
@@ -27,23 +27,7 @@ public class SwordController : WeaponController
 
                 atacando = false;
             }
-        } 
-        /*
-        else if (other.CompareTag("Enemy"))
-        {
-            if (atacando)
-            {
-                Debug.Log("Estoy atacando a Enemigo");
-                try
-                {
-                    other.gameObject.GetComponent<BhutaController>().TakeDamage(damage);
-                }
-                catch (NullReferenceException) { }
-
-                atacando = false;
-                
-            }
-        }*/
-    }
+        }
+    }*/
 
 }

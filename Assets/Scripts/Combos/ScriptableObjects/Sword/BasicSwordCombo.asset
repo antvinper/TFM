@@ -14,14 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Basic attack
   description: Basi attack description
-  damageMultiplier:
-  - 0.75
-  - 1
-  - 1.25
   skills:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: 2bfceb6d414d6f74ab1f0f1b40e4e82d, type: 2}
+  - {fileID: 11400000, guid: 2bfceb6d414d6f74ab1f0f1b40e4e82d, type: 2}
+  - {fileID: 11400000, guid: 2bfceb6d414d6f74ab1f0f1b40e4e82d, type: 2}
   startsActive: 1
   buttons: 010000000100000001000000
   comboFinished: 0

@@ -13,10 +13,11 @@ public class IaksaController : EnemyController
     [SerializeField] private Animator animator;
     [SerializeField] List<SkillDefinition> skills = new List<SkillDefinition>();
 
+
     private float latestChangeTime;
     private readonly float changeTime = 3f;
-    private float walkSpeed = 2f; //TODO -> Usar la velocidad de los stats.
-    private float runSpeed = 5f; // TODO -> Velocidad de los stats * x
+    private float walkSpeed; //TODO -> Usar la velocidad de los stats.
+    private float runSpeed; // TODO -> Velocidad de los stats * x
     private Vector3 movementDir;
     private Vector3 speedDir;
     private float timeBetweenAttack = 2f;
@@ -35,6 +36,9 @@ public class IaksaController : EnemyController
         model = new IaksaModel();
         this.SetModel(model);
 
+        walkSpeed = GetStatValue(StatNames.SPEED, StatParts.ACTUAL_VALUE);
+        runSpeed = walkSpeed * 2.5f;
+
         latestChangeTime = 0f;
 
         calculateRandomVector();
@@ -42,6 +46,8 @@ public class IaksaController : EnemyController
 
     void calculateRandomVector()
     {
+        walkSpeed = GetStatValue(StatNames.SPEED, StatParts.ACTUAL_VALUE);
+        Debug.Log("WalkSpeed = " + walkSpeed);
         movementDir = new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f)).normalized;
         transform.rotation = Quaternion.LookRotation(movementDir);
         speedDir = movementDir * walkSpeed;
@@ -49,6 +55,9 @@ public class IaksaController : EnemyController
 
     void calculateObjectiveVector(Vector3 objectivePos)
     {
+        walkSpeed = GetStatValue(StatNames.SPEED, StatParts.ACTUAL_VALUE);
+        runSpeed = walkSpeed * 2.5f;
+        Debug.Log("WalkSpeed = " + walkSpeed);
         movementDir = new Vector3(objectivePos.x - transform.position.x, 0, objectivePos.z - transform.position.z).normalized;
         transform.rotation = Quaternion.LookRotation(movementDir);
         speedDir = movementDir * runSpeed;

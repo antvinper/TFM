@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stats:
   - name: 0
-    value: 100
-    actualMaxValue: 150
+    value: 1
+    actualMaxValue: 1
     minValue: 0
     maxValue: 9999
     isVolatil: 1
@@ -38,7 +38,7 @@ MonoBehaviour:
     maxValue: 255
     isVolatil: 0
   - name: 4
-    value: 10
+    value: 5
     actualMaxValue: 255
     minValue: 1
     maxValue: 255
