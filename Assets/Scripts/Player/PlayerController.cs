@@ -9,7 +9,11 @@ public class PlayerController : CompanyCharacterController//<PlayerMutableModel>
     private PlayerController instance;
 
     private PlayerMutableModel playerModel;
-    public PlayerMutableModel PlayerModel;
+    public PlayerMutableModel PlayerModel
+    {
+        get => playerModel;
+        set => playerModel = value;
+    }
 
     [SerializeField] List<SkillDefinition> skills = new List<SkillDefinition>();
     private SoulFragment soulFragments;
@@ -107,8 +111,8 @@ public class PlayerController : CompanyCharacterController//<PlayerMutableModel>
     //TODO to erase
     private void WriteStats()
     {
-        
-        /*statsCanvas.statsPanelSupport.healthText.text = StatNames.HEALTH + ": " + playerModel.GetStatValue(StatNames.HEALTH, StatParts.ACTUAL_VALUE);
+        /*
+        statsCanvas.statsPanelSupport.healthText.text = StatNames.HEALTH + ": " + playerModel.GetStatValue(StatNames.HEALTH, StatParts.ACTUAL_VALUE);
         statsCanvas.statsPanelSupport.actualMaxHealthText.text = StatNames.HEALTH + " ACTUAL MAX: " + playerModel.GetStatValue(StatNames.HEALTH, StatParts.ACTUAL_MAX_VALUE);
         statsCanvas.statsPanelSupport.manaText.text = StatNames.MANA + ": " + playerModel.GetStatValue(StatNames.MANA, StatParts.ACTUAL_VALUE);
         statsCanvas.statsPanelSupport.attackText.text = StatNames.ATTACK + ": " + playerModel.GetStatValue(StatNames.ATTACK, StatParts.ACTUAL_VALUE);
