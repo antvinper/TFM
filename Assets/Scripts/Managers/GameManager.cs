@@ -31,11 +31,11 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     {
         if (dataPersistenceManager.IsDataLoaded)
         {
-            playerController.SetModel(GameModel.PlayerModel);
+            playerController.SetUp(GameModel.PlayerModel);
         }
         else
         {
-            playerController.SetNewModel();
+            playerController.SetUp();
         }
         this.playerController = playerController;
     }
@@ -97,7 +97,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     {
         if(dataPersistenceManager.gameModel.PlayerModel != null && playerController != null)
         {
-            dataPersistenceManager.gameModel.PlayerModel = playerController.Model as PlayerMutableModel;
+            dataPersistenceManager.gameModel.PlayerModel = playerController.PlayerModel;
             dataPersistenceManager.SaveGame();
         }
         else

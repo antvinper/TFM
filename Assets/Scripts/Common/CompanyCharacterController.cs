@@ -16,6 +16,10 @@ using UnityEngine;
             set => model = value;
         }
 
+        public void Setup(CharacterMutableModel model)
+        {
+            this.model = model;
+        }
 
         public virtual bool TryAddEffect(EffectDefinition effectDefinition, CompanyCharacterController effectOwner, bool isFromTree = false, int index = -1)
         {

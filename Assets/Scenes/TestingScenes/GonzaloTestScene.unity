@@ -2221,8 +2221,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b376a842597110846adba855b1b6bca1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  newTestingGame: 0
-  loadDataTestingGame: 1
+  newTestingGame: 1
+  loadDataTestingGame: 0
 --- !u!4 &1521536471
 Transform:
   m_ObjectHideFlags: 0
