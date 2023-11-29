@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.3069224, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -340,6 +340,10 @@ PrefabInstance:
       propertyPath: playerController
       value: 
       objectReference: {fileID: 1080185268}
+    - target: {fileID: 274060088090906233, guid: e14fe6ff7ba13774abe414e462c12fef, type: 3}
+      propertyPath: skills.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 274060088090906233, guid: e14fe6ff7ba13774abe414e462c12fef, type: 3}
       propertyPath: characterStatsDefinition
       value: 
@@ -904,6 +908,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b376a842597110846adba855b1b6bca1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  newTestingGame: 1
+  loadDataTestingGame: 0
 --- !u!4 &1472923338
 Transform:
   m_ObjectHideFlags: 0
@@ -1339,6 +1345,10 @@ PrefabInstance:
       propertyPath: skills.Array.data[0]
       value: 
       objectReference: {fileID: 11400000, guid: 831f6f82d7ca04b4faf2b5e9a3e70b3a, type: 2}
+    - target: {fileID: 2050708853417886103, guid: dd225e2935d66ba468d5e07c93c07f18, type: 3}
+      propertyPath: characterStatsDefinition
+      value: 
+      objectReference: {fileID: 11400000, guid: 70c4fb5aab6aa364d895211c2614d110, type: 2}
     - target: {fileID: 2050708853417886105, guid: dd225e2935d66ba468d5e07c93c07f18, type: 3}
       propertyPath: m_Name
       value: Iaksa

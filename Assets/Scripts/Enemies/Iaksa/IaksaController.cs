@@ -15,8 +15,8 @@ public class IaksaController : EnemyController
 
     private float latestChangeTime;
     private readonly float changeTime = 3f;
-    private float walkSpeed = 2f;
-    private float runSpeed = 5f;
+    private float walkSpeed = 2f; //TODO -> Usar la velocidad de los stats.
+    private float runSpeed = 5f; // TODO -> Velocidad de los stats * x
     private Vector3 movementDir;
     private Vector3 speedDir;
     private float timeBetweenAttack = 2f;
@@ -138,6 +138,8 @@ public class IaksaController : EnemyController
             animator.Play("Armature|Action");
             PlayerController playerController = collision.collider.GetComponent<PlayerController>();
             ApplySkill(playerController);
+            ResetAttack();
+
         }
     }
 }

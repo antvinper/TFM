@@ -8,8 +8,8 @@ public class PlayerController : CompanyCharacterController//<PlayerMutableModel>
 {
     private PlayerController instance;
 
-    protected new PlayerMutableModel model;
-    new public PlayerMutableModel Model
+    protected PlayerMutableModel model;
+    public PlayerMutableModel Model
     {
         get => this.model;
         set => this.model = value;
@@ -100,7 +100,7 @@ public class PlayerController : CompanyCharacterController//<PlayerMutableModel>
         WriteStats();
         //ActiveSlotTree(1);
         ApplySkill();
-        canvasTreeManager.Setup(model.Tree.Slots);
+        //canvasTreeManager.Setup(model.Tree.Slots);
 
         //TODO -> Erase from here. Just for testing
         AddSoulFragments(100);
@@ -109,7 +109,7 @@ public class PlayerController : CompanyCharacterController//<PlayerMutableModel>
     //TODO to erase
     private void WriteStats()
     {
-        /*
+        
         statsCanvas.statsPanelSupport.healthText.text = StatNames.HEALTH + ": " + model.GetStatValue(StatNames.HEALTH, StatParts.ACTUAL_VALUE);
         statsCanvas.statsPanelSupport.actualMaxHealthText.text = StatNames.HEALTH + " ACTUAL MAX: " + model.GetStatValue(StatNames.HEALTH, StatParts.ACTUAL_MAX_VALUE);
         statsCanvas.statsPanelSupport.manaText.text = StatNames.MANA + ": " + model.GetStatValue(StatNames.MANA, StatParts.ACTUAL_VALUE);
@@ -121,7 +121,7 @@ public class PlayerController : CompanyCharacterController//<PlayerMutableModel>
         statsCanvas.statsPanelSupport.evasionText.text = StatNames.EVASION + ": " + model.GetStatValue(StatNames.EVASION, StatParts.ACTUAL_VALUE);
         statsCanvas.statsPanelSupport.critChanceText.text = StatNames.CRIT_CHANCE + ": " + model.GetStatValue(StatNames.CRIT_CHANCE, StatParts.ACTUAL_VALUE);
         statsCanvas.statsPanelSupport.dodgeChanceText.text = StatNames.DODGE_CHANCE + ": " + model.GetStatValue(StatNames.DODGE_CHANCE, StatParts.ACTUAL_VALUE);
-        */
+        
     }
 
 
@@ -200,6 +200,20 @@ public class PlayerController : CompanyCharacterController//<PlayerMutableModel>
         }
     }
 
+    /*public override Stat GetStatFromName(StatNames statName)
+    {
+        return model.GetStatFromName(statName);
+    }
+
+    public override int GetStatValue(StatNames statName, StatParts statPart)
+    {
+        if (model == null)
+        {
+            Debug.Log("NULL");
+        }
+        return model.GetStatValue(statName, statPart);
+    }*/
+
     public void DoCombo(ButtonsXbox buttonPressed)
     {
         weaponController.DoCombo(buttonPressed);
@@ -262,4 +276,52 @@ public class PlayerController : CompanyCharacterController//<PlayerMutableModel>
         weaponController.FinishCombo();
     }
     #endregion
+
+
+    public override Stat GetStatFromName(StatNames statName)
+    {
+        return model.GetStatFromName(statName);
+    }
+
+    public override int GetStatValue(StatNames statName, StatParts statPart)
+    {
+        if (model == null)
+        {
+            Debug.Log("NULL");
+        }
+        return model.GetStatValue(statName, statPart);
+    }
+
+    public override DuringTimeEffect GetDuringTimeEffectByType(EffectTypesEnum effectType)
+    {
+        return model.GetDuringTimeEffectByType(effectType);
+    }
+    public override OverTimeEffect GetOverTimeEffectByType(EffectTypesEnum effectType)
+    {
+        return model.GetOverTimeEffectByType(effectType);
+    }
+
+    public override void ChangeActualStatInstantly(EffectDefinition effectDefinition)
+    {
+        model.ChangeActualStat(effectDefinition);
+    }
+
+    public override void ChangeActualMaxStatInstantly(EffectDefinition effectDefinition)
+    {
+        model.ChangeActualMaxStat(effectDefinition);
+    }
+
+    public override bool TryAddEffect(EffectDefinition effectDefinition, CompanyCharacterController effectOwner, bool isFromTree = false, int index = -1)
+    {
+        bool hasBeenRemoved = model.TryAddEffect(effectDefinition, isFromTree, index);
+
+        return hasBeenRemoved;
+    }
+
+    public override bool TryRemoveEffect(EffectDefinition effectDefinition)
+    {
+        bool hasBeenRemoved = model.TryRemoveEffect(effectDefinition);
+
+        return hasBeenRemoved;
+    }
 }

@@ -37,11 +37,19 @@ public class MovePlayer : MonoBehaviour//SingletonMonoBehaviour<MovePlayer>
     {
         player = GetComponent<CharacterController>();
         anim = GetComponent<Animator>();
+
+        
+    }
+
+    private void FixedUpdate()
+    {
+        playerSpeed = playerController.GetStatValue(StatNames.SPEED, StatParts.ACTUAL_VALUE);
     }
 
     void Update()
     {
-        playerSpeed = playerController.GetStatValue(StatNames.SPEED, StatParts.ACTUAL_VALUE);
+        //TODO? Coger la velocidad una vez y al modificarse?
+        //playerSpeed = playerController.GetStatValue(StatNames.SPEED, StatParts.ACTUAL_VALUE);
 
         horizontalMove = Input.GetAxis("Horizontal");
         verticalMove = Input.GetAxis("Vertical");
@@ -60,7 +68,7 @@ public class MovePlayer : MonoBehaviour//SingletonMonoBehaviour<MovePlayer>
         player.Move(movePlayer * Time.deltaTime);
 
         //Rotacion del personaje segun hacia donde mira
-        if (movePlayer != Vector3.zero)
+        if (movePlayer != Vector3.zero && playerInput != Vector3.zero)
         {
             Quaternion rotation = Quaternion.LookRotation(playerInput, Vector3.up);
             transform.rotation = Quaternion.RotateTowards(transform.rotation, rotation, rotationSpeed);

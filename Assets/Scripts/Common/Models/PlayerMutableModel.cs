@@ -153,7 +153,7 @@ public class PlayerMutableModel : CharacterMutableModel
         /*
          * 5º Se calculan los Duringtimeffect cambios temporales
          */
-        CalculateDuringTimeEffects();
+        CalculateDuringTimeEffects(statName);
     }
 
     private void CalculateNotPercentualPermanentsFromTree(StatNames statName)

@@ -17,12 +17,12 @@ using UnityEngine;
         }
 
 
-        public bool TryAddEffect(EffectDefinition effectDefinition, CompanyCharacterController effectOwner, bool isFromTree = false, int index = -1)
+        public virtual bool TryAddEffect(EffectDefinition effectDefinition, CompanyCharacterController effectOwner, bool isFromTree = false, int index = -1)
         {
             return model.TryAddEffect(effectDefinition, isFromTree, index);
         }
 
-        public bool TryRemoveEffect(EffectDefinition effectDefinition)
+        public virtual bool TryRemoveEffect(EffectDefinition effectDefinition)
         {
             return model.TryRemoveEffect(effectDefinition);
         }
@@ -40,31 +40,35 @@ using UnityEngine;
             }
         }
 
-        public Stat GetStatFromName(StatNames statName)
+        public virtual Stat GetStatFromName(StatNames statName)
         {
             return model.GetStatFromName(statName);
         }
 
-        public int GetStatValue(StatNames statName, StatParts statPart)
+        public virtual int GetStatValue(StatNames statName, StatParts statPart)
         {
+            if(model == null)
+            {
+                Debug.Log("NULL");
+            }
             return model.GetStatValue(statName, statPart);
         }
 
-        public DuringTimeEffect GetDuringTimeEffectByType(EffectTypesEnum effectType)
+        public virtual DuringTimeEffect GetDuringTimeEffectByType(EffectTypesEnum effectType)
         {
             return model.GetDuringTimeEffectByType(effectType);
         }
-        public OverTimeEffect GetOverTimeEffectByType(EffectTypesEnum effectType)
+        public virtual OverTimeEffect GetOverTimeEffectByType(EffectTypesEnum effectType)
         {
             return model.GetOverTimeEffectByType(effectType);
         }
 
-        public void ChangeActualStatInstantly(EffectDefinition effectDefinition)
+        public virtual void ChangeActualStatInstantly(EffectDefinition effectDefinition)
         {
             model.ChangeActualStat(effectDefinition);
         }
 
-        public void ChangeActualMaxStatInstantly(EffectDefinition effectDefinition)
+        public virtual void ChangeActualMaxStatInstantly(EffectDefinition effectDefinition)
         {
             model.ChangeActualMaxStat(effectDefinition);
         }
