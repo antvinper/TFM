@@ -13,12 +13,7 @@ public class CanvasTreeManager : MonoBehaviour
     private void Start()
     {
         treeBranches = new List<TreeBranchView>();
-        /*treeBranches = new List<TreeBranchView>(GetComponentsInChildren<TreeBranchView>());
 
-        foreach(TreeBranchView branch in treeBranches)
-        {
-            branch.FillBranchView();
-        }*/
         RefreshSoulFragmentText();
     }
 
@@ -30,9 +25,6 @@ public class CanvasTreeManager : MonoBehaviour
             playerController = GameManager.Instance.GetPlayerController();
             await new WaitForSeconds(0.1f);
         }
-        
-        //await new WaitForSeconds(1.0f);
-        //PlayerController playerController = GameManager.Instance.GetPlayerController();
 
         soulFragmentText.text = playerController.SoulFragments.Amount + "$";
     }
@@ -58,7 +50,7 @@ public class CanvasTreeManager : MonoBehaviour
 
         if (price < playerController.SoulFragments.Amount)
         {
-            GameManager.Instance.GetPlayerController().ActiveSlotTree(slot);
+            GameManager.Instance.GetPlayerController().IncrementSlotTree(slot);
             branch.RefreshUI(slot);
 
             playerController.AddSoulFragments(-price);

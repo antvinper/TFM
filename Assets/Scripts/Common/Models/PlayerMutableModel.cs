@@ -24,7 +24,7 @@ public class PlayerMutableModel : CharacterMutableModel
     }
 
     private StatsTree tree;
-    //[JsonProperty]
+
     [JsonIgnore]
     public StatsTree Tree
     {
@@ -42,10 +42,8 @@ public class PlayerMutableModel : CharacterMutableModel
 
     [JsonIgnore] private List<StatModificationPermanent> statsModificationPermanentFromTree;
 
-    public PlayerMutableModel()
-    {
-
-    }
+    //Constructor vacío necesario para cargar datos
+    public PlayerMutableModel() { }
 
     public PlayerMutableModel(List<TreeStruct> treeStructList)
     {
@@ -72,7 +70,7 @@ public class PlayerMutableModel : CharacterMutableModel
         }
     }
 
-    public void ProcessSlotTreeActivation(int index)
+    public void ProcessIncrementSlotTree(int index)
     {
         tree.ProcessSlotActivation(tree.Slots[index]);
         FillStatsModificationPermanentFromTree();
@@ -80,16 +78,15 @@ public class PlayerMutableModel : CharacterMutableModel
         SetTreeStruct();
     }
 
-    public void ProcessSlotTreeActivation(TreeSlot slot)
+    public void ProcessIncrementSlotTree(TreeSlot slot)
     {
-        /*TreeSlotDefinition slotToActive = tree.Slots.Where(s => s.Equals(slot)).FirstOrDefault();*/
         tree.ProcessSlotActivation(slot);
         FillStatsModificationPermanentFromTree();
         CalculateStats();
         SetTreeStruct();
 
     }
-    /*public void ProcessSlotTreeDeActivation(int index)
+    /*public void ProcessDecrementSlotTree(int index)
     {
         TreeSlotDefinition slot = tree.Slots[index];
         tree.ProcessSlotDeActivation(slot);

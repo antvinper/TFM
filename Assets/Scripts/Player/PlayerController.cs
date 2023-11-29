@@ -14,12 +14,6 @@ public class PlayerController : CompanyCharacterController//<PlayerMutableModel>
         get => this.model;
         set => this.model = value;
     }
-    /*private new PlayerMutableModel model;
-    public PlayerMutableModel Model
-    {
-        get => model;
-        set => model = value;
-    }*/
 
     [SerializeField] List<SkillDefinition> skills = new List<SkillDefinition>();
     private SoulFragment soulFragments;
@@ -34,18 +28,18 @@ public class PlayerController : CompanyCharacterController//<PlayerMutableModel>
         get => rupees;
     }
 
+    //TODO -> Make it private and get it from WeaponActive
     public WeaponController weaponController;
 
     [SerializeField] private StatsTreeDefinition tree;
-    //[SerializeField] private StatsDefinition statsDefinitions;
+
     /**
      * TODO
-     * Borrar de aqu�
+     * Borrar de aquí y obtenerlo con colisiones
      */
     //public Characters.CharacterController enemy;
+
     public CanvasTreeManager canvasTreeManager;
-
-
     StatsCanvasSupport statsCanvas;
 
 
@@ -93,43 +87,12 @@ public class PlayerController : CompanyCharacterController//<PlayerMutableModel>
          * Refactor all the Start Method
          */
         GameManager.Instance.SetPlayerController(this);
-        //SetNewModel();
 
-
-        //Obtener del modelo la cantidad de rupias y fragmentos que tiene
         this.rupees = new Rupee(model.Rupees);
         this.soulFragments = new SoulFragment(model.SoulFragments);
 
-
-
-        //TREE BEHAVIOUR
-        /*Debug.Log(model.Tree.Slots);
-        for(int i = 0; i < model.Tree.Slots.Count; ++i)
-        {
-            TreeSlotDefinition slot = model.Tree.Slots[i];
-            List<InstantEffectPermanent> effects = model.Tree.Slots[i].Effects;
-            Debug.Log("## Slot: " + i + " ## ");
-            for(int j = 0; j < effects.Count; ++j)
-            {
-                Debug.Log("Effect: " + j + " / " + effects[j].name + " / " + effects[j].Value);
-            }
-            slot.ProcessSlotActivation(this);
-        }
-        model.Tree.Slots[0].ProcessSlotDeActivation();*/
-
-
-        //UseSkill(PlayerEnumSkills.SINGLE_PERCENTAGE_ATTACK, this);
-        //UseSkill(PlayerEnumSkills.HEAL_BY_MAX_HEALTH_PERCENTAGE, this);
-        //UseSkill(PlayerEnumSkills.SLOW_DOWN, enemy);
-
-        //UseSkills(PlayerEnumSkills.HURRY_UP, this);
-
-        //UseSkill(PlayerEnumSkills.SLOW_DOWN, this);
-        //UseSkill(PlayerEnumSkills.PERMANENT, this);
-        //UseSkill(PlayerEnumSkills.DEFFENSE_DOWN, enemy);
         //GetRoomRewards();
 
-        //ApplySkill();
 
 
 
@@ -139,6 +102,7 @@ public class PlayerController : CompanyCharacterController//<PlayerMutableModel>
         ApplySkill();
         canvasTreeManager.Setup(model.Tree.Slots);
 
+        //TODO -> Erase from here. Just for testing
         AddSoulFragments(100);
     }
 
@@ -158,18 +122,10 @@ public class PlayerController : CompanyCharacterController//<PlayerMutableModel>
         statsCanvas.statsPanelSupport.dodgeChanceText.text = StatNames.DODGE_CHANCE + ": " + model.GetStatValue(StatNames.DODGE_CHANCE, StatParts.ACTUAL_VALUE);
     }
 
-    public async Task ActiveSlotTree(int index)
-    {
-        await new WaitForSeconds(2.0f);
-        //PlayerMutableModel model = this.model as PlayerMutableModel;
-        model.ProcessSlotTreeActivation(index);
-        WriteStats();
-    }
 
-    public async Task ActiveSlotTree(TreeSlot slot)
+    public async Task IncrementSlotTree(TreeSlot slot)
     {
-        //PlayerMutableModel model = this.model as PlayerMutableModel;
-        model.ProcessSlotTreeActivation(slot);
+        model.ProcessIncrementSlotTree(slot);
         WriteStats();
     }
 
@@ -180,8 +136,6 @@ public class PlayerController : CompanyCharacterController//<PlayerMutableModel>
         this.model.Rupees = this.rupees.Amount;
         Debug.Log("#Room# Rupees gained: " + value);
         Debug.Log("#Room# Actual rupees: " + this.model.Rupees);
-
-        //model.Rupees += value;
     }
     public void AddSoulFragments(int value)
     {
@@ -199,7 +153,7 @@ public class PlayerController : CompanyCharacterController//<PlayerMutableModel>
         Debug.Log("#Room# Actual SoulFragments: " + this.model.SoulFragments);
     }
 
-
+    //TODO -> Esto debería ir en algún RoomManager
     private async Task GetRoomRewards()
     {
         await new WaitForSeconds(2.0f);
@@ -208,8 +162,7 @@ public class PlayerController : CompanyCharacterController//<PlayerMutableModel>
         AddRupees(rupeesGained);
         
 
-        //Shop
-        //Al gameManager
+        //TODO -> Shop a GameManager
         ShopManager.Instance.CreateShop();
 
         GetActiveCombos();
@@ -230,12 +183,6 @@ public class PlayerController : CompanyCharacterController//<PlayerMutableModel>
         WriteStats();
     }
 
-    /*public override float GetMyRealDamage()
-    {
-        Debug.Log("My real damage = " + model.GetStatValue(StatsEnum.ATTACK));
-        return model.GetStatValue(StatsEnum.ATTACK);
-    }*/
-
     public async Task ApplySkill()
     {
         await new WaitForSeconds(2.0f);
@@ -251,49 +198,6 @@ public class PlayerController : CompanyCharacterController//<PlayerMutableModel>
         }
     }
 
-    public async Task UseSkills(List<SkillDefinition> skillName, CompanyCharacterController target)
-    {
-        foreach(SkillDefinition sd in skills)
-        {
-            await new WaitForSeconds(2);
-            //Instant, During, Over
-            //sd.ProcessSkill(this, target);
-            //Permanent
-            //sd.ProcessSkill(this);
-        }
-
-        
-    }
-
-    public async Task UseSkill(SkillDefinition skillName, CompanyCharacterController target)
-    {
-        Debug.Log("Using: " + skillName);
-        SkillDefinition skill = skills.Where(s => s.name.Equals(skillName)).FirstOrDefault();
-        await new WaitForSeconds(6);
-        /*switch (skillName)
-        {
-            case PlayerEnumSkillsTest.SINGLE_ATTACK:
-
-                break;
-        }*/
-
-        //skill.ProcessSkill(this);
-        //skill.ProcessSkill(this, target);
-        //Debug.Log(model.MaxHealth);
-        //Debug.Log(model.GetStatValue(StatsEnum.HEALTH));
-    }
-
-    /*public void ProcessDamage(float value)
-    {
-        model.TakeDamage(value);
-
-        if(model.Health <= 0)
-        {
-            //TODO
-            Debug.Log("Dead");
-        }
-    }*/
-
     public void DoCombo(ButtonsXbox buttonPressed)
     {
         weaponController.DoCombo(buttonPressed);
@@ -302,7 +206,6 @@ public class PlayerController : CompanyCharacterController//<PlayerMutableModel>
     public void StartCharging()
     {
         weaponController.StartCharging();
-        //StartCoroutine(weaponController.StartCharging());
     }
 
     public void StopCharging()
