@@ -6,6 +6,7 @@ using UnityEngine;
 public class StatsPanelSupport : MonoBehaviour
 {
     public TextMeshProUGUI healthText;
+    public TextMeshProUGUI actualMaxHealthText;
     public TextMeshProUGUI manaText;
     public TextMeshProUGUI attackText;
     public TextMeshProUGUI magicalAttackText;

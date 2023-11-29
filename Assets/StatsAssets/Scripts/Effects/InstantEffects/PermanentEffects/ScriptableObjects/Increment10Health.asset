@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0e871837e1d9ef046874c32c342c6c95, type: 3}
-  m_Name: Increment10Attack
+  m_Name: Increment10Health
   m_EditorClassIdentifier: 
-  effectName: +10 ATACK
+  effectName: +10HP
   effectType: 0
   description: 
   applyOnSelf: 0
   isStatIncremented: 1
-  statAffected: 2
-  statPart: 1
+  statAffected: 0
+  statPart: 2
   isValueInPercentage: 0
   statWhatToSee: 0
   isTheOwnerStat: 0

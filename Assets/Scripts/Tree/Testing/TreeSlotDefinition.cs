@@ -9,36 +9,85 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Tree Slot Definition", menuName = "Tree/Slot Definition")]
 public class TreeSlotDefinition : ScriptableObject
 {
-    [SerializeField] private List<InstantEffectPermanent> effects = new List<InstantEffectPermanent>();
-    [SerializeField] private bool isActive;
-    [JsonProperty]
-    public List<InstantEffectPermanent> Effects
-    {
-        get => effects;
-        set => effects = value;
-    }
-    [JsonProperty]
-    public bool IsActive
-    {
-        get => isActive;
-        set => isActive = value;
-    }
+    //[SerializeField] private List<InstantEffectPermanent> effects = new List<InstantEffectPermanent>();
+    [SerializeField] private InstantEffectPermanent effect;
 
-    public async Task ProcessSlotActivation(CompanyCharacterController target)
+    [Tooltip("Número de veces que se ha mejorado la rama.")]
+    [SerializeField] private int actualActives;
+    [Tooltip("Máximo número de veces que se puede mejorar la rama.")]
+    [SerializeField] private int maxActives;
+    [Tooltip("Precio, en fragmentos de alma, que cuesta la primera activación.")]
+    [SerializeField] private int price;
+    [Tooltip("Incremento de precio en porcentaje por compra.")]
+    [Range(0, 1000)]
+    [SerializeField] private int percentualCostPerIncrement;
+
+    //[JsonIgnore] 
+    /*private int actualCost
     {
-        foreach(InstantEffectPermanent effect in effects)
+        get
         {
-            effect.ProcessEffect(target);
+            return GetPriceForNext();
         }
-        isActive = true;
+    }*/
+    public int Price
+    {
+        get => price;
+    }
+    //[JsonProperty]
+    public int ActualActives
+    {
+        get => actualActives;
     }
 
-    public async Task ProcessSlotDeActivation(CompanyCharacterController target)
+    //[JsonProperty]
+    public InstantEffectPermanent Effect
+    {
+        get => effect;
+        set => effect = value;
+    }
+
+    public int PercentualCostPerIncrement
+    {
+        get => percentualCostPerIncrement;
+    }
+
+    //[JsonIgnore]
+    /*public int ActualCost
+    {
+        get
+        {
+            return GetPriceForNext();
+        }
+    }*/
+
+    //[JsonIgnore]
+    public int MaxActives
+    {
+        get => maxActives;
+    }
+
+    /*private int GetPriceForNext()
+    {
+        return (int)(price + (0.1 * percentualCostPerIncrement * actualActives));
+    }*/
+
+
+    /*public async Task ProcessSlotActivation()
+    {
+        //Intentar activar.
+        if(actualActives < maxActives)
+        {
+            ++actualActives;
+        }
+    }*/
+
+    /*public async Task ProcessSlotDeActivation(CompanyCharacterController target)
     {
         foreach (InstantEffectPermanent effect in effects)
         {
             effect.RemoveEffect(target);
         }
-        isActive = false;
-    }
+
+    }*/
 }
