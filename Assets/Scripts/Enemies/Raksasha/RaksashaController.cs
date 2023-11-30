@@ -10,7 +10,6 @@ public class RaksashaController : EnemyController
     [SerializeField] private Animator animator;
     [SerializeField] SkillDefinition skillSmash;
     [SerializeField] SkillDefinition skillBlow;
-    [SerializeField] PlayerController player;
 
     private float walkSpeed;
 
@@ -24,14 +23,13 @@ public class RaksashaController : EnemyController
 
     void Start()
     {
+        
         model = new RaksashaModel();
         this.SetModel(model);
 
         latestChangeTime = 0f;
 
         walkSpeed = GetStatValue(StatNames.SPEED, StatParts.ACTUAL_VALUE);
-
-        calculateRandomVector();
     }
 
     void Update()
@@ -86,15 +84,21 @@ public class RaksashaController : EnemyController
         canAttack = true;
     }
 
+    public async Task WaitAnSecods()
+    {
+       await new WaitForSeconds(5f);
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         //Si el jugador entra en contacto con "Sphere Collider"
         if (other.CompareTag("Player"))
         {
             //Realiza ataque en area "Aplastar" (Smash)
-            animator.Play("Armatura|Aplastar");
-            player = GetComponent<PlayerController>();
-            ApplySkillSmash(player); //TODO -> Mejorar, ya que debe hacer daño si esta dentro del area, si sale no deberia hacerle caso
+            animator.Play("Armature|Aplastar");
+            PlayerController playerController = other.GetComponent<PlayerController>();
+            ApplySkillSmash(playerController); //TODO -> Mejorar, ya que debe hacer daño si esta dentro del area, si sale no deberia hacerle caso
+            WaitAnSecods();
 
             //Moverse hacia el jugador
             transform.LookAt(new Vector3(other.transform.position.x, transform.position.y, other.transform.position.z));
