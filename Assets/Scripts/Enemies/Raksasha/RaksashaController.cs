@@ -1,23 +1,21 @@
-using CompanyStats;
+﻿using CompanyStats;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 
-public class IaksaController : EnemyController
+public class RaksashaController : EnemyController
 {
-    //private new IaksaModel model;
-    //public IaksaModel Model { get => model; }
-
     [SerializeField] private Rigidbody rb;
     [SerializeField] private Animator animator;
-    [SerializeField] List<SkillDefinition> skills = new List<SkillDefinition>();
+    [SerializeField] SkillDefinition skillSmash;
+    [SerializeField] SkillDefinition skillBlow;
+    [SerializeField] PlayerController player;
 
+    private float walkSpeed;
 
     private float latestChangeTime;
     private readonly float changeTime = 3f;
-    private float walkSpeed;
-    private float runSpeed; 
     private Vector3 movementDir;
     private Vector3 speedDir;
     private float timeBetweenAttack = 2f;
@@ -26,15 +24,26 @@ public class IaksaController : EnemyController
 
     void Start()
     {
-        model = new IaksaModel();
+        model = new RaksashaModel();
         this.SetModel(model);
-
-        walkSpeed = GetStatValue(StatNames.SPEED, StatParts.ACTUAL_VALUE);
-        runSpeed = walkSpeed * 2.5f;
 
         latestChangeTime = 0f;
 
+        walkSpeed = GetStatValue(StatNames.SPEED, StatParts.ACTUAL_VALUE);
+
         calculateRandomVector();
+    }
+
+    void Update()
+    {
+        if (Time.time - latestChangeTime > changeTime)
+        {
+            latestChangeTime = Time.time;
+            calculateRandomVector();
+            animator.Play("Armature|Andar");
+        }
+
+        rb.velocity = speedDir;
     }
 
     void calculateRandomVector()
@@ -49,24 +58,22 @@ public class IaksaController : EnemyController
     void calculateObjectiveVector(Vector3 objectivePos)
     {
         walkSpeed = GetStatValue(StatNames.SPEED, StatParts.ACTUAL_VALUE);
-        runSpeed = walkSpeed * 2.5f;
         Debug.Log("WalkSpeed = " + walkSpeed);
         movementDir = new Vector3(objectivePos.x - transform.position.x, 0, objectivePos.z - transform.position.z).normalized;
         transform.rotation = Quaternion.LookRotation(movementDir);
-        speedDir = movementDir * runSpeed;
+        speedDir = movementDir * walkSpeed;
     }
 
-    void Update()
+    public async Task ApplySkillSmash(CompanyCharacterController target)
     {
-        if(Time.time - latestChangeTime > changeTime)
-        {
-            latestChangeTime = Time.time;
-            calculateRandomVector(); 
-            animator.Play("Armature|Walk");
-        }
-
-        rb.velocity = speedDir;
+        skillSmash.ProcessSkill(this, target);
     }
+
+    public async Task ApplySkillBlow(CompanyCharacterController target)
+    {
+        skillBlow.ProcessSkill(this, target);
+    }
+
     public async Task ResetAttack()
     {
         while (actualTimeBetweenAttack < timeBetweenAttack)
@@ -79,36 +86,33 @@ public class IaksaController : EnemyController
         canAttack = true;
     }
 
-
-    public async Task ApplySkill(CompanyCharacterController target)
-    {
-        foreach (SkillDefinition skill in skills)
-        {
-            skill.ProcessSkill(this, target);
-        }
-    }
-
     private void OnTriggerEnter(Collider other)
     {
-        //Si el jugador/enemigo entra en contacto con "Sphere Collider", ira a por el
-        if (other.CompareTag("Player") || other.CompareTag("Enemy"))
+        //Si el jugador entra en contacto con "Sphere Collider"
+        if (other.CompareTag("Player"))
         {
+            //Realiza ataque en area "Aplastar" (Smash)
+            animator.Play("Armatura|Aplastar");
+            player = GetComponent<PlayerController>();
+            ApplySkillSmash(player); //TODO -> Mejorar, ya que debe hacer daño si esta dentro del area, si sale no deberia hacerle caso
+
             //Moverse hacia el jugador
             transform.LookAt(new Vector3(other.transform.position.x, transform.position.y, other.transform.position.z));
             calculateObjectiveVector(other.transform.position);
             latestChangeTime = Time.time;
-            animator.Play("Armature|Run");
+            animator.Play("Armature|Andar");
         }
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        //Si el jugador/enemigo entra en contacto con "Box Collider", activara la animacion "Action" para pegar un saltito y aplicar el buff/debuff
-        if ((collision.collider.CompareTag("Player") || collision.collider.CompareTag("Enemy")) && canAttack)
+        //Si el jugador entra en contacto con "Box Collider"
+        if (collision.collider.CompareTag("Player") && canAttack)
         {
-            animator.Play("Armature|Action");
+            //Realiza un "zarpazo" (Blow)
+            animator.Play("Armature|Zarpazo");
             PlayerController playerController = collision.collider.GetComponent<PlayerController>();
-            ApplySkill(playerController);
+            ApplySkillBlow(playerController);
             ResetAttack();
 
         }
