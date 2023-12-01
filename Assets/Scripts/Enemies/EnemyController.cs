@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
+using System;
 
 
 /*
@@ -10,6 +11,11 @@ using UnityEngine;
  */
 public class EnemyController : CompanyCharacterController
 {
+    Guid gUID;
+    public Guid GUID
+    {
+        get => gUID;
+    }
     //protected new EnemyMutableModel model { get; set; }
 
     /**
@@ -20,6 +26,7 @@ public class EnemyController : CompanyCharacterController
 
     private void Start()
     {
+        gUID = Guid.NewGuid();
         //SetModel();
     }
 

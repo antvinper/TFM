@@ -48,8 +48,6 @@ public class IaksaController : EnemyController
     void calculateRandomVector()
     {
         walkSpeed = GetStatValue(StatNames.SPEED, StatParts.ACTUAL_VALUE);
-        walkSpeed = 0;
-        Debug.Log("WalkSpeed = " + walkSpeed);
         movementDir = new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f)).normalized;
         transform.rotation = Quaternion.LookRotation(movementDir);
         speedDir = movementDir * walkSpeed;
@@ -58,9 +56,7 @@ public class IaksaController : EnemyController
     void calculateObjectiveVector(Vector3 objectivePos)
     {
         walkSpeed = GetStatValue(StatNames.SPEED, StatParts.ACTUAL_VALUE);
-        walkSpeed = 0;
         runSpeed = walkSpeed * 2.5f;
-        Debug.Log("WalkSpeed = " + walkSpeed);
         movementDir = new Vector3(objectivePos.x - transform.position.x, 0, objectivePos.z - transform.position.z).normalized;
         transform.rotation = Quaternion.LookRotation(movementDir);
         speedDir = movementDir * runSpeed;
@@ -71,7 +67,7 @@ public class IaksaController : EnemyController
         if(Time.time - latestChangeTime > changeTime)
         {
             latestChangeTime = Time.time;
-            //calculateRandomVector(); 
+            calculateRandomVector(); 
             animator.Play("Armature|Walk");
         }
 

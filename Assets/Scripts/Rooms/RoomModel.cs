@@ -7,7 +7,6 @@ using UnityEngine;
 public class RoomModel
 {
     [SerializeField] private RoomTypesEnum roomType;
-    [SerializeField] private List<GameObject> enemiesPrefabs;
     [SerializeField] private RewardsEnum rewardType;
     [SerializeField] private int rupeesMinAmount;
     [SerializeField] private int rupeesMaxAmount;
@@ -16,9 +15,51 @@ public class RoomModel
     [SerializeField] private int healMinAmount;
     [SerializeField] private int healMaxAmount;
     [SerializeField] private SkillDefinition healSkill;
+    [SerializeField] private List<Transform> spawnPoints;
+    [SerializeField] private List<Wave> waves;
 
-    private int enemiesDied = 0;
+    private int actualWave = 1;
+    public int ActualWave
+    {
+        get => actualWave;
+    }
 
+    public List<Transform> SpawnPoints
+    {
+        get => spawnPoints;
+    }
+
+    public bool IsTheLastWave()
+    {
+        bool isTheLastWave = false;
+        if(actualWave == waves.Count)
+        {
+            isTheLastWave = true;
+        }
+        else
+        {
+            ++actualWave;
+        }
+
+        return isTheLastWave;
+    }
+
+    public int GetNEnemiesToSpawn()
+    {
+        return waves[actualWave - 1].NumberOfEnemiesToSpawn;
+    }
+
+    public GameObject GetWaveRandomEnemy()
+    {
+        int randomIndex = Random.Range(0, waves[actualWave - 1].Enemies.Count);
+
+        return waves[actualWave - 1].Enemies[randomIndex];
+    }
+
+    public List<GameObject> GetEnemiesWave()
+    {
+        return waves[actualWave - 1].Enemies;
+    }
 
     public RoomReward GetReward(PlayerController playerController)
     {
@@ -72,28 +113,14 @@ public class RoomModel
         return value;
     }
 
-    public bool OnEnemyKilled(EnemyController enemy)
+    public void AddEnemyKilled()
     {
-        bool areAllEnemiesKilled = false;
-        GameObject goToErase = null;
-        foreach(GameObject go in enemiesPrefabs)
-        {
-            if (enemy.Equals(go.transform.GetComponent<EnemyController>()))
-            {
-                ++enemiesDied;
-                
-                goToErase = go;
-            }
-        }
-        if(goToErase != null)
-        {
-            enemiesPrefabs.Remove(goToErase);
-        }
-        if (enemiesPrefabs.Count.Equals(0))
-        {
-            areAllEnemiesKilled = true;
-        }
-        return areAllEnemiesKilled;
+        waves[actualWave - 1].AddEnemyKilled();
+    }
+
+    public void RestartEnemiesKilled()
+    {
+        waves[actualWave - 1].RestartEnemiesKilled();
     }
 
 }
