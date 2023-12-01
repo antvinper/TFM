@@ -27,6 +27,7 @@ public class EnemyController : CompanyCharacterController
     {
         this.model = model;
         this.model.Setup(characterStatsDefinition);
+        base.Setup(this.model);
         //model = new EnemyMutableModel();
         //model.Setup(statsDefinitions);
     }
@@ -57,8 +58,13 @@ public class EnemyController : CompanyCharacterController
 
         if (!isAlive)
         {
-            Debug.Log("TODO -> Behaviour when dies.");
+            Debug.Log("TODO -> Behaviour when dies."); 
+            if (transform.tag.Equals("Enemy"))
+            {
+                RoomManager.Instance.OnEnemyKilled(this);
+            }
             Destroy(transform.gameObject);
+            
         }
     }
 

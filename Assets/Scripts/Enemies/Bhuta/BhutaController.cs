@@ -6,17 +6,19 @@ using UnityEngine;
 
 public class BhutaController: EnemyController
 {
-    private new BhutaModel model;
-    public BhutaModel Model
+    private BhutaModel bhutaModel;
+    public BhutaModel BhutaModel
     {
-        get => model;
+        get => bhutaModel;
     }
     //BhutaModel _model;
     void Start()
     {
         //model = new BhutaModel();
-        model = new BhutaModel();
-        Model.SetTeleportPoints(new List<TeleportPoint>(GetComponentsInChildren<TeleportPoint>()));
+        bhutaModel = new BhutaModel();
+        this.SetModel(bhutaModel);
+
+        bhutaModel.SetTeleportPoints(new List<TeleportPoint>(GetComponentsInChildren<TeleportPoint>()));
 
         List<Collider> colliders = new List<Collider>(Physics.OverlapSphere(transform.position, 1));
 
@@ -24,10 +26,11 @@ public class BhutaController: EnemyController
         {
             if (c.gameObject.GetComponent<RoomBounds>())
             {
-                model.FloorCollider = c.gameObject.GetComponent<BoxCollider>();
-                model.ActualFloorColliderInstanceId = c.gameObject.GetInstanceID();
+                bhutaModel.FloorCollider = c.gameObject.GetComponent<BoxCollider>();
+                bhutaModel.ActualFloorColliderInstanceId = c.gameObject.GetInstanceID();
             }
         }
+        
         Teleport();
     }
 
@@ -53,7 +56,7 @@ public class BhutaController: EnemyController
     {
         bool isRandomPosOk = false;
 
-        int maxSize = model.TeleportPoints.Count;
+        int maxSize = bhutaModel.TeleportPoints.Count;
         int[] numeros = new int[maxSize];
         List<int> numerosPosibles = Enumerable.Range(0, maxSize).ToList();
         System.Random rnd = new System.Random();
@@ -67,11 +70,11 @@ public class BhutaController: EnemyController
 
         foreach (int n in numeros)
         {
-            Vector3 telPos = model.TeleportPoints[n].gameObject.transform.position;
+            Vector3 telPos = bhutaModel.TeleportPoints[n].gameObject.transform.position;
             if (Physics.CheckSphere(telPos, 1))
             {
                 List<Collider> colliders = new List<Collider>(Physics.OverlapSphere(telPos, 0.5f));
-                if (colliders.Count() == 1 && colliders[0].gameObject.GetInstanceID().Equals(model.ActualFloorColliderInstanceId))
+                if (colliders.Count() == 1 && colliders[0].gameObject.GetInstanceID().Equals(bhutaModel.ActualFloorColliderInstanceId))
                 {
                     isRandomPosOk = true;
                     randomPosition = telPos;

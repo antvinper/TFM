@@ -15,7 +15,7 @@ public class PlayerController : CompanyCharacterController//<PlayerMutableModel>
         set => playerModel = value;
     }
 
-    [SerializeField] List<SkillDefinition> skills = new List<SkillDefinition>();
+    //[SerializeField] List<SkillDefinition> skills = new List<SkillDefinition>();
     private SoulFragment soulFragments;
     private Rupee rupees;
 
@@ -30,6 +30,8 @@ public class PlayerController : CompanyCharacterController//<PlayerMutableModel>
 
     //TODO -> Make it private and get it from WeaponActive
     public WeaponController weaponController;
+
+    //public EnemyController enemy;
 
     [SerializeField] private StatsTreeDefinition tree;
 
@@ -93,15 +95,15 @@ public class PlayerController : CompanyCharacterController//<PlayerMutableModel>
         this.rupees = new Rupee(playerModel.Rupees);
         this.soulFragments = new SoulFragment(playerModel.SoulFragments);
 
-        //GetRoomRewards();
+        
 
 
 
 
         statsCanvas = FindObjectOfType<StatsCanvasSupport>();
-        //WriteStats();
+        WriteStats();
         //ActiveSlotTree(1);
-        ApplySkill();
+        //ApplySkill();
         //canvasTreeManager.Setup(playerModel.Tree.Slots);
 
         //TODO -> Erase from here. Just for testing
@@ -111,8 +113,8 @@ public class PlayerController : CompanyCharacterController//<PlayerMutableModel>
     //TODO to erase
     private void WriteStats()
     {
-        /*
-        statsCanvas.statsPanelSupport.healthText.text = StatNames.HEALTH + ": " + playerModel.GetStatValue(StatNames.HEALTH, StatParts.ACTUAL_VALUE);
+        
+        /*statsCanvas.statsPanelSupport.healthText.text = StatNames.HEALTH + ": " + playerModel.GetStatValue(StatNames.HEALTH, StatParts.ACTUAL_VALUE);
         statsCanvas.statsPanelSupport.actualMaxHealthText.text = StatNames.HEALTH + " ACTUAL MAX: " + playerModel.GetStatValue(StatNames.HEALTH, StatParts.ACTUAL_MAX_VALUE);
         statsCanvas.statsPanelSupport.manaText.text = StatNames.MANA + ": " + playerModel.GetStatValue(StatNames.MANA, StatParts.ACTUAL_VALUE);
         statsCanvas.statsPanelSupport.attackText.text = StatNames.ATTACK + ": " + playerModel.GetStatValue(StatNames.ATTACK, StatParts.ACTUAL_VALUE);
@@ -122,7 +124,8 @@ public class PlayerController : CompanyCharacterController//<PlayerMutableModel>
         statsCanvas.statsPanelSupport.speedText.text = StatNames.SPEED + ": " + playerModel.GetStatValue(StatNames.SPEED, StatParts.ACTUAL_VALUE);
         statsCanvas.statsPanelSupport.evasionText.text = StatNames.EVASION + ": " + playerModel.GetStatValue(StatNames.EVASION, StatParts.ACTUAL_VALUE);
         statsCanvas.statsPanelSupport.critChanceText.text = StatNames.CRIT_CHANCE + ": " + playerModel.GetStatValue(StatNames.CRIT_CHANCE, StatParts.ACTUAL_VALUE);
-        statsCanvas.statsPanelSupport.dodgeChanceText.text = StatNames.DODGE_CHANCE + ": " + playerModel.GetStatValue(StatNames.DODGE_CHANCE, StatParts.ACTUAL_VALUE);*/
+        statsCanvas.statsPanelSupport.dodgeChanceText.text = StatNames.DODGE_CHANCE + ": " + playerModel.GetStatValue(StatNames.DODGE_CHANCE, StatParts.ACTUAL_VALUE);
+        statsCanvas.statsPanelSupport.luckyText.text = StatNames.LUCKY + ": " + playerModel.GetStatValue(StatNames.LUCKY, StatParts.ACTUAL_VALUE);*/
         
     }
 
@@ -157,19 +160,12 @@ public class PlayerController : CompanyCharacterController//<PlayerMutableModel>
         Debug.Log("#Room# Actual SoulFragments: " + this.playerModel.SoulFragments);
     }
 
-    //TODO -> Esto debería ir en algún RoomManager
-    private async Task GetRoomRewards()
+    //TODO -> Esto debería de crearse de otra manera -> al tomar una acción
+    private async Task CreateShop()
     {
-        await new WaitForSeconds(2.0f);
-        int rupeesGained = RoomManager.Instance.GetRoomRewards();
+        //ShopManager.Instance.CreateShop();
 
-        AddRupees(rupeesGained);
-        
-
-        //TODO -> Shop a GameManager
-        ShopManager.Instance.CreateShop();
-
-        GetActiveCombos();
+        //GetActiveCombos();
     }
 
     
@@ -187,12 +183,12 @@ public class PlayerController : CompanyCharacterController//<PlayerMutableModel>
         WriteStats();
     }
 
-    public async Task ApplySkill()
+    /*public async Task ApplySkill()
     {
         await new WaitForSeconds(2.0f);
         foreach (SkillDefinition skill in skills)
         {
-            skill.ProcessSkill(this, this);
+            skill.ProcessSkill(this, enemy);
             await new WaitForSeconds(3.0f);
         }
         foreach (SkillDefinition skill in skills)
@@ -200,7 +196,7 @@ public class PlayerController : CompanyCharacterController//<PlayerMutableModel>
             skill.ProcessSkill(this);
             await new WaitForSeconds(3.0f);
         }
-    }
+    }*/
 
     /*public override Stat GetStatFromName(StatNames statName)
     {
@@ -278,52 +274,4 @@ public class PlayerController : CompanyCharacterController//<PlayerMutableModel>
         weaponController.FinishCombo();
     }
     #endregion
-
-
-    /*public override Stat GetStatFromName(StatNames statName)
-    {
-        return model.GetStatFromName(statName);
-    }
-
-    public override int GetStatValue(StatNames statName, StatParts statPart)
-    {
-        if (model == null)
-        {
-            Debug.Log("NULL");
-        }
-        return model.GetStatValue(statName, statPart);
-    }
-
-    public override DuringTimeEffect GetDuringTimeEffectByType(EffectTypesEnum effectType)
-    {
-        return model.GetDuringTimeEffectByType(effectType);
-    }
-    public override OverTimeEffect GetOverTimeEffectByType(EffectTypesEnum effectType)
-    {
-        return model.GetOverTimeEffectByType(effectType);
-    }
-
-    public override void ChangeActualStatInstantly(EffectDefinition effectDefinition)
-    {
-        model.ChangeActualStat(effectDefinition);
-    }
-
-    public override void ChangeActualMaxStatInstantly(EffectDefinition effectDefinition)
-    {
-        model.ChangeActualMaxStat(effectDefinition);
-    }
-
-    public override bool TryAddEffect(EffectDefinition effectDefinition, CompanyCharacterController effectOwner, bool isFromTree = false, int index = -1)
-    {
-        bool hasBeenRemoved = model.TryAddEffect(effectDefinition, isFromTree, index);
-
-        return hasBeenRemoved;
-    }
-
-    public override bool TryRemoveEffect(EffectDefinition effectDefinition)
-    {
-        bool hasBeenRemoved = model.TryRemoveEffect(effectDefinition);
-
-        return hasBeenRemoved;
-    }*/
 }

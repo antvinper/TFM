@@ -6,8 +6,8 @@ using UnityEngine;
 
 public class IaksaController : EnemyController
 {
-    //private new IaksaModel model;
-    //public IaksaModel Model { get => model; }
+    private  IaksaModel iaksaModel;
+    public IaksaModel IaksaModel { get => iaksaModel; }
 
     [SerializeField] private Rigidbody rb;
     [SerializeField] private Animator animator;
@@ -33,8 +33,9 @@ public class IaksaController : EnemyController
     //public float cur_health = 0f;
     void Start()
     {
-        model = new IaksaModel();
-        this.SetModel(model);
+        iaksaModel = new IaksaModel();
+        this.SetModel(iaksaModel);
+
 
         walkSpeed = GetStatValue(StatNames.SPEED, StatParts.ACTUAL_VALUE);
         runSpeed = walkSpeed * 2.5f;
@@ -47,6 +48,7 @@ public class IaksaController : EnemyController
     void calculateRandomVector()
     {
         walkSpeed = GetStatValue(StatNames.SPEED, StatParts.ACTUAL_VALUE);
+        walkSpeed = 0;
         Debug.Log("WalkSpeed = " + walkSpeed);
         movementDir = new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f)).normalized;
         transform.rotation = Quaternion.LookRotation(movementDir);
@@ -56,6 +58,7 @@ public class IaksaController : EnemyController
     void calculateObjectiveVector(Vector3 objectivePos)
     {
         walkSpeed = GetStatValue(StatNames.SPEED, StatParts.ACTUAL_VALUE);
+        walkSpeed = 0;
         runSpeed = walkSpeed * 2.5f;
         Debug.Log("WalkSpeed = " + walkSpeed);
         movementDir = new Vector3(objectivePos.x - transform.position.x, 0, objectivePos.z - transform.position.z).normalized;
@@ -68,7 +71,7 @@ public class IaksaController : EnemyController
         if(Time.time - latestChangeTime > changeTime)
         {
             latestChangeTime = Time.time;
-            calculateRandomVector(); 
+            //calculateRandomVector(); 
             animator.Play("Armature|Walk");
         }
 
@@ -108,10 +111,10 @@ public class IaksaController : EnemyController
         }
     }
 
-    public void DestroyEnemy()
+    /*public void DestroyEnemy()
     {
         Destroy(gameObject);
-    }
+    }*/
 
     /*
     private void OnTriggerEnter(Collider other)

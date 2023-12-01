@@ -175,7 +175,7 @@ public class PlayerMutableModel : CharacterMutableModel
             List<StatModificationPermanent> statModificationsActives = statsModificationPermanentFromTree.Where(e => e.StatAffected.Equals(statName) && e.IsValueInPercentage).ToList();
             foreach (StatModificationPermanent statActive in statModificationsActives)
             {
-                statActive.GetRealValue();
+                statActive.CalculateRealPercentage(GetStatValue(statActive.StatWhatToSee, statActive.StatWhatToSeeStatPart));
                 ChangeStat(statActive);
             }
         }

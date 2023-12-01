@@ -16,4 +16,5 @@ public class StatsPanelSupport : MonoBehaviour
     public TextMeshProUGUI evasionText;
     public TextMeshProUGUI critChanceText;
     public TextMeshProUGUI dodgeChanceText;
+    public TextMeshProUGUI luckyText;
 }

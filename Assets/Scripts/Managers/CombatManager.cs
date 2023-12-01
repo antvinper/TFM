@@ -8,7 +8,7 @@ public class CombatManager : MonoBehaviour
     //private PlayerController player;
 
     /**
-     * Compruebo que se llama al modelo de buta y no al genérico
+     * Compruebo que se llama al modelo de buta y no al genï¿½rico
      */
     public void Test()
     {

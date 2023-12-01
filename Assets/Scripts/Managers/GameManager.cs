@@ -39,6 +39,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         }
         this.playerController = playerController;
     }
+
     public PlayerController GetPlayerController()
     {
         return this.playerController;

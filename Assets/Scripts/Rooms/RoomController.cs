@@ -11,8 +11,13 @@ public class RoomController : MonoBehaviour
         RoomManager.Instance.RoomController = this; 
     }
 
-    public int GetRupeesAmount()
+    public RoomReward GetReward(PlayerController playerController)
     {
-        return model.GetRupeesAmount();
+        return model.GetReward(playerController);
+    }
+
+    public bool OnEnemyKilled(EnemyController enemy)
+    {
+        return model.OnEnemyKilled(enemy);
     }
 }
