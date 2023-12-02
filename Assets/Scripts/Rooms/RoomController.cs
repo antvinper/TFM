@@ -11,10 +11,9 @@ public class RoomController : MonoBehaviour
 
     List<GameObject> instantiatedEnemies;
 
-    private void Start()
-    {
-        RoomManager.Instance.RoomController = this; 
-    }
+    [SerializeField] BoxCollider nextLevelCollider;
+    [SerializeField] MeshRenderer nextLevelDoorMesh;
+
 
     public async Task StartNewWave()
     {
@@ -71,7 +70,7 @@ public class RoomController : MonoBehaviour
         Debug.Log("#REWARDS " + roomReward.RewardType + " -> " + roomReward.Value);
     }
 
-    public void OnEnemyKilled(EnemyController enemy, PlayerController playerController)
+    public async Task OnEnemyKilled(EnemyController enemy, PlayerController playerController)
     {
         GameObject goToErase = null;
 
@@ -95,9 +94,13 @@ public class RoomController : MonoBehaviour
             if (model.IsTheLastWave())
             {
                 GetRoomRewards(playerController);
+                
+                nextLevelDoorMesh.enabled = false;
+                nextLevelCollider.enabled = true;
             }
             else
             {
+                await new WaitForSeconds(0.5f);
                 StartNewWave();
             }
         }

@@ -6,15 +6,7 @@ using UnityEngine;
 [System.Serializable]
 public class RoomModel
 {
-    [SerializeField] private RoomTypesEnum roomType;
-    [SerializeField] private RewardsEnum rewardType;
-    [SerializeField] private int rupeesMinAmount;
-    [SerializeField] private int rupeesMaxAmount;
-    [SerializeField] private int soulFragmentsMinAmount;
-    [SerializeField] private int soulFragmentsMaxAmount;
-    [SerializeField] private int healMinAmount;
-    [SerializeField] private int healMaxAmount;
-    [SerializeField] private SkillDefinition healSkill;
+    [SerializeField] RoomDefinition roomDefinition;
     [SerializeField] private List<Transform> spawnPoints;
     [SerializeField] private List<Wave> waves;
 
@@ -23,6 +15,11 @@ public class RoomModel
     {
         get => actualWave;
     }
+
+    /*public List<Transform> SpawnPoints
+    {
+        get => spawnPoints;
+    }*/
 
     public List<Transform> SpawnPoints
     {
@@ -67,17 +64,17 @@ public class RoomModel
 
         int luckyValue = playerController.GetStatValue(StatNames.LUCKY, StatParts.ACTUAL_VALUE);
 
-        switch (rewardType)
+        switch (roomDefinition.RewardType)
         {
             case RewardsEnum.RUPEES:
-                roomReward = new RoomReward(rewardType, GetRupeesAmount(luckyValue));
+                roomReward = new RoomReward(roomDefinition.RewardType, GetRupeesAmount(luckyValue));
                 break;
             case RewardsEnum.HEAL:
-                roomReward = new RoomReward(rewardType, GetHealAmount(luckyValue));
-                roomReward.SetHealSkill(healSkill);
+                roomReward = new RoomReward(roomDefinition.RewardType, GetHealAmount(luckyValue));
+                roomReward.SetHealSkill(roomDefinition.HealSkill);
                 break;
             case RewardsEnum.SOULFRAGMENTS:
-                roomReward = new RoomReward(rewardType, GetSoulFragmentsAmount(luckyValue));
+                roomReward = new RoomReward(roomDefinition.RewardType, GetSoulFragmentsAmount(luckyValue));
                 break;
         }
 
@@ -86,21 +83,21 @@ public class RoomModel
 
     public int GetSoulFragmentsAmount(int luckyValue)
     {
-        int preValue = Random.Range(soulFragmentsMinAmount, soulFragmentsMaxAmount + 1);
+        int preValue = Random.Range(roomDefinition.SoulFragmentsMinAmount, roomDefinition.SoulFragmentsMaxAmount + 1);
 
         return GetFinalValue(preValue, luckyValue);
     }
 
     public int GetHealAmount(int luckyValue)
     {
-        int preValue = Random.Range(healMinAmount, healMaxAmount + 1);
+        int preValue = Random.Range(roomDefinition.HealMinAmount, roomDefinition.HealMaxAmount + 1);
 
         return GetFinalValue(preValue, luckyValue);
     }
 
     public int GetRupeesAmount(int luckyValue)
     {
-        int preValue = Random.Range(rupeesMinAmount, rupeesMaxAmount + 1);
+        int preValue = Random.Range(roomDefinition.RupeesMinAmount, roomDefinition.RupeesMaxAmount + 1);
 
         return GetFinalValue(preValue, luckyValue);
     }

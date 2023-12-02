@@ -5,13 +5,9 @@ using UnityEngine;
 
 public class RoomManager : SingletonMonoBehaviour<RoomManager>
 {
-    private RoomController roomController;
+    [SerializeField] private RoomController roomController;
     private PlayerController playerController;
 
-    public RoomController RoomController
-    {
-        set => this.roomController = value;
-    }
 
     private void Start()
     {
