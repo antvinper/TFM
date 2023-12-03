@@ -1122,6 +1122,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 279318535}
   m_Mesh: {fileID: -1142842941047641275, guid: 6bfbe8b49f844e84da66bb17cad12da8, type: 3}
+--- !u!95 &290282892 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 447664583895393412, guid: f1c0e42ad3f65ad4fbb037257004b4b3, type: 3}
+  m_PrefabInstance: {fileID: 447664583905155744}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &297291347
 GameObject:
   m_ObjectHideFlags: 0
@@ -6024,6 +6029,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 239949858190007323, guid: 4800d2db8f5b33243a340455acc7a28a, type: 3}
+      propertyPath: doorAnimator
+      value: 
+      objectReference: {fileID: 290282892}
+    - target: {fileID: 239949858190007323, guid: 4800d2db8f5b33243a340455acc7a28a, type: 3}
       propertyPath: nextLevelCollider
       value: 
       objectReference: {fileID: 1299566220}
@@ -9487,6 +9496,10 @@ PrefabInstance:
     - target: {fileID: 447664583895393471, guid: f1c0e42ad3f65ad4fbb037257004b4b3, type: 3}
       propertyPath: m_Name
       value: EA03_Prop_House_Door_01b_LOD0 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 447664583895393471, guid: f1c0e42ad3f65ad4fbb037257004b4b3, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f1c0e42ad3f65ad4fbb037257004b4b3, type: 3}
