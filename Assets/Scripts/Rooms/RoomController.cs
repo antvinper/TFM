@@ -12,8 +12,7 @@ public class RoomController : MonoBehaviour
     List<GameObject> instantiatedEnemies;
 
     [SerializeField] BoxCollider nextLevelCollider;
-    [SerializeField] MeshRenderer nextLevelDoorMesh;
-
+    [SerializeField] Animator doorAnimator;
 
     public async Task StartNewWave()
     {
@@ -94,8 +93,8 @@ public class RoomController : MonoBehaviour
             if (model.IsTheLastWave())
             {
                 GetRoomRewards(playerController);
-                
-                nextLevelDoorMesh.enabled = false;
+
+                doorAnimator.SetTrigger("openDoor");
                 nextLevelCollider.enabled = true;
             }
             else
