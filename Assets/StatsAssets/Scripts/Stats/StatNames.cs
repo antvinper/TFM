@@ -11,7 +11,8 @@ namespace CompanyStats
         SPEED,
         EVASION,
         CRIT_CHANCE,
-        DODGE_CHANCE
+        DODGE_CHANCE,
+        LUCKY
     }
 }
 

@@ -10,6 +10,10 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     private bool isGameInRun = false;
     private DataPersistenceManager dataPersistenceManager;
 
+    //TODO borrar
+    public bool newTestingGame;
+    public bool loadDataTestingGame;
+
     /**
      * TODO
      * Quiz�s borrar. Ahora se usa en el application quit para almacenar la localizaci�n del personaje
@@ -27,14 +31,15 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     {
         if (dataPersistenceManager.IsDataLoaded)
         {
-            playerController.SetModel(GameModel.PlayerModel);
+            playerController.SetUp(GameModel.PlayerModel);
         }
         else
         {
-            playerController.SetNewModel();
+            playerController.SetUp();
         }
         this.playerController = playerController;
     }
+
     public PlayerController GetPlayerController()
     {
         return this.playerController;
@@ -44,15 +49,21 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     {
         dataPersistenceManager = new DataPersistenceManager();
 
+        if (newTestingGame)
+        {
+            NewGame(99);
+        }
+        if (loadDataTestingGame)
+        {
+            LoadDataTesting();
+        }
 
-        //LoadDataTesting();
-        //NewGame(99);
+
     }
 
 
     public void NewGame(int slotIndex)
     {
-
         dataPersistenceManager.NewGame(slotIndex);
         isGameStarted = true;
         //SceneManager.Instance.LoadLobbyScene();
@@ -87,7 +98,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     {
         if(dataPersistenceManager.gameModel.PlayerModel != null && playerController != null)
         {
-            dataPersistenceManager.gameModel.PlayerModel = playerController.Model as PlayerMutableModel;
+            dataPersistenceManager.gameModel.PlayerModel = playerController.PlayerModel;
             dataPersistenceManager.SaveGame();
         }
         else
@@ -141,8 +152,11 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
              * Get the player quaternion to save the data
              */
             //SavePlayerLocation();
+            
             Debug.Log("Here should save when application quit");
             SaveGame();
+            
+            
         }
     }
 

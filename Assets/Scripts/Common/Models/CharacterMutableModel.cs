@@ -11,8 +11,7 @@ public class CharacterMutableModel// : ICharacterModel
     private CharacterStatsDefinition characterStatsDefinition;
     private List<Stat> stats;
 
-    private int soulFragments;
-    private int rupees;
+    
     
     protected List<TreeForModelStruct> treeForModelStructs;
 
@@ -26,18 +25,7 @@ public class CharacterMutableModel// : ICharacterModel
     [JsonIgnore] public List<DuringTimeEffectDefinition> DuringTimeEffects { get => duringTimeEffects; }
     [JsonIgnore] public List<InstantEffectTemporallyDefinition> TemporallyEffects { get => temporallyEffects; }
 
-    [JsonProperty]
-    public int Rupees
-    {
-        get => rupees;
-        set => rupees = value;
-    }
-    [JsonProperty]
-    public int SoulFragments
-    {
-        get => soulFragments;
-        set => soulFragments = value;
-    }
+    
     [JsonProperty]
     public List<StatModificationPermanent> StatsModificationPermanent
     {
@@ -45,6 +33,7 @@ public class CharacterMutableModel// : ICharacterModel
         set => statsModificationPermanent = value;
     }
      
+    public CharacterMutableModel() { }
 
     public virtual void Setup(CharacterStatsDefinition characterStatsDefinition)
     {
@@ -108,6 +97,10 @@ public class CharacterMutableModel// : ICharacterModel
 
     public virtual void CalculateStat(StatNames statName, StatParts statPart)
     {
+        if(statName.Equals(StatNames.SPEED) && statPart.Equals(StatParts.ACTUAL_VALUE))
+        {
+            Debug.Log("HOLA");
+        }
         GetStatFromName(statName).ResetStat();
 
 
@@ -143,7 +136,7 @@ public class CharacterMutableModel// : ICharacterModel
         /*
          * 5º Se calculan los Duringtimeffect cambios temporales
          */
-        CalculateDuringTimeEffects();
+        CalculateDuringTimeEffects(statName);
 
         /* TODO
          * 7º Se calculan los Overtimeffect cambios temporales
@@ -165,9 +158,10 @@ public class CharacterMutableModel// : ICharacterModel
         }*/
     }
 
-    protected void CalculateDuringTimeEffects()
+    protected void CalculateDuringTimeEffects(StatNames statName)
     {
-        foreach (DuringTimeEffectDefinition duringTimeEffect in duringTimeEffects)
+        List<DuringTimeEffectDefinition> duringTimeEffectsFromStat = duringTimeEffects.Where(e => e.StatAffected.Equals(statName)).ToList();
+        foreach (DuringTimeEffectDefinition duringTimeEffect in duringTimeEffectsFromStat)
         {
             if (duringTimeEffect.IsValueInPercentage)
             {

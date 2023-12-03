@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9d4ad1931286854d9a6bb45c5167307, type: 3}
+  m_Name: TreeSlot_10%_Lucky
+  m_EditorClassIdentifier: 
+  effect: {fileID: 11400000, guid: 8defda176404a4641bf9f81b46adb072, type: 2}
+  actualActives: 0
+  maxActives: 5
+  price: 30
+  percentualCostPerIncrement: 25

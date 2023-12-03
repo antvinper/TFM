@@ -7,28 +7,43 @@ using CompanyStats;
 public class PlayerController : CompanyCharacterController//<PlayerMutableModel>
 {
     private PlayerController instance;
-    /*private new PlayerMutableModel model;
-    public PlayerMutableModel Model
+
+    private PlayerMutableModel playerModel;
+    public PlayerMutableModel PlayerModel
     {
-        get => model;
-        set => model = value;
-    }*/
-    
-    [SerializeField] List<SkillDefinition> skills = new List<SkillDefinition>();
-    private SoulFragment soulFragment;
+        get => playerModel;
+        set => playerModel = value;
+    }
+
+    //[SerializeField] List<SkillDefinition> skills = new List<SkillDefinition>();
+    private SoulFragment soulFragments;
     private Rupee rupees;
 
+    public SoulFragment SoulFragments
+    {
+        get => soulFragments;
+    }
+    public Rupee Rupees
+    {
+        get => rupees;
+    }
+
+    //TODO -> Make it private and get it from WeaponActive
     public WeaponController weaponController;
 
-    [SerializeField] private StatsTree tree;
-    //[SerializeField] private StatsDefinition statsDefinitions;
+    //public EnemyController enemy;
+
+    [SerializeField] private StatsTreeDefinition tree;
+
     /**
      * TODO
-     * Borrar de aqu�
+     * Borrar de aquí y obtenerlo con colisiones
      */
     //public Characters.CharacterController enemy;
 
+    public CanvasTreeManager canvasTreeManager;
     StatsCanvasSupport statsCanvas;
+
 
     private void Awake()
     {
@@ -40,6 +55,25 @@ public class PlayerController : CompanyCharacterController//<PlayerMutableModel>
         {
             instance = this;
         }
+    }
+
+    public async Task SetUp(PlayerMutableModel model)
+    {
+        this.playerModel = model;
+        StatsTree t = new StatsTree(tree);
+        this.playerModel.Tree = t;
+        this.playerModel.Setup(characterStatsDefinition);
+        base.Setup(playerModel);
+    }
+
+    public async Task SetUp()
+    {
+        StatsTree t = new StatsTree(tree);
+        playerModel = new PlayerMutableModel(t);
+        playerModel.Setup(characterStatsDefinition);
+        GameManager.Instance.GameModel.PlayerModel = playerModel as PlayerMutableModel;
+        base.Setup(playerModel);
+
     }
 
     /**
@@ -57,123 +91,90 @@ public class PlayerController : CompanyCharacterController//<PlayerMutableModel>
          * Refactor all the Start Method
          */
         GameManager.Instance.SetPlayerController(this);
-        //SetNewModel();
 
-        //Obtener del modelo la cantidad de rupias y fragmentos que tiene
-        this.rupees = new Rupee(model.Rupees);
-        this.soulFragment = new SoulFragment(model.SoulFragments);
+        this.rupees = new Rupee(playerModel.Rupees);
+        this.soulFragments = new SoulFragment(playerModel.SoulFragments);
 
-
-
-        //TREE BEHAVIOUR
-        /*Debug.Log(model.Tree.Slots);
-        for(int i = 0; i < model.Tree.Slots.Count; ++i)
-        {
-            TreeSlotDefinition slot = model.Tree.Slots[i];
-            List<InstantEffectPermanent> effects = model.Tree.Slots[i].Effects;
-            Debug.Log("## Slot: " + i + " ## ");
-            for(int j = 0; j < effects.Count; ++j)
-            {
-                Debug.Log("Effect: " + j + " / " + effects[j].name + " / " + effects[j].Value);
-            }
-            slot.ProcessSlotActivation(this);
-        }
-        model.Tree.Slots[0].ProcessSlotDeActivation();*/
+        
 
 
-        //UseSkill(PlayerEnumSkills.SINGLE_PERCENTAGE_ATTACK, this);
-        //UseSkill(PlayerEnumSkills.HEAL_BY_MAX_HEALTH_PERCENTAGE, this);
-        //UseSkill(PlayerEnumSkills.SLOW_DOWN, enemy);
-
-        //UseSkills(PlayerEnumSkills.HURRY_UP, this);
-
-        //UseSkill(PlayerEnumSkills.SLOW_DOWN, this);
-        //UseSkill(PlayerEnumSkills.PERMANENT, this);
-        //UseSkill(PlayerEnumSkills.DEFFENSE_DOWN, enemy);
-        //GetRoomRewards();
-
-        //ApplySkill();
 
 
         statsCanvas = FindObjectOfType<StatsCanvasSupport>();
         WriteStats();
         //ActiveSlotTree(1);
-        ApplySkill();
+        //ApplySkill();
+        //canvasTreeManager.Setup(playerModel.Tree.Slots);
+
+        //TODO -> Erase from here. Just for testing
+        AddSoulFragments(100);
     }
 
     //TODO to erase
     private void WriteStats()
     {
-        statsCanvas.statsPanelSupport.healthText.text = StatNames.HEALTH + ": " + model.GetStatValue(StatNames.HEALTH, StatParts.ACTUAL_VALUE);
-        statsCanvas.statsPanelSupport.manaText.text = StatNames.MANA + ": " + model.GetStatValue(StatNames.MANA, StatParts.ACTUAL_VALUE);
-        statsCanvas.statsPanelSupport.attackText.text = StatNames.ATTACK + ": " + model.GetStatValue(StatNames.ATTACK, StatParts.ACTUAL_VALUE);
-        statsCanvas.statsPanelSupport.magicalAttackText.text = StatNames.MAGICAL_ATTACK + ": " + model.GetStatValue(StatNames.MAGICAL_ATTACK, StatParts.ACTUAL_VALUE);
-        statsCanvas.statsPanelSupport.defenseText.text = StatNames.DEFENSE + ": " + model.GetStatValue(StatNames.DEFENSE, StatParts.ACTUAL_VALUE);
-        statsCanvas.statsPanelSupport.magicalDefenseText.text = StatNames.MAGICAL_DEFENSE + ": " + model.GetStatValue(StatNames.MAGICAL_DEFENSE, StatParts.ACTUAL_VALUE);
-        statsCanvas.statsPanelSupport.speedText.text = StatNames.SPEED + ": " + model.GetStatValue(StatNames.SPEED, StatParts.ACTUAL_VALUE);
-        statsCanvas.statsPanelSupport.evasionText.text = StatNames.EVASION + ": " + model.GetStatValue(StatNames.EVASION, StatParts.ACTUAL_VALUE);
-        statsCanvas.statsPanelSupport.critChanceText.text = StatNames.CRIT_CHANCE + ": " + model.GetStatValue(StatNames.CRIT_CHANCE, StatParts.ACTUAL_VALUE);
-        statsCanvas.statsPanelSupport.dodgeChanceText.text = StatNames.DODGE_CHANCE + ": " + model.GetStatValue(StatNames.DODGE_CHANCE, StatParts.ACTUAL_VALUE);
+        
+        /*statsCanvas.statsPanelSupport.healthText.text = StatNames.HEALTH + ": " + playerModel.GetStatValue(StatNames.HEALTH, StatParts.ACTUAL_VALUE);
+        statsCanvas.statsPanelSupport.actualMaxHealthText.text = StatNames.HEALTH + " ACTUAL MAX: " + playerModel.GetStatValue(StatNames.HEALTH, StatParts.ACTUAL_MAX_VALUE);
+        statsCanvas.statsPanelSupport.manaText.text = StatNames.MANA + ": " + playerModel.GetStatValue(StatNames.MANA, StatParts.ACTUAL_VALUE);
+        statsCanvas.statsPanelSupport.attackText.text = StatNames.ATTACK + ": " + playerModel.GetStatValue(StatNames.ATTACK, StatParts.ACTUAL_VALUE);
+        statsCanvas.statsPanelSupport.magicalAttackText.text = StatNames.MAGICAL_ATTACK + ": " + playerModel.GetStatValue(StatNames.MAGICAL_ATTACK, StatParts.ACTUAL_VALUE);
+        statsCanvas.statsPanelSupport.defenseText.text = StatNames.DEFENSE + ": " + playerModel.GetStatValue(StatNames.DEFENSE, StatParts.ACTUAL_VALUE);
+        statsCanvas.statsPanelSupport.magicalDefenseText.text = StatNames.MAGICAL_DEFENSE + ": " + playerModel.GetStatValue(StatNames.MAGICAL_DEFENSE, StatParts.ACTUAL_VALUE);
+        statsCanvas.statsPanelSupport.speedText.text = StatNames.SPEED + ": " + playerModel.GetStatValue(StatNames.SPEED, StatParts.ACTUAL_VALUE);
+        statsCanvas.statsPanelSupport.evasionText.text = StatNames.EVASION + ": " + playerModel.GetStatValue(StatNames.EVASION, StatParts.ACTUAL_VALUE);
+        statsCanvas.statsPanelSupport.critChanceText.text = StatNames.CRIT_CHANCE + ": " + playerModel.GetStatValue(StatNames.CRIT_CHANCE, StatParts.ACTUAL_VALUE);
+        statsCanvas.statsPanelSupport.dodgeChanceText.text = StatNames.DODGE_CHANCE + ": " + playerModel.GetStatValue(StatNames.DODGE_CHANCE, StatParts.ACTUAL_VALUE);
+        statsCanvas.statsPanelSupport.luckyText.text = StatNames.LUCKY + ": " + playerModel.GetStatValue(StatNames.LUCKY, StatParts.ACTUAL_VALUE);*/
+        
     }
 
-    public async Task ActiveSlotTree(int index)
+
+    public async Task IncrementSlotTree(TreeSlot slot)
     {
-        await new WaitForSeconds(2.0f);
-        PlayerMutableModel model = this.model as PlayerMutableModel;
-        model.ProcessSlotTreeActivation(index);
+        playerModel.ProcessIncrementSlotTree(slot);
         WriteStats();
     }
+
 
     public void AddRupees(int value)
     {
         this.rupees.AddAmount(value);
-        this.model.Rupees = this.rupees.Amount;
+        this.playerModel.Rupees = this.rupees.Amount;
         Debug.Log("#Room# Rupees gained: " + value);
-        Debug.Log("#Room# Actual rupees: " + this.model.Rupees);
-
-        //model.Rupees += value;
+        Debug.Log("#Room# Actual rupees: " + this.playerModel.Rupees);
     }
     public void AddSoulFragments(int value)
     {
-        this.soulFragment.AddAmount(value);
-        this.model.SoulFragments = this.soulFragment.Amount;
-        Debug.Log("#Room# SoulFragments gained: " + value);
-        Debug.Log("#Room# Actual SoulFragments: " + this.model.SoulFragments);
-    }
-
-    private async Task GetRoomRewards()
-    {
-        await new WaitForSeconds(2.0f);
-        int rupeesGained = RoomManager.Instance.GetRoomRewards();
-
-        AddRupees(rupeesGained);
+        if(value > 0)
+        {
+            this.soulFragments.AddAmount(value);
+        }
+        else
+        {
+            this.soulFragments.RemoveAmount(-value);
+        }
         
-
-        //Shop
-        //Al gameManager
-        ShopManager.Instance.CreateShop();
-
-        GetActiveCombos();
+        this.playerModel.SoulFragments = this.soulFragments.Amount;
+        Debug.Log("#Room# SoulFragments gained: " + value);
+        Debug.Log("#Room# Actual SoulFragments: " + this.playerModel.SoulFragments);
     }
 
-    public async Task SetModel(PlayerMutableModel model)
+    //TODO -> Esto debería de crearse de otra manera -> al tomar una acción
+    private async Task CreateShop()
     {
-        this.model = model;
-        this.model.Setup(characterStatsDefinition);
+        //ShopManager.Instance.CreateShop();
+
+        //GetActiveCombos();
     }
 
-    public async Task SetNewModel()
-    {
-        model = new PlayerMutableModel(tree);
-        model.Setup(characterStatsDefinition);
-        GameManager.Instance.GameModel.PlayerModel = model as PlayerMutableModel;
-    }
+    
     public override void ApplyDamage(Strike strike)
     {
-        Debug.Log("Health before damage = " + model.GetStatValue(StatNames.HEALTH, StatParts.ACTUAL_VALUE));
-        bool isAlive = model.ApplyDamage(strike);
+        Debug.Log("Health before damage = " + playerModel.GetStatValue(StatNames.HEALTH, StatParts.ACTUAL_VALUE));
+        bool isAlive = playerModel.ApplyDamage(strike);
         Debug.Log("Applied an attack of: " + strike.FinalValue + " points");
-        Debug.Log("Health after damage = " + model.GetStatValue(StatNames.HEALTH, StatParts.ACTUAL_VALUE));
+        Debug.Log("Health after damage = " + playerModel.GetStatValue(StatNames.HEALTH, StatParts.ACTUAL_VALUE));
 
         if (!isAlive)
         {
@@ -182,18 +183,12 @@ public class PlayerController : CompanyCharacterController//<PlayerMutableModel>
         WriteStats();
     }
 
-    /*public override float GetMyRealDamage()
-    {
-        Debug.Log("My real damage = " + model.GetStatValue(StatsEnum.ATTACK));
-        return model.GetStatValue(StatsEnum.ATTACK);
-    }*/
-
-    public async Task ApplySkill()
+    /*public async Task ApplySkill()
     {
         await new WaitForSeconds(2.0f);
         foreach (SkillDefinition skill in skills)
         {
-            skill.ProcessSkill(this, this);
+            skill.ProcessSkill(this, enemy);
             await new WaitForSeconds(3.0f);
         }
         foreach (SkillDefinition skill in skills)
@@ -201,49 +196,20 @@ public class PlayerController : CompanyCharacterController//<PlayerMutableModel>
             skill.ProcessSkill(this);
             await new WaitForSeconds(3.0f);
         }
+    }*/
+
+    /*public override Stat GetStatFromName(StatNames statName)
+    {
+        return model.GetStatFromName(statName);
     }
 
-    public async Task UseSkills(List<SkillDefinition> skillName, CompanyCharacterController target)
+    public override int GetStatValue(StatNames statName, StatParts statPart)
     {
-        foreach(SkillDefinition sd in skills)
+        if (model == null)
         {
-            await new WaitForSeconds(2);
-            //Instant, During, Over
-            //sd.ProcessSkill(this, target);
-            //Permanent
-            //sd.ProcessSkill(this);
+            Debug.Log("NULL");
         }
-
-        
-    }
-
-    public async Task UseSkill(SkillDefinition skillName, CompanyCharacterController target)
-    {
-        Debug.Log("Using: " + skillName);
-        SkillDefinition skill = skills.Where(s => s.name.Equals(skillName)).FirstOrDefault();
-        await new WaitForSeconds(6);
-        /*switch (skillName)
-        {
-            case PlayerEnumSkillsTest.SINGLE_ATTACK:
-
-                break;
-        }*/
-
-        //skill.ProcessSkill(this);
-        //skill.ProcessSkill(this, target);
-        //Debug.Log(model.MaxHealth);
-        //Debug.Log(model.GetStatValue(StatsEnum.HEALTH));
-    }
-
-    /*public void ProcessDamage(float value)
-    {
-        model.TakeDamage(value);
-
-        if(model.Health <= 0)
-        {
-            //TODO
-            Debug.Log("Dead");
-        }
+        return model.GetStatValue(statName, statPart);
     }*/
 
     public void DoCombo(ButtonsXbox buttonPressed)
@@ -254,7 +220,6 @@ public class PlayerController : CompanyCharacterController//<PlayerMutableModel>
     public void StartCharging()
     {
         weaponController.StartCharging();
-        //StartCoroutine(weaponController.StartCharging());
     }
 
     public void StopCharging()

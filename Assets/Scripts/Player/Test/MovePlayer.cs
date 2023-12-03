@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using CompanyStats;
 using UnityEngine;
 
 public class MovePlayer : MonoBehaviour//SingletonMonoBehaviour<MovePlayer>
@@ -9,7 +10,7 @@ public class MovePlayer : MonoBehaviour//SingletonMonoBehaviour<MovePlayer>
     private float horizontalMove;
     private float verticalMove;
     private Vector3 playerInput;
-    private UnityEngine.CharacterController player;
+    private CharacterController player;
     private Animator anim;
     public float gravity = 9.8f;
     public float targetRotation = 9.8f;
@@ -17,9 +18,9 @@ public class MovePlayer : MonoBehaviour//SingletonMonoBehaviour<MovePlayer>
     public float player_health = 100f;
     private GameObject _mainCamera;
 
-    bool imAttacking;
-
+    [SerializeField] PlayerController playerController;
     [SerializeField] private float playerSpeed;
+
     [SerializeField] private float fallVelocity;
     [SerializeField] private float rotationSpeed;
 
@@ -34,12 +35,22 @@ public class MovePlayer : MonoBehaviour//SingletonMonoBehaviour<MovePlayer>
 
     void Start()
     {
-        player = GetComponent<UnityEngine.CharacterController>();
+        player = GetComponent<CharacterController>();
         anim = GetComponent<Animator>();
+
+        
+    }
+
+    private void FixedUpdate()
+    {
+        playerSpeed = playerController.GetStatValue(StatNames.SPEED, StatParts.ACTUAL_VALUE);
     }
 
     void Update()
     {
+        //TODO? Coger la velocidad una vez y al modificarse?
+        //playerSpeed = playerController.GetStatValue(StatNames.SPEED, StatParts.ACTUAL_VALUE);
+
         horizontalMove = Input.GetAxis("Horizontal");
         verticalMove = Input.GetAxis("Vertical");
 
@@ -57,7 +68,7 @@ public class MovePlayer : MonoBehaviour//SingletonMonoBehaviour<MovePlayer>
         player.Move(movePlayer * Time.deltaTime);
 
         //Rotacion del personaje segun hacia donde mira
-        if (movePlayer != Vector3.zero)
+        if (movePlayer != Vector3.zero && playerInput != Vector3.zero)
         {
             Quaternion rotation = Quaternion.LookRotation(playerInput, Vector3.up);
             transform.rotation = Quaternion.RotateTowards(transform.rotation, rotation, rotationSpeed);

@@ -5,39 +5,106 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
+[System.Serializable]
 public class PlayerMutableModel : CharacterMutableModel
 {
-    private StatsTree tree;
+    private int soulFragments;
+    private int rupees;
     [JsonProperty]
+    public int Rupees
+    {
+        get => rupees;
+        set => rupees = value;
+    }
+    [JsonProperty]
+    public int SoulFragments
+    {
+        get => soulFragments;
+        set => soulFragments = value;
+    }
+
+    private StatsTree tree;
+
+    [JsonIgnore]
     public StatsTree Tree
     {
         get => tree;
         set => tree = value;
     }
+
+    private List<TreeStruct> treeStructList;
+    [JsonProperty]
+    public List<TreeStruct> TreeStructList
+    {
+        get => treeStructList;
+        set => treeStructList = value;
+    }
+
     [JsonIgnore] private List<StatModificationPermanent> statsModificationPermanentFromTree;
+
+    //Constructor vacío necesario para cargar datos
+    public PlayerMutableModel() { }
+
+    public PlayerMutableModel(List<TreeStruct> treeStructList)
+    {
+        this.treeStructList = treeStructList;
+    }
 
     public PlayerMutableModel(StatsTree tree)
     {
         this.tree = tree;
+        this.soulFragments = 0;
+        this.rupees = 0;
+        SetTreeStruct();
     }
 
-    public void ProcessSlotTreeActivation(int index)
+    private void SetTreeStruct()
     {
-        TreeSlotDefinition slot = tree.Slots[index];
+        treeStructList = new List<TreeStruct>();
+        for(int i = 0; i < tree.Slots.Count; ++i)
+        {
+            TreeStruct ts = new TreeStruct();
+            ts.actualActives = tree.Slots[i].ActualActives;
+            ts.arrayIndex = i;
+            treeStructList.Add(ts);
+        }
+    }
+
+    public void ProcessIncrementSlotTree(int index)
+    {
+        tree.ProcessSlotActivation(tree.Slots[index]);
+        FillStatsModificationPermanentFromTree();
+        CalculateStats();
+        SetTreeStruct();
+    }
+
+    public void ProcessIncrementSlotTree(TreeSlot slot)
+    {
         tree.ProcessSlotActivation(slot);
         FillStatsModificationPermanentFromTree();
         CalculateStats();
+        SetTreeStruct();
+
     }
-    public void ProcessSlotTreeDeActivation(int index)
+    /*public void ProcessDecrementSlotTree(int index)
     {
         TreeSlotDefinition slot = tree.Slots[index];
         tree.ProcessSlotDeActivation(slot);
         FillStatsModificationPermanentFromTree();
         CalculateStats();
+    }*/
+
+    private void SetupTree()
+    {
+        foreach(TreeStruct treeStruct in treeStructList)
+        {
+            tree.Slots[treeStruct.arrayIndex].ActualActives = treeStruct.actualActives;
+        }
     }
 
     public override void Setup(CharacterStatsDefinition characterStatsDefinition)
     {
+        SetupTree();
         statsModificationPermanentFromTree = new List<StatModificationPermanent>();
 
         FillStatsModificationPermanentFromTree();
@@ -50,11 +117,11 @@ public class PlayerMutableModel : CharacterMutableModel
         statsModificationPermanentFromTree.Clear();
         for (int i = 0; i < tree.Slots.Count; ++i)
         {
-            if (tree.Slots[i].IsActive)
+            if (tree.Slots[i].ActualActives > 0)
             {
-                foreach (InstantEffectPermanent effect in tree.Slots[i].Effects)
+                StatModificationPermanent statModificationPermanent = new StatModificationPermanent(tree.Slots[i].Effect as InstantEffectPermanentDefinition);
+                for (int j = 0; j < tree.Slots[i].ActualActives; ++j)
                 {
-                    StatModificationPermanent statModificationPermanent = new StatModificationPermanent(effect as InstantEffectPermanentDefinition);
                     statsModificationPermanentFromTree.Add(statModificationPermanent);
                 }
             }
@@ -86,7 +153,7 @@ public class PlayerMutableModel : CharacterMutableModel
         /*
          * 5º Se calculan los Duringtimeffect cambios temporales
          */
-        CalculateDuringTimeEffects();
+        CalculateDuringTimeEffects(statName);
     }
 
     private void CalculateNotPercentualPermanentsFromTree(StatNames statName)
@@ -108,7 +175,7 @@ public class PlayerMutableModel : CharacterMutableModel
             List<StatModificationPermanent> statModificationsActives = statsModificationPermanentFromTree.Where(e => e.StatAffected.Equals(statName) && e.IsValueInPercentage).ToList();
             foreach (StatModificationPermanent statActive in statModificationsActives)
             {
-                statActive.GetRealValue();
+                statActive.CalculateRealPercentage(GetStatValue(statActive.StatWhatToSee, statActive.StatWhatToSeeStatPart));
                 ChangeStat(statActive);
             }
         }

@@ -9,8 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b9d4ad1931286854d9a6bb45c5167307, type: 3}
-  m_Name: TreeSlot_20MaxHealth
+  m_Script: {fileID: 11500000, guid: e54767eff4d251847afc317b946bce6b, type: 3}
+  m_Name: IaksaBaseStats
   m_EditorClassIdentifier: 
-  effects:
-  - {fileID: 11400000, guid: 4bb9486f0fb99a54d9f5bd3a399902ef, type: 2}
+  statsDefinition: {fileID: 11400000, guid: 2c61653a68eff2948a28e191b380dd47, type: 2}

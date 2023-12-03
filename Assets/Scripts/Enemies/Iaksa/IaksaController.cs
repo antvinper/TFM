@@ -1,33 +1,37 @@
+using CompanyStats;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class IaksaController : EnemyController
 {
-    //private new IaksaModel model;
-    //public IaksaModel Model { get => model; }
+    private  IaksaModel iaksaModel;
+    public IaksaModel IaksaModel { get => iaksaModel; }
 
     [SerializeField] private Rigidbody rb;
     [SerializeField] private Animator animator;
+    [SerializeField] List<SkillDefinition> skills = new List<SkillDefinition>();
+
 
     private float latestChangeTime;
     private readonly float changeTime = 3f;
-    private float walkSpeed = 2f;
-    private float runSpeed = 5f;
+    private float walkSpeed;
+    private float runSpeed; 
     private Vector3 movementDir;
     private Vector3 speedDir;
+    private float timeBetweenAttack = 2f;
+    private float actualTimeBetweenAttack = 0;
+    private bool canAttack = true;
 
-    [SerializeField] private float alertRange;
-    [SerializeField] private LayerMask maskPlayer;
-    [SerializeField] private Transform player;
-
-    // TO DO: anyadir los efectos de buff/debuff cuando salta al lado de otro personaje
-    //public float max_health;
-    //public float cur_health = 0f;
     void Start()
     {
-        model = new IaksaModel();
-        this.SetModel(model);
+        iaksaModel = new IaksaModel();
+        this.SetModel(iaksaModel);
+
+
+        walkSpeed = GetStatValue(StatNames.SPEED, StatParts.ACTUAL_VALUE);
+        runSpeed = walkSpeed * 2.5f;
 
         latestChangeTime = 0f;
 
@@ -36,6 +40,7 @@ public class IaksaController : EnemyController
 
     void calculateRandomVector()
     {
+        walkSpeed = GetStatValue(StatNames.SPEED, StatParts.ACTUAL_VALUE);
         movementDir = new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f)).normalized;
         transform.rotation = Quaternion.LookRotation(movementDir);
         speedDir = movementDir * walkSpeed;
@@ -43,6 +48,8 @@ public class IaksaController : EnemyController
 
     void calculateObjectiveVector(Vector3 objectivePos)
     {
+        walkSpeed = GetStatValue(StatNames.SPEED, StatParts.ACTUAL_VALUE);
+        runSpeed = walkSpeed * 2.5f;
         movementDir = new Vector3(objectivePos.x - transform.position.x, 0, objectivePos.z - transform.position.z).normalized;
         transform.rotation = Quaternion.LookRotation(movementDir);
         speedDir = movementDir * runSpeed;
@@ -59,45 +66,26 @@ public class IaksaController : EnemyController
 
         rb.velocity = speedDir;
     }
-
-    /*public void TakeDamage(float amount)
+    public async Task ResetAttack()
     {
-        if (cur_health > 0)
+        while (actualTimeBetweenAttack < timeBetweenAttack)
         {
-            cur_health -= amount;
-        }
-        else
-        {
-            DestroyEnemy();
+            canAttack = false;
+            await new WaitForSeconds(Time.deltaTime);
+            actualTimeBetweenAttack += Time.deltaTime;
         }
 
-    }*/
-
-    public void DestroyEnemy()
-    {
-        Destroy(gameObject);
+        canAttack = true;
     }
 
-    /*
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Player") || other.CompareTag("Enemy"))
-        {
-            calculateObjectiveVector(other.transform.position);
-            latestChangeTime = Time.time;
-            animator.Play("Armature|Run");
-        }
-    }
-    
 
-    private void OnCollisionEnter(Collision collision)
+    public async Task ApplySkill(CompanyCharacterController target)
     {
-        if (collision.collider.CompareTag("Player") || collision.collider.CompareTag("Enemy"))
+        foreach (SkillDefinition skill in skills)
         {
-            animator.Play("Armature|Action");
+            skill.ProcessSkill(this, target);
         }
     }
-    */
 
     private void OnTriggerEnter(Collider other)
     {
@@ -112,13 +100,16 @@ public class IaksaController : EnemyController
         }
     }
 
-
     private void OnCollisionEnter(Collision collision)
     {
         //Si el jugador/enemigo entra en contacto con "Box Collider", activara la animacion "Action" para pegar un saltito y aplicar el buff/debuff
-        if (collision.collider.CompareTag("Player") || collision.collider.CompareTag("Enemy"))
+        if ((collision.collider.CompareTag("Player") || collision.collider.CompareTag("Enemy")) && canAttack)
         {
             animator.Play("Armature|Action");
+            PlayerController playerController = collision.collider.GetComponent<PlayerController>();
+            ApplySkill(playerController);
+            ResetAttack();
+
         }
     }
 }

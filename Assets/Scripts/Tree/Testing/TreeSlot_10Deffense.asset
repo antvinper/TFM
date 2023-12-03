@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9d4ad1931286854d9a6bb45c5167307, type: 3}
   m_Name: TreeSlot_10Deffense
   m_EditorClassIdentifier: 
-  effects:
-  - {fileID: 11400000, guid: a8d3cf9a05742a6429f1b3630f088006, type: 2}
-  isActive: 0
+  effect: {fileID: 11400000, guid: a8d3cf9a05742a6429f1b3630f088006, type: 2}
+  actualActives: 0
+  maxActives: 10
+  price: 12
+  percentualCostPerIncrement: 15

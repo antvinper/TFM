@@ -1,18 +1,33 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class RoomManager : SingletonMonoBehaviour<RoomManager>
 {
-    private RoomController roomController;
+    [SerializeField] private RoomController roomController;
+    private PlayerController playerController;
 
-    public RoomController RoomController
+
+    private void Start()
     {
-        set => this.roomController = value;
+        this.playerController = GameManager.Instance.GetPlayerController();
+        StartWave();
     }
 
-    public int GetRoomRewards()
+    public async Task StartWave()
     {
-        return this.roomController.GetRupeesAmount();
+        roomController.StartNewWave();
+    }
+
+    
+    /*public void Setup(PlayerController playerController)
+    {
+        this.playerController = playerController;
+    }*/
+
+    public void OnEnemyKilled(EnemyController enemy)
+    {
+        roomController.OnEnemyKilled(enemy, playerController);
     }
 }
