@@ -9,6 +9,7 @@
 /[Bb]uilds/
 /[Ll]ogs/
 /[Mm]emoryCaptures/
+/[Uu]ser[Ss]ettings/
 
 # Asset meta data should only be ignored when the corresponding asset is also ignored
 !/[Aa]ssets/**/*.meta
@@ -54,9 +55,6 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
-
-# Ignorar el archivo EditorUserSettings.asset en Unity
-Library/EditorUserSettings.asset
 
 # Crashlytics generated file
 crashlytics-build.properties
