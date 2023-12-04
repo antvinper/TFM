@@ -44,6 +44,7 @@ public class MovePlayer : MonoBehaviour//SingletonMonoBehaviour<MovePlayer>
     private void FixedUpdate()
     {
         playerSpeed = playerController.GetStatValue(StatNames.SPEED, StatParts.ACTUAL_VALUE);
+        anim.speed = playerSpeed * 0.1f;
     }
 
     void Update()
@@ -61,7 +62,7 @@ public class MovePlayer : MonoBehaviour//SingletonMonoBehaviour<MovePlayer>
 
         player.transform.position = player.transform.position + movePlayer;
 
-        anim.SetFloat("isWalking", playerInput.magnitude * playerSpeed);
+        anim.SetFloat("isWalking", playerInput.magnitude);
 
         SetGravity();
 

@@ -450,7 +450,7 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 4
     m_ConditionEvent: isWalking
-    m_EventTreshold: 1
+    m_EventTreshold: 0.6
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 2337305477177734859}
   m_Solo: 0
