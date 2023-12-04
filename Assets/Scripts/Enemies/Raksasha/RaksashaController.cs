@@ -6,6 +6,9 @@ using UnityEngine;
 
 public class RaksashaController : EnemyController
 {
+    private RaksashaModel raksashaModel;
+    public RaksashaModel RaksashaModel { get => raksashaModel; }
+
     [SerializeField] private Rigidbody rb;
     [SerializeField] private Animator animator;
     [SerializeField] SkillDefinition skillSmash;
@@ -24,8 +27,8 @@ public class RaksashaController : EnemyController
     void Start()
     {
         
-        model = new RaksashaModel();
-        this.SetModel(model);
+        raksashaModel = new RaksashaModel();
+        this.SetModel(raksashaModel);
 
         latestChangeTime = 0f;
 
