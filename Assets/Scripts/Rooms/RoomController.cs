@@ -14,8 +14,15 @@ public class RoomController : MonoBehaviour
     [SerializeField] BoxCollider nextLevelCollider;
     [SerializeField] Animator doorAnimator;
 
-    public async Task StartNewWave()
+    public void StartRoomWaves()
     {
+        model.Setup();
+        StartNewWave();
+    }
+
+    private async Task StartNewWave()
+    {
+        
         Debug.Log("#WAVE Starting wave: " + model.ActualWave);
         model.RestartEnemiesKilled();
 
@@ -27,7 +34,9 @@ public class RoomController : MonoBehaviour
             spawnPointsAvailable.Add(i);
         }
 
-        for(int i = 0; i < model.GetNEnemiesToSpawn(); ++i)
+        int nEnemiesToSpawn = model.GetNEnemiesToSpawnInWave();
+        Debug.Log(nEnemiesToSpawn);
+        for (int i = 0; i < nEnemiesToSpawn; ++i)
         {
             GameObject go = Instantiate(model.GetWaveRandomEnemy(), GetRandomSpawnPoint());
             instantiatedEnemies.Add(go);
@@ -96,6 +105,7 @@ public class RoomController : MonoBehaviour
 
                 doorAnimator.SetTrigger("openDoor");
                 nextLevelCollider.enabled = true;
+                GameManager.Instance.IncrementRunLevel();
             }
             else
             {

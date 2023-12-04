@@ -3497,6 +3497,61 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6bfbe8b49f844e84da66bb17cad12da8, type: 3}
+--- !u!1 &830222280
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 830222282}
+  - component: {fileID: 830222281}
+  m_Layer: 0
+  m_Name: RoomController
+  m_TagString: RoomController
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &830222281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 830222280}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b0d18c25802cfc4e92fdbb3f3a8c1bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  model:
+    roomDefinition: {fileID: 11400000, guid: 15e1d85dfc50b7847b510507f1226b6a, type: 2}
+    spawnPoints:
+    - {fileID: 630952114}
+    - {fileID: 584793944}
+    - {fileID: 1591206393}
+    wave:
+      enemies:
+      - {fileID: 2050708853417886105, guid: dd225e2935d66ba468d5e07c93c07f18, type: 3}
+  nextLevelCollider: {fileID: 1299566220}
+  doorAnimator: {fileID: 290282892}
+--- !u!4 &830222282
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 830222280}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 9.920442, y: -1.4775991, z: 28.971632}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 18
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &833036092
 GameObject:
   m_ObjectHideFlags: 0
@@ -6790,6 +6845,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b376a842597110846adba855b1b6bca1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  runLevel: 5
   newTestingGame: 1
   loadDataTestingGame: 0
 --- !u!4 &1665968379

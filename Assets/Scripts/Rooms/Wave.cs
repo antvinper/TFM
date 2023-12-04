@@ -6,7 +6,7 @@ using UnityEngine;
 public class Wave
 {
     [SerializeField] private List<GameObject> enemies;
-    [SerializeField] private int numberOfEnemiesToSpawn;
+    //[SerializeField] private int numberOfEnemiesToSpawn;
     private int enemiesKilled = 0;
 
     public int EnemiesKilled
@@ -29,8 +29,8 @@ public class Wave
         get => enemies;
     }
 
-    public int NumberOfEnemiesToSpawn
+    /*public int NumberOfEnemiesToSpawn
     {
         get => numberOfEnemiesToSpawn;
-    }
+    }*/
 }

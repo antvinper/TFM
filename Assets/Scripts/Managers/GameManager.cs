@@ -8,6 +8,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 {
     private bool isGameStarted = false;
     private bool isGameInRun = false;
+    [SerializeField] private int runLevel = 0;
     private DataPersistenceManager dataPersistenceManager;
 
     //TODO borrar
@@ -25,6 +26,16 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     public GameModel GameModel
     {
         get => dataPersistenceManager.gameModel;
+    }
+
+    public int RunLevel
+    {
+        get => runLevel;
+    }
+
+    public void IncrementRunLevel()
+    {
+        ++runLevel;
     }
 
     public void SetPlayerController(PlayerController playerController)

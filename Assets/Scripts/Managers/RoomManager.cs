@@ -5,19 +5,20 @@ using UnityEngine;
 
 public class RoomManager : SingletonMonoBehaviour<RoomManager>
 {
-    [SerializeField] private RoomController roomController;
+    private RoomController roomController;
     private PlayerController playerController;
 
 
     private void Start()
     {
         this.playerController = GameManager.Instance.GetPlayerController();
-        StartWave();
+        this.roomController = GameObject.FindGameObjectWithTag("RoomController").GetComponent<RoomController>();
+        StartRoomWaves();
     }
 
-    public async Task StartWave()
+    public async Task StartRoomWaves()
     {
-        roomController.StartNewWave();
+        roomController.StartRoomWaves();
     }
 
     
