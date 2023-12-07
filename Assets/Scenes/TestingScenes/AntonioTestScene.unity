@@ -310,9 +310,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c37992ec3d6fc6f4891cfd68942d2d6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterStatsDefinition: {fileID: 0}
-  rb: {fileID: 0}
-  animator: {fileID: 0}
+  characterStatsDefinition: {fileID: 11400000, guid: a3eb2632fa7945949a7acbb9782409e8, type: 2}
+  rb: {fileID: 271932773}
+  animator: {fileID: 1061157496}
+  skillPoison: {fileID: 11400000, guid: 451a5222eadfe2040ba078d038a13752, type: 2}
 --- !u!1 &417746726
 GameObject:
   m_ObjectHideFlags: 0
@@ -957,7 +958,7 @@ Animator:
   m_GameObject: {fileID: 1061157495}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f599b52fc36099546ad12a504b5483e6, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1104,6 +1105,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b376a842597110846adba855b1b6bca1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  runLevel: 0
   newTestingGame: 1
   loadDataTestingGame: 0
 --- !u!4 &1472923338

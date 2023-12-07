@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - Iaksa
   - RoomController
+  - Wall
   layers:
   - Default
   - TransparentFX
