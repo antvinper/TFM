@@ -5,6 +5,7 @@ using UnityEngine;
 public class SardulaBehavior : MonoBehaviour
 {
     float timer = 0.0f;
+    private Animator anim;
     [SerializeField] Transform player;
     [SerializeField] GameObject centerZoneObject;
     [SerializeField] float dist = 0.0f;
@@ -13,6 +14,7 @@ public class SardulaBehavior : MonoBehaviour
     void Start()
     {
         zone = centerZoneObject.GetComponent<CenterAreaZone>();
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -73,6 +75,7 @@ public class SardulaBehavior : MonoBehaviour
     
     void CallAction(string action)
     {
+        anim.SetTrigger(action);
         if (action == "center") 
         {
             Debug.Log(action);
@@ -88,6 +91,10 @@ public class SardulaBehavior : MonoBehaviour
             Debug.Log(action);
         }
         else if (action == "stun")
+        {
+            Debug.Log(action);
+        }
+        else if (action == "beam")
         {
             Debug.Log(action);
         }
