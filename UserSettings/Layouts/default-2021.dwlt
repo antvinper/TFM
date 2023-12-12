@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1920
     height: 989
   m_ShowMode: 4
-  m_Title: Project
+  m_Title: Inspector
   m_RootView: {fileID: 6}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -48,7 +48,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 108
+  controlID: 73
 --- !u!114 &3
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -76,8 +76,9 @@ MonoBehaviour:
   - {fileID: 17}
   - {fileID: 14}
   - {fileID: 12}
+  - {fileID: 16}
   m_Selected: 0
-  m_LastSelected: 3
+  m_LastSelected: 4
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -131,9 +132,8 @@ MonoBehaviour:
   - {fileID: 23}
   - {fileID: 13}
   - {fileID: 22}
-  - {fileID: 16}
   m_Selected: 0
-  m_LastSelected: 4
+  m_LastSelected: 1
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -229,7 +229,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 200}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 48
+  controlID: 74
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -254,7 +254,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 49
+  controlID: 65
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -340,7 +340,7 @@ MonoBehaviour:
     m_SaveData: []
   m_LockTracker:
     m_IsLocked: 0
-  m_LastSelectedObjectID: -2066
+  m_LastSelectedObjectID: 31928
 --- !u!114 &14
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -417,10 +417,10 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 0
-    y: 671
-    width: 1391
-    height: 320
+    x: 1392
+    y: 73
+    width: 527
+    height: 918
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
@@ -432,6 +432,7 @@ MonoBehaviour:
     - {fileID: 5946439559920083679, guid: 7e6be6f9aa806e14fb5e7c27ecc6eb8f, type: 2}
     - {fileID: -3876736226809727996, guid: a87a4626582e02a4a88465ffe901fb93, type: 2}
     - {fileID: 5135900707232969866, guid: b7c5c301ae10ff543a4abe1d0c40e916, type: 2}
+    - {fileID: 5657181272118449253, guid: f599b52fc36099546ad12a504b5483e6, type: 2}
     m_ValueSerializationHelper:
     - e00: 0.7168421
       e01: 0
@@ -513,10 +514,26 @@ MonoBehaviour:
       e31: 0
       e32: 0
       e33: 1
+    - e00: 0.74156815
+      e01: 0
+      e02: 0
+      e03: -282.99567
+      e10: 0
+      e11: 0.74156815
+      e12: 0
+      e13: -153.94763
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
   m_PreviewAnimator: {fileID: 0}
-  m_AnimatorController: {fileID: 9100000, guid: b7c5c301ae10ff543a4abe1d0c40e916, type: 2}
+  m_AnimatorController: {fileID: 9100000, guid: f599b52fc36099546ad12a504b5483e6, type: 2}
   m_BreadCrumbs:
-  - m_Target: {fileID: 5135900707232969866, guid: b7c5c301ae10ff543a4abe1d0c40e916, type: 2}
+  - m_Target: {fileID: 5657181272118449253, guid: f599b52fc36099546ad12a504b5483e6, type: 2}
     m_ScrollPosition: {x: 0, y: 0}
   stateMachineGraph: {fileID: 0}
   stateMachineGraphGUI: {fileID: 0}
@@ -625,22 +642,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scripts/Enemies/Vetala
+    - Assets/Entities/fbx
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 16
   m_LastFolders:
-  - Assets/Scripts/Enemies/Vetala
+  - Assets/Entities/fbx
   m_LastFoldersGridSize: 16
   m_LastProjectPath: C:\Users\Jennifer\Documents\GitHub\TFM
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 404}
-    m_SelectedIDs: 0c750000
-    m_LastClickedID: 29964
-    m_ExpandedIDs: 00000000b4660000b6660000b8660000ba660000bc660000be660000c0660000c2660000c4660000c6660000c8660000ca660000cc660000ce660000d0660000d2660000d4660000d6660000d8660000da660000dc660000de660000e0660000e2660000e4660000e6660000e8660000ea660000ec660000ee660000f0660000f2660000f4660000f66600009c740000be74000000ca9a3bffffff7f
+    scrollPos: {x: 0, y: 79}
+    m_SelectedIDs: 10800000
+    m_LastClickedID: 32784
+    m_ExpandedIDs: 00000000fe6e0000006f0000026f0000046f0000066f0000086f00000a6f00000c6f00000e6f0000106f0000126f0000146f0000166f0000186f00001a6f00001c6f00001e6f0000206f0000226f0000246f0000266f0000286f00002a6f00002c6f00002e6f0000306f0000326f0000346f0000366f0000386f00003a6f00003c6f00003e6f0000406f0000d47b0000e27b0000067c0000287c00000082000002820000048200000882000046820000488200004c82000086820000948200009682000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -668,7 +685,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000b4660000b6660000b8660000ba660000bc660000be660000c0660000c2660000c4660000c6660000c8660000ca660000cc660000ce660000d0660000d2660000d4660000d6660000d8660000da660000dc660000de660000e0660000e2660000e4660000e6660000e8660000ea660000ec660000ee660000f0660000f2660000f4660000f6660000
+    m_ExpandedIDs: 00000000fe6e0000006f0000026f0000046f0000066f0000086f00000a6f00000c6f00000e6f0000106f0000126f0000146f0000166f0000186f00001a6f00001c6f00001e6f0000206f0000226f0000246f0000266f0000286f00002a6f00002c6f00002e6f0000306f0000326f0000346f0000366f0000386f00003a6f00003c6f00003e6f0000406f0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -695,8 +712,8 @@ MonoBehaviour:
   m_ListAreaState:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 1
-    m_ExpandedInstanceIDs: c62300005e9900003a630000
+    m_HadKeyboardFocusLastEvent: 0
+    m_ExpandedInstanceIDs: c62300005e9900003a6300001c7d0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -796,23 +813,23 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: ece8ffff
-      m_LastClickedID: 0
-      m_ExpandedIDs: eafaffff78610000
+      m_SelectedIDs: b87c0000
+      m_LastClickedID: 31928
+      m_ExpandedIDs: 40eeffffb2faffffb87c0000de7c0000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: 
-        m_OriginalName: 
+        m_Name: Vetala
+        m_OriginalName: Vetala
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: 0
+        m_UserData: 31966
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
-        m_OriginalEventType: 11
+        m_OriginalEventType: 0
         m_IsRenamingFilename: 0
         m_ClientGUIView: {fileID: 4}
       m_SearchString: 
@@ -1080,9 +1097,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 4.609194, y: -3.067204, z: 29.870293}
+    m_Target: {x: -82.44386, y: -69.066246, z: 110.25176}
     speed: 2
-    m_Value: {x: 4.609194, y: -3.067204, z: 29.870293}
+    m_Value: {x: -82.44386, y: -69.066246, z: 110.25176}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -1129,13 +1146,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: 0.07804176, y: -0.76706076, z: 0.091966726, w: 0.630142}
+    m_Target: {x: 0.21720149, y: -0.45149907, z: 0.11206179, w: 0.85816485}
     speed: 2
-    m_Value: {x: 0.07804139, y: -0.7670571, z: 0.09196629, w: 0.630139}
+    m_Value: {x: 0.21686077, y: -0.4540641, z: 0.11271105, w: 0.85679245}
   m_Size:
-    m_Target: 20.315676
+    m_Target: 81.430916
     speed: 2
-    m_Value: 20.315676
+    m_Value: 77.924324
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -1221,7 +1238,7 @@ MonoBehaviour:
     m_HSlider: 0
     m_VSlider: 0
     m_IgnoreScrollWheelUntilClicked: 0
-    m_EnableMouseInput: 0
+    m_EnableMouseInput: 1
     m_EnableSliderZoomHorizontal: 0
     m_EnableSliderZoomVertical: 0
     m_UniformScale: 1
