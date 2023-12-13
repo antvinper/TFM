@@ -70,8 +70,8 @@ public class EnemyController : CompanyCharacterController
             {
                 RoomManager.Instance.OnEnemyKilled(this);
             }
-            Destroy(transform.gameObject);
-            
+
+            Destroy(transform.gameObject); 
         }
     }
 
