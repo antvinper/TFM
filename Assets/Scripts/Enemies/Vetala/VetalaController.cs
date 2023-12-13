@@ -29,7 +29,7 @@ public class VetalaController : EnemyController
         walkSpeed = GetStatValue(StatNames.SPEED, StatParts.ACTUAL_VALUE);
     }
 
-    void Update()
+    void FixedUpdate()
     {
         rb.velocity = speedDir;
     }
@@ -59,10 +59,6 @@ public class VetalaController : EnemyController
             transform.LookAt(new Vector3(other.transform.position.x, transform.position.y, other.transform.position.z));
             Vector3 directionToOther = (other.transform.position - transform.position).normalized;
             calculateObjectiveVector(other.transform.position);
-            
-                
-   
-
         }
     }
 
@@ -73,14 +69,19 @@ public class VetalaController : EnemyController
         {
             PlayerController playerController = collision.collider.GetComponent<PlayerController>();
             ApplySkill(playerController);
-            
         }
 
+        if (collision.collider.CompareTag("Wall"))
+        {
+            walkSpeed = 0;
+            animator.Play("Armature|Idle");
+        }
+        /*
         Vector3 directionToOther = (collision.transform.position - transform.position).normalized;
         if (!Physics.Raycast(transform.position, directionToOther, Mathf.Infinity, 6))
         {
             walkSpeed = 0;
             animator.Play("Armature|Idle");
-        }
+        }*/
     }
 }
