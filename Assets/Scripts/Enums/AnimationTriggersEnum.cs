@@ -1,0 +1,7 @@
+public enum AnimationTriggersEnum
+{
+    START_SWORD_BASIC_COMBO,
+    START_SWORD_CONE_COMBO,
+    START_SWORD_ALTERN_COMBO,
+    START_SWORD_DASH_COMBO
+}

@@ -198,7 +198,7 @@ public class WeaponController: MonoBehaviour
                 comboStarted = true;
                 //CancelComboAfterTime();
                 actualActionStack.Add(buttonPressed);
-                animator.SetTrigger(model.BasicComboDefinitions[i].AnimationTriggerToStart);
+                animator.SetTrigger(model.BasicComboDefinitions[i].AnimationTriggerToStart.ToString());
                 break;
             }
         }

@@ -45,7 +45,7 @@ public abstract class ComboDefinition : ScriptableObject//, IComboModel
      * TODO
      * MAKE AN ENUM
      */
-    [SerializeField] protected string animationTriggerToStart;
-    public string AnimationTriggerToStart => animationTriggerToStart;
+    [SerializeField] protected AnimationTriggersEnum animationTriggerToStart;
+    public AnimationTriggersEnum AnimationTriggerToStart => animationTriggerToStart;
 
 }
