@@ -25,6 +25,7 @@ namespace CompanyStats
         private SerializedProperty effectLifeTimeProperty;
         private SerializedProperty timeBetweenApplyEffectProperty;
         private SerializedProperty isValueInPercentageProperty;
+        private SerializedProperty isInfiniteProperty;
 
         private SerializedProperty statWhatToSeeProperty;
         private SerializedProperty isTheOwnerStatProperty;
@@ -47,6 +48,7 @@ namespace CompanyStats
             effectLifeTimeProperty = serializedObject.FindProperty("effectLifeTime");
             timeBetweenApplyEffectProperty = serializedObject.FindProperty("timeBetweenApplyEffect");
             isValueInPercentageProperty = serializedObject.FindProperty("isValueInPercentage");
+            isInfiniteProperty = serializedObject.FindProperty("isInfinite");
 
             statWhatToSeeProperty = serializedObject.FindProperty("statWhatToSee");
             isTheOwnerStatProperty = serializedObject.FindProperty("isTheOwnerStat");
@@ -66,7 +68,13 @@ namespace CompanyStats
             EditorGUILayout.PropertyField(applyOnSelfProperty);
 
             EditorGUILayout.PropertyField(effectTypeProperty);
-            EditorGUILayout.PropertyField(effectLifeTimeProperty);
+            EditorGUILayout.PropertyField(isInfiniteProperty);
+
+            if (!isInfiniteProperty.boolValue)
+            {
+                EditorGUILayout.PropertyField(effectLifeTimeProperty);
+            }
+            //EditorGUILayout.PropertyField(effectLifeTimeProperty);
             EditorGUILayout.PropertyField(statAffectedProperty);
             EditorGUILayout.PropertyField(statPartAffectedProperty);
             EditorGUILayout.PropertyField(isStatIncrementedProperty);

@@ -14,6 +14,13 @@ namespace CompanyStats
         bool resetEffect = false;
         bool hasBeenRemoved = false;
         bool hasBeenStopped = false;
+
+        [SerializeField]
+        bool isInfinite = false;
+        public bool IsInfinite
+        {
+            get => isInfinite;
+        }
         /**
          * TODO
          * Esto debe ser elegible.
@@ -43,13 +50,49 @@ namespace CompanyStats
             {
                 if (target.TryAddEffect(this, owner))
                 {
-                    StartTimer();
+                    if (isInfinite)
+                    {
+                        StartInfiniteTimer();
+                    }
+                    else
+                    {
+                        StartTimer();
+                    }
                 }
             } else
             {
                 Debug.Log("TODO Realizar los checks");
             }
             
+        }
+
+        private async Task StartInfiniteTimer()
+        {
+            do
+            {
+                await new WaitForSeconds(Time.deltaTime);
+                actualTimeEffectApplied += Time.deltaTime;
+                actualTimeBetweenAplpyEffect += Time.deltaTime;
+                if (hasBeenCanceled)
+                {
+                    Debug.Log("#TIMER hasBeenCanceled");
+                    RemoveEffect(target);
+                    break;
+                }
+                else if (actualTimeBetweenAplpyEffect > timeBetweenApplyEffect)
+                {
+                    Stat stat = target.GetStatFromName(StatAffected);
+                    Debug.Log(stat.StatName + "." + StatPart + " value before apply the effect " + name + ": " + target.GetStatValue(stat.StatName, StatPart));
+
+                    actualTimeBetweenAplpyEffect = 0.0f;
+                    timesApplied += 1;
+                    Debug.Log("#TIMER Effect applied correctly");
+                    //target.CalculateStat(StatAffected, StatPart);
+                    ApplyEffect();
+
+                    Debug.Log(stat.StatName + "." + StatPart + " value after apply the effect " + name + ": " + target.GetStatValue(stat.StatName, StatPart));
+                }
+            } while (!hasBeenCanceled);
         }
 
         private async Task StartTimer()
