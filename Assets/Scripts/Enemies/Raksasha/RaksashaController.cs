@@ -89,7 +89,7 @@ public class RaksashaController : EnemyController
 
     public async Task WaitAnSecods()
     {
-       await new WaitForSeconds(5f);
+       await new WaitForSeconds(1f);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -99,9 +99,11 @@ public class RaksashaController : EnemyController
         {
             //Realiza ataque en area "Aplastar" (Smash)
             animator.Play("Armature|Aplastar");
+            walkSpeed = 0;
             PlayerController playerController = other.GetComponent<PlayerController>();
             ApplySkillSmash(playerController); //TODO -> Mejorar, ya que debe hacer daño si esta dentro del area, si sale no deberia hacerle caso
             WaitAnSecods();
+            walkSpeed = GetStatValue(StatNames.SPEED, StatParts.ACTUAL_VALUE);
 
             //Moverse hacia el jugador
             transform.LookAt(new Vector3(other.transform.position.x, transform.position.y, other.transform.position.z));
