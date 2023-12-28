@@ -81,10 +81,12 @@ public class IaksaController : EnemyController
 
     public async Task ApplySkill(CompanyCharacterController target)
     {
-        foreach (SkillDefinition skill in skills)
-        {
-            skill.ProcessSkill(this, target);
-        }
+        //Escoge una skill aleatoria de la lista
+        int randomIndex = UnityEngine.Random.Range(0, skills.Count);
+        SkillDefinition randomSkill = skills[randomIndex];
+
+        //Procesa la skill seleccionada
+        randomSkill.ProcessSkill(this, target);
     }
 
     private void OnTriggerEnter(Collider other)
