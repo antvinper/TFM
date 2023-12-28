@@ -98,12 +98,9 @@ public class RaksashaController : EnemyController
         if (other.CompareTag("Player") && canAttack)
         {
             //Realiza ataque en area "Aplastar" (Smash)
-            animator.SetTrigger("Aplastar");
-            walkSpeed = 0;
             PlayerController playerController = other.GetComponent<PlayerController>();
             ApplySkillSmash(playerController); //TODO -> Mejorar, ya que debe hacer daño si esta dentro del area, si sale no deberia hacerle caso
-            WaitAnSecods();
-            walkSpeed = GetStatValue(StatNames.SPEED, StatParts.ACTUAL_VALUE);
+            animator.SetTrigger("Aplastar");
 
             //Moverse hacia el jugador
             transform.LookAt(new Vector3(other.transform.position.x, transform.position.y, other.transform.position.z));
