@@ -50,7 +50,7 @@ MonoBehaviour:
     maxValue: 255
     isVolatil: 0
   - name: 6
-    value: 20
+    value: 10
     actualMaxValue: 255
     minValue: 1
     maxValue: 255

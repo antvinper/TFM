@@ -95,6 +95,7 @@ MonoBehaviour:
   animator: {fileID: 2718197503783360984}
   skillSmash: {fileID: 11400000, guid: b0a87ef93373221489ec99e7a0831aff, type: 2}
   skillBlow: {fileID: 11400000, guid: 59022f0476e1c71489fe9402fc9caf0f, type: 2}
+  walkSpeed: 0
 --- !u!1001 &2718197503783360981
 PrefabInstance:
   m_ObjectHideFlags: 0

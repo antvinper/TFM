@@ -17,8 +17,6 @@ public class VetalaController : EnemyController
 
     private Vector3 movementDir;
     private Vector3 speedDir;
-    private float timeBetweenAttack = 2f;
-    private float actualTimeBetweenAttack = 0;
 
     void Start()
     {
