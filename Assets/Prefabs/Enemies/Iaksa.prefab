@@ -66,6 +66,14 @@ MonoBehaviour:
   animator: {fileID: 2050708853450596499}
   skills:
   - {fileID: 11400000, guid: 831f6f82d7ca04b4faf2b5e9a3e70b3a, type: 2}
+  - {fileID: 11400000, guid: 151ce31de47220d4b90a1b3ae163bbd3, type: 2}
+  - {fileID: 11400000, guid: 188607df09f31894fb0988d9fab115df, type: 2}
+  - {fileID: 11400000, guid: ef7106397d07e5a4192513dd79787144, type: 2}
+  - {fileID: 11400000, guid: 81ac13c7cba415d4087ce8ca50fed5d8, type: 2}
+  - {fileID: 11400000, guid: 22f39d9a71d6899429b96b2a1f93f635, type: 2}
+  - {fileID: 11400000, guid: e208eba0484b49a40b737bb59c2c65d8, type: 2}
+  - {fileID: 11400000, guid: 00d037485f98236499aa1455a128c4d7, type: 2}
+  - {fileID: 11400000, guid: 6906c060b3a76514a8d1fc4930fa25f7, type: 2}
 --- !u!54 &2050708853417886102
 Rigidbody:
   m_ObjectHideFlags: 0

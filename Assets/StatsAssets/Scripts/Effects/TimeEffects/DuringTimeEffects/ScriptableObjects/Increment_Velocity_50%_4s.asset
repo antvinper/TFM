@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4cd2d95b3554ea246a989eeab6c8cba3, type: 3}
+  m_Name: Increment_Velocity_50%_4s
+  m_EditorClassIdentifier: 
+  effectName: Increment_Velocity_50%_4s
+  effectType: 17
+  description: 
+  applyOnSelf: 0
+  isStatIncremented: 0
+  statAffected: 6
+  statPart: 0
+  isValueInPercentage: 1
+  statWhatToSee: 6
+  isTheOwnerStat: 0
+  statWhatToSeeStatPart: 1
+  valueInPercentage: 50
+  value: 0
+  effectLifeTime: 4

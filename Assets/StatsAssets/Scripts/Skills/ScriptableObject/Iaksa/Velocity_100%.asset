@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f097c9abb95d1d949bc93b53fa7cde90, type: 3}
-  m_Name: SlowDown
+  m_Name: Velocity_100%
   m_EditorClassIdentifier: 
   name: 
   description: 
@@ -18,4 +18,4 @@ MonoBehaviour:
   permanentInstantEffects: []
   overTimeEffects: []
   duringTimeEffects:
-  - {fileID: 11400000, guid: a89d8986f53ca444f8d79aa7d72f1ea3, type: 2}
+  - {fileID: 11400000, guid: 7c055179ad3a4654abaa3c20f6ffbaab, type: 2}
