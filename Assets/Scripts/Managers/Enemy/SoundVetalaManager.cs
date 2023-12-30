@@ -8,7 +8,6 @@ public class SoundVetalaManager : MonoBehaviour
     public enum Sonidos
     {
         VETALA_GOLPE,
-        VETALA_FLAPPING,
         MUERTE_VETALA,
         TOTAL_SONIDOS
     }
@@ -20,7 +19,7 @@ public class SoundVetalaManager : MonoBehaviour
     private bool damage, isIdle;
 
     public AudioSource[] audios;
-    string[] nombreSonidos = { "vetala_golpe", "vetala_flapping", "muerte_vetala" };
+    string[] nombreSonidos = { "vetala_golpe", "muerte_vetala" };
 
     void Start()
     {
@@ -37,19 +36,10 @@ public class SoundVetalaManager : MonoBehaviour
         EnemyController enemy = gameObject.GetComponent<EnemyController>();
         VetalaController vetala = gameObject.GetComponent<VetalaController>();
         damage = enemy.isHit;
-        isIdle = vetala.isIdle;
         cur_health = vetala.GetStatValue(StatNames.HEALTH, StatParts.ACTUAL_VALUE);
 
         if (Time.timeScale == 1f)
         {
-            if (isIdle)
-            {
-                audios[(int)Sonidos.VETALA_FLAPPING].Play();
-            }
-            else
-            {
-                audios[(int)Sonidos.VETALA_FLAPPING].Pause();
-            }
 
             if (damage)
             {
@@ -64,7 +54,6 @@ public class SoundVetalaManager : MonoBehaviour
         }
         else
         {
-            audios[(int)Sonidos.VETALA_FLAPPING].Pause();
             audios[(int)Sonidos.VETALA_GOLPE].Pause();
             audios[(int)Sonidos.MUERTE_VETALA].Pause();
         }

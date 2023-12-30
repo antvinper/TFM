@@ -14,7 +14,6 @@ public class VetalaController : EnemyController
     [SerializeField] SkillDefinition skillPoison;
 
     private float walkSpeed;
-    public bool isIdle = true;
 
     private Vector3 movementDir;
     private Vector3 speedDir;
@@ -53,7 +52,6 @@ public class VetalaController : EnemyController
         {
             //Realiza ataque en area "Aplastar" (Smash)
             animator.Play("Armature|Attack");
-            isIdle = false;
 
             //Moverse hacia el jugador
             transform.LookAt(new Vector3(other.transform.position.x, transform.position.y, other.transform.position.z));
@@ -75,7 +73,6 @@ public class VetalaController : EnemyController
         {
             walkSpeed = 0;
             animator.Play("Armature|Idle");
-            isIdle = true;
         }
         /*
         Vector3 directionToOther = (collision.transform.position - transform.position).normalized;

@@ -45,10 +45,7 @@ public class SoundIaksaManager : MonoBehaviour
             {
                 audios[(int)Sonidos.IAKSA_GOLPE].Play();
             }
-        }
 
-        if (Time.timeScale == 1f)
-        {
             if (cur_health <= 0 && !alreadyDead)
             {
                 alreadyDead = true;

@@ -36,7 +36,6 @@ public class SoundRaksashaManager : MonoBehaviour
         EnemyController enemy = gameObject.GetComponent<EnemyController>();
         RaksashaController raksasha = gameObject.GetComponent<RaksashaController>();
         damage = enemy.isHit;
-
         cur_health = raksasha.GetStatValue(StatNames.HEALTH, StatParts.ACTUAL_VALUE);
 
         if (Time.timeScale == 1f)
@@ -45,16 +44,14 @@ public class SoundRaksashaManager : MonoBehaviour
             {
                 audios[(int)Sonidos.RAKSASHA_GOLPE].Play();
             }
-        }
 
-        if (Time.timeScale == 1f)
-        {
             if (cur_health <= 0 && !alreadyDead)
             {
                 alreadyDead = true;
                 audios[(int)Sonidos.MUERTE_RAKSASHA].Play();
             }
         }
+
         else
         {
             audios[(int)Sonidos.RAKSASHA_GOLPE].Pause();
@@ -62,3 +59,5 @@ public class SoundRaksashaManager : MonoBehaviour
         }
     }
 }
+
+
