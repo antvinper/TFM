@@ -6,17 +6,6 @@ public class CenterAreaZone : MonoBehaviour
 {
     public bool player = false;
     public bool boss = false;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 
     void OnTriggerStay(Collider other)
     {

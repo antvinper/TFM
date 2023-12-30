@@ -4,20 +4,27 @@ using UnityEngine;
 
 public class SardulaBehavior : MonoBehaviour
 {
-    private float timer = 0.0f;
+    [SerializeField] float timer = 0.0f;
     private Animator anim;
     private string doingAction;
     private bool isAction;
     private Vector3 actionPosition;
     private float timeToReachTarget, t;
     [SerializeField] Transform player;
-    [SerializeField] GameObject centerZoneObject;
     [SerializeField] float dist = 0.0f;
-    CenterAreaZone zone;
+    [SerializeField] Transform centerZoneObject;
+    [SerializeField] GameObject beamProjectile;
+    [SerializeField] Transform beamSpawn;
+    [SerializeField] GameObject stompArea;
+    [SerializeField] Transform stompSpawn;
+    [SerializeField] GameObject dashArea;
+    [SerializeField] Transform slashSpawn;
+    [SerializeField] GameObject slashProyectile;
+    [SerializeField] private int proyectileNumber;
+    [SerializeField] GameObject centerProyectile;
     // Start is called before the first frame update
     void Start()
     {
-        zone = centerZoneObject.GetComponent<CenterAreaZone>();
         anim = GetComponent<Animator>();
         isAction = false;
     }
@@ -45,9 +52,10 @@ public class SardulaBehavior : MonoBehaviour
         if (isAction)
         {
 
-            if (doingAction == "slash" && timer > 1.0f && timer <= 1.3f)
+            if (doingAction == "slash" && timer > 1.0f && timer <= 1.03f)
             {
-                Debug.Log("Estoy haciendo Slash");
+                GameObject tmpObject = Instantiate(slashProyectile, slashSpawn.position, slashSpawn.rotation);
+                Destroy(tmpObject, 3);
             }
             else if(doingAction == "slash" && timer >= 2.0f)
             {
@@ -56,32 +64,38 @@ public class SardulaBehavior : MonoBehaviour
 
             if (doingAction == "center" && timer > 0.3f && timer <= 1.0f)
             {
-                Debug.Log("Estoy volviendo al centro");
                 timeToReachTarget = 0.7f;
                 t += Time.deltaTime / timeToReachTarget;
-                actionPosition = new Vector3(centerZoneObject.transform.position.x, transform.position.y, centerZoneObject.transform.position.z);
+                actionPosition = new Vector3(centerZoneObject.position.x, transform.position.y, centerZoneObject.position.z);
                 transform.position = Vector3.Lerp(transform.position, actionPosition, t);
             }
             else if (doingAction == "center" && timer >= 1.4f)
             {
+                SpawnProyectile();
                 EndAction();
             }
 
             if (doingAction == "dash" && timer > 0.3f && timer <= 1.3f)
             {
-                Debug.Log("Estoy haciendo Dash");
+                dashArea.SetActive(true);
                 timeToReachTarget = 1.0f;
                 t += Time.deltaTime / timeToReachTarget;
                 transform.position = Vector3.Lerp(transform.position, actionPosition, t);
+                if(transform.position == actionPosition)
+                {
+                    dashArea.SetActive(false);
+                }
             }
             else if (doingAction == "dash" && timer >= 2.0f)
             {
+                timer = 3.9f;
                 EndAction();
             }
 
-            if (doingAction == "stun" && timer > 2.0f && timer <= 2.1f)
+            if (doingAction == "stun" && timer > 2.0f && timer <= 2.05f)
             {
-                Debug.Log("Estoy haciendo Stun");
+                GameObject tmpObject = Instantiate(stompArea, stompSpawn.position, stompSpawn.rotation);
+                Destroy(tmpObject, 0.3f);
             }
             else if (doingAction == "stun" && timer >= 2.7f)
             {
@@ -90,7 +104,8 @@ public class SardulaBehavior : MonoBehaviour
 
             if (doingAction == "beam" && timer > 0.7f && timer <= 2.3f)
             {
-                Debug.Log("Estoy haciendo Beam");
+                GameObject tmpObj =Instantiate(beamProjectile,beamSpawn.position, beamSpawn.rotation);
+                Destroy(tmpObj, 3);
             }
             else if (doingAction == "beam" && timer >= 3.7f)
             {
@@ -101,27 +116,18 @@ public class SardulaBehavior : MonoBehaviour
 
     void ChooseAction()
     {
-        zone = centerZoneObject.GetComponent<CenterAreaZone>();
-        if (!zone.player && !zone.boss)
+        CallAction("center");
+        /* accion;
+        if (dist > 10)
         {
-            if (dist > 10)
-            {
-                RandomBool("center", "beam");
-            }
-            else
-            {
-                RandomBool("center", "slash");
-            }
-        }
-        else if(zone.player && zone.boss) 
-        {
-            RandomBool("stun", "slash");
+            accion = RandomBool(RandomBool("dash", "beam"), RandomBool("dash", "center"));
+            CallAction(accion);
         }
         else
         {
-            RandomBool("dash", "beam");
-        }
-
+            accion = RandomBool("slash", "stun");
+            CallAction(accion);
+        }*/
     }
 
     void LookAtTarget(Vector3 target)
@@ -130,22 +136,21 @@ public class SardulaBehavior : MonoBehaviour
         transform.LookAt(target);
     }
 
-    void RandomBool(string action1, string action2)
+    string RandomBool(string action1, string action2)
     {
         if (Random.value >= 0.5)
         {
-            CallAction(action1);
+           return action1;
         }
         else
         {
-            CallAction(action2);
+            return action2;
         }
     }
     
     void CallAction(string action)
     {
         anim.SetTrigger(action);
-        Debug.Log(action);
         actionPosition = new Vector3(player.position.x, transform.position.y, player.position.z); ;
         doingAction = action;
         isAction = true;
@@ -157,7 +162,26 @@ public class SardulaBehavior : MonoBehaviour
         doingAction = "none";
         timeToReachTarget = 0;
         t = 0;
-        Debug.Log("Fin de la accion");
     }
+
+    private void SpawnProyectile()
+    {
+        float angleStep = 360f / proyectileNumber;
+        float angle = 0f;
+
+        for (int i = 1; i <= proyectileNumber; i++)
+        {
+            float projectileDirXPosition = transform.position.x + Mathf.Sin((angle * Mathf.PI) / 180) * 1F;
+            float projectileDirYPosition = transform.position.y + Mathf.Cos((angle * Mathf.PI) / 180) * 1F;
+
+            Vector3 proyectileVector = new Vector3(projectileDirXPosition, projectileDirYPosition, 0 );
+            Vector3 proyectileMoveDirection = (proyectileVector - transform.position).normalized * 200;
+            GameObject tmpObj = Instantiate(centerProyectile,transform.position,Quaternion.identity);
+            tmpObj.GetComponent<Rigidbody>().velocity = new Vector3(proyectileMoveDirection.x, 0, proyectileMoveDirection.y);
+            Destroy(tmpObj, 3);
+            angle += angleStep;
+        }
+    }
+
 }
 
