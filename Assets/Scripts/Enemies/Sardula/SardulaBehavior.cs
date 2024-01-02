@@ -22,11 +22,20 @@ public class SardulaBehavior : MonoBehaviour
     [SerializeField] GameObject slashProyectile;
     [SerializeField] private int proyectileNumber;
     [SerializeField] GameObject centerProyectile;
+    [SerializeField] GameObject secondPhase;
+    public bool isSecondPhase;
     // Start is called before the first frame update
+
+    private void Awake()
+    {
+        if (secondPhase != null) { secondPhase.SetActive(false); }
+    }
     void Start()
     {
         anim = GetComponent<Animator>();
-        isAction = false;
+        CallAction("center");
+        isAction = true;
+        isSecondPhase = false;
     }
 
     // Update is called once per frame
@@ -36,6 +45,11 @@ public class SardulaBehavior : MonoBehaviour
         if (!isAction)
         {
             actionPosition = player.position;
+        }
+
+        if (isSecondPhase && secondPhase != null)
+        {
+            secondPhase.SetActive(true);
         }
 
         LookAtTarget(actionPosition);
@@ -52,7 +66,7 @@ public class SardulaBehavior : MonoBehaviour
         if (isAction)
         {
 
-            if (doingAction == "slash" && timer > 1.0f && timer <= 1.03f)
+            if (doingAction == "slash" && timer > 1.0f && timer <= 1.04f)
             {
                 GameObject tmpObject = Instantiate(slashProyectile, slashSpawn.position, slashSpawn.rotation);
                 Destroy(tmpObject, 3);
@@ -116,18 +130,18 @@ public class SardulaBehavior : MonoBehaviour
 
     void ChooseAction()
     {
-        CallAction("center");
-        /* accion;
+        //CallAction("center");
+        string accion;
         if (dist > 10)
         {
-            accion = RandomBool(RandomBool("dash", "beam"), RandomBool("dash", "center"));
+            accion = RandomBool(RandomBool("dash", "beam"), RandomBool("slash", "center"));
             CallAction(accion);
         }
         else
         {
-            accion = RandomBool("slash", "stun");
+            accion = RandomBool(RandomBool("slash", "beam"), RandomBool("stun","center"));
             CallAction(accion);
-        }*/
+        }
     }
 
     void LookAtTarget(Vector3 target)

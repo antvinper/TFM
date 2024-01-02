@@ -17,6 +17,7 @@ public class BeamProjectile : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             Debug.Log("Ouch");
+            gameObject.SetActive(false);
             Destroy(gameObject);
         }
     }

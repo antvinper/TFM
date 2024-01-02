@@ -13,4 +13,13 @@ public class SlashProjectile : MonoBehaviour
         gameObject.transform.localScale += new Vector3(0.1f, 0, 0);
         speed += 0.5f;
     }
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            Debug.Log("Ouch");
+            gameObject.SetActive(false);
+            Destroy(gameObject);
+        }
+    }
 }
