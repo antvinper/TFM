@@ -12,11 +12,12 @@ public class StompArea : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            SardulaBehavior target = other.GetComponent<SardulaBehavior>(); ;
+            PlayerController target = other.GetComponent<PlayerController>();
 
             Debug.Log(target.GetStatValue(StatNames.HEALTH, StatParts.ACTUAL_VALUE));
             skill.ProcessSkill(target);
             Debug.Log(target.GetStatValue(StatNames.HEALTH, StatParts.ACTUAL_VALUE));
+
             gameObject.SetActive(false);
             Destroy(gameObject);
         }
