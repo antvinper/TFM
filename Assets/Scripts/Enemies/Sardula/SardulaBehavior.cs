@@ -1,13 +1,15 @@
+using CompanyStats;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SardulaBehavior : MonoBehaviour
+public class SardulaBehavior : EnemyController
 {
     [SerializeField] float timer = 0.0f;
     private Animator anim;
     private string doingAction;
     private bool isAction;
+    private bool doneAction;
     private Vector3 actionPosition;
     private float timeToReachTarget, t;
     [SerializeField] Transform player;
@@ -24,6 +26,12 @@ public class SardulaBehavior : MonoBehaviour
     [SerializeField] GameObject centerProyectile;
     [SerializeField] GameObject secondPhase;
     public bool isSecondPhase;
+    private SardulaModel sardulaModel;
+    public SardulaModel SardulaModel
+    {
+        get => sardulaModel;
+        set => sardulaModel = value;
+    }
     // Start is called before the first frame update
 
     private void Awake()
@@ -32,10 +40,14 @@ public class SardulaBehavior : MonoBehaviour
     }
     void Start()
     {
+        sardulaModel = new SardulaModel();
+        this.SetModel(sardulaModel);
+
         anim = GetComponent<Animator>();
         CallAction("center");
         isAction = true;
         isSecondPhase = false;
+        Debug.Log(sardulaModel.GetStatValue(StatNames.HEALTH, StatParts.ACTUAL_VALUE));
     }
 
     // Update is called once per frame
@@ -47,7 +59,7 @@ public class SardulaBehavior : MonoBehaviour
             actionPosition = player.position;
         }
 
-        if (isSecondPhase && secondPhase != null)
+        if ((sardulaModel.GetStatValue(StatNames.HEALTH, StatParts.ACTUAL_VALUE) == 1250 && secondPhase != null) || (isSecondPhase && secondPhase != null))
         {
             secondPhase.SetActive(true);
         }
@@ -66,8 +78,9 @@ public class SardulaBehavior : MonoBehaviour
         if (isAction)
         {
 
-            if (doingAction == "slash" && timer > 1.0f && timer <= 1.04f)
+            if (doingAction == "slash" && timer > 1.0f && !doneAction)
             {
+                doneAction = true;
                 GameObject tmpObject = Instantiate(slashProyectile, slashSpawn.position, slashSpawn.rotation);
                 Destroy(tmpObject, 3);
             }
@@ -106,8 +119,9 @@ public class SardulaBehavior : MonoBehaviour
                 EndAction();
             }
 
-            if (doingAction == "stun" && timer > 2.0f && timer <= 2.05f)
+            if (doingAction == "stun" && timer > 2.0f && !doneAction)
             {
+                doneAction = true;
                 GameObject tmpObject = Instantiate(stompArea, stompSpawn.position, stompSpawn.rotation);
                 Destroy(tmpObject, 0.3f);
             }
@@ -130,9 +144,9 @@ public class SardulaBehavior : MonoBehaviour
 
     void ChooseAction()
     {
-        //CallAction("center");
+        CallAction("stun");
         string accion;
-        if (dist > 10)
+        /*if (dist > 10)
         {
             accion = RandomBool(RandomBool("dash", "beam"), RandomBool("slash", "center"));
             CallAction(accion);
@@ -141,7 +155,7 @@ public class SardulaBehavior : MonoBehaviour
         {
             accion = RandomBool(RandomBool("slash", "beam"), RandomBool("stun","center"));
             CallAction(accion);
-        }
+        }*/
     }
 
     void LookAtTarget(Vector3 target)
@@ -173,6 +187,7 @@ public class SardulaBehavior : MonoBehaviour
     void EndAction()
     {
         isAction = false;
+        doneAction = false;
         doingAction = "none";
         timeToReachTarget = 0;
         t = 0;

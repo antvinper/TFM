@@ -7791,6 +7791,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95cd878f5e3b5794698ab18235724096, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterStatsDefinition: {fileID: 11400000, guid: d4e62dd647f1f9942b0e284b60c8f4e5, type: 2}
   timer: 0
   player: {fileID: 1360725483}
   dist: 0
@@ -10044,6 +10045,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95cd878f5e3b5794698ab18235724096, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterStatsDefinition: {fileID: 11400000, guid: d4e62dd647f1f9942b0e284b60c8f4e5, type: 2}
   timer: 0
   player: {fileID: 1360725483}
   dist: 0

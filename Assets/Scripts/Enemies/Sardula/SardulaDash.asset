@@ -9,19 +9,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d446c1fd301a8fe42ac37df0911aee5b, type: 3}
+  m_Script: {fileID: 11500000, guid: 0e871837e1d9ef046874c32c342c6c95, type: 3}
   m_Name: SardulaDash
   m_EditorClassIdentifier: 
-  effectName: SardulaDash
-  effectType: 17
+  effectName: Dash
+  effectType: 0
   description: 
   applyOnSelf: 0
   isStatIncremented: 0
   statAffected: 0
-  statPart: 1
+  statPart: 0
   isValueInPercentage: 0
   statWhatToSee: 0
   isTheOwnerStat: 0
   statWhatToSeeStatPart: 0
   valueInPercentage: 0
-  value: 60
+  value: 30
