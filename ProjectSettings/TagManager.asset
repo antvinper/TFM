@@ -9,6 +9,7 @@ TagManager:
   - Iaksa
   - Sardula
   - Wall
+  - RoomController
   layers:
   - Default
   - TransparentFX

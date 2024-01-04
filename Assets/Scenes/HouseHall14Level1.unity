@@ -3964,7 +3964,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 613a214a9ee137a45b605d03ac3f0d96, type: 3}
       propertyPath: m_TagString
-      value: Sardula
+      value: Enemy
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 613a214a9ee137a45b605d03ac3f0d96, type: 3}
@@ -7408,7 +7408,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 613a214a9ee137a45b605d03ac3f0d96, type: 3}
       propertyPath: m_TagString
-      value: Sardula
+      value: Enemy
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 613a214a9ee137a45b605d03ac3f0d96, type: 3}
@@ -7738,6 +7738,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b376a842597110846adba855b1b6bca1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  runLevel: 0
   newTestingGame: 1
   loadDataTestingGame: 0
 --- !u!4 &1555917435
@@ -8099,6 +8100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterStatsDefinition: {fileID: 11400000, guid: d4e62dd647f1f9942b0e284b60c8f4e5, type: 2}
+  isHit: 0
   timer: 0
   player: {fileID: 1360725483}
   dist: 0
@@ -10446,6 +10448,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterStatsDefinition: {fileID: 11400000, guid: d4e62dd647f1f9942b0e284b60c8f4e5, type: 2}
+  isHit: 0
   timer: 0
   player: {fileID: 1360725483}
   dist: 0

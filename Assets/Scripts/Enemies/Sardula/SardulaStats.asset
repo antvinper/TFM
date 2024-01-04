@@ -25,3 +25,9 @@ MonoBehaviour:
     minValue: 100
     maxValue: 100
     isVolatil: 0
+  - name: 4
+    value: 0
+    actualMaxValue: 0
+    minValue: 0
+    maxValue: 0
+    isVolatil: 0
