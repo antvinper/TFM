@@ -127,3 +127,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1efab2e291c4a64cb8eacea3195b934, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  skill: {fileID: 11400000, guid: b84d9c21522168c4eb14aa3538c183fd, type: 2}
+  sardula: {fileID: 0}

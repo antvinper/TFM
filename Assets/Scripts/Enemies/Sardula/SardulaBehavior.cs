@@ -18,7 +18,6 @@ public class SardulaBehavior : EnemyController
     [SerializeField] GameObject beamProjectile;
     [SerializeField] Transform beamSpawn;
     [SerializeField] GameObject stompArea;
-    [SerializeField] Transform stompSpawn;
     [SerializeField] GameObject dashArea;
     [SerializeField] Transform slashSpawn;
     [SerializeField] GameObject slashProyectile;
@@ -42,7 +41,7 @@ public class SardulaBehavior : EnemyController
     {
         sardulaModel = new SardulaModel();
         this.SetModel(sardulaModel);
-
+        stompArea.GetComponent<StompArea>().sardula = this;
         anim = GetComponent<Animator>();
         CallAction("center");
         isAction = true;
@@ -82,6 +81,7 @@ public class SardulaBehavior : EnemyController
             {
                 doneAction = true;
                 GameObject tmpObject = Instantiate(slashProyectile, slashSpawn.position, slashSpawn.rotation);
+                tmpObject.GetComponent<SlashProjectile>().sardula = this;
                 Destroy(tmpObject, 3);
             }
             else if(doingAction == "slash" && timer >= 2.0f)
@@ -119,21 +119,32 @@ public class SardulaBehavior : EnemyController
                 EndAction();
             }
 
-            if (doingAction == "stun" && timer > 2.0f && !doneAction)
+            if (doingAction == "stun" && timer > 2.0f)
             {
-                doneAction = true;
-                GameObject tmpObject = Instantiate(stompArea, stompSpawn.position, stompSpawn.rotation);
-                Destroy(tmpObject, 0.3f);
+                if (timer > 2.03)
+                {
+                    stompArea.SetActive(false);
+                }
+                else
+                {
+                    stompArea.SetActive(true);
+                }
             }
             else if (doingAction == "stun" && timer >= 2.7f)
             {
                 EndAction();
             }
 
-            if (doingAction == "beam" && timer > 0.7f && timer <= 2.3f)
+            if (doingAction == "beam" && timer > 0.7f)
             {
-                GameObject tmpObj =Instantiate(beamProjectile,beamSpawn.position, beamSpawn.rotation);
-                Destroy(tmpObj, 3);
+                if (timer >= 2.3f)
+                {
+                    beamProjectile.SetActive(false);
+                }
+                else
+                {
+                    beamProjectile.SetActive(true);
+                }
             }
             else if (doingAction == "beam" && timer >= 3.7f)
             {
@@ -144,9 +155,8 @@ public class SardulaBehavior : EnemyController
 
     void ChooseAction()
     {
-        CallAction("stun");
         string accion;
-        /*if (dist > 10)
+        if (dist > 10)
         {
             accion = RandomBool(RandomBool("dash", "beam"), RandomBool("slash", "center"));
             CallAction(accion);
@@ -155,7 +165,7 @@ public class SardulaBehavior : EnemyController
         {
             accion = RandomBool(RandomBool("slash", "beam"), RandomBool("stun","center"));
             CallAction(accion);
-        }*/
+        }
     }
 
     void LookAtTarget(Vector3 target)
@@ -206,6 +216,7 @@ public class SardulaBehavior : EnemyController
             Vector3 proyectileVector = new Vector3(projectileDirXPosition, projectileDirYPosition, 0 );
             Vector3 proyectileMoveDirection = (proyectileVector - transform.position).normalized * 200;
             GameObject tmpObj = Instantiate(centerProyectile,transform.position,Quaternion.identity);
+            tmpObj.GetComponent<CenterProjectile>().sardula = this;
             tmpObj.GetComponent<Rigidbody>().velocity = new Vector3(proyectileMoveDirection.x, 0, proyectileMoveDirection.y);
             Destroy(tmpObj, 3);
             angle += angleStep;

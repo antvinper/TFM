@@ -1,3 +1,4 @@
+using CompanyStats;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,8 @@ using UnityEngine;
 public class SlashProjectile : MonoBehaviour
 {
     [SerializeField] private float speed;
+    [SerializeField] SkillDefinition skill;
+    public SardulaBehavior sardula;
 
     // Update is called once per frame
     void Update()
@@ -17,7 +20,8 @@ public class SlashProjectile : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log("Ouch");
+            PlayerController target = other.GetComponent<PlayerController>();
+            skill.ProcessSkill(sardula, target);
             gameObject.SetActive(false);
             Destroy(gameObject);
         }

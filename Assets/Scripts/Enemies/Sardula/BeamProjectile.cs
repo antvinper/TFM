@@ -1,24 +1,22 @@
+using CompanyStats;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class BeamProjectile : MonoBehaviour
 {
     [SerializeField] private float speed;
-
-    // Update is called once per frame
-    void Update()
-    {
-        transform.position += transform.forward * speed * Time.deltaTime;
-    }
+    [SerializeField] SkillDefinition skill;
+    public SardulaBehavior sardula;
 
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log("Ouch");
+            PlayerController target = other.GetComponent<PlayerController>();
+            skill.ProcessSkill(sardula, target);
             gameObject.SetActive(false);
-            Destroy(gameObject);
         }
     }
 }

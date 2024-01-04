@@ -111,3 +111,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 3
+  skill: {fileID: 11400000, guid: 449a7e82f78d1104cb9420d4d279538c, type: 2}
+  sardula: {fileID: 0}

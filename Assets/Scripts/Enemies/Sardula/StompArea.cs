@@ -7,19 +7,15 @@ public class StompArea : MonoBehaviour
 {
     // Update is called once per frame
     [SerializeField] SkillDefinition skill;
+    public SardulaBehavior sardula;
 
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
             PlayerController target = other.GetComponent<PlayerController>();
-
-            Debug.Log(target.GetStatValue(StatNames.HEALTH, StatParts.ACTUAL_VALUE));
-            skill.ProcessSkill(target);
-            Debug.Log(target.GetStatValue(StatNames.HEALTH, StatParts.ACTUAL_VALUE));
-
+            skill.ProcessSkill(sardula, target);
             gameObject.SetActive(false);
-            Destroy(gameObject);
         }
     }
 }
