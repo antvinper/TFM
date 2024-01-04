@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f097c9abb95d1d949bc93b53fa7cde90, type: 3}
+  m_Name: Dash
+  m_EditorClassIdentifier: 
+  name: 
+  description: 
+  temporalInstantEffects: []
+  permanentInstantEffects:
+  - {fileID: 11400000, guid: d1360d9965d9e7d408fc65264cb2dcec, type: 2}
+  overTimeEffects:
+  - {fileID: 11400000, guid: f7d33a1dcef9dc64280cd8f104cbc8c6, type: 2}
+  duringTimeEffects: []

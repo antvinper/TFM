@@ -6,12 +6,15 @@ using UnityEngine;
 
 public class RaksashaController : EnemyController
 {
+    private RaksashaModel raksashaModel;
+    public RaksashaModel RaksashaModel { get => raksashaModel; }
+
     [SerializeField] private Rigidbody rb;
     [SerializeField] private Animator animator;
     [SerializeField] SkillDefinition skillSmash;
     [SerializeField] SkillDefinition skillBlow;
 
-    private float walkSpeed;
+    [SerializeField] private float walkSpeed;
 
     private float latestChangeTime;
     private readonly float changeTime = 3f;
@@ -24,8 +27,8 @@ public class RaksashaController : EnemyController
     void Start()
     {
         
-        model = new RaksashaModel();
-        this.SetModel(model);
+        raksashaModel = new RaksashaModel();
+        this.SetModel(raksashaModel);
 
         latestChangeTime = 0f;
 
@@ -86,25 +89,25 @@ public class RaksashaController : EnemyController
 
     public async Task WaitAnSecods()
     {
-       await new WaitForSeconds(5f);
+       await new WaitForSeconds(1f);
     }
 
     private void OnTriggerEnter(Collider other)
     {
         //Si el jugador entra en contacto con "Sphere Collider"
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && canAttack)
         {
             //Realiza ataque en area "Aplastar" (Smash)
-            animator.Play("Armature|Aplastar");
             PlayerController playerController = other.GetComponent<PlayerController>();
             ApplySkillSmash(playerController); //TODO -> Mejorar, ya que debe hacer daño si esta dentro del area, si sale no deberia hacerle caso
-            WaitAnSecods();
+            animator.SetTrigger("Aplastar");
 
             //Moverse hacia el jugador
             transform.LookAt(new Vector3(other.transform.position.x, transform.position.y, other.transform.position.z));
             calculateObjectiveVector(other.transform.position);
             latestChangeTime = Time.time;
-            animator.Play("Armature|Andar");
+            ResetAttack();
+            //animator.Play("Armature|Andar");
         }
     }
 
@@ -114,7 +117,7 @@ public class RaksashaController : EnemyController
         if (collision.collider.CompareTag("Player") && canAttack)
         {
             //Realiza un "zarpazo" (Blow)
-            animator.Play("Armature|Zarpazo");
+            animator.SetTrigger("Zarpazo");
             PlayerController playerController = collision.collider.GetComponent<PlayerController>();
             ApplySkillBlow(playerController);
             ResetAttack();

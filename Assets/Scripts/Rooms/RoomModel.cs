@@ -8,12 +8,46 @@ public class RoomModel
 {
     [SerializeField] RoomDefinition roomDefinition;
     [SerializeField] private List<Transform> spawnPoints;
-    [SerializeField] private List<Wave> waves;
+    [SerializeField] private Wave wave;
 
+    private int totalWaves = 0;
     private int actualWave = 1;
+    private int[] enemiesToSpawnPerWave;
+
     public int ActualWave
     {
         get => actualWave;
+    }
+
+    public void Setup()
+    {
+        float numero = GameManager.Instance.RunLevel;
+        float basePersonalizada = 1.75f;
+
+        float logaritmoBasePersonalizada = Mathf.Log(numero+1) / Mathf.Log(basePersonalizada);
+        totalWaves = Mathf.FloorToInt(logaritmoBasePersonalizada);
+        enemiesToSpawnPerWave = new int[totalWaves];
+
+        FillEnemiesToSpawnPerWave();
+    }
+
+    private void FillEnemiesToSpawnPerWave()
+    {
+        int totalEnemiesToSpawn = GetNEnemiesToSpawn();
+
+
+        while (totalEnemiesToSpawn > 0)
+        {
+            for (int i = totalWaves - 1; i >= 0; --i)
+            {
+                enemiesToSpawnPerWave[i] += 1;
+                --totalEnemiesToSpawn;
+                if (totalEnemiesToSpawn == 0)
+                {
+                    break;
+                }
+            }
+        }
     }
 
     /*public List<Transform> SpawnPoints
@@ -29,7 +63,7 @@ public class RoomModel
     public bool IsTheLastWave()
     {
         bool isTheLastWave = false;
-        if(actualWave == waves.Count)
+        if(actualWave == totalWaves)
         {
             isTheLastWave = true;
         }
@@ -41,21 +75,27 @@ public class RoomModel
         return isTheLastWave;
     }
 
-    public int GetNEnemiesToSpawn()
+    private int GetNEnemiesToSpawn()
     {
-        return waves[actualWave - 1].NumberOfEnemiesToSpawn;
+        return Mathf.FloorToInt(GameManager.Instance.RunLevel * 1.5f);
+        //return waves[actualWave - 1].NumberOfEnemiesToSpawn;
+    }
+
+    public int GetNEnemiesToSpawnInWave()
+    {
+        return enemiesToSpawnPerWave[actualWave - 1];
     }
 
     public GameObject GetWaveRandomEnemy()
     {
-        int randomIndex = Random.Range(0, waves[actualWave - 1].Enemies.Count);
+        int randomIndex = Random.Range(0, wave.Enemies.Count);
 
-        return waves[actualWave - 1].Enemies[randomIndex];
+        return wave.Enemies[randomIndex];
     }
 
     public List<GameObject> GetEnemiesWave()
     {
-        return waves[actualWave - 1].Enemies;
+        return wave.Enemies;
     }
 
     public RoomReward GetReward(PlayerController playerController)
@@ -112,12 +152,12 @@ public class RoomModel
 
     public void AddEnemyKilled()
     {
-        waves[actualWave - 1].AddEnemyKilled();
+        wave.AddEnemyKilled();
     }
 
     public void RestartEnemiesKilled()
     {
-        waves[actualWave - 1].RestartEnemiesKilled();
+        wave.RestartEnemiesKilled();
     }
 
 }

@@ -97,10 +97,6 @@ public class CharacterMutableModel// : ICharacterModel
 
     public virtual void CalculateStat(StatNames statName, StatParts statPart)
     {
-        if(statName.Equals(StatNames.SPEED) && statPart.Equals(StatParts.ACTUAL_VALUE))
-        {
-            Debug.Log("HOLA");
-        }
         GetStatFromName(statName).ResetStat();
 
 

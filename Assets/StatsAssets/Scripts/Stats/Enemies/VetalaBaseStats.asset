@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e54767eff4d251847afc317b946bce6b, type: 3}
   m_Name: VetalaBaseStats
   m_EditorClassIdentifier: 
-  statsDefinition: {fileID: 0}
+  statsDefinition: {fileID: 11400000, guid: ded20da385bb83343a04884b9d420027, type: 2}

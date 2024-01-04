@@ -19,19 +19,19 @@ public class StartMenu : MonoBehaviour
     
     void Start()
     {
-        gameManager.selectedFile = 1;
+        //gameManager.selectedFile = 1;
         //saveFileText.text = "Partida " + gameManager.selectedFile;
-        continueButton.interactable = gameManager.hasOngoingRun;
+        //continueButton.interactable = gameManager.hasOngoingRun;
     }
 
     public void ContinueRun()
     {
-        Debug.Log("Continuando la run del archivo de guardado " + gameManager.selectedFile);
+        Debug.Log("Continuando la run del archivo de guardado");
     }
     
     public void NewRun()
     {
-        Debug.Log("Comenzando una nueva run en el archivo de guardado " + gameManager.selectedFile);
+        Debug.Log("Comenzando una nueva run en el archivo de guardado");
     }
 
     public void OpenOptions()

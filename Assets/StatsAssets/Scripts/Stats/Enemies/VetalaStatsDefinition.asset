@@ -12,4 +12,70 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6762c888c7f989b419d961d95ec9dd74, type: 3}
   m_Name: VetalaStatsDefinition
   m_EditorClassIdentifier: 
-  stats: []
+  stats:
+  - name: 0
+    value: 50
+    actualMaxValue: 250
+    minValue: 0
+    maxValue: 9999
+    isVolatil: 1
+  - name: 1
+    value: 70
+    actualMaxValue: 75
+    minValue: 0
+    maxValue: 9999
+    isVolatil: 1
+  - name: 2
+    value: 30
+    actualMaxValue: 255
+    minValue: 1
+    maxValue: 255
+    isVolatil: 0
+  - name: 3
+    value: 10
+    actualMaxValue: 255
+    minValue: 1
+    maxValue: 255
+    isVolatil: 0
+  - name: 4
+    value: 5
+    actualMaxValue: 255
+    minValue: 1
+    maxValue: 255
+    isVolatil: 0
+  - name: 5
+    value: 10
+    actualMaxValue: 255
+    minValue: 1
+    maxValue: 255
+    isVolatil: 0
+  - name: 6
+    value: 10
+    actualMaxValue: 255
+    minValue: 1
+    maxValue: 255
+    isVolatil: 0
+  - name: 7
+    value: 10
+    actualMaxValue: 255
+    minValue: 1
+    maxValue: 255
+    isVolatil: 0
+  - name: 8
+    value: 0
+    actualMaxValue: 100
+    minValue: 0
+    maxValue: 100
+    isVolatil: 0
+  - name: 7
+    value: 0
+    actualMaxValue: 100
+    minValue: 0
+    maxValue: 100
+    isVolatil: 0
+  - name: 9
+    value: 0
+    actualMaxValue: 100
+    minValue: 0
+    maxValue: 100
+    isVolatil: 0

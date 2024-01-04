@@ -11,6 +11,7 @@ using System;
  */
 public class EnemyController : CompanyCharacterController
 {
+    public bool isHit = false;
     Guid gUID;
     public Guid GUID
     {
@@ -59,6 +60,7 @@ public class EnemyController : CompanyCharacterController
     public override void ApplyDamage(Strike strike)
     {
         Debug.Log("Health before damage = " + model.GetStatValue(StatNames.HEALTH, StatParts.ACTUAL_VALUE));
+        isHit = true;
         bool isAlive = model.ApplyDamage(strike);
         Debug.Log("Applied an attack of: " + strike.FinalValue + " points");
         Debug.Log("Health after damage = " + model.GetStatValue(StatNames.HEALTH, StatParts.ACTUAL_VALUE));
@@ -70,9 +72,10 @@ public class EnemyController : CompanyCharacterController
             {
                 RoomManager.Instance.OnEnemyKilled(this);
             }
-            Destroy(transform.gameObject);
-            
+
+            Destroy(transform.gameObject); 
         }
+        isHit = false;
     }
 
     /*public override void ProcessEffect(CharacterMutableModel attacker)

@@ -76,7 +76,26 @@ public class WeaponController: MonoBehaviour
             {
                 model.BasicComboDefinitions[comboIndex++].UseSkill(owner, target);
             }
-            
+            CanNotMakeDamage();
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.tag.Equals("Enemy") && canMakeDamage)
+        {
+            Debug.Log(actualIndex);
+            if (actualIndex == 2)
+            {
+                Debug.Log("H");
+            }
+            PlayerController owner = GetComponentInParent<PlayerController>();
+            EnemyController target = other.GetComponentInParent<EnemyController>();
+            if (owner != null && target != null)
+            {
+                model.BasicComboDefinitions[comboIndex++].UseSkill(owner, target);
+            }
+            CanNotMakeDamage();
         }
     }
 
@@ -198,7 +217,7 @@ public class WeaponController: MonoBehaviour
                 comboStarted = true;
                 //CancelComboAfterTime();
                 actualActionStack.Add(buttonPressed);
-                animator.SetTrigger(model.BasicComboDefinitions[i].AnimationTriggerToStart);
+                animator.SetTrigger(model.BasicComboDefinitions[i].AnimationTriggerToStart.ToString());
                 break;
             }
         }

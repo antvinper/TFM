@@ -6,11 +6,13 @@ using UnityEngine.InputSystem;
 public class PlayerInputManager : MonoBehaviour
 {
     [SerializeField] PlayerController playerController;
+    [SerializeField] private AudioSource moverEspada;
 
     private void Update()
     {
         if (Input.GetMouseButtonDown(0))
         {
+            moverEspada.Play();
             playerController.DoCombo(ButtonsXbox.X);
             dealingDamage();
         }
@@ -23,6 +25,7 @@ public class PlayerInputManager : MonoBehaviour
         {
             if (callbackContext.action.activeControl.ToString().Contains("buttonWest"))
             {
+                moverEspada.Play();
                 playerController.DoCombo(ButtonsXbox.X);
 
                 //Debug.Log("West or X Pressed");
@@ -30,17 +33,20 @@ public class PlayerInputManager : MonoBehaviour
             }
             if (callbackContext.action.activeControl.ToString().Contains("buttonNorth"))
             {
+                moverEspada.Play();
                 playerController.DoCombo(ButtonsXbox.Y);
                 playerController.StartCharging();
             }
             if (callbackContext.action.activeControl.ToString().Contains("rightTrigger"))
             {
+                moverEspada.Play();
                 playerController.DoCombo(ButtonsXbox.RT);
                 Debug.Log("Right or RT Pressed");
                 //TODO
             }
             if (callbackContext.action.activeControl.ToString().Contains("buttonEst"))
             {
+                moverEspada.Play();
                 playerController.DoCombo(ButtonsXbox.B);
                 Debug.Log("Dash");
                 //TODO
