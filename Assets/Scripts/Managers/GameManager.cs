@@ -72,12 +72,11 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
     }
 
-
     public void NewGame(int slotIndex)
     {
         dataPersistenceManager.NewGame(slotIndex);
         isGameStarted = true;
-        //SceneManager.Instance.LoadLobbyScene();
+        SceneManager.Instance.LoadLobbyScene();
     }
 
     public bool IsGameStarted

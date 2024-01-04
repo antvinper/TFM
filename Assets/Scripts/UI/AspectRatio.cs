@@ -27,6 +27,5 @@ public class AspectRatio : MonoBehaviour
                 Screen.SetResolution(1280, 800, false);
                 break;
         }
-        
     }
 }

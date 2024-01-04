@@ -52,7 +52,7 @@ public class FileDataHandler
     public async Task<GameModel> GetDataByFileName(string fileName)
     {
         //string fullPath = Path.Combine(dataDirPath, fileName);
-        string fullPath = dataDirPath + "/" + fileName + ".game";
+        string fullPath = dataDirPath + "/" + fileName;
         //GameModel loadedData = new GameModel();
         gameModel = new GameModel();
 
