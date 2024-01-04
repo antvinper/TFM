@@ -20,33 +20,33 @@ MonoBehaviour:
     maxValue: 9999
     isVolatil: 1
   - name: 1
-    value: 10
-    actualMaxValue: 30
+    value: 0
+    actualMaxValue: 0
     minValue: 0
     maxValue: 999
     isVolatil: 1
   - name: 2
-    value: 10
+    value: 250
     actualMaxValue: 255
     minValue: 1
     maxValue: 255
     isVolatil: 0
   - name: 3
-    value: 10
-    actualMaxValue: 255
-    minValue: 1
+    value: 0
+    actualMaxValue: 0
+    minValue: 0
     maxValue: 255
     isVolatil: 0
   - name: 4
-    value: 10
+    value: 0
     actualMaxValue: 255
-    minValue: 1
+    minValue: 0
     maxValue: 255
     isVolatil: 0
   - name: 5
-    value: 10
+    value: 0
     actualMaxValue: 255
-    minValue: 1
+    minValue: 0
     maxValue: 255
     isVolatil: 0
   - name: 6

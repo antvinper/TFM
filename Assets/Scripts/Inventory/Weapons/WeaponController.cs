@@ -72,6 +72,7 @@ public class WeaponController: MonoBehaviour
             }
             PlayerController owner = GetComponentInParent<PlayerController>();
             EnemyController target = other.GetComponentInParent<EnemyController>();
+            Debug.Log("#Sardula Health: " + target.GetStatValue(StatNames.HEALTH, StatParts.ACTUAL_VALUE));
             if(owner != null && target != null)
             {
                 model.BasicComboDefinitions[comboIndex++].UseSkill(owner, target);

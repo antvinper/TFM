@@ -1,11 +1,14 @@
 fileFormatVersion: 2
-guid: 836406e8f24966a4791733cb759e966b
+guid: 613a214a9ee137a45b605d03ac3f0d96
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable:
   - first:
       74: -4449717305648701825
     second: Armature|0TPose
+  - first:
+      74: -22902058382792025
+    second: Armature|Beam
   - first:
       74: -2246502780319343731
     second: Armature|Dash
@@ -24,17 +27,7 @@ ModelImporter:
   - first:
       74: 6690909081564076358
     second: Armature|Stomp
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Material
-    second: {fileID: 2100000, guid: 363ad4e116b540c43a1c5dacf9d4be26, type: 2}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: TexturaSardula
-    second: {fileID: 2800000, guid: 26f9ba3ef62d6e543ab9edb7d3677f53, type: 3}
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0
