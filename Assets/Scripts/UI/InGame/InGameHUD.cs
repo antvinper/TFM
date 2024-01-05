@@ -2,6 +2,8 @@ using CompanyStats;
 using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class InGameHUD : MonoBehaviour
@@ -9,7 +11,13 @@ public class InGameHUD : MonoBehaviour
     private InGameHUD instance;
     private bool isPauseMenuOpen = false;
 
+    [SerializeField] protected EventSystem eventSystem;
     [SerializeField] private PlayerController playerController;
+    [SerializeField] private InputActionReference pauseReference;
+    [SerializeField] private InputActionReference submitReference;
+    [SerializeField] private GameObject pauseStartButtonActive;
+    [SerializeField] private MovePlayer movePlayer;
+
 
     [Header("InGameHUD Parts")]
     [SerializeField] private GameObject inGameHUD;
@@ -46,19 +54,23 @@ public class InGameHUD : MonoBehaviour
     {
         // Asignar el player model dinamicamente? Si no, se asigna a mano en todas las escenas
         //Debug.Log("Is there a player controller?: " + (playerController == null ? "No" : "Yes"));
+        pauseReference.action.performed += this.PauseIddle;
     }
 
     void Update()
     {
+        //TODO -> Mover el setupInGameHud, sÃ³lo cuando ocurra un cambio en los stats del jugador
+        //Tal como estÃ¡ chupa muchos recursos.
         SetUpInGameHUD();
-        if (Input.GetKeyDown(KeyCode.Escape) /*|| Input.GetKeyDown(KeyCode.Joystick1Button9)*/) //Definir el botón del mando Start
+    }
+    
+    private void PauseIddle(InputAction.CallbackContext callbackContext)
+    {
+        if (callbackContext.phase.Equals(InputActionPhase.Performed))
         {
             if (isPauseMenuOpen)
             {
-                isPauseMenuOpen = false;
-                pauseMenu.SetActive(false);
-                inGameHUD.SetActive(true);
-                Time.timeScale = 1.0f;
+                ClosePauseMenu();
             }
             else
             {
@@ -67,6 +79,8 @@ public class InGameHUD : MonoBehaviour
                 pauseMenu.SetActive(true);
                 inGameHUD.SetActive(false);
                 Time.timeScale = 0.0f;
+                eventSystem.SetSelectedGameObject(pauseStartButtonActive);
+                movePlayer.enabled = false;
             }
         }
     }
@@ -113,19 +127,20 @@ public class InGameHUD : MonoBehaviour
         pauseMenu.SetActive(false);
         inGameHUD.SetActive(true);
         Time.timeScale = 1.0f;
+        movePlayer.enabled = true;
     }
 
     public void GoToMainMenu()
     {
-        // Llamar a la función de guardado
-        Debug.Log("Guardando antes de volver al menú de inicio...");
+        // Llamar a la funciï¿½n de guardado
+        Debug.Log("TODO -> Guardar antes de volver al menu de inicio e ir al menu de inicio...");
         //await SceneManager.LoadMenuScene();
     }
 
     public void SaveAndClose()
     {
-        // Llamar a la función de guardado
-        Debug.Log("Guardando antes de cerrar el juego...");
+        // Llamar a la funciï¿½n de guardado
+        Debug.Log("TODO -> Guardando antes de cerrar el juego...");
         Application.Quit();
     }
 }
