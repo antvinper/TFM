@@ -11,6 +11,10 @@ using System;
  */
 public class EnemyController : CompanyCharacterController
 {
+    [SerializeField] private GameObject originalRender;
+    [SerializeField] private GameObject dissolveRender;
+    [SerializeField] private SpawnEffect despawnEffect;
+    
     public bool isHit = false;
     Guid gUID;
     public Guid GUID
@@ -67,16 +71,23 @@ public class EnemyController : CompanyCharacterController
 
         if (!isAlive)
         {
-            Debug.Log("TODO -> Behaviour when dies."); 
-            if (transform.tag.Equals("Enemy"))
-            {
-                RoomManager.Instance.OnEnemyKilled(this);
-            }
-
-            Destroy(transform.gameObject); 
+            DieBehaviour();
         }
         isHit = false;
     }
+
+    public override async Task DieBehaviour()
+    {
+        Debug.Log("TODO -> Behaviour when dies.");
+
+        RoomManager.Instance.OnEnemyKilled(this);
+        await new WaitForSeconds(despawnEffect.spawnEffectTime);
+        dissolveRender.SetActive(true);
+        originalRender.SetActive(false);
+        await new WaitForSeconds(despawnEffect.spawnEffectTime);
+        base.DieBehaviour();
+    }
+
 
     /*public override void ProcessEffect(CharacterMutableModel attacker)
     {

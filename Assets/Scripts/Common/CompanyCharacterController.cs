@@ -2,6 +2,7 @@ using CompanyStats;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using UnityEngine;
 
 
@@ -43,6 +44,11 @@ using UnityEngine;
                 Debug.Log("TODO -> Behaviour when dies. Maybe should override method if enemy or player");
             }
             
+        }
+
+        public virtual async Task DieBehaviour()
+        {
+            Destroy(transform.gameObject);
         }
 
         public virtual Stat GetStatFromName(StatNames statName)
