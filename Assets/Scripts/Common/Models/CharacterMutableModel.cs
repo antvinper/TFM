@@ -394,7 +394,16 @@ public class CharacterMutableModel// : ICharacterModel
         bool hasBeenRemoved = false;
         if (effect is OverTimeEffectDefinition)
         {
-            Debug.Log("TODO remove OverTimeEffectDefinition");
+            int previousLength = overTimeEffects.Count;
+            OverTimeEffectDefinition overTimeEffect = GetOverTimeEffectByType(effect.EffectType);
+            overTimeEffects.Remove(overTimeEffect);
+            int afterRemoveLength = overTimeEffects.Count;
+
+            if (previousLength == afterRemoveLength + 1)
+            {
+                Debug.Log("Effect has been removed");
+                hasBeenRemoved = true;
+            }
         }
         else if (effect is DuringTimeEffectDefinition)
         {

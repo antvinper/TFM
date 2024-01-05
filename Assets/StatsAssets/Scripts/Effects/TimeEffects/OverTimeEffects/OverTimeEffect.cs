@@ -61,7 +61,14 @@ namespace CompanyStats
                 }
             } else
             {
-                Debug.Log("TODO Realizar los checks");
+                if (this.Equals(previousOverTimeEffect))
+                {
+                    RestartEffect();
+                }
+                else
+                {
+                    Debug.Log("TODO Realizar los checks");
+                }
             }
             
         }
@@ -86,7 +93,7 @@ namespace CompanyStats
 
                     actualTimeBetweenAplpyEffect = 0.0f;
                     timesApplied += 1;
-                    Debug.Log("#TIMER Effect applied correctly");
+                    //Debug.Log("#TIMER Effect applied correctly");
                     //target.CalculateStat(StatAffected, StatPart);
                     ApplyEffect();
 
@@ -138,6 +145,12 @@ namespace CompanyStats
                     Debug.Log(stat.StatName + "." + StatPart + " value after apply the effect " + name + ": " + target.GetStatValue(stat.StatName, StatPart));
                 }
             } while (effectLifeTime > actualTimeEffectApplied);
+
+            Debug.Log("#TIMER Time finished. Here i should remove effect.");
+            if (!target.TryRemoveEffect(this))
+            {
+                Debug.LogError("Effect couldn't be removed");
+            }
         }
 
         private void ApplyEffect()
@@ -176,8 +189,32 @@ namespace CompanyStats
         }
         public override async Task RestartEffect()
         {
-            throw new System.NotImplementedException();
+            resetEffect = true;
         }
+
+
+        /*public override bool Equals(object obj)
+        {
+            if (obj == null || GetType() != obj.GetType())
+            {
+                return false;
+            }
+            else
+            {
+                OverTimeEffect other = obj as OverTimeEffect;
+
+                if (other.ApplyOnSelf != this.ApplyOnSelf)
+                {
+                    return false;
+                }
+                else if(other.EffectLifeTime != this.EffectLifeTime)
+                {
+                    return false;
+                }
+            }
+            
+            return base.Equals(obj);
+        }*/
     }
 }
 

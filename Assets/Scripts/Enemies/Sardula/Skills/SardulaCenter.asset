@@ -26,5 +26,6 @@ MonoBehaviour:
   valueInPercentage: 0
   value: 1
   effectLifeTime: 4
-  timesApplied: 0
+  timesApplied: 77
+  isInfinite: 0
   timeBetweenApplyEffect: 0.1

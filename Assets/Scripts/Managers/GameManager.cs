@@ -62,14 +62,18 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
         if (newTestingGame)
         {
-            NewGame(99);
+            NewTestingGame();
         }
         if (loadDataTestingGame)
         {
             LoadDataTesting();
         }
+    }
 
-
+    public void NewTestingGame()
+    {
+        dataPersistenceManager.NewGame(99);
+        isGameStarted = true;
     }
 
     public void NewGame(int slotIndex)
