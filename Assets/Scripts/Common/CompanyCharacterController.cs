@@ -58,11 +58,12 @@ using UnityEngine;
 
         public virtual int GetStatValue(StatNames statName, StatParts statPart)
         {
-            if(model == null)
+            int value = 0;
+            if(model != null)
             {
-                Debug.Log("NULL");
+                value = model.GetStatValue(statName, statPart);
             }
-            return model.GetStatValue(statName, statPart);
+            return value;
         }
 
         public virtual DuringTimeEffect GetDuringTimeEffectByType(EffectTypesEnum effectType)

@@ -12,7 +12,7 @@ public class RoomModel
 
     private int totalWaves = 0;
     private int actualWave = 1;
-    private int[] enemiesToSpawnPerWave;
+    private int[] nEnemiesToSpawnPerWave;
 
     public int ActualWave
     {
@@ -26,7 +26,7 @@ public class RoomModel
 
         float logaritmoBasePersonalizada = Mathf.Log(numero+1) / Mathf.Log(basePersonalizada);
         totalWaves = Mathf.FloorToInt(logaritmoBasePersonalizada);
-        enemiesToSpawnPerWave = new int[totalWaves];
+        nEnemiesToSpawnPerWave = new int[totalWaves];
 
         FillEnemiesToSpawnPerWave();
     }
@@ -35,12 +35,11 @@ public class RoomModel
     {
         int totalEnemiesToSpawn = GetNEnemiesToSpawn();
 
-
         while (totalEnemiesToSpawn > 0)
         {
             for (int i = totalWaves - 1; i >= 0; --i)
             {
-                enemiesToSpawnPerWave[i] += 1;
+                nEnemiesToSpawnPerWave[i] += 1;
                 --totalEnemiesToSpawn;
                 if (totalEnemiesToSpawn == 0)
                 {
@@ -49,11 +48,6 @@ public class RoomModel
             }
         }
     }
-
-    /*public List<Transform> SpawnPoints
-    {
-        get => spawnPoints;
-    }*/
 
     public List<Transform> SpawnPoints
     {
@@ -83,7 +77,7 @@ public class RoomModel
 
     public int GetNEnemiesToSpawnInWave()
     {
-        return enemiesToSpawnPerWave[actualWave - 1];
+        return nEnemiesToSpawnPerWave[actualWave - 1] <= spawnPoints.Count ? nEnemiesToSpawnPerWave[actualWave - 1]: spawnPoints.Count;
     }
 
     public GameObject GetWaveRandomEnemy()

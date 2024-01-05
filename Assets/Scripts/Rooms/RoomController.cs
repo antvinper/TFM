@@ -101,6 +101,7 @@ public class RoomController : MonoBehaviour
             //Si lo es, dar rewards, sino, instanciar la siguiente wave
             if (model.IsTheLastWave())
             {
+                Debug.Log("#WAVE Waves finished");
                 GetRoomRewards(playerController);
 
                 doorAnimator.SetTrigger("openDoor");
@@ -109,6 +110,7 @@ public class RoomController : MonoBehaviour
             }
             else
             {
+                Debug.Log("#WAVE Starting next wave...");
                 await new WaitForSeconds(0.5f);
                 StartNewWave();
             }

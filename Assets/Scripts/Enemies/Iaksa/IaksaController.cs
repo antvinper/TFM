@@ -29,7 +29,6 @@ public class IaksaController : EnemyController
         iaksaModel = new IaksaModel();
         this.SetModel(iaksaModel);
 
-
         walkSpeed = GetStatValue(StatNames.SPEED, StatParts.ACTUAL_VALUE);
         runSpeed = walkSpeed * 2.5f;
 
