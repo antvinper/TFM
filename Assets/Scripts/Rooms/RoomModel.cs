@@ -26,6 +26,7 @@ public class RoomModel
 
         float logaritmoBasePersonalizada = Mathf.Log(numero+1) / Mathf.Log(basePersonalizada);
         totalWaves = Mathf.FloorToInt(logaritmoBasePersonalizada);
+
         nEnemiesToSpawnPerWave = new int[totalWaves];
 
         FillEnemiesToSpawnPerWave();

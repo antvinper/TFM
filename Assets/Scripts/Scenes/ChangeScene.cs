@@ -30,6 +30,7 @@ public class ChangeScene : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            GameManager.Instance.IncrementRunLevel();
             //Change to random scene
             SceneManager.Instance.ChangeToRandomScene();
             //sceneLoader.ChangeToRandomScene();

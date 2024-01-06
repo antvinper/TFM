@@ -63,22 +63,25 @@ public class EnemyController : CompanyCharacterController
 
     public override void ApplyDamage(Strike strike)
     {
-        Debug.Log("Health before damage = " + model.GetStatValue(StatNames.HEALTH, StatParts.ACTUAL_VALUE));
-        isHit = true;
-        bool isAlive = model.ApplyDamage(strike);
-        Debug.Log("Applied an attack of: " + strike.FinalValue + " points");
-        Debug.Log("Health after damage = " + model.GetStatValue(StatNames.HEALTH, StatParts.ACTUAL_VALUE));
-
-        if (!isAlive)
+        if(GetStatValue(StatNames.HEALTH, StatParts.ACTUAL_VALUE) > 0)
         {
-            DieBehaviour();
+            Debug.Log("Health before damage = " + model.GetStatValue(StatNames.HEALTH, StatParts.ACTUAL_VALUE));
+            isHit = true;
+            bool isAlive = model.ApplyDamage(strike);
+            Debug.Log("Applied an attack of: " + strike.FinalValue + " points");
+            Debug.Log("Health after damage = " + model.GetStatValue(StatNames.HEALTH, StatParts.ACTUAL_VALUE));
+
+            if (!isAlive)
+            {
+                DieBehaviour();
+            }
+            isHit = false;
         }
-        isHit = false;
     }
 
     public override async Task DieBehaviour()
     {
-        Debug.Log("TODO -> Behaviour when dies.");
+        Debug.Log("TODO -> Enemy Behaviour when dies.");
 
         RoomManager.Instance.OnEnemyKilled(this);
         await new WaitForSeconds(despawnEffect.spawnEffectTime);

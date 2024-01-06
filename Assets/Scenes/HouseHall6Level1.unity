@@ -2256,6 +2256,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Room
       objectReference: {fileID: 0}
+    - target: {fileID: 8232645649537126076, guid: 07e9afb9da145ed41877cf1331df7d35, type: 3}
+      propertyPath: m_Size.y
+      value: 2.3252306
+      objectReference: {fileID: 0}
+    - target: {fileID: 8232645649537126076, guid: 07e9afb9da145ed41877cf1331df7d35, type: 3}
+      propertyPath: m_Size.z
+      value: 1.3144913
+      objectReference: {fileID: 0}
+    - target: {fileID: 8232645649537126076, guid: 07e9afb9da145ed41877cf1331df7d35, type: 3}
+      propertyPath: m_Center.y
+      value: 0.6626152
+      objectReference: {fileID: 0}
+    - target: {fileID: 8232645649537126076, guid: 07e9afb9da145ed41877cf1331df7d35, type: 3}
+      propertyPath: m_Center.z
+      value: 0.05659485
+      objectReference: {fileID: 0}
     - target: {fileID: 8232645649537126077, guid: 07e9afb9da145ed41877cf1331df7d35, type: 3}
       propertyPath: m_LocalScale.y
       value: 1
@@ -2266,11 +2282,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8232645649537126077, guid: 07e9afb9da145ed41877cf1331df7d35, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 30.929
+      value: 31.45
       objectReference: {fileID: 0}
     - target: {fileID: 8232645649537126077, guid: 07e9afb9da145ed41877cf1331df7d35, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.55
+      value: 1.732
       objectReference: {fileID: 0}
     - target: {fileID: 8232645649537126077, guid: 07e9afb9da145ed41877cf1331df7d35, type: 3}
       propertyPath: m_LocalPosition.z

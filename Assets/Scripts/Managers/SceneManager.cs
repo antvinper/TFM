@@ -7,23 +7,8 @@ using UnityEngine.SceneManagement;
 public class SceneManager: SingletonMonoBehaviour<SceneManager>
 {
     private List<int> availableScenes;    
-    private int numRooms = 12;
-    private int countRooms = 1;
-    //private SceneManager instance;
-    //public static SceneManager Instance;
-    /*private void Awake()
-    {
-        if (instance != null && instance != this)
-        {
-            Destroy(this);
-        }
-        else
-        {
-            Instance = this;
-            DontDestroyOnLoad(this);
-            //NotDestroy();
-        }
-    }*/
+    private int numRooms = 14;
+    private int countRooms;
 
     private void Start()
     {
@@ -38,8 +23,7 @@ public class SceneManager: SingletonMonoBehaviour<SceneManager>
 
     public void ChangeToRandomScene()
     {
-        countRooms++;
-        Debug.Log(countRooms);
+        countRooms = GameManager.Instance.RunLevel;
         if (availableScenes.Count > 0)
         {
             if (countRooms == 7 || countRooms == 13 || countRooms == 14)
@@ -62,7 +46,7 @@ public class SceneManager: SingletonMonoBehaviour<SceneManager>
             else
             {
                 //Get random index
-                int randomIndex = Random.Range(2, availableScenes.Count);
+                int randomIndex = Random.Range(0, availableScenes.Count-1);
                 int sceneToLoad = availableScenes[randomIndex];
                 availableScenes.RemoveAt(randomIndex);
                 UnityEngine.SceneManagement.SceneManager.LoadScene(sceneToLoad);

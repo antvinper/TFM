@@ -36,6 +36,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     public void IncrementRunLevel()
     {
         ++runLevel;
+        Debug.Log("#RUNLEVEL Incrementing run level to -> " + runLevel);
     }
 
     public void SetPlayerController(PlayerController playerController)
@@ -93,11 +94,13 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     {
         dataPersistenceManager.gameModel = gameModel;
         Debug.Log("Game loaded in slot " + dataPersistenceManager.gameModel.SlotIndex + ", now should be change scene");
+        SceneManager.Instance.LoadLobbyScene();
     }
 
     public async Task StartRun()
     {
         Debug.Log("Starting run...");
+        runLevel = 1;
         SceneManager.Instance.ChangeToRandomScene();
         //UnityEngine.SceneManagement.SceneManager.LoadSceneAsync("HouseHall5Level1");
     }

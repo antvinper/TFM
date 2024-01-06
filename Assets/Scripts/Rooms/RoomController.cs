@@ -35,6 +35,7 @@ public class RoomController : MonoBehaviour
         }
 
         int nEnemiesToSpawn = model.GetNEnemiesToSpawnInWave();
+        
         Debug.Log(nEnemiesToSpawn);
         for (int i = 0; i < nEnemiesToSpawn; ++i)
         {
@@ -106,7 +107,7 @@ public class RoomController : MonoBehaviour
 
                 doorAnimator.SetTrigger("openDoor");
                 nextLevelCollider.enabled = true;
-                GameManager.Instance.IncrementRunLevel();
+                //GameManager.Instance.IncrementRunLevel();
             }
             else
             {
