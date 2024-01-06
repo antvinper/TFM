@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stats:
   - name: 0
-    value: 1
+    value: 250
     actualMaxValue: 250
     minValue: 0
     maxValue: 9999
