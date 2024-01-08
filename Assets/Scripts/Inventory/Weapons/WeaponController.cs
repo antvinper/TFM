@@ -129,7 +129,7 @@ public class WeaponController: MonoBehaviour
     public void CancelComboFromAnim()
     {
         Debug.Log(doingCombo + " " + actualIndex);
-        if (!doingCombo || actualIndex == 0)
+        if (doingCombo || actualIndex == 0)
         {
             canContinueCombo = false;
             doingCombo = false;
@@ -142,7 +142,6 @@ public class WeaponController: MonoBehaviour
         if (!doingCombo && !isComboFinished)
         {
             animator.SetTrigger("cancelCombo");
-            doingCombo = false;
             comboStarted = false;
             actualIndex = 0;
             actualActionStack.Clear();
