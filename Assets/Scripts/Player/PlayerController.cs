@@ -44,6 +44,7 @@ public class PlayerController : CompanyCharacterController//<PlayerMutableModel>
     public CanvasTreeManager canvasTreeManager;
     StatsCanvasSupport statsCanvas;
 
+    [SerializeField] private Animator animator;
 
     private void Awake()
     {
@@ -212,9 +213,14 @@ public class PlayerController : CompanyCharacterController//<PlayerMutableModel>
         return model.GetStatValue(statName, statPart);
     }*/
 
-    public void DoDash()
+    public void SetDashing(bool isDashing)
     {
-        GetComponent<MovePlayer>().DoDash();
+        animator.SetBool("isDashing", isDashing);
+    }
+
+    public void DoDash(float dashingTime = 0.35f, float dashingPower = 1.0f)
+    {
+        GetComponent<MovePlayer>().DoDash(dashingTime, dashingPower);
     }
 
     public void DoCombo(ButtonsXbox buttonPressed)
@@ -288,5 +294,7 @@ public class PlayerController : CompanyCharacterController//<PlayerMutableModel>
     {
         weaponController.FinishCombo();
     }
+
+
     #endregion
 }

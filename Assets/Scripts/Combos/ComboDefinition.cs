@@ -3,6 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
+public struct ComboStruct
+{
+    public SkillDefinition skill;
+    public ButtonsXbox button;
+    public bool hasDash;
+    public float dashTime;
+    public float dashPower;
+}
 
 public abstract class ComboDefinition : ScriptableObject//, IComboModel
 {
@@ -17,16 +26,16 @@ public abstract class ComboDefinition : ScriptableObject//, IComboModel
     //[SerializeField] protected float[] damageMultiplier;
     //public float[] DamageMultiplier => damageMultiplier;
 
-    [SerializeField] protected List<SkillDefinition> skills = new List<SkillDefinition>();
-    public List<SkillDefinition> Skills => skills;
+    //[SerializeField] protected List<SkillDefinition> skills = new List<SkillDefinition>();
+    //public List<SkillDefinition> Skills => skills;
 
     protected bool isActive;
     public bool IsActive => isActive;
     [SerializeField] protected bool startsActive;
     public bool StartsActive => startsActive;
 
-    [SerializeField] protected ButtonsXbox[] buttons;
-    public ButtonsXbox[] Buttons => buttons;
+    //[SerializeField] protected ButtonsXbox[] buttons;
+    //public ButtonsXbox[] Buttons => buttons;
 
     [SerializeField] protected bool comboFinished = false;
     public bool ComboFinished
@@ -41,11 +50,9 @@ public abstract class ComboDefinition : ScriptableObject//, IComboModel
     [SerializeField] protected Sprite sprite;
     public Sprite Sprite => sprite;
 
-    /**
-     * TODO
-     * MAKE AN ENUM
-     */
     [SerializeField] protected AnimationTriggersEnum animationTriggerToStart;
     public AnimationTriggersEnum AnimationTriggerToStart => animationTriggerToStart;
+
+    [SerializeField] protected List<ComboStruct> comboStruct;
 
 }

@@ -14,13 +14,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Basic attack
   description: Basi attack description
-  skills:
-  - {fileID: 11400000, guid: 2bfceb6d414d6f74ab1f0f1b40e4e82d, type: 2}
-  - {fileID: 11400000, guid: 2bfceb6d414d6f74ab1f0f1b40e4e82d, type: 2}
-  - {fileID: 11400000, guid: 2bfceb6d414d6f74ab1f0f1b40e4e82d, type: 2}
   startsActive: 1
-  buttons: 010000000100000001000000
-  comboFinished: 0
+  comboFinished: 1
   price: 0
   sprite: {fileID: 21300000, guid: 9e9474494461bd048803b48e391ef0f6, type: 3}
-  animationTriggerToStart: startBasic
+  animationTriggerToStart: 0
+  comboStruct:
+  - skill: {fileID: 11400000, guid: 2bfceb6d414d6f74ab1f0f1b40e4e82d, type: 2}
+    button: 1
+    hasDash: 1
+    dashTime: 0.1
+    dashPower: 0.8
+  - skill: {fileID: 11400000, guid: 2bfceb6d414d6f74ab1f0f1b40e4e82d, type: 2}
+    button: 1
+    hasDash: 1
+    dashTime: 0.1
+    dashPower: 0.9
+  - skill: {fileID: 11400000, guid: 2bfceb6d414d6f74ab1f0f1b40e4e82d, type: 2}
+    button: 1
+    hasDash: 1
+    dashTime: 0.1
+    dashPower: 1

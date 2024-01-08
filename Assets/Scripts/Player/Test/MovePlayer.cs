@@ -24,7 +24,7 @@ public class MovePlayer : MonoBehaviour//SingletonMonoBehaviour<MovePlayer>
     private bool isDashing;
     private float dashingPower = 2f;
     private float dashingTime = 0.35f;
-    private float dashingCooldown = 1f;
+    private float dashingCoolDown = 1f;
 
     [SerializeField] PlayerController playerController;
     [SerializeField] private float playerSpeed;
@@ -65,15 +65,12 @@ public class MovePlayer : MonoBehaviour//SingletonMonoBehaviour<MovePlayer>
 
     void Update()
     {
-        //TODO? Coger la velocidad una vez y al modificarse?
-        //playerSpeed = playerController.GetStatValue(StatNames.SPEED, StatParts.ACTUAL_VALUE);
-
         playerInput = Vector3.zero;
-        /*if (canMove || isDashing)
+        if (!isDashing && canMove)
         {
             SetPlayerInputConverted();
-        }*/
-        SetPlayerInputConverted();
+        }
+        
         movePlayer = playerInput * playerSpeed;
 
         //player.transform.position = player.transform.position + movePlayer;
@@ -99,17 +96,6 @@ public class MovePlayer : MonoBehaviour//SingletonMonoBehaviour<MovePlayer>
             Quaternion rotation = Quaternion.LookRotation(playerInput, Vector3.up);
             transform.rotation = Quaternion.RotateTowards(transform.rotation, rotation, rotationSpeed);
         }
-
-        /*
-        if (Input.GetMouseButtonDown(0))
-        {
-            anim.SetBool("isAttack", true);
-        }
-        if (Input.GetMouseButtonUp(0))
-        {
-            anim.SetBool("isAttack", false);
-        }
-        */
     }
 
     void SetGravity()
@@ -131,28 +117,20 @@ public class MovePlayer : MonoBehaviour//SingletonMonoBehaviour<MovePlayer>
         player_health = Math.Max(player_health - amount, 0);
     }
 
-    public async Task DoDash()
+    public async Task DoDash(float dashingTime, float dashingPower)
     {
         Debug.Log("#DASH Doing dash");
         canDash = false;
         isDashing = true;
-
-        //SetPlayerInputConverted();
-
-        //movePlayer = Vector3.forward * playerSpeed;
-        //player.Move(movePlayer * Time.deltaTime * dashingPower);
+        GetComponent<PlayerController>().SetDashing(isDashing);
+        this.dashingPower = dashingPower;
 
         await new WaitForSeconds(dashingTime);
         isDashing = false;
-        await new WaitForSeconds(dashingCooldown);
+        GetComponent<PlayerController>().SetDashing(isDashing);
+        await new WaitForSeconds(1.0f);
         canDash = true;
     }
-
-    private async Task DoingDash()
-    {
-
-    }
-    
 
     private Vector3 SetPlayerInputConverted()
     {
@@ -160,6 +138,8 @@ public class MovePlayer : MonoBehaviour//SingletonMonoBehaviour<MovePlayer>
         verticalMove = Input.GetAxis("Vertical");
 
         playerInput = new Vector3(horizontalMove, 0.0f, verticalMove);
+        
+        
         return Vector3.ClampMagnitude(playerInput, 1);
     }
 

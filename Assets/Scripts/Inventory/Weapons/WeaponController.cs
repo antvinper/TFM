@@ -169,30 +169,6 @@ public class WeaponController: MonoBehaviour
 
     }
 
-    
-    //TODO
-    //Cambiar esta funci�n por un animationEvent que invoque el ResetCombo cuando corresponda.
-    /*async Task CancelComboAfterTime()
-    {
-        tokenCancelComboAfterTime = new CancellationTokenSource();
-        Debug.Log("#COMBO# Starting Cancel Coroutine");
-        float timeBetweenAtacks = 0.0f;
-
-        while (timeBetweenAtacks <= 1f)
-        {
-            int t = (int)(Time.deltaTime * 1000);
-            await Task.Delay(t, tokenCancelComboAfterTime.Token);
-            timeBetweenAtacks += Time.deltaTime;
-        }
-
-        if (timeBetweenAtacks >= 1f)
-        {
-            CancelCombo();
-        }
-
-        Debug.Log("#COMBO# Coroutine ended");
-    }*/
-
     public void DoCombo(ButtonsXbox buttonPressed)
     {
         //Debug.Log("Button pressed: " + buttonPressed);
@@ -246,11 +222,6 @@ public class WeaponController: MonoBehaviour
                 if (isComboContinued)
                 {
                     comboIndex = i;
-                    //cancelamos la corrutina y empezamos otra
-                    //tokenCancelComboAfterTime.Cancel();
-                    //CancelComboAfterTime();
-
-                    //NextComboStep(buttonPressed);
                     isComboContinued = true;
                     ContinueAnimationCombo();
                     canContinueCombo = false;
@@ -261,7 +232,6 @@ public class WeaponController: MonoBehaviour
             if (!isComboContinued)
             {
                 CancelCombo();
-                //tokenCancelComboAfterTime.Cancel();
             }
         }
         

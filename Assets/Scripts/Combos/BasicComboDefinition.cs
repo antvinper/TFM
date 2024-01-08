@@ -26,11 +26,17 @@ public class BasicComboDefinition : ComboDefinition
     {
         bool activated = false;
         //if (buttonPressed == buttons[weaponController.ActualIndex])
-        if (buttonPressed == buttons[actualIndex] && isActive)
+        if (buttonPressed == comboStruct[actualIndex].button && isActive)
         {
             //Debug.Log("#COMBO# Combo Started: " + this.name + " button: " + buttons[weaponController.ActualIndex]);
             activated = true;
+
             //++weaponController.ActualIndex;
+            if (comboStruct[actualIndex].hasDash)
+            {
+                DoDash();
+            }
+            
         }
 
         return activated;
@@ -38,8 +44,8 @@ public class BasicComboDefinition : ComboDefinition
 
     public async Task UseSkill(CompanyCharacterController owner, CompanyCharacterController target)
     {
-        skills[actualIndex++].ProcessSkill(owner, target);
-        if (weaponController.ActualIndex == buttons.Length)
+        comboStruct[actualIndex++].skill.ProcessSkill(owner, target);
+        if (weaponController.ActualIndex == comboStruct.Count)
         {
             actualIndex = 0;
         }
@@ -58,16 +64,21 @@ public class BasicComboDefinition : ComboDefinition
         bool isThisCombo = true;
         for(int i = 0; i < actualActionStack.Count; ++i)
         {
-            if(actualActionStack[i] != buttons[i])
+            if(isActive && actualActionStack[i] != comboStruct[i].button)
             {
                 isThisCombo = false;
                 break;
             }
         }
 
-        if(isThisCombo && buttonPressed == buttons[weaponController.ActualIndex])
+        if(isThisCombo && buttonPressed == comboStruct[weaponController.ActualIndex].button)
         {
-            if(weaponController.ActualIndex == buttons.Length-1)
+            if (comboStruct[actualIndex].hasDash)
+            {
+                DoDash();
+            }
+            
+            if(weaponController.ActualIndex == comboStruct.Count-1)
             {
                 weaponController.ContinueAnimationCombo();
                 comboFinished = true;
@@ -94,6 +105,11 @@ public class BasicComboDefinition : ComboDefinition
 
     public int GetComboLength()
     {
-        return buttons.Length;
+        return comboStruct.Count;
+    }
+
+    private void DoDash()
+    {
+        GameManager.Instance.GetPlayerController().DoDash(comboStruct[actualIndex].dashTime, comboStruct[actualIndex].dashPower);
     }
 }
