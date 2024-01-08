@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using CompanyStats;
 using UnityEngine;
+using System.Threading.Tasks;
 
 public class MovePlayer : MonoBehaviour//SingletonMonoBehaviour<MovePlayer>
 {
@@ -18,6 +19,12 @@ public class MovePlayer : MonoBehaviour//SingletonMonoBehaviour<MovePlayer>
     public float player_health = 100f;
     private GameObject _mainCamera;
     private bool canMove;
+
+    private bool canDash = true;
+    private bool isDashing;
+    private float dashingPower = 2f;
+    private float dashingTime = 0.35f;
+    private float dashingCooldown = 1f;
 
     [SerializeField] PlayerController playerController;
     [SerializeField] private float playerSpeed;
@@ -62,24 +69,29 @@ public class MovePlayer : MonoBehaviour//SingletonMonoBehaviour<MovePlayer>
         //playerSpeed = playerController.GetStatValue(StatNames.SPEED, StatParts.ACTUAL_VALUE);
 
         playerInput = Vector3.zero;
-        if (canMove)
+        /*if (canMove || isDashing)
         {
-            horizontalMove = Input.GetAxis("Horizontal");
-            verticalMove = Input.GetAxis("Vertical");
-
-            playerInput = new Vector3(horizontalMove, 0.0f, verticalMove);
-            playerInput = Vector3.ClampMagnitude(playerInput, 1);
-        }
-
+            SetPlayerInputConverted();
+        }*/
+        SetPlayerInputConverted();
         movePlayer = playerInput * playerSpeed;
 
-        player.transform.position = player.transform.position + movePlayer;
+        //player.transform.position = player.transform.position + movePlayer;
 
         anim.SetFloat("isWalking", playerInput.magnitude);
 
         SetGravity();
 
-        player.Move(movePlayer * Time.deltaTime);
+        if (isDashing)
+        {
+            Debug.Log("#DASH forward: " + player.transform.forward);
+            movePlayer = player.transform.forward * playerSpeed;
+            player.Move(movePlayer * dashingPower * Time.deltaTime);
+        }
+        else
+        {
+            player.Move(movePlayer * Time.deltaTime);
+        }
 
         //Rotacion del personaje segun hacia donde mira
         if (movePlayer != Vector3.zero && playerInput != Vector3.zero)
@@ -117,6 +129,38 @@ public class MovePlayer : MonoBehaviour//SingletonMonoBehaviour<MovePlayer>
     public void TakeDamage(float amount)
     {
         player_health = Math.Max(player_health - amount, 0);
+    }
+
+    public async Task DoDash()
+    {
+        Debug.Log("#DASH Doing dash");
+        canDash = false;
+        isDashing = true;
+
+        //SetPlayerInputConverted();
+
+        //movePlayer = Vector3.forward * playerSpeed;
+        //player.Move(movePlayer * Time.deltaTime * dashingPower);
+
+        await new WaitForSeconds(dashingTime);
+        isDashing = false;
+        await new WaitForSeconds(dashingCooldown);
+        canDash = true;
+    }
+
+    private async Task DoingDash()
+    {
+
+    }
+    
+
+    private Vector3 SetPlayerInputConverted()
+    {
+        horizontalMove = Input.GetAxis("Horizontal");
+        verticalMove = Input.GetAxis("Vertical");
+
+        playerInput = new Vector3(horizontalMove, 0.0f, verticalMove);
+        return Vector3.ClampMagnitude(playerInput, 1);
     }
 
 }

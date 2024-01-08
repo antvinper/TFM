@@ -128,6 +128,7 @@ public class WeaponController: MonoBehaviour
     }
     public void CancelComboFromAnim()
     {
+        Debug.Log("#COMBO Cancel Combo From Anim");
         Debug.Log(doingCombo + " " + actualIndex);
         if (doingCombo || actualIndex == 0)
         {
@@ -219,6 +220,7 @@ public class WeaponController: MonoBehaviour
                 comboStarted = true;
                 //CancelComboAfterTime();
                 actualActionStack.Add(buttonPressed);
+                Debug.Log("#COMBO Triggering " + model.BasicComboDefinitions[i].AnimationTriggerToStart.ToString());
                 animator.SetTrigger(model.BasicComboDefinitions[i].AnimationTriggerToStart.ToString());
                 break;
             }
@@ -237,6 +239,7 @@ public class WeaponController: MonoBehaviour
         if (canContinueCombo)
         {
             bool isComboContinued = false;
+            NextComboStep(buttonPressed);
             for (int i = 0; i < model.BasicComboDefinitions.Length; ++i)
             {
                 isComboContinued = model.BasicComboDefinitions[i].ContinueCombo(buttonPressed, actualActionStack);
@@ -246,7 +249,8 @@ public class WeaponController: MonoBehaviour
                     //cancelamos la corrutina y empezamos otra
                     //tokenCancelComboAfterTime.Cancel();
                     //CancelComboAfterTime();
-                    NextComboStep(buttonPressed);
+
+                    //NextComboStep(buttonPressed);
                     isComboContinued = true;
                     ContinueAnimationCombo();
                     canContinueCombo = false;

@@ -14,9 +14,7 @@ public class PlayerInputManager : MonoBehaviour
         {
             moverEspada.Play();
             playerController.DoCombo(ButtonsXbox.X);
-            dealingDamage();
         }
-        notDealingDamage();
     }
 
     public void GetInput(InputAction.CallbackContext callbackContext)
@@ -44,9 +42,10 @@ public class PlayerInputManager : MonoBehaviour
                 Debug.Log("Right or RT Pressed");
                 //TODO
             }
-            if (callbackContext.action.activeControl.ToString().Contains("buttonEst"))
+            if (callbackContext.action.activeControl.ToString().Contains("buttonEast"))
             {
-                moverEspada.Play();
+                //moverEspada.Play();
+                playerController.DoDash();
                 playerController.DoCombo(ButtonsXbox.B);
                 Debug.Log("Dash");
                 //TODO
@@ -60,17 +59,5 @@ public class PlayerInputManager : MonoBehaviour
                 playerController.StopCharging();
             }
         }
-    }
-
-    void dealingDamage()
-    {
-        GetComponentInChildren<SwordController>().atacando = true;
-
-    }
-
-    void notDealingDamage()
-    {
-        GetComponentInChildren<SwordController>().atacando = false;
-
     }
 }

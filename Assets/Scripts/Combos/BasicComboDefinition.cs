@@ -26,7 +26,7 @@ public class BasicComboDefinition : ComboDefinition
     {
         bool activated = false;
         //if (buttonPressed == buttons[weaponController.ActualIndex])
-        if (buttonPressed == buttons[actualIndex])
+        if (buttonPressed == buttons[actualIndex] && isActive)
         {
             //Debug.Log("#COMBO# Combo Started: " + this.name + " button: " + buttons[weaponController.ActualIndex]);
             activated = true;

@@ -212,6 +212,11 @@ public class PlayerController : CompanyCharacterController//<PlayerMutableModel>
         return model.GetStatValue(statName, statPart);
     }*/
 
+    public void DoDash()
+    {
+        GetComponent<MovePlayer>().DoDash();
+    }
+
     public void DoCombo(ButtonsXbox buttonPressed)
     {
         weaponController.DoCombo(buttonPressed);
@@ -268,6 +273,7 @@ public class PlayerController : CompanyCharacterController//<PlayerMutableModel>
     }
     public void CancelComboAnimEvent()
     {
+        Debug.Log("#DASH CancelComboAnimEvent");
         weaponController.CancelComboFromAnim();
     }
     public void CanMakeDamageAnimEvent()
