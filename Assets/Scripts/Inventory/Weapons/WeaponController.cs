@@ -135,10 +135,10 @@ public class WeaponController: MonoBehaviour
             doingCombo = false;
             CancelCombo();
         }
-
     }
     public void CancelCombo()
     {
+        GameManager.Instance.GetPlayerController().ContinueMovement();
         if (!doingCombo && !isComboFinished)
         {
             animator.SetTrigger("cancelCombo");
@@ -152,6 +152,7 @@ public class WeaponController: MonoBehaviour
 
     public async Task FinishCombo()
     {
+        GameManager.Instance.GetPlayerController().ContinueMovement();
         //tokenCancelComboAfterTime.Cancel();
         isComboFinished = true;
         doingCombo = false;
@@ -213,6 +214,7 @@ public class WeaponController: MonoBehaviour
         {
             if (model.BasicComboDefinitions[i].StartCombo(buttonPressed))
             {
+                GameManager.Instance.GetPlayerController().StopMovement();
                 comboIndex = i;
                 comboStarted = true;
                 //CancelComboAfterTime();

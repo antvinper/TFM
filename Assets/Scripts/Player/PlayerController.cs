@@ -247,6 +247,15 @@ public class PlayerController : CompanyCharacterController//<PlayerMutableModel>
         return inactiveCombos;
     }
 
+    public void ContinueMovement()
+    {
+        GetComponent<MovePlayer>().ContinueMovement();
+    }
+    public void StopMovement()
+    {
+        GetComponent<MovePlayer>().StopMovement();
+    }
+
 
     #region AnimEvents
     public void CanContinueComboAnimEvent()

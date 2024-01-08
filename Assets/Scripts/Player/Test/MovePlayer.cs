@@ -17,6 +17,7 @@ public class MovePlayer : MonoBehaviour//SingletonMonoBehaviour<MovePlayer>
     public float RotationSmoothTime = 0.12f;
     public float player_health = 100f;
     private GameObject _mainCamera;
+    private bool canMove;
 
     [SerializeField] PlayerController playerController;
     [SerializeField] private float playerSpeed;
@@ -37,8 +38,7 @@ public class MovePlayer : MonoBehaviour//SingletonMonoBehaviour<MovePlayer>
     {
         player = GetComponent<CharacterController>();
         anim = GetComponent<Animator>();
-
-        
+        canMove = true;
     }
 
     private void FixedUpdate()
@@ -47,16 +47,29 @@ public class MovePlayer : MonoBehaviour//SingletonMonoBehaviour<MovePlayer>
         anim.speed = playerSpeed * 0.1f;
     }
 
+    public void StopMovement()
+    {
+        canMove = false;
+    }
+    public void ContinueMovement()
+    {
+        canMove = true;
+    }
+
     void Update()
     {
         //TODO? Coger la velocidad una vez y al modificarse?
         //playerSpeed = playerController.GetStatValue(StatNames.SPEED, StatParts.ACTUAL_VALUE);
 
-        horizontalMove = Input.GetAxis("Horizontal");
-        verticalMove = Input.GetAxis("Vertical");
+        playerInput = Vector3.zero;
+        if (canMove)
+        {
+            horizontalMove = Input.GetAxis("Horizontal");
+            verticalMove = Input.GetAxis("Vertical");
 
-        playerInput = new Vector3(horizontalMove, 0.0f, verticalMove);
-        playerInput = Vector3.ClampMagnitude(playerInput, 1);
+            playerInput = new Vector3(horizontalMove, 0.0f, verticalMove);
+            playerInput = Vector3.ClampMagnitude(playerInput, 1);
+        }
 
         movePlayer = playerInput * playerSpeed;
 
