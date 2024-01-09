@@ -172,10 +172,10 @@ public class PlayerController : CompanyCharacterController//<PlayerMutableModel>
     
     public override void ApplyDamage(Strike strike)
     {
-        Debug.Log("Health before damage = " + playerModel.GetStatValue(StatNames.HEALTH, StatParts.ACTUAL_VALUE));
+        //Debug.Log("Health before damage = " + playerModel.GetStatValue(StatNames.HEALTH, StatParts.ACTUAL_VALUE));
         bool isAlive = playerModel.ApplyDamage(strike);
-        Debug.Log("Applied an attack of: " + strike.FinalValue + " points");
-        Debug.Log("Health after damage = " + playerModel.GetStatValue(StatNames.HEALTH, StatParts.ACTUAL_VALUE));
+        //Debug.Log("Applied an attack of: " + strike.FinalValue + " points");
+        //Debug.Log("Health after damage = " + playerModel.GetStatValue(StatNames.HEALTH, StatParts.ACTUAL_VALUE));
 
         if (!isAlive)
         {

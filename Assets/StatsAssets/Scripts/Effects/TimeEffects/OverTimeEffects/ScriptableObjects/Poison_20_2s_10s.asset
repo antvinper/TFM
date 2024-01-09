@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e66f751f6d8098a4bb6d0d678c70983f, type: 3}
   m_Name: Poison_20_2s_10s
   m_EditorClassIdentifier: 
-  effectName: Poison_20_1s_5s
+  effectName: Poison_20_2s_5s
   effectType: 3
   description: 
   applyOnSelf: 1
@@ -26,6 +26,6 @@ MonoBehaviour:
   valueInPercentage: 0
   value: 20
   effectLifeTime: 10
-  timesApplied: 2
+  timesApplied: 0
   isInfinite: 0
   timeBetweenApplyEffect: 2

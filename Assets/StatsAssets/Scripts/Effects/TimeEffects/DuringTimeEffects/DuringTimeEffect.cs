@@ -11,7 +11,6 @@ namespace CompanyStats
         bool hasBeenRemoved = false;
         bool hasBeenStopped = false;
         float finalEffectLifeTime;
-        internal float FinalEffectLifeTime { get => finalEffectLifeTime; }
 
         public override async Task ProcessEffect(CompanyCharacterController owner, CompanyCharacterController target)
         {
@@ -102,7 +101,7 @@ namespace CompanyStats
              * 
              * Reiniciar, nada, reemplazar
              */
-            float previousEffectLifeTime = previousDuringTimeEffect.FinalEffectLifeTime;
+            float previousEffectLifeTime = previousDuringTimeEffect.finalEffectLifeTime;
             float previousValue = previousDuringTimeEffect.Value;
             if(this.Value < previousValue || this.effectLifeTime < previousEffectLifeTime)
             {
@@ -111,7 +110,7 @@ namespace CompanyStats
             }
             if(this.Value > previousValue || this.effectLifeTime > previousEffectLifeTime)
             {
-                Debug.Log("#TIMER Caso 2: El efecto reemplaza");
+                Debug.Log("#TIMER Caso 2: El efecto se reemplaza");
                 effectCase = 2;
             }
             if((this.Value > previousValue && this.effectLifeTime < previousEffectLifeTime) || 

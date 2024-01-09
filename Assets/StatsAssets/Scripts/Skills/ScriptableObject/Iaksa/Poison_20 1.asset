@@ -17,5 +17,5 @@ MonoBehaviour:
   temporalInstantEffects: []
   permanentInstantEffects: []
   overTimeEffects:
-  - {fileID: 11400000, guid: a3d2e67168647a84d95021784810002d, type: 2}
+  - {fileID: 11400000, guid: deaf0658cc175694d882bf3bbdbef355, type: 2}
   duringTimeEffects: []

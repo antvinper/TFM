@@ -50,31 +50,84 @@ namespace CompanyStats
             finalEffectLifeTime = GetFinalEffectLifeTime(target.GetStatValue(StatNames.POISE, StatParts.ACTUAL_VALUE));
 
             OverTimeEffect previousOverTimeEffect = target.GetOverTimeEffectByType(effectType);
-            if(previousOverTimeEffect == null)
+            if(previousOverTimeEffect == null || previousOverTimeEffect.isInfinite)
             {
-                if (target.TryAddEffect(this, owner))
-                {
-                    if (isInfinite)
-                    {
-                        StartInfiniteTimer();
-                    }
-                    else
-                    {
-                        StartTimer();
-                    }
-                }
-            } else
+                AddEffect();
+            } 
+            else
             {
-                if (this.Equals(previousOverTimeEffect))
+                int effectCase = CheckCase(previousOverTimeEffect);
+
+                switch (effectCase)
                 {
-                    RestartEffect();
-                }
-                else
-                {
-                    Debug.Log("TODO Realizar los checks");
+                    case 0:
+                        Debug.Log("#OverTimeEffect ResetEffect");
+                        RestartEffect();
+                        break;
+                    case 1:
+                        Debug.Log("#OverTimeEffect no se aplica");
+                        break;
+                    case 2:
+                    case 3:
+                        Debug.Log("#OverTimeEffect reemplaza al anterior");
+                        previousOverTimeEffect.CancelEffect();
+                        AddEffect();
+                        break;
                 }
             }
-            
+        }
+
+        private void CancelEffect()
+        {
+            hasBeenCanceled = true;
+        }
+
+        private int CheckCase(OverTimeEffect previousOverTimeEffect)
+        {
+            int effectCase = 0;
+            bool hasSomethingInferior = false;
+            bool hasSomethingSuperior = false;
+
+            /**
+            * Parámetros a checkear:
+            * - FinalEffectLifeTime menor
+            * - TimeBetweenApplyEffect mayor (es inferior que se aplique cada 2sg que cada 0.5)
+            * - Value menor
+            * 
+            * CASOS
+            * Caso 1: Si el nuevo tiene algún parámetro inferior, no se aplica
+            * Caso 2: Si el nuevo tiene algún parámetro superior, reemplaza
+            * Caso 3: Si el nuevo tiene algún parámetro superior y alguno inferior, reemplaza
+            */
+            if (!this.Equals(previousOverTimeEffect))
+            {
+                if (isValueInPercentage)
+                {
+                    CalculateRealPercentage();
+                }
+                float previousEffectLifeTime = previousOverTimeEffect.finalEffectLifeTime;
+                float previousTimeBetweenApplyEffect = previousOverTimeEffect.timeBetweenApplyEffect;
+                float previousValue = previousOverTimeEffect.Value;
+                if(this.Value < previousValue || this.finalEffectLifeTime < previousEffectLifeTime || this.timeBetweenApplyEffect > previousTimeBetweenApplyEffect)
+                {
+                    Debug.Log("#OverTimeEffect tiene algún parámetro inferior");
+                    effectCase = 1;
+                    hasSomethingInferior = true;
+                }
+                if(this.Value > previousValue || this.finalEffectLifeTime > previousEffectLifeTime || this.timeBetweenApplyEffect < previousTimeBetweenApplyEffect)
+                {
+                    Debug.Log("#OverTimeEffect tiene algún parámetro superior");
+                    effectCase = 2;
+                    hasSomethingSuperior = true;
+                }
+                if(hasSomethingSuperior && hasSomethingInferior)
+                {
+                    Debug.Log("#OverTimeEffect tiene algún parámetro superior y alguno inferior");
+                    effectCase = 3;
+                }
+            }
+
+            return effectCase;
         }
 
         private async Task StartInfiniteTimer()
@@ -87,7 +140,7 @@ namespace CompanyStats
                 if (hasBeenCanceled)
                 {
                     Debug.Log("#TIMER hasBeenCanceled");
-                    RemoveEffect(target);
+                    RemoveEffect();
                     break;
                 }
                 else if (actualTimeBetweenAplpyEffect > timeBetweenApplyEffect)
@@ -123,7 +176,7 @@ namespace CompanyStats
                 if (hasBeenCanceled)
                 {
                     Debug.Log("#TIMER effect hasBeenCanceled");
-                    RemoveEffect(target);
+                    RemoveEffect();
                     break;
                 }
                 if (hasBeenStopped)
@@ -133,7 +186,7 @@ namespace CompanyStats
                 else if (actualTimeEffectApplied > finalEffectLifeTime)
                 {
                     Debug.Log("#TIMER Effect is over -> Removing effect");
-                    RemoveEffect(target);
+                    RemoveEffect();
                 }
                 else if (actualTimeBetweenAplpyEffect > timeBetweenApplyEffect)
                 {
@@ -149,12 +202,6 @@ namespace CompanyStats
                     //Debug.Log(stat.StatName + "." + StatPart + " value after apply the effect " + name + ": " + target.GetStatValue(stat.StatName, StatPart));
                 }
             } while (finalEffectLifeTime > actualTimeEffectApplied);
-
-            Debug.Log("#TIMER Time finished. Here i should remove effect.");
-            if (!target.TryRemoveEffect(this))
-            {
-                Debug.LogError("Effect couldn't be removed");
-            }
         }
 
         private void ApplyEffect()
@@ -183,13 +230,34 @@ namespace CompanyStats
             }
         }
 
+        private void AddEffect()
+        {
+            if (target.TryAddEffect(this, owner))
+            {
+                if (isInfinite)
+                {
+                    StartInfiniteTimer();
+                }
+                else
+                {
+                    StartTimer();
+                }
+            }
+        }
+
         public override async Task RemoveEffect(CompanyCharacterController target)
         {
-            throw new System.NotImplementedException();
+            if (!target.TryRemoveEffect(this))
+            {
+                Debug.LogError("Effect couldn't be removed");
+            }
         }
         public override async Task RemoveEffect()
         {
-            throw new System.NotImplementedException();
+            if (!target.TryRemoveEffect(this))
+            {
+                Debug.LogError("Effect couldn't be removed");
+            }
         }
         public override async Task RestartEffect()
         {
