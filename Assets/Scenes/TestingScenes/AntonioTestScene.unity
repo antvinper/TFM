@@ -688,8 +688,16 @@ PrefabInstance:
       objectReference: {fileID: 1080185273}
     - target: {fileID: 274060088090906233, guid: e14fe6ff7ba13774abe414e462c12fef, type: 3}
       propertyPath: skills.Array.size
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 274060088090906233, guid: e14fe6ff7ba13774abe414e462c12fef, type: 3}
+      propertyPath: skills.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: ef7106397d07e5a4192513dd79787144, type: 2}
+    - target: {fileID: 274060088090906233, guid: e14fe6ff7ba13774abe414e462c12fef, type: 3}
+      propertyPath: skills.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: ef7106397d07e5a4192513dd79787144, type: 2}
     - target: {fileID: 274060088090906233, guid: e14fe6ff7ba13774abe414e462c12fef, type: 3}
       propertyPath: characterStatsDefinition
       value: 

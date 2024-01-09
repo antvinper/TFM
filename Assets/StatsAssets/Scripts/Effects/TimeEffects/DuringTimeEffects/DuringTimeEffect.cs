@@ -10,6 +10,8 @@ namespace CompanyStats
         bool resetEffect = false;
         bool hasBeenRemoved = false;
         bool hasBeenStopped = false;
+        float finalEffectLifeTime;
+        internal float FinalEffectLifeTime { get => finalEffectLifeTime; }
 
         public override async Task ProcessEffect(CompanyCharacterController owner, CompanyCharacterController target)
         {
@@ -21,6 +23,10 @@ namespace CompanyStats
             hasBeenRemoved = false;
             hasBeenCanceled = false;
             resetEffect = false;
+
+
+            //Calcular final effectLifeTime
+            finalEffectLifeTime = GetFinalEffectLifeTime(target.GetStatValue(StatNames.POISE, StatParts.ACTUAL_VALUE));
 
             DuringTimeEffect previousDuringTimeEffect = target.GetDuringTimeEffectByType(effectType);
 
@@ -96,7 +102,7 @@ namespace CompanyStats
              * 
              * Reiniciar, nada, reemplazar
              */
-            float previousEffectLifeTime = previousDuringTimeEffect.EffectLifeTime;
+            float previousEffectLifeTime = previousDuringTimeEffect.FinalEffectLifeTime;
             float previousValue = previousDuringTimeEffect.Value;
             if(this.Value < previousValue || this.effectLifeTime < previousEffectLifeTime)
             {

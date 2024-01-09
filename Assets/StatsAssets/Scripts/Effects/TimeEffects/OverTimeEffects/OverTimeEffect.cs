@@ -15,6 +15,8 @@ namespace CompanyStats
         bool hasBeenRemoved = false;
         bool hasBeenStopped = false;
 
+        float finalEffectLifeTime = 0.0f;
+
         [SerializeField]
         bool isInfinite = false;
         public bool IsInfinite
@@ -44,6 +46,8 @@ namespace CompanyStats
             hasBeenCanceled = false;
             resetEffect = false;
             timesApplied = 0;
+
+            finalEffectLifeTime = GetFinalEffectLifeTime(target.GetStatValue(StatNames.POISE, StatParts.ACTUAL_VALUE));
 
             OverTimeEffect previousOverTimeEffect = target.GetOverTimeEffectByType(effectType);
             if(previousOverTimeEffect == null)
@@ -118,33 +122,33 @@ namespace CompanyStats
                 }
                 if (hasBeenCanceled)
                 {
-                    Debug.Log("#TIMER hasBeenCanceled");
+                    Debug.Log("#TIMER effect hasBeenCanceled");
                     RemoveEffect(target);
                     break;
                 }
                 if (hasBeenStopped)
                 {
-                    Debug.Log("#TIMER hasBeenStopped");
+                    Debug.Log("#TIMER effect hasBeenStopped -> DOING NOTHING");
                 }
-                else if (actualTimeEffectApplied > effectLifeTime)
+                else if (actualTimeEffectApplied > finalEffectLifeTime)
                 {
-                    Debug.Log("#TIMER actual time bigger");
+                    Debug.Log("#TIMER Effect is over -> Removing effect");
                     RemoveEffect(target);
                 }
                 else if (actualTimeBetweenAplpyEffect > timeBetweenApplyEffect)
                 {
                     Stat stat = target.GetStatFromName(StatAffected);
-                    Debug.Log(stat.StatName + "." + StatPart + " value before apply the effect " + name + ": " + target.GetStatValue(stat.StatName, StatPart));
+                    //Debug.Log(stat.StatName + "." + StatPart + " value before apply the effect " + name + ": " + target.GetStatValue(stat.StatName, StatPart));
 
                     actualTimeBetweenAplpyEffect = 0.0f;
                     timesApplied += 1;
-                    Debug.Log("#TIMER Effect applied correctly");
+                    //Debug.Log("#TIMER Effect applied correctly");
                     //target.CalculateStat(StatAffected, StatPart);
                     ApplyEffect();
 
-                    Debug.Log(stat.StatName + "." + StatPart + " value after apply the effect " + name + ": " + target.GetStatValue(stat.StatName, StatPart));
+                    //Debug.Log(stat.StatName + "." + StatPart + " value after apply the effect " + name + ": " + target.GetStatValue(stat.StatName, StatPart));
                 }
-            } while (effectLifeTime > actualTimeEffectApplied);
+            } while (finalEffectLifeTime > actualTimeEffectApplied);
 
             Debug.Log("#TIMER Time finished. Here i should remove effect.");
             if (!target.TryRemoveEffect(this))

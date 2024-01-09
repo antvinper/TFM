@@ -12,7 +12,8 @@ namespace CompanyStats
         EVASION,
         CRIT_CHANCE,
         DODGE_CHANCE,
-        LUCKY
+        LUCKY,
+        POISE
     }
 }
 

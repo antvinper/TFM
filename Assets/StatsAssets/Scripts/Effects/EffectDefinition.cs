@@ -178,6 +178,7 @@ namespace CompanyStats
 
             //Debug.Log(value);
         }
+
     }
 }
 

@@ -8,7 +8,7 @@ namespace CompanyStats
         [Range(0f, float.MaxValue)]
         [SerializeField] protected float effectLifeTime;
 
-        [HideInInspector] public float EffectLifeTime { get => effectLifeTime; }
+        //[HideInInspector] public float EffectLifeTime { get => effectLifeTime; }
 
         public abstract Task RestartEffect();
 
@@ -18,6 +18,17 @@ namespace CompanyStats
 
 
         }*/
+
+        protected float GetFinalEffectLifeTime(int poise)
+        {
+            float finalEffectLifeTime = effectLifeTime;
+            if (poise > 0)
+            {
+                float percent = poise * 0.01f;
+                finalEffectLifeTime *= percent;
+            }
+            return finalEffectLifeTime;
+        }
     }
 }
 

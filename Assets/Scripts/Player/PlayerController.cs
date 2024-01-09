@@ -15,7 +15,7 @@ public class PlayerController : CompanyCharacterController//<PlayerMutableModel>
         set => playerModel = value;
     }
 
-    //[SerializeField] List<SkillDefinition> skills = new List<SkillDefinition>();
+    [SerializeField] List<SkillDefinition> skills = new List<SkillDefinition>();
     private SoulFragment soulFragments;
     private Rupee rupees;
 
@@ -104,7 +104,7 @@ public class PlayerController : CompanyCharacterController//<PlayerMutableModel>
         statsCanvas = FindObjectOfType<StatsCanvasSupport>();
         WriteStats();
         //ActiveSlotTree(1);
-        //ApplySkill();
+        ApplySkill();
         //canvasTreeManager.Setup(playerModel.Tree.Slots);
 
         //TODO -> Erase from here. Just for testing
@@ -184,20 +184,20 @@ public class PlayerController : CompanyCharacterController//<PlayerMutableModel>
         WriteStats();
     }
 
-    /*public async Task ApplySkill()
+    public async Task ApplySkill()
     {
         await new WaitForSeconds(2.0f);
         foreach (SkillDefinition skill in skills)
         {
-            skill.ProcessSkill(this, enemy);
-            await new WaitForSeconds(3.0f);
+            skill.ProcessSkill(this, this);
+            await new WaitForSeconds(2.0f);
         }
-        foreach (SkillDefinition skill in skills)
+        /*foreach (SkillDefinition skill in skills)
         {
             skill.ProcessSkill(this);
             await new WaitForSeconds(3.0f);
-        }
-    }*/
+        }*/
+    }
 
     /*public override Stat GetStatFromName(StatNames statName)
     {
