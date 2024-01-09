@@ -45,7 +45,7 @@ public class PlayerInputManager : MonoBehaviour
             if (callbackContext.action.activeControl.ToString().Contains("buttonEast"))
             {
                 //moverEspada.Play();
-                playerController.DoDash();
+                //playerController.DoDash();
                 playerController.DoCombo(ButtonsXbox.B);
                 Debug.Log("Dash");
                 //TODO

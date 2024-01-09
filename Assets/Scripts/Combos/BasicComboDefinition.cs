@@ -12,14 +12,16 @@ public class BasicComboDefinition : ComboDefinition
 
     public void SetUp(WeaponController weaponController)
     {
-        actualIndex = 0;
+        Reset();
         this.weaponController = weaponController;
         isActive = startsActive;
     }
 
-    public void ResetActualIndex()
+    public void Reset()
     {
+        Debug.Log("#MOVE Reset actual index in " + name);
         actualIndex = 0;
+        isRunning = false;
     }
 
     public bool StartCombo(ButtonsXbox buttonPressed)
@@ -30,7 +32,7 @@ public class BasicComboDefinition : ComboDefinition
         {
             //Debug.Log("#COMBO# Combo Started: " + this.name + " button: " + buttons[weaponController.ActualIndex]);
             activated = true;
-
+            isRunning = true;
             //++weaponController.ActualIndex;
             if (comboStruct[actualIndex].hasDash)
             {
@@ -44,10 +46,10 @@ public class BasicComboDefinition : ComboDefinition
 
     public async Task UseSkill(CompanyCharacterController owner, CompanyCharacterController target)
     {
-        comboStruct[actualIndex++].skill.ProcessSkill(owner, target);
+        comboStruct[actualIndex].skill.ProcessSkill(owner, target);
         if (weaponController.ActualIndex == comboStruct.Count)
         {
-            actualIndex = 0;
+            Reset();
         }
     }
 
@@ -56,48 +58,56 @@ public class BasicComboDefinition : ComboDefinition
         this.isActive = isActive;
     }
 
+    public bool IsLastComboIndex()
+    {
+        Debug.Log("#MOVE actualIndex in " + name +": " + actualIndex);
+        return actualIndex == comboStruct.Count -1 ? true : false;
+    }
 
     public bool ContinueCombo(ButtonsXbox buttonPressed, List<ButtonsXbox> actualActionStack)
     {
         bool comboContinued = false;
-
-        bool isThisCombo = true;
-        for(int i = 0; i < actualActionStack.Count; ++i)
+        if (isRunning)
         {
-            if(isActive && actualActionStack[i] != comboStruct[i].button)
+            bool isThisCombo = true;
+            for (int i = 0; i < actualActionStack.Count; ++i)
             {
-                isThisCombo = false;
-                break;
+                if (isActive && actualActionStack[i] != comboStruct[i].button)
+                {
+                    isThisCombo = false;
+                    break;
+                }
             }
-        }
 
-        if(isThisCombo && buttonPressed == comboStruct[weaponController.ActualIndex].button)
-        {
-            if (comboStruct[actualIndex].hasDash)
+            if (isThisCombo && buttonPressed == comboStruct[weaponController.ActualIndex].button)
             {
-                DoDash();
-            }
-            
-            if(weaponController.ActualIndex == comboStruct.Count-1)
-            {
-                weaponController.ContinueAnimationCombo();
-                comboFinished = true;
-                //weaponController.FinishCombo();
-                //Debug.Log("#COMBO# Combo Finished: " + this.name + " button: " + buttons[weaponController.ActualIndex]);
-                //actualIndex = 0;
+                ++actualIndex;
+                if (comboStruct[actualIndex].hasDash)
+                {
+                    DoDash();
+                }
+
+                if (weaponController.ActualIndex == comboStruct.Count - 1)
+                {
+                    weaponController.ContinueAnimationCombo();
+                    comboFinished = true;
+                    //weaponController.FinishCombo();
+                    //Debug.Log("#COMBO# Combo Finished: " + this.name + " button: " + buttons[weaponController.ActualIndex]);
+                    //actualIndex = 0;
+                }
+                else
+                {
+                    comboContinued = true;
+                    //Debug.Log("#COMBO# Combo Continued: " + this.name + " actualIndex = " + weaponController.ActualIndex + " button: " + buttons[weaponController.ActualIndex]);
+                    //++weaponController.ActualIndex;
+                }
+
+                weaponController.DoingCombo = true;
             }
             else
             {
-                comboContinued = true;
-                //Debug.Log("#COMBO# Combo Continued: " + this.name + " actualIndex = " + weaponController.ActualIndex + " button: " + buttons[weaponController.ActualIndex]);
-                //++weaponController.ActualIndex;
+                Reset();
             }
-
-            weaponController.DoingCombo = true;
-        }
-        else
-        {
-            actualIndex = 0;
         }
 
         return comboContinued;

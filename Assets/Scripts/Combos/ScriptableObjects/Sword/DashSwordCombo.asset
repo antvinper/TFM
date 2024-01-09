@@ -32,6 +32,6 @@ MonoBehaviour:
     dashPower: 1
   - skill: {fileID: 11400000, guid: 2bfceb6d414d6f74ab1f0f1b40e4e82d, type: 2}
     button: 3
-    hasDash: 0
-    dashTime: 0
-    dashPower: 0
+    hasDash: 1
+    dashTime: 0.1
+    dashPower: 0.5

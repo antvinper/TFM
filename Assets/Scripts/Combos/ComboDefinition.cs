@@ -29,6 +29,8 @@ public abstract class ComboDefinition : ScriptableObject//, IComboModel
     //[SerializeField] protected List<SkillDefinition> skills = new List<SkillDefinition>();
     //public List<SkillDefinition> Skills => skills;
 
+    protected bool isRunning;
+
     protected bool isActive;
     public bool IsActive => isActive;
     [SerializeField] protected bool startsActive;

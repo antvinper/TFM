@@ -20,6 +20,7 @@ public class WeaponController: MonoBehaviour
     protected bool canAttack;
     private bool canMakeDamage = false;
     private bool isComboFinished = false;
+    private bool isComboFinishing = false;
 
     private bool canContinueCombo = false;
 
@@ -40,10 +41,6 @@ public class WeaponController: MonoBehaviour
 
     WeaponModel model;
 
-    private void Start()
-    {
-        
-    }
 
     public void Setup(WeaponModel model)
     {
@@ -123,7 +120,7 @@ public class WeaponController: MonoBehaviour
     {
         foreach (BasicComboDefinition combo in model.BasicComboDefinitions)
         {
-            combo.ResetActualIndex();
+            combo.Reset();
         }
     }
     public void CancelComboFromAnim()
@@ -153,11 +150,9 @@ public class WeaponController: MonoBehaviour
 
     public async Task FinishCombo()
     {
-        GameManager.Instance.GetPlayerController().ContinueMovement();
         //tokenCancelComboAfterTime.Cancel();
         isComboFinished = true;
         doingCombo = false;
-        comboStarted = false;
         canAttack = false;
         animator.SetTrigger("finishCombo");
         await new WaitForSeconds(0.2f);
@@ -166,13 +161,15 @@ public class WeaponController: MonoBehaviour
         canAttack = true;
         isComboFinished = false;
         ResetCombos();
-
+        comboStarted = false;
+        isComboFinishing = false;
+        GameManager.Instance.GetPlayerController().ContinueMovement();
     }
 
     public void DoCombo(ButtonsXbox buttonPressed)
     {
         //Debug.Log("Button pressed: " + buttonPressed);
-        if (canAttack && !isCharging)
+        if (canAttack && !isCharging && !isComboFinishing)
         {
             if (!comboStarted)
             {
@@ -187,6 +184,7 @@ public class WeaponController: MonoBehaviour
     }
     protected void StartCombo(ButtonsXbox buttonPressed)
     {
+        
         for (int i = 0; i < model.BasicComboDefinitions.Length; ++i)
         {
             if (model.BasicComboDefinitions[i].StartCombo(buttonPressed))
@@ -201,7 +199,6 @@ public class WeaponController: MonoBehaviour
                 break;
             }
         }
-
     }
 
     public void ContinueAnimationCombo()
@@ -216,9 +213,14 @@ public class WeaponController: MonoBehaviour
         {
             bool isComboContinued = false;
             NextComboStep(buttonPressed);
+
             for (int i = 0; i < model.BasicComboDefinitions.Length; ++i)
             {
                 isComboContinued = model.BasicComboDefinitions[i].ContinueCombo(buttonPressed, actualActionStack);
+                if (model.BasicComboDefinitions[i].IsLastComboIndex())
+                {
+                    isComboFinishing = true;
+                }
                 if (isComboContinued)
                 {
                     comboIndex = i;
@@ -229,7 +231,7 @@ public class WeaponController: MonoBehaviour
                 }
             }
 
-            if (!isComboContinued)
+            if (!isComboContinued && !isComboFinishing)
             {
                 CancelCombo();
             }
@@ -255,16 +257,19 @@ public class WeaponController: MonoBehaviour
 
     public async Task StartCharging()
     {
-        isPreCharging = true;
-        await new WaitForSeconds(0.2f);
-        if (isPreCharging && this.actualIndex == 1)
+        if (!canContinueCombo)
         {
-            isCharging = true;
-            while (isCharging && actualTimeCharging < model.MaxTimeCharge)
+            isPreCharging = true;
+            await new WaitForSeconds(0.2f);
+            if (isPreCharging && this.actualIndex == 1)
             {
-                actualTimeCharging += Time.deltaTime;
-                Debug.Log("Time recharging = " + actualTimeCharging);
-                await new WaitForSeconds(Time.deltaTime);
+                isCharging = true;
+                while (isCharging && actualTimeCharging < model.MaxTimeCharge)
+                {
+                    actualTimeCharging += Time.deltaTime;
+                    Debug.Log("Time recharging = " + actualTimeCharging);
+                    await new WaitForSeconds(Time.deltaTime);
+                }
             }
         }
     }

@@ -260,10 +260,12 @@ public class PlayerController : CompanyCharacterController//<PlayerMutableModel>
 
     public void ContinueMovement()
     {
+        Debug.Log("#MOVE -> MOVE");
         GetComponent<MovePlayer>().ContinueMovement();
     }
     public void StopMovement()
     {
+        Debug.Log("#MOVE -> STOP");
         GetComponent<MovePlayer>().StopMovement();
     }
 
@@ -280,6 +282,7 @@ public class PlayerController : CompanyCharacterController//<PlayerMutableModel>
     public void CancelComboAnimEvent()
     {
         Debug.Log("#DASH CancelComboAnimEvent");
+
         weaponController.CancelComboFromAnim();
     }
     public void CanMakeDamageAnimEvent()
