@@ -81,7 +81,7 @@ public class MovePlayer : MonoBehaviour//SingletonMonoBehaviour<MovePlayer>
 
         if (isDashing)
         {
-            Debug.Log("#DASH forward: " + player.transform.forward);
+            //Debug.Log("#DASH forward: " + player.transform.forward);
             movePlayer = player.transform.forward * playerSpeed;
             player.Move(movePlayer * dashingPower * Time.deltaTime);
         }

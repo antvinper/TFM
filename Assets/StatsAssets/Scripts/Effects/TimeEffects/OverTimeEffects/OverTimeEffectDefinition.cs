@@ -11,6 +11,7 @@ namespace CompanyStats
 
     }
 
+#if UNITY_EDITOR
     [CustomEditor(typeof(OverTimeEffectDefinition))]
     public class OverTimeEffectDefinitionEditor : Editor
     {
@@ -97,5 +98,6 @@ namespace CompanyStats
             serializedObject.ApplyModifiedProperties();
         }
     }
+#endif
 }
 

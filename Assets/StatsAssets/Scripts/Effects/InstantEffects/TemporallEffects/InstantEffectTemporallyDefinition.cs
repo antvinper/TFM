@@ -1,3 +1,4 @@
+
 using UnityEditor;
 using UnityEngine;
 
@@ -8,7 +9,7 @@ namespace CompanyStats
     {
         
     }
-
+    #if UNITY_EDITOR
     [CustomEditor(typeof(InstantEffectTemporallyDefinition))]
     public class InstantEffectTemporallyDefinitionEditor : Editor
     {
@@ -78,5 +79,5 @@ namespace CompanyStats
             serializedObject.ApplyModifiedProperties();
         }
     }
+    #endif
 }
-

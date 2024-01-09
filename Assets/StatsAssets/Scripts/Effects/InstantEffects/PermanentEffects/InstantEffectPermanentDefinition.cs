@@ -9,6 +9,7 @@ namespace CompanyStats
         
     }
 
+    #if UNITY_EDITOR
     [CustomEditor(typeof(InstantEffectPermanentDefinition))]
     public class InstantEffectPermanentDefinitionEditor : Editor
     {
@@ -71,5 +72,6 @@ namespace CompanyStats
             serializedObject.ApplyModifiedProperties();
         }
     }
+    #endif
 }
 

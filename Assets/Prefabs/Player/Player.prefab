@@ -209,7 +209,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 274060088621764023}
   m_LocalRotation: {x: 0.38150373, y: 0.07248677, z: -0.030025002, w: 0.92103153}
-  m_LocalPosition: {x: 0.17250061, y: 1.3316641, z: -2.7410755}
+  m_LocalPosition: {x: 0.17250109, y: 1.3316636, z: -2.7410755}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -284,7 +284,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 274060088628090865}
   m_LocalRotation: {x: 0.3727998, y: 0.108718574, z: -0.118163735, w: 0.91391355}
-  m_LocalPosition: {x: 0.17250061, y: 1.3316641, z: -2.7410755}
+  m_LocalPosition: {x: 0.17250109, y: 1.3316636, z: -2.7410755}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -872,6 +872,7 @@ MonoBehaviour:
   weaponController: {fileID: 8960032450904413920}
   tree: {fileID: 11400000, guid: 6559bb119022108438547b4098326e92, type: 2}
   canvasTreeManager: {fileID: 0}
+  animator: {fileID: 274060088090906231}
 --- !u!114 &274060088090906235
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -913,6 +914,18 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 2ca7ce6b-d4c6-4beb-90a0-caefa3012f35
     m_ActionName: PlayerMap/Combat
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 1717fbaa-a892-4283-988d-f9d987124d30
+    m_ActionName: PlayerMap/Submit[/Keyboard/enter,/XInputControllerWindows/buttonSouth]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 1e6f5184-1ce6-43de-bcc2-15f3f13cc078
+    m_ActionName: PlayerMap/Pause[/XInputControllerWindows/start,/Keyboard/escape]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 557de18a-be1c-4ce8-9024-b128685c5678
+    m_ActionName: PlayerMap/Navigate[/XInputControllerWindows/dpad/up,/XInputControllerWindows/leftStick/up,/XInputControllerWindows/dpad/down,/XInputControllerWindows/leftStick/down,/XInputControllerWindows/dpad/left,/XInputControllerWindows/leftStick/left,/XInputControllerWindows/dpad/right,/XInputControllerWindows/leftStick/right]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: PlayerMap

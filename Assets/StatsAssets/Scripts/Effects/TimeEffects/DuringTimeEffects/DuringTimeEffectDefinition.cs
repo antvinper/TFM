@@ -9,6 +9,7 @@ namespace CompanyStats
         
     }
 
+#if UNITY_EDITOR
     [CustomEditor(typeof(DuringTimeEffectDefinition))]
     public class DuringTimeEffectDefinitionEditor : Editor
     {
@@ -84,5 +85,6 @@ namespace CompanyStats
             serializedObject.ApplyModifiedProperties();
         }
     }
+#endif
 }
 
