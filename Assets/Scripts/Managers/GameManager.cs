@@ -93,8 +93,10 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     internal void LoadGame(GameModel gameModel)
     {
         dataPersistenceManager.gameModel = gameModel;
+        runLevel = dataPersistenceManager.gameModel.RunLevel;
         Debug.Log("Game loaded in slot " + dataPersistenceManager.gameModel.SlotIndex + ", now should be change scene");
-        SceneManager.Instance.LoadLobbyScene();
+        //SceneManager.Instance.LoadLobbyScene();
+        SceneManager.Instance.LoadScene(dataPersistenceManager.gameModel.SceneName);
     }
 
     public async Task StartRun()
@@ -116,6 +118,9 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         if(dataPersistenceManager.gameModel.PlayerModel != null && playerController != null)
         {
             dataPersistenceManager.gameModel.PlayerModel = playerController.PlayerModel;
+            dataPersistenceManager.gameModel.RunLevel = runLevel;
+            dataPersistenceManager.gameModel.SceneName = SceneManager.Instance.GetActiveScene();
+
             dataPersistenceManager.SaveGame();
         }
         else
@@ -172,12 +177,10 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
             
             Debug.Log("Here should save when application quit");
             SaveGame();
-            
-            
         }
     }
 
-    private void SavePlayerLocation()
+    /*private void SavePlayerLocation()
     {
         SavePlayerPosition();
         SavePlayerRotation();
@@ -199,5 +202,5 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         dataPersistenceManager.gameModel.RotationY = rotation.y;
         dataPersistenceManager.gameModel.RotationZ = rotation.z;
         dataPersistenceManager.gameModel.RotationW = rotation.w;
-    }
+    }*/
 }

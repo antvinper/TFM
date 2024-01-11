@@ -73,8 +73,13 @@ public class SceneManager: SingletonMonoBehaviour<SceneManager>
         UnityEngine.SceneManagement.SceneManager.LoadSceneAsync("LevelSelector");
     }
 
-    private async Task LoadScene(string scene)
+    public async Task LoadScene(string scene)
     {
         UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(scene);
+    }
+
+    public string GetActiveScene()
+    {
+        return UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
     }
 }

@@ -19,6 +19,8 @@ public class GameModel
 
     private PlayerMutableModel playerModel;
     //private Quaternion rotation;
+    private int runLevel;
+    private string sceneName;
 
 
     public TimeSpan TotalPlaytime { get => GetTotalPlayTime(); set { totalPlayTime = value; } }
@@ -87,6 +89,22 @@ public class GameModel
         }
     }
 
+    public int RunLevel
+    {
+        get => runLevel;
+        set
+        {
+            runLevel = value;
+        }
+    }
+    public string SceneName
+    {
+        get => sceneName;
+        set
+        {
+            sceneName = value;
+        }
+    }
 
     public void Setup(int slotIndex)
     {
