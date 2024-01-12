@@ -3,6 +3,8 @@ using System.Threading.Tasks;
 using UnityEngine;
 using System.Linq;
 using CompanyStats;
+using System;
+using UnityEngine.InputSystem;
 
 public class PlayerController : CompanyCharacterController//<PlayerMutableModel>
 {
@@ -15,8 +17,11 @@ public class PlayerController : CompanyCharacterController//<PlayerMutableModel>
         set => playerModel = value;
     }
 
-    [SerializeField] List<SkillDefinition> skills = new List<SkillDefinition>();
+    //[SerializeField] List<SkillDefinition> skills = new List<SkillDefinition>();
     private SoulFragment soulFragments;
+
+    
+
     private Rupee rupees;
 
     public SoulFragment SoulFragments
@@ -45,6 +50,56 @@ public class PlayerController : CompanyCharacterController//<PlayerMutableModel>
     StatsCanvasSupport statsCanvas;
 
     [SerializeField] private Animator animator;
+
+    [Header("Scripts and objects that must be de/activated")]
+    [SerializeField] GameObject camera;
+    [SerializeField] GameObject virtualCamera;
+    [SerializeField] MovePlayer movePlayer;
+    [SerializeField] PlayerInputManager playerInputManager;
+    [SerializeField] CapsuleCollider capsuleCollider;
+    [SerializeField] PlayerInput playerInput;
+
+    private bool areControlActives = true;
+
+    internal void ActivateControls()
+    {
+        if (!areControlActives)
+        {
+            camera.SetActive(true);
+            virtualCamera.SetActive(true);
+
+            capsuleCollider.enabled = true;
+
+
+            playerInput.enabled = true;
+            playerInputManager.enabled = true;
+
+            movePlayer.ActivateControls();
+            movePlayer.ContinueMovement();
+
+            areControlActives = true;
+        }
+        
+    }
+
+    internal void DeActivateControls()
+    {
+        if (areControlActives)
+        {
+            playerInputManager.enabled = false;
+            playerInput.enabled = false;
+
+            movePlayer.StopMovement();
+            movePlayer.DeActivateControls();
+
+            capsuleCollider.enabled = false;
+
+            virtualCamera.SetActive(false);
+            camera.SetActive(false);
+
+            areControlActives = false;
+        }
+    }
 
     private void Awake()
     {
@@ -104,7 +159,7 @@ public class PlayerController : CompanyCharacterController//<PlayerMutableModel>
         statsCanvas = FindObjectOfType<StatsCanvasSupport>();
         WriteStats();
         //ActiveSlotTree(1);
-        ApplySkill();
+        //ApplySkill();
         //canvasTreeManager.Setup(playerModel.Tree.Slots);
 
         //TODO -> Erase from here. Just for testing
@@ -184,7 +239,7 @@ public class PlayerController : CompanyCharacterController//<PlayerMutableModel>
         WriteStats();
     }
 
-    public async Task ApplySkill()
+    /*public async Task ApplySkill()
     {
         await new WaitForSeconds(2.0f);
         foreach (SkillDefinition skill in skills)
@@ -192,12 +247,12 @@ public class PlayerController : CompanyCharacterController//<PlayerMutableModel>
             skill.ProcessSkill(this, this);
             await new WaitForSeconds(2.0f);
         }
-        /*foreach (SkillDefinition skill in skills)
+        foreach (SkillDefinition skill in skills)
         {
             skill.ProcessSkill(this);
             await new WaitForSeconds(3.0f);
-        }*/
-    }
+        }
+    }*/
 
     /*public override Stat GetStatFromName(StatNames statName)
     {

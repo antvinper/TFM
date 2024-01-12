@@ -6,7 +6,7 @@ using UnityEngine;
 public class BasicRoomSceneRoot : SceneRoot
 {
     [SerializeField] private RoomController roomController;
-    private PlayerController playerController;
+    [SerializeField] private Room roomDefinition;
 
     private void Start()
     {
@@ -16,8 +16,11 @@ public class BasicRoomSceneRoot : SceneRoot
     public override async Task Initialize()
     {
         await new WaitUntil(() => IsInitialized);
-        playerController = GameManager.Instance.GetPlayerController();
+
+        ActivatePlayerController();
+        InGameHUD.Instance.Setup();
+
         roomController.Setup(playerController);
-        roomController.StartRoomWaves();  
+        roomController.StartRoomWaves(GameManager.Instance.NextRoomReward, roomDefinition);  
     }
 }

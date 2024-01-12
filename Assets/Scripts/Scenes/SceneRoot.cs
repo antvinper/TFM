@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class SceneRoot : MonoBehaviour
 {
     [SerializeField] private bool saveOnInit;
+    protected PlayerController playerController;
     public bool IsInitialized { get; private set; }
 
     private void OnEnable()
@@ -16,6 +17,7 @@ public class SceneRoot : MonoBehaviour
 
     protected void OnSceneLoaded(Scene scene, LoadSceneMode sceneMode)
     {
+        Debug.Log("#SCENE SceneLoaded: " + name);
         if (saveOnInit)
         {
             GameManager.Instance.SaveGame();
@@ -29,4 +31,17 @@ public class SceneRoot : MonoBehaviour
         await new WaitUntil(() => IsInitialized == true);
 
     }
+
+    private void OnDestroy()
+    {
+        UnityEngine.SceneManagement.SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    protected void ActivatePlayerController()
+    {
+        playerController = GameManager.Instance.GetPlayerController();
+        playerController.ActivateControls();
+    }
+
+
 }

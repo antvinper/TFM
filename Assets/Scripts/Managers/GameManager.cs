@@ -21,6 +21,13 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
      * Pero eso en un futuro no debe ser as� sino s�lo cuando se est� en el lobby.
      */
     private PlayerController playerController;
+    private RewardsEnum nextRoomReward;
+    
+    public RewardsEnum NextRoomReward
+    {
+        get => nextRoomReward;
+        set => nextRoomReward = value;
+    }
     
 
     public GameModel GameModel
@@ -113,9 +120,27 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         set => isGameInRun = value;
     }
 
-    public void SaveGame()
+    public async Task SaveGame()
     {
-        if(dataPersistenceManager.gameModel.PlayerModel != null && playerController != null)
+        int maxRetries = 10;
+        int actualRetries = 0;
+        bool canSave = false;
+        do
+        {
+            if (dataPersistenceManager.gameModel.PlayerModel != null && playerController != null)
+            {
+                canSave = true;
+            }
+            else
+            {
+                ++actualRetries;
+                await new WaitForFixedUpdate();
+            }
+        } while (actualRetries < maxRetries && !canSave);
+
+        //await new WaitUntil(() => dataPersistenceManager.gameModel.PlayerModel != null && playerController != null);
+        Debug.Log("HOLA");
+        if(canSave)
         {
             dataPersistenceManager.gameModel.PlayerModel = playerController.PlayerModel;
             dataPersistenceManager.gameModel.RunLevel = runLevel;

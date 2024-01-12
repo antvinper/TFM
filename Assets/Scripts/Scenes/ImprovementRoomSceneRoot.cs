@@ -13,6 +13,10 @@ public class ImprovementRoomSceneRoot : SceneRoot
     public override async Task Initialize()
     {
         await new WaitUntil(() => IsInitialized);
+        
+        ActivatePlayerController();
+        InGameHUD.Instance.Setup();
+
         Debug.Log("TODO");
     }
 }

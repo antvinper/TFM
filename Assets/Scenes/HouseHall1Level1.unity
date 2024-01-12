@@ -6345,22 +6345,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: BasicRoomSceneRoot Variant
       objectReference: {fileID: 0}
-    - target: {fileID: 8970933100798777161, guid: dbae702d6d0295f4495b6284c6ff56f4, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 18.54
-      objectReference: {fileID: 0}
-    - target: {fileID: 8970933100798777161, guid: dbae702d6d0295f4495b6284c6ff56f4, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 28.88
-      objectReference: {fileID: 0}
-    - target: {fileID: 8970933100911999139, guid: dbae702d6d0295f4495b6284c6ff56f4, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 17.83
-      objectReference: {fileID: 0}
-    - target: {fileID: 8970933100911999139, guid: dbae702d6d0295f4495b6284c6ff56f4, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 38.31
-      objectReference: {fileID: 0}
     - target: {fileID: 8970933101119154226, guid: dbae702d6d0295f4495b6284c6ff56f4, type: 3}
       propertyPath: doorAnimator
       value: 

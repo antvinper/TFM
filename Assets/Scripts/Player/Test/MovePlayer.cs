@@ -11,13 +11,13 @@ public class MovePlayer : MonoBehaviour//SingletonMonoBehaviour<MovePlayer>
     private float horizontalMove;
     private float verticalMove;
     private Vector3 playerInput;
-    private CharacterController player;
-    private Animator anim;
+    //private CharacterController player;
+    //private Animator anim;
     public float gravity = 9.8f;
     public float targetRotation = 9.8f;
     public float RotationSmoothTime = 0.12f;
     public float player_health = 100f;
-    private GameObject _mainCamera;
+
     private bool canMove;
 
     private bool canDash = true;
@@ -32,20 +32,22 @@ public class MovePlayer : MonoBehaviour//SingletonMonoBehaviour<MovePlayer>
     [SerializeField] private float fallVelocity;
     [SerializeField] private float rotationSpeed;
 
+    [SerializeField] private CharacterController player;
+    [SerializeField] private Animator anim;
+
     private Vector3 movePlayer;
-    private void Awake()
+    
+
+    internal void ActivateControls()
     {
-        if (_mainCamera == null)
-        {
-            _mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
-        }
+        player.enabled = true;
+        anim.enabled = true;
     }
 
-    void Start()
+    internal void DeActivateControls()
     {
-        player = GetComponent<CharacterController>();
-        anim = GetComponent<Animator>();
-        canMove = true;
+        player.enabled = false;
+        anim.enabled = false;
     }
 
     private void FixedUpdate()
@@ -57,14 +59,18 @@ public class MovePlayer : MonoBehaviour//SingletonMonoBehaviour<MovePlayer>
     public void StopMovement()
     {
         canMove = false;
+        Debug.Log("#MOVEE StopMovement");
     }
     public void ContinueMovement()
     {
         canMove = true;
+        Debug.Log("#MOVEE ContinueMovement");
     }
 
     void Update()
     {
+
+        Debug.Log("#MOVEE CanMove: " + canMove);
         playerInput = Vector3.zero;
         if (!isDashing && canMove)
         {

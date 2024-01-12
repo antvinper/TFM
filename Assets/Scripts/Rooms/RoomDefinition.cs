@@ -1,55 +1,59 @@
-using CompanyStats;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "RoomDefinition", menuName = "TFM/Room/NormalRoomDefinition")]
-public class RoomDefinition : ScriptableObject
+public class RoomDefinition : Room
 {
-    [SerializeField] private RoomTypesEnum roomType;
-    [SerializeField] private RewardsEnum rewardType;
-    [SerializeField] private int rupeesMinAmount;
-    [SerializeField] private int rupeesMaxAmount;
-    [SerializeField] private int soulFragmentsMinAmount;
-    [SerializeField] private int soulFragmentsMaxAmount;
-    [SerializeField] private int healMinAmount;
-    [SerializeField] private int healMaxAmount;
-    [SerializeField] private SkillDefinition healSkill;
+    
+}
 
-    public int RupeesMinAmount
-    {
-        get => rupeesMinAmount;
-    }
-    public int RupeesMaxAmount
-    {
-        get => rupeesMaxAmount;
-    }
+#if UNITY_EDITOR
+[CustomEditor(typeof(RoomDefinition))]
+public class RoomDefnitionEditor: Editor
+{
+    private SerializedProperty roomTypeProperty;
+    private SerializedProperty rupeesMinAmountProperty;
+    private SerializedProperty soulFragmentsMinAmountProperty;
+    private SerializedProperty healMinAmountProperty;
+    private SerializedProperty healSkillProperty;
 
-    public int SoulFragmentsMinAmount
+    private void OnEnable()
     {
-        get => soulFragmentsMinAmount;
-    }
-    public int SoulFragmentsMaxAmount
-    {
-        get => soulFragmentsMaxAmount;
+        roomTypeProperty = serializedObject.FindProperty("roomType");
+        rupeesMinAmountProperty = serializedObject.FindProperty("rupeesMinAmount");
+        soulFragmentsMinAmountProperty = serializedObject.FindProperty("soulFragmentsMinAmount");
+        healMinAmountProperty = serializedObject.FindProperty("healMinAmount");
+        healSkillProperty = serializedObject.FindProperty("healSkill");
     }
 
-    public int HealMinAmount
+    public override void OnInspectorGUI()
     {
-        get => healMinAmount;
-    }
-    public int HealMaxAmount
-    {
-        get => healMaxAmount;
-    }
+        Room room = (Room)target;
+        serializedObject.Update();
 
-    public RewardsEnum RewardType
-    {
-        get => rewardType;
-    }
+        EditorGUILayout.PropertyField(roomTypeProperty);
+        if (roomTypeProperty.intValue.Equals((int)RoomTypesEnum.NORMAL_ROOM) ||
+            roomTypeProperty.intValue.Equals((int)RoomTypesEnum.HIGH_ROOM) ||
+            roomTypeProperty.intValue.Equals((int)RoomTypesEnum.BOSS_ROOM))
+        {
+            room.hasReward = true;
+        }
+        else
+        {
+            room.hasReward = false;
+        }
 
-    public SkillDefinition HealSkill
-    {
-        get => healSkill;
+        if (room.hasReward)
+        {
+            EditorGUILayout.PropertyField(rupeesMinAmountProperty);
+            EditorGUILayout.PropertyField(soulFragmentsMinAmountProperty);
+            EditorGUILayout.PropertyField(healMinAmountProperty);
+            EditorGUILayout.PropertyField(healSkillProperty);
+        }
+
+        serializedObject.ApplyModifiedProperties();
     }
 }
+#endif

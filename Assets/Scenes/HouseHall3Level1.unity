@@ -1593,6 +1593,14 @@ PrefabInstance:
       propertyPath: doorAnimator
       value: 
       objectReference: {fileID: 1716704802}
+    - target: {fileID: 8970933102260636022, guid: dbae702d6d0295f4495b6284c6ff56f4, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.18
+      objectReference: {fileID: 0}
+    - target: {fileID: 8970933102260636022, guid: dbae702d6d0295f4495b6284c6ff56f4, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 33.76
+      objectReference: {fileID: 0}
     - target: {fileID: 8970933102590027266, guid: dbae702d6d0295f4495b6284c6ff56f4, type: 3}
       propertyPath: m_LocalPosition.x
       value: 5.81

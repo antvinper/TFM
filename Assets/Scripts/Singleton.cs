@@ -14,7 +14,7 @@ public class Singleton : MonoBehaviour
         else
         {
             Instance = this;
-            DontDestroyOnLoad(this);
+            DontDestroyOnLoad(this.transform.gameObject);
         }
     }
 }

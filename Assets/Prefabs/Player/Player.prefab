@@ -159,6 +159,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 274060088606349922}
+  - component: {fileID: 857115033306690427}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -184,6 +185,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &857115033306690427
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 274060088606349923}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51f8de03578e51f48a62bfaa0f63a0f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &274060088621764023
 GameObject:
   m_ObjectHideFlags: 0
@@ -774,7 +787,6 @@ GameObject:
   - component: {fileID: 274060088090906233}
   - component: {fileID: 274060088090906235}
   - component: {fileID: 274060088090906234}
-  - component: {fileID: 274060088090906229}
   - component: {fileID: 274060088090906228}
   - component: {fileID: 2154626831935442980}
   - component: {fileID: 1155035016002916849}
@@ -873,6 +885,12 @@ MonoBehaviour:
   tree: {fileID: 11400000, guid: 6559bb119022108438547b4098326e92, type: 2}
   canvasTreeManager: {fileID: 0}
   animator: {fileID: 274060088090906231}
+  camera: {fileID: 274060088628090865}
+  virtualCamera: {fileID: 274060088621764023}
+  movePlayer: {fileID: 274060088090906228}
+  playerInputManager: {fileID: 274060088090906234}
+  capsuleCollider: {fileID: 274060088090906230}
+  playerInput: {fileID: 274060088090906235}
 --- !u!114 &274060088090906235
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -945,18 +963,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerController: {fileID: 274060088090906233}
   moverEspada: {fileID: 2154626831935442980}
---- !u!114 &274060088090906229
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1084454792363275054}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 51f8de03578e51f48a62bfaa0f63a0f4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &274060088090906228
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -977,6 +983,8 @@ MonoBehaviour:
   playerSpeed: 10
   fallVelocity: 5
   rotationSpeed: 200
+  player: {fileID: 274060088090906232}
+  anim: {fileID: 274060088090906231}
 --- !u!82 &2154626831935442980
 AudioSource:
   m_ObjectHideFlags: 0

@@ -15,7 +15,7 @@ public class SceneManager: SingletonMonoBehaviour<SceneManager>
         //List to store the index of available scenes
         availableScenes = new List<int>();
 
-        for (int i = 1; i < numRooms; i++)
+        for (int i = 2; i <= numRooms; i++)
         {
             availableScenes.Add(i);
         }

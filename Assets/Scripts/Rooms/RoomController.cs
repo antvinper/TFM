@@ -21,9 +21,9 @@ public class RoomController : MonoBehaviour
         this.playerController = playerController;
     }
 
-    public void StartRoomWaves()
+    public void StartRoomWaves(RewardsEnum rewardType, Room roomDefinition)
     {
-        model.Setup();
+        model.Setup(rewardType, roomDefinition);
         StartNewWave();
     }
 
@@ -64,7 +64,7 @@ public class RoomController : MonoBehaviour
 
     private RoomReward GetReward()
     {
-        return model.GetReward(playerController);
+        return model.GetReward(playerController, GameManager.Instance.RunLevel);
     }
 
     public async Task GetRoomRewards()

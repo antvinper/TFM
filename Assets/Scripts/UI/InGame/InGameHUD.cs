@@ -6,9 +6,9 @@ using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-public class InGameHUD : MonoBehaviour
+public class InGameHUD : SingletonMonoBehaviour<InGameHUD>
 {
-    private InGameHUD instance;
+    //private InGameHUD instance;
     private bool isPauseMenuOpen = false;
 
     [SerializeField] protected EventSystem eventSystem;
@@ -40,14 +40,14 @@ public class InGameHUD : MonoBehaviour
 
     private void Awake()
     {
-        if (instance != null && instance != this)
+        /*if (instance != null && instance != this)
         {
             Destroy(this);
         }
         else
         {
             instance = this;
-        }
+        }*/
     }
 
     void Start()
@@ -57,11 +57,22 @@ public class InGameHUD : MonoBehaviour
         pauseReference.action.performed += this.PauseIddle;
     }
 
+    public void Setup()
+    {
+        if(playerController == null)
+        {
+            playerController = GameManager.Instance.GetPlayerController();
+        }
+    }
+
     void Update()
     {
         //TODO -> Mover el setupInGameHud, sólo cuando ocurra un cambio en los stats del jugador
         //Tal como está chupa muchos recursos.
-        SetUpInGameHUD();
+        if(playerController != null)
+        {
+            SetUpInGameHUD();
+        }
     }
     
     private void PauseIddle(InputAction.CallbackContext callbackContext)

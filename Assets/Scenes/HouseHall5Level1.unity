@@ -6677,6 +6677,34 @@ PrefabInstance:
       propertyPath: doorAnimator
       value: 
       objectReference: {fileID: 290282892}
+    - target: {fileID: 8970933102260636022, guid: dbae702d6d0295f4495b6284c6ff56f4, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 13.18
+      objectReference: {fileID: 0}
+    - target: {fileID: 8970933102260636022, guid: dbae702d6d0295f4495b6284c6ff56f4, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 24.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 8970933102260636022, guid: dbae702d6d0295f4495b6284c6ff56f4, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.71091783
+      objectReference: {fileID: 0}
+    - target: {fileID: 8970933102260636022, guid: dbae702d6d0295f4495b6284c6ff56f4, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8970933102260636022, guid: dbae702d6d0295f4495b6284c6ff56f4, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.70327514
+      objectReference: {fileID: 0}
+    - target: {fileID: 8970933102260636022, guid: dbae702d6d0295f4495b6284c6ff56f4, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8970933102260636022, guid: dbae702d6d0295f4495b6284c6ff56f4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 270.61902
+      objectReference: {fileID: 0}
     - target: {fileID: 8970933102590027266, guid: dbae702d6d0295f4495b6284c6ff56f4, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.95

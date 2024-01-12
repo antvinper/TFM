@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 356ffe224cc4dbc4d8d4ffcb7b7c6dec, type: 3}
+  m_Name: HighRoomDefinition
+  m_EditorClassIdentifier: 
+  roomType: 1
+  rupeesMinAmount: 75
+  soulFragmentsMinAmount: 2
+  healMinAmount: 40
+  healSkill: {fileID: 11400000, guid: 1f9b749d61b95234f9a3a67c7cd5ae9f, type: 2}
