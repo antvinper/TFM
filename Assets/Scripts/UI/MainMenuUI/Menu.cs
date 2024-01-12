@@ -8,7 +8,7 @@ using UnityEngine.InputSystem;
 public class Menu: MonoBehaviour
 {
     [Header("Main Menu Manager")]
-    [SerializeField] protected MainMenuManager mainMenuManager;
+    [SerializeField] protected MainMenuController mainMenuManager;
     public virtual void PerformAction(EventSystem eventSystem)
     {
 

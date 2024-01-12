@@ -18,12 +18,6 @@ public class StartMenu : Menu
     [SerializeField] private Button continueButton;
     [SerializeField] private GameObject optionsMenu;
 
-
-    void Start()
-    {
-        Setup();
-    }
-
     public void Setup()
     {
         mainMenuManager.SetCurrentLayout(this, newGameButton.gameObject);

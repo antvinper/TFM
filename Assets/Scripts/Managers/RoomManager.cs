@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class RoomManager : SingletonMonoBehaviour<RoomManager>
 {
-    private RoomController roomController;
+    /*private RoomController roomController;
     private PlayerController playerController;
 
 
@@ -19,16 +19,5 @@ public class RoomManager : SingletonMonoBehaviour<RoomManager>
     public async Task StartRoomWaves()
     {
         roomController.StartRoomWaves();
-    }
-
-    
-    /*public void Setup(PlayerController playerController)
-    {
-        this.playerController = playerController;
     }*/
-
-    public void OnEnemyKilled(EnemyController enemy)
-    {
-        roomController.OnEnemyKilled(enemy, playerController);
-    }
 }

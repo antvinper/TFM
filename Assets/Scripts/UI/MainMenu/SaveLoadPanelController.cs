@@ -8,7 +8,7 @@ using static UnityEngine.InputSystem.InputAction;
 
 public class SaveLoadPanelController : PanelController
 {
-    [SerializeField] private InputActionReference cancelReference;
+    /*[SerializeField] private InputActionReference cancelReference;
     [SerializeField] private PanelView saveLoadPanelView;
     [SerializeField] private GameObject container;
     private MainMenuCanvasController mainMenuCanvasController;
@@ -54,7 +54,7 @@ public class SaveLoadPanelController : PanelController
             GameMinModel g = savedData[i];
             slots[i].Setup(g, i);
         }
-    }
+    }*/
 
     
 }

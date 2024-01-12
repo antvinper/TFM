@@ -5,15 +5,15 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
-public class MainMenuManager : MonoBehaviour
+public class MainMenuController : MonoBehaviour
 {
     //[SerializeField] private FileSelectMenu fileSelect;
 
     public InputActionReference submitReference;
     [SerializeField] protected EventSystem eventSystem;
 
-    private static MainMenuManager instance;
-    public static MainMenuManager Instance => instance;
+    //private static MainMenuController instance;
+    //public static MainMenuController Instance => instance;
 
     [SerializeField] PressAnythingMenu pressAnythingMenu;
     //[SerializeField] StartMenu startMenu;
@@ -24,10 +24,10 @@ public class MainMenuManager : MonoBehaviour
 
     private Menu currentMenu;
 
-    private void Awake()
+    /*private void Awake()
     {
         instance = this;
-    }
+    }*/
 
     public void OpenNewGameMenu(GameObject menuToClose, FileFolder fileFolderSelected)
     {

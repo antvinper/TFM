@@ -14,6 +14,13 @@ public class RoomController : MonoBehaviour
     [SerializeField] BoxCollider nextLevelCollider;
     [SerializeField] Animator doorAnimator;
 
+    private PlayerController playerController;
+
+    public void Setup(PlayerController playerController)
+    {
+        this.playerController = playerController;
+    }
+
     public void StartRoomWaves()
     {
         model.Setup();
@@ -40,6 +47,7 @@ public class RoomController : MonoBehaviour
         for (int i = 0; i < nEnemiesToSpawn; ++i)
         {
             GameObject go = Instantiate(model.GetWaveRandomEnemy(), GetRandomSpawnPoint());
+            go.GetComponent<EnemyController>().RoomController = this;
             instantiatedEnemies.Add(go);
         }
 
@@ -54,14 +62,14 @@ public class RoomController : MonoBehaviour
         return spawnPoint;
     }
 
-    private RoomReward GetReward(PlayerController playerController)
+    private RoomReward GetReward()
     {
         return model.GetReward(playerController);
     }
 
-    public async Task GetRoomRewards(PlayerController playerController)
+    public async Task GetRoomRewards()
     {
-        RoomReward roomReward = GetReward(playerController);
+        RoomReward roomReward = GetReward();
 
         switch (roomReward.RewardType)
         {
@@ -79,7 +87,7 @@ public class RoomController : MonoBehaviour
         Debug.Log("#REWARDS " + roomReward.RewardType + " -> " + roomReward.Value);
     }
 
-    public async Task OnEnemyKilled(EnemyController enemy, PlayerController playerController)
+    public async Task OnEnemyKilled(EnemyController enemy)
     {
         GameObject goToErase = null;
 
@@ -103,9 +111,13 @@ public class RoomController : MonoBehaviour
             if (model.IsTheLastWave())
             {
                 Debug.Log("#WAVE Waves finished");
-                GetRoomRewards(playerController);
+                GetRoomRewards();
 
-                doorAnimator.SetTrigger("openDoor");
+                if(doorAnimator != null)
+                {
+                    doorAnimator.SetTrigger("openDoor");
+                }
+                
                 nextLevelCollider.enabled = true;
                 //GameManager.Instance.IncrementRunLevel();
             }

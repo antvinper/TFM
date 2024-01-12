@@ -9,6 +9,7 @@ public class FileSelectMenu : Menu
 {
     private List<FileFolder> fileFolders;
     private bool hasBeenFilled = false;
+    [SerializeField] private MainMenuController mainMenuController;
 
     [SerializeField] private Button firstSelectedButton;
     public void Setup()
@@ -46,10 +47,10 @@ public class FileSelectMenu : Menu
 
     public async Task FillFileFolders()
     {
-        await new WaitUntil(() => MainMenuManager.Instance != null);
+        //await new WaitUntil(() => MainMenuController.Instance != null);
         
         Debug.Log("Filling file folders");
-        List<GameModel>gameModels = await MainMenuManager.Instance.GetAllDataSaved();
+        List<GameModel>gameModels = await mainMenuController.GetAllDataSaved();
 
         int slotIndex = 0;
         foreach(GameModel gameModel in gameModels)

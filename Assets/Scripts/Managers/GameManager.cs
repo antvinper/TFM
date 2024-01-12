@@ -175,8 +175,8 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
              */
             //SavePlayerLocation();
             
-            Debug.Log("Here should save when application quit");
-            SaveGame();
+            //Debug.Log("Here should save when application quit");
+            //SaveGame();
         }
     }
 

@@ -14,7 +14,10 @@ public class EnemyController : CompanyCharacterController
     [SerializeField] private GameObject originalRender;
     [SerializeField] private GameObject dissolveRender;
     [SerializeField] private SpawnEffect despawnEffect;
-    
+
+    private RoomController roomController;
+    public RoomController RoomController { set => roomController = value; }
+
     public bool isHit = false;
     Guid gUID;
     public Guid GUID
@@ -34,6 +37,7 @@ public class EnemyController : CompanyCharacterController
         gUID = Guid.NewGuid();
         //SetModel();
     }
+
 
     protected async Task SetModel(CharacterMutableModel model)
     {
@@ -83,13 +87,24 @@ public class EnemyController : CompanyCharacterController
     {
         Debug.Log("TODO -> Enemy Behaviour when dies.");
 
-        RoomManager.Instance.OnEnemyKilled(this);
+        //RoomManager.Instance.OnEnemyKilled(this);
+        if(roomController == null)
+        {
+            roomController = FindObjectOfType<RoomController>();
+        }
+        else
+        {
+            roomController.OnEnemyKilled(this);
+        }
+
         await new WaitForSeconds(despawnEffect.spawnEffectTime);
         dissolveRender.SetActive(true);
         originalRender.SetActive(false);
         await new WaitForSeconds(despawnEffect.spawnEffectTime);
         base.DieBehaviour();
     }
+
+
 
 
     /*public override void ProcessEffect(CharacterMutableModel attacker)

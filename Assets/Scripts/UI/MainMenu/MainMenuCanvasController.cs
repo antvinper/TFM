@@ -6,14 +6,14 @@ using UnityEngine;
 public class MainMenuCanvasController : MonoBehaviour
 {
 
-    [SerializeField] private MainMenuCanvasView mainMenuCanvasView;
+    /*[SerializeField] private MainMenuCanvasView mainMenuCanvasView;
     public async Task LoadPanelLoad()
     {
-        mainMenuCanvasView.LoadPanelLoad(await MainMenuManager.Instance.GetAllDataSaved());
-    }
+        mainMenuCanvasView.LoadPanelLoad(await MainMenuController.Instance.GetAllDataSaved());
+    }*/
 
-    public void LoadMainMenuPanel()
+    /*public void LoadMainMenuPanel()
     {
         mainMenuCanvasView.LoadMainMenuPanel();
-    }
+    }*/
 }
