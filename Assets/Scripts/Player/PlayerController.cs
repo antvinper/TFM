@@ -59,6 +59,8 @@ public class PlayerController : CompanyCharacterController//<PlayerMutableModel>
     [SerializeField] CapsuleCollider capsuleCollider;
     [SerializeField] PlayerInput playerInput;
 
+    public MovePlayer MovePlayer { get => movePlayer; } 
+
     private bool areControlActives = true;
 
     internal void ActivateControls()

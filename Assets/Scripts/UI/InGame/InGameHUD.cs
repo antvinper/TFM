@@ -62,6 +62,7 @@ public class InGameHUD : SingletonMonoBehaviour<InGameHUD>
         if(playerController == null)
         {
             playerController = GameManager.Instance.GetPlayerController();
+            movePlayer = playerController.MovePlayer;
         }
     }
 
