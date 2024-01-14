@@ -23,7 +23,7 @@ public class SceneRoot : MonoBehaviour
         if (saveOnInit)
         {
             GameManager.Instance.SaveGame();
-            Debug.Log("GameSaved");
+            //Debug.Log("GameSaved");
         }
         IsInitialized = true;
     }

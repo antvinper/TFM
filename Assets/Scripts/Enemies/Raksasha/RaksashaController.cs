@@ -50,7 +50,7 @@ public class RaksashaController : EnemyController
     void calculateRandomVector()
     {
         walkSpeed = GetStatValue(StatNames.SPEED, StatParts.ACTUAL_VALUE);
-        Debug.Log("WalkSpeed = " + walkSpeed);
+        //Debug.Log("WalkSpeed = " + walkSpeed);
         movementDir = new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f)).normalized;
         transform.rotation = Quaternion.LookRotation(movementDir);
         speedDir = movementDir * walkSpeed;
@@ -59,7 +59,7 @@ public class RaksashaController : EnemyController
     void calculateObjectiveVector(Vector3 objectivePos)
     {
         walkSpeed = GetStatValue(StatNames.SPEED, StatParts.ACTUAL_VALUE);
-        Debug.Log("WalkSpeed = " + walkSpeed);
+        //Debug.Log("WalkSpeed = " + walkSpeed);
         movementDir = new Vector3(objectivePos.x - transform.position.x, 0, objectivePos.z - transform.position.z).normalized;
         transform.rotation = Quaternion.LookRotation(movementDir);
         speedDir = movementDir * walkSpeed;

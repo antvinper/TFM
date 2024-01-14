@@ -21,6 +21,7 @@ public class WeaponController: MonoBehaviour
     private bool canMakeDamage = false;
     private bool isComboFinished = false;
     private bool isComboFinishing = false;
+    private bool isComboCanceled = false;
 
     private bool canContinueCombo = false;
 
@@ -34,6 +35,9 @@ public class WeaponController: MonoBehaviour
     public bool CanCancelCombo { get => canCancelCombo; set => canCancelCombo = value; }
 
     [SerializeField] private Animator animator;
+
+    private float timeBetweenCombos = 0.5f;
+    private bool isTimeBetweenCombosCompleted= true;
 
     //TODO
     //Quiz�s sea necesario crear una lista de estas corrutinas.
@@ -125,7 +129,7 @@ public class WeaponController: MonoBehaviour
     }
     public void CancelComboFromAnim()
     {
-        Debug.Log("#COMBO Cancel Combo From Anim");
+        //Debug.Log("#COMBO Cancel Combo From Anim");
         Debug.Log(doingCombo + " " + actualIndex);
         if (doingCombo || actualIndex == 0)
         {
@@ -134,18 +138,32 @@ public class WeaponController: MonoBehaviour
             CancelCombo();
         }
     }
-    public void CancelCombo()
+    public async Task CancelCombo()
     {
-        GameManager.Instance.GetPlayerController().ContinueMovement();
-        if (!doingCombo && !isComboFinished)
+        if (!isComboCanceled)
         {
-            animator.SetTrigger("cancelCombo");
-            comboStarted = false;
-            actualIndex = 0;
-            actualActionStack.Clear();
-            ResetCombos();
+            isComboCanceled = true;
+            GameManager.Instance.GetPlayerController().ContinueMovement();
+            if (!doingCombo && !isComboFinished)
+            {
+                animator.SetTrigger("cancelCombo");
+                comboStarted = false;
+                actualIndex = 0;
+                actualActionStack.Clear();
+                ResetCombos();
+                await StartTimerBetweenCombosCompleted();
+                isComboCanceled = false;
+            }
         }
-        
+    }
+
+    private async Task StartTimerBetweenCombosCompleted()
+    {
+        Debug.Log("#TIMER_COMBOS Starting timer");
+        isTimeBetweenCombosCompleted = false;
+        await new WaitForSeconds(timeBetweenCombos);
+        Debug.Log("#TIMER_COMBOS End timer");
+        isTimeBetweenCombosCompleted = true;
     }
 
     public async Task FinishCombo()
@@ -154,8 +172,8 @@ public class WeaponController: MonoBehaviour
         isComboFinished = true;
         doingCombo = false;
         canAttack = false;
-        animator.SetTrigger("finishCombo");
-        await new WaitForSeconds(0.2f);
+        //animator.SetTrigger("finishCombo");
+
         actualActionStack.Clear();
         actualIndex = 0;
         canAttack = true;
@@ -164,12 +182,13 @@ public class WeaponController: MonoBehaviour
         comboStarted = false;
         isComboFinishing = false;
         GameManager.Instance.GetPlayerController().ContinueMovement();
+        await StartTimerBetweenCombosCompleted();
     }
 
     public void DoCombo(ButtonsXbox buttonPressed)
     {
         //Debug.Log("Button pressed: " + buttonPressed);
-        if (canAttack && !isCharging && !isComboFinishing)
+        if (canAttack && !isCharging && !isComboFinishing && isTimeBetweenCombosCompleted)
         {
             if (!comboStarted)
             {
@@ -184,21 +203,24 @@ public class WeaponController: MonoBehaviour
     }
     protected void StartCombo(ButtonsXbox buttonPressed)
     {
-        
-        for (int i = 0; i < model.BasicComboDefinitions.Length; ++i)
+        if (isTimeBetweenCombosCompleted)
         {
-            if (model.BasicComboDefinitions[i].StartCombo(buttonPressed))
+            for (int i = 0; i < model.BasicComboDefinitions.Length; ++i)
             {
-                GameManager.Instance.GetPlayerController().StopMovement();
-                comboIndex = i;
-                comboStarted = true;
-                //CancelComboAfterTime();
-                actualActionStack.Add(buttonPressed);
-                Debug.Log("#COMBO Triggering " + model.BasicComboDefinitions[i].AnimationTriggerToStart.ToString());
-                animator.SetTrigger(model.BasicComboDefinitions[i].AnimationTriggerToStart.ToString());
-                break;
+                if (model.BasicComboDefinitions[i].StartCombo(buttonPressed))
+                {
+                    GameManager.Instance.GetPlayerController().StopMovement();
+                    comboIndex = i;
+                    comboStarted = true;
+                    //CancelComboAfterTime();
+                    actualActionStack.Add(buttonPressed);
+                    Debug.Log("#COMBO Triggering " + model.BasicComboDefinitions[i].AnimationTriggerToStart.ToString());
+                    animator.SetTrigger(model.BasicComboDefinitions[i].AnimationTriggerToStart.ToString());
+                    break;
+                }
             }
         }
+        
     }
 
     public void ContinueAnimationCombo()

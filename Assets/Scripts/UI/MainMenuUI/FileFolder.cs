@@ -27,7 +27,7 @@ public class FileFolder : MonoBehaviour
         this.gameModel = model;
         isNewGame = false;
         fileNumberText.text = "Partida " + model.SlotIndex;
-        Debug.Log(model.TotalPlaytime.ToString("hh':'mm':'ss"));
+        //Debug.Log(model.TotalPlaytime.ToString("hh':'mm':'ss"));
         gameTimeText.text += model.TotalPlaytime.ToString("hh':'mm':'ss");
     }
 
@@ -35,7 +35,7 @@ public class FileFolder : MonoBehaviour
     {
         slotIndex = index;
         fileNumberText.text = "Partida " + index;
-        Debug.Log("New game folder");
+        //Debug.Log("New game folder");
         gameTimeText.text = "";
         buttonText.text = "New Game";
     }

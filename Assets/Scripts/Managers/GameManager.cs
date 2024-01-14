@@ -103,14 +103,14 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     {
         dataPersistenceManager.gameModel = gameModel;
         runLevel = dataPersistenceManager.gameModel.RunLevel;
-        Debug.Log("Game loaded in slot " + dataPersistenceManager.gameModel.SlotIndex + ", now should be change scene");
+        //Debug.Log("Game loaded in slot " + dataPersistenceManager.gameModel.SlotIndex + ", now should be change scene");
         //SceneManager.Instance.LoadLobbyScene();
         SceneManager.Instance.LoadScene(dataPersistenceManager.gameModel.SceneName);
     }
 
     public async Task StartRun()
     {
-        Debug.Log("Starting run...");
+        //Debug.Log("Starting run...");
         runLevel = 1;
         SceneManager.Instance.ChangeToRandomScene();
         //UnityEngine.SceneManagement.SceneManager.LoadSceneAsync("HouseHall5Level1");
@@ -141,7 +141,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         } while (actualRetries < maxRetries && !canSave);
 
         //await new WaitUntil(() => dataPersistenceManager.gameModel.PlayerModel != null && playerController != null);
-        Debug.Log("HOLA");
+        //Debug.Log("HOLA");
         if(canSave)
         {
             dataPersistenceManager.gameModel.PlayerModel = playerController.PlayerModel;

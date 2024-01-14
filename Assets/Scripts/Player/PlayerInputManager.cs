@@ -10,11 +10,11 @@ public class PlayerInputManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        /*if (Input.GetMouseButtonDown(0))
         {
             moverEspada.Play();
             playerController.DoCombo(ButtonsXbox.X);
-        }
+        }*/
     }
 
     public void GetInput(InputAction.CallbackContext callbackContext)
@@ -39,7 +39,7 @@ public class PlayerInputManager : MonoBehaviour
             {
                 moverEspada.Play();
                 playerController.DoCombo(ButtonsXbox.RT);
-                Debug.Log("Right or RT Pressed");
+                //Debug.Log("Right or RT Pressed");
                 //TODO
             }
             if (callbackContext.action.activeControl.ToString().Contains("buttonEast"))
@@ -47,7 +47,7 @@ public class PlayerInputManager : MonoBehaviour
                 //moverEspada.Play();
                 //playerController.DoDash();
                 playerController.DoCombo(ButtonsXbox.B);
-                Debug.Log("Dash");
+                //Debug.Log("Dash");
                 //TODO
             }
         }

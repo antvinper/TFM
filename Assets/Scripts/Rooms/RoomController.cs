@@ -30,7 +30,7 @@ public class RoomController : MonoBehaviour
     private async Task StartNewWave()
     {
         
-        Debug.Log("#WAVE Starting wave: " + model.ActualWave);
+        //Debug.Log("#WAVE Starting wave: " + model.ActualWave);
         model.RestartEnemiesKilled();
 
         instantiatedEnemies = new List<GameObject>();
@@ -43,7 +43,7 @@ public class RoomController : MonoBehaviour
 
         int nEnemiesToSpawn = model.GetNEnemiesToSpawnInWave();
         
-        Debug.Log(nEnemiesToSpawn);
+        
         for (int i = 0; i < nEnemiesToSpawn; ++i)
         {
             GameObject go = Instantiate(model.GetWaveRandomEnemy(), GetRandomSpawnPoint());

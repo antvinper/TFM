@@ -19,7 +19,7 @@ public class BasicComboDefinition : ComboDefinition
 
     public void Reset()
     {
-        Debug.Log("#MOVE Reset actual index in " + name);
+        //Debug.Log("#MOVE Reset actual index in " + name);
         actualIndex = 0;
         isRunning = false;
     }
@@ -60,7 +60,7 @@ public class BasicComboDefinition : ComboDefinition
 
     public bool IsLastComboIndex()
     {
-        Debug.Log("#MOVE actualIndex in " + name +": " + actualIndex);
+        //Debug.Log("#MOVE actualIndex in " + name +": " + actualIndex);
         return actualIndex == comboStruct.Count -1 ? true : false;
     }
 
@@ -120,6 +120,7 @@ public class BasicComboDefinition : ComboDefinition
 
     private void DoDash()
     {
+        Debug.Log("DO DASH");
         GameManager.Instance.GetPlayerController().DoDash(comboStruct[actualIndex].dashTime, comboStruct[actualIndex].dashPower);
     }
 }

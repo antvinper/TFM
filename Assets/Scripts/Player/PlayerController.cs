@@ -183,7 +183,7 @@ public class PlayerController : CompanyCharacterController//<PlayerMutableModel>
         //transform.rotation = selfOffset.rotation;
         transform.rotation = selfRotationOffset;
 
-        Debug.Log("#PLAYER player set in position");
+        //Debug.Log("#PLAYER player set in position");
     }
     /**
      * TODO
@@ -195,7 +195,6 @@ public class PlayerController : CompanyCharacterController//<PlayerMutableModel>
      */
     private void Start()
     {
-        Debug.Log("#PLAYER start");
         if(cameraOffset == null || selfOffset == null || virtualCameraOffset == null)
         {
             SetOffsets();

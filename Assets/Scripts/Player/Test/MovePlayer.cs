@@ -59,18 +59,18 @@ public class MovePlayer : MonoBehaviour//SingletonMonoBehaviour<MovePlayer>
     public void StopMovement()
     {
         canMove = false;
-        Debug.Log("#MOVEE StopMovement");
+        //Debug.Log("#MOVEE StopMovement");
     }
     public void ContinueMovement()
     {
         canMove = true;
-        Debug.Log("#MOVEE ContinueMovement");
+        //Debug.Log("#MOVEE ContinueMovement");
     }
 
     void Update()
     {
 
-        Debug.Log("#MOVEE CanMove: " + canMove);
+        //Debug.Log("#MOVEE CanMove: " + canMove);
         playerInput = Vector3.zero;
 
         if (!isDashing && canMove)

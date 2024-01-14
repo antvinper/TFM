@@ -25,7 +25,7 @@ public class FileSelectMenu : Menu
 
     public override void PerformAction(EventSystem eventSystem)
     {
-        Debug.Log(eventSystem.currentSelectedGameObject.name);
+        //Debug.Log(eventSystem.currentSelectedGameObject.name);
         if (eventSystem.currentSelectedGameObject.name.Equals("OptionsButton"))
         {
             mainMenuManager.OpenOptionsMenu(this.gameObject);
@@ -49,7 +49,7 @@ public class FileSelectMenu : Menu
     {
         //await new WaitUntil(() => MainMenuController.Instance != null);
         
-        Debug.Log("Filling file folders");
+        //Debug.Log("Filling file folders");
         List<GameModel>gameModels = await mainMenuController.GetAllDataSaved();
 
         int slotIndex = 0;
