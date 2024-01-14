@@ -25,7 +25,6 @@ public class WeaponController: MonoBehaviour
 
     private bool canContinueCombo = false;
 
-    //private CancellationTokenSource tokenCancelComboAfterTime;
 
     private List<ButtonsXbox> actualActionStack;
     [SerializeField] protected SkillDefinition chargedSkill;
@@ -39,12 +38,17 @@ public class WeaponController: MonoBehaviour
     private float timeBetweenCombos = 0.5f;
     private bool isTimeBetweenCombosCompleted= true;
 
-    //TODO
-    //Quiz�s sea necesario crear una lista de estas corrutinas.
-    //Coroutine cancelComboAfterTime;
-
     WeaponModel model;
 
+    private void Update()
+    {
+        Debug.Log("#DOINGCOMBO: " + DoingCombo);
+    }
+
+    internal void SetIsDoingCombo(bool isDoingCombo)
+    {
+        this.doingCombo = isDoingCombo;
+    }
 
     public void Setup(WeaponModel model)
     {
@@ -54,31 +58,24 @@ public class WeaponController: MonoBehaviour
         int maxComboLength = 0;
         foreach (BasicComboDefinition basicComboDefinition in this.model.BasicComboDefinitions)
         {
-            basicComboDefinition.SetUp(this);
+            basicComboDefinition.SetUp();
             int comboLength = basicComboDefinition.GetComboLength();
             maxComboLength = comboLength > maxComboLength ? comboLength : maxComboLength;
         }
         actualActionStack = new List<ButtonsXbox>();
-        //actualActionStack = new ButtonsXbox[maxComboLength];
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag.Equals("Enemy") && canMakeDamage)
         {
-            Debug.Log(actualIndex);
-            if (actualIndex == 2)
-            {
-                Debug.Log("H");
-            }
+            CanNotMakeDamage();
             PlayerController owner = GetComponentInParent<PlayerController>();
             EnemyController target = other.GetComponentInParent<EnemyController>();
-            Debug.Log("#Sardula Health: " + target.GetStatValue(StatNames.HEALTH, StatParts.ACTUAL_VALUE));
             if(owner != null && target != null)
             {
-                model.BasicComboDefinitions[comboIndex++].UseSkill(owner, target);
+                model.BasicComboDefinitions[comboIndex++].UseSkill(owner, target, this);
             }
-            CanNotMakeDamage();
         }
     }
 
@@ -86,18 +83,13 @@ public class WeaponController: MonoBehaviour
     {
         if (other.tag.Equals("Enemy") && canMakeDamage)
         {
-            Debug.Log(actualIndex);
-            if (actualIndex == 2)
-            {
-                Debug.Log("H");
-            }
+            CanNotMakeDamage();
             PlayerController owner = GetComponentInParent<PlayerController>();
             EnemyController target = other.GetComponentInParent<EnemyController>();
             if (owner != null && target != null)
             {
-                model.BasicComboDefinitions[comboIndex++].UseSkill(owner, target);
+                model.BasicComboDefinitions[comboIndex++].UseSkill(owner, target, this);
             }
-            CanNotMakeDamage();
         }
     }
 
@@ -129,8 +121,6 @@ public class WeaponController: MonoBehaviour
     }
     public void CancelComboFromAnim()
     {
-        //Debug.Log("#COMBO Cancel Combo From Anim");
-        Debug.Log(doingCombo + " " + actualIndex);
         if (doingCombo || actualIndex == 0)
         {
             canContinueCombo = false;
@@ -159,20 +149,16 @@ public class WeaponController: MonoBehaviour
 
     private async Task StartTimerBetweenCombosCompleted()
     {
-        Debug.Log("#TIMER_COMBOS Starting timer");
         isTimeBetweenCombosCompleted = false;
         await new WaitForSeconds(timeBetweenCombos);
-        Debug.Log("#TIMER_COMBOS End timer");
         isTimeBetweenCombosCompleted = true;
     }
 
     public async Task FinishCombo()
     {
-        //tokenCancelComboAfterTime.Cancel();
         isComboFinished = true;
         doingCombo = false;
         canAttack = false;
-        //animator.SetTrigger("finishCombo");
 
         actualActionStack.Clear();
         actualIndex = 0;
@@ -187,7 +173,6 @@ public class WeaponController: MonoBehaviour
 
     public void DoCombo(ButtonsXbox buttonPressed)
     {
-        //Debug.Log("Button pressed: " + buttonPressed);
         if (canAttack && !isCharging && !isComboFinishing && isTimeBetweenCombosCompleted)
         {
             if (!comboStarted)
@@ -212,9 +197,7 @@ public class WeaponController: MonoBehaviour
                     GameManager.Instance.GetPlayerController().StopMovement();
                     comboIndex = i;
                     comboStarted = true;
-                    //CancelComboAfterTime();
                     actualActionStack.Add(buttonPressed);
-                    Debug.Log("#COMBO Triggering " + model.BasicComboDefinitions[i].AnimationTriggerToStart.ToString());
                     animator.SetTrigger(model.BasicComboDefinitions[i].AnimationTriggerToStart.ToString());
                     break;
                 }
@@ -230,7 +213,6 @@ public class WeaponController: MonoBehaviour
 
     private void ContinueCombo(ButtonsXbox buttonPressed)
     {
-        //TODO
         if (canContinueCombo)
         {
             bool isComboContinued = false;
@@ -238,7 +220,7 @@ public class WeaponController: MonoBehaviour
 
             for (int i = 0; i < model.BasicComboDefinitions.Length; ++i)
             {
-                isComboContinued = model.BasicComboDefinitions[i].ContinueCombo(buttonPressed, actualActionStack);
+                isComboContinued = model.BasicComboDefinitions[i].ContinueCombo(buttonPressed, actualActionStack, this);
                 if (model.BasicComboDefinitions[i].IsLastComboIndex())
                 {
                     isComboFinishing = true;
@@ -318,4 +300,5 @@ public class WeaponController: MonoBehaviour
         activeCombos = model.BasicComboDefinitions.ToList();
         return activeCombos.Where(t => !t.IsActive).ToList();
     }
+
 }

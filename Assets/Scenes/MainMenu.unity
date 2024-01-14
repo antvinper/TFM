@@ -3885,7 +3885,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97257a87822bd79488febdc5efe0c290, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fileSelectMenu: {fileID: 1913460948}
+  saveOnInit: 0
+  playerSpawnPoint: {fileID: 0}
   startMenu: {fileID: 702206846}
 --- !u!4 &893618396
 Transform:
@@ -7941,6 +7942,7 @@ MonoBehaviour:
   runLevel: 0
   newTestingGame: 0
   loadDataTestingGame: 0
+  saveGameTesting: 0
 --- !u!4 &1764275390 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4288416149911810, guid: f293a2dcc753a4a489fefe7f8f312d69, type: 3}

@@ -179,9 +179,9 @@ public class PlayerController : CompanyCharacterController//<PlayerMutableModel>
         virtualCamera.transform.rotation = virtualCameraOffset.rotation;*/
 
         //transform.position = selfOffset.position;
-        transform.position = selfPositionOffset;
+        //transform.position = selfPositionOffset;
         //transform.rotation = selfOffset.rotation;
-        transform.rotation = selfRotationOffset;
+        //transform.rotation = selfRotationOffset;
 
         //Debug.Log("#PLAYER player set in position");
     }

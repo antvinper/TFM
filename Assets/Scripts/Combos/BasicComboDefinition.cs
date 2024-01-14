@@ -7,19 +7,16 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "BasicCombo", menuName = "TFM/Combos/Basic Combo Definition")]
 public class BasicComboDefinition : ComboDefinition
 {
-    WeaponController weaponController;
     int actualIndex = 0;
 
-    public void SetUp(WeaponController weaponController)
+    public void SetUp()
     {
         Reset();
-        this.weaponController = weaponController;
         isActive = startsActive;
     }
 
     public void Reset()
     {
-        //Debug.Log("#MOVE Reset actual index in " + name);
         actualIndex = 0;
         isRunning = false;
     }
@@ -27,13 +24,11 @@ public class BasicComboDefinition : ComboDefinition
     public bool StartCombo(ButtonsXbox buttonPressed)
     {
         bool activated = false;
-        //if (buttonPressed == buttons[weaponController.ActualIndex])
         if (buttonPressed == comboStruct[actualIndex].button && isActive)
         {
-            //Debug.Log("#COMBO# Combo Started: " + this.name + " button: " + buttons[weaponController.ActualIndex]);
             activated = true;
             isRunning = true;
-            //++weaponController.ActualIndex;
+
             if (comboStruct[actualIndex].hasDash)
             {
                 DoDash();
@@ -44,7 +39,7 @@ public class BasicComboDefinition : ComboDefinition
         return activated;
     }
 
-    public async Task UseSkill(CompanyCharacterController owner, CompanyCharacterController target)
+    public async Task UseSkill(CompanyCharacterController owner, CompanyCharacterController target, WeaponController weaponController)
     {
         comboStruct[actualIndex].skill.ProcessSkill(owner, target);
         if (weaponController.ActualIndex == comboStruct.Count)
@@ -60,11 +55,10 @@ public class BasicComboDefinition : ComboDefinition
 
     public bool IsLastComboIndex()
     {
-        //Debug.Log("#MOVE actualIndex in " + name +": " + actualIndex);
         return actualIndex == comboStruct.Count -1 ? true : false;
     }
 
-    public bool ContinueCombo(ButtonsXbox buttonPressed, List<ButtonsXbox> actualActionStack)
+    public bool ContinueCombo(ButtonsXbox buttonPressed, List<ButtonsXbox> actualActionStack, WeaponController weaponController)
     {
         bool comboContinued = false;
         if (isRunning)
@@ -91,15 +85,10 @@ public class BasicComboDefinition : ComboDefinition
                 {
                     weaponController.ContinueAnimationCombo();
                     comboFinished = true;
-                    //weaponController.FinishCombo();
-                    //Debug.Log("#COMBO# Combo Finished: " + this.name + " button: " + buttons[weaponController.ActualIndex]);
-                    //actualIndex = 0;
                 }
                 else
                 {
                     comboContinued = true;
-                    //Debug.Log("#COMBO# Combo Continued: " + this.name + " actualIndex = " + weaponController.ActualIndex + " button: " + buttons[weaponController.ActualIndex]);
-                    //++weaponController.ActualIndex;
                 }
 
                 weaponController.DoingCombo = true;
@@ -120,7 +109,6 @@ public class BasicComboDefinition : ComboDefinition
 
     private void DoDash()
     {
-        Debug.Log("DO DASH");
         GameManager.Instance.GetPlayerController().DoDash(comboStruct[actualIndex].dashTime, comboStruct[actualIndex].dashPower);
     }
 }

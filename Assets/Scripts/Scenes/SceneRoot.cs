@@ -45,6 +45,7 @@ public class SceneRoot : MonoBehaviour
         await new WaitForSeconds(1.0f);
         playerController = GameManager.Instance.GetPlayerController();
         playerController.SetStartPosition(playerSpawnPoint);
+        Debug.Log("PlayerPosition setted");
         playerController.ActivateControls();
     }
 

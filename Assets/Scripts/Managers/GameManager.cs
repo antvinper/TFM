@@ -14,6 +14,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     //TODO borrar
     public bool newTestingGame;
     public bool loadDataTestingGame;
+    public bool saveGameTesting;
 
     private InGameHUD inGameHud;
     public InGameHUD InGameHUD { get => inGameHud; set => inGameHud = value; }
@@ -148,7 +149,11 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
             dataPersistenceManager.gameModel.RunLevel = runLevel;
             dataPersistenceManager.gameModel.SceneName = SceneManager.Instance.GetActiveScene();
 
-            dataPersistenceManager.SaveGame();
+            if (saveGameTesting)
+            {
+                dataPersistenceManager.SaveGame();
+            }
+            
         }
         else
         {

@@ -59,18 +59,14 @@ public class MovePlayer : MonoBehaviour//SingletonMonoBehaviour<MovePlayer>
     public void StopMovement()
     {
         canMove = false;
-        //Debug.Log("#MOVEE StopMovement");
     }
     public void ContinueMovement()
     {
         canMove = true;
-        //Debug.Log("#MOVEE ContinueMovement");
     }
 
     void Update()
     {
-
-        //Debug.Log("#MOVEE CanMove: " + canMove);
         playerInput = Vector3.zero;
 
         if (!isDashing && canMove)
@@ -80,7 +76,6 @@ public class MovePlayer : MonoBehaviour//SingletonMonoBehaviour<MovePlayer>
         
         movePlayer = playerInput * playerSpeed;
 
-        //player.transform.position = player.transform.position + movePlayer;
 
         anim.SetFloat("isWalking", playerInput.magnitude);
 
@@ -92,8 +87,7 @@ public class MovePlayer : MonoBehaviour//SingletonMonoBehaviour<MovePlayer>
 
         if (isDashing)
         {
-            //Debug.Log("#DASH forward: " + player.transform.forward);
-            movePlayer = player.transform.forward * playerSpeed;
+            movePlayer = transform.forward * playerSpeed;
             player.Move(movePlayer * dashingPower * Time.deltaTime);
         }
         else
