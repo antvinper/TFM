@@ -7,6 +7,8 @@ using UnityEngine.SceneManagement;
 public class SceneRoot : MonoBehaviour
 {
     [SerializeField] private bool saveOnInit;
+    [SerializeField] private Transform playerSpawnPoint;
+
     protected PlayerController playerController;
     public bool IsInitialized { get; private set; }
 
@@ -37,9 +39,12 @@ public class SceneRoot : MonoBehaviour
         UnityEngine.SceneManagement.SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
-    protected void ActivatePlayerController()
+    protected async Task ActivatePlayerController()
     {
+        Debug.Log("TODO -> Scene transition");
+        await new WaitForSeconds(1.0f);
         playerController = GameManager.Instance.GetPlayerController();
+        playerController.SetStartPosition(playerSpawnPoint);
         playerController.ActivateControls();
     }
 

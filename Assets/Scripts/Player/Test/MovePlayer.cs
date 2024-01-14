@@ -72,6 +72,7 @@ public class MovePlayer : MonoBehaviour//SingletonMonoBehaviour<MovePlayer>
 
         Debug.Log("#MOVEE CanMove: " + canMove);
         playerInput = Vector3.zero;
+
         if (!isDashing && canMove)
         {
             SetPlayerInputConverted();
@@ -83,7 +84,11 @@ public class MovePlayer : MonoBehaviour//SingletonMonoBehaviour<MovePlayer>
 
         anim.SetFloat("isWalking", playerInput.magnitude);
 
-        SetGravity();
+        if (canMove && !isDashing)
+        {
+            SetGravity();
+        }
+        
 
         if (isDashing)
         {

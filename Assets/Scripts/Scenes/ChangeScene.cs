@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class ChangeScene : MonoBehaviour
@@ -26,13 +27,14 @@ public class ChangeScene : MonoBehaviour
         }*/
     }
 
-    private void OnTriggerEnter(Collider other)
+    private async Task OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
+
             GameManager.Instance.IncrementRunLevel();
             //Change to random scene
-            SceneManager.Instance.ChangeToRandomScene();
+            await SceneManager.Instance.ChangeToRandomScene();
             //sceneLoader.ChangeToRandomScene();
         }
     }

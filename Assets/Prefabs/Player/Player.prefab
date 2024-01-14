@@ -881,6 +881,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterStatsDefinition: {fileID: 11400000, guid: 7ea7a417acd57ab41baa2df352edc074, type: 2}
+  parentTransform: {fileID: 274060088606349922}
+  cameraTransform: {fileID: 274060088628090864}
+  virtualCameraTransform: {fileID: 274060088621764017}
+  selfPositionOffset: {x: 0.06183863, y: -1.729432, z: -1.023209}
+  selfRotationOffset: {x: 0, y: 0.81622833, z: 0, w: 0.5777294}
   weaponController: {fileID: 8960032450904413920}
   tree: {fileID: 11400000, guid: 6559bb119022108438547b4098326e92, type: 2}
   canvasTreeManager: {fileID: 0}
@@ -935,15 +940,15 @@ MonoBehaviour:
   - m_PersistentCalls:
       m_Calls: []
     m_ActionId: 1717fbaa-a892-4283-988d-f9d987124d30
-    m_ActionName: PlayerMap/Submit[/Keyboard/enter,/XInputControllerWindows/buttonSouth]
+    m_ActionName: PlayerMap/Submit[/Keyboard/enter]
   - m_PersistentCalls:
       m_Calls: []
     m_ActionId: 1e6f5184-1ce6-43de-bcc2-15f3f13cc078
-    m_ActionName: PlayerMap/Pause[/XInputControllerWindows/start,/Keyboard/escape]
+    m_ActionName: PlayerMap/Pause[/Keyboard/escape]
   - m_PersistentCalls:
       m_Calls: []
     m_ActionId: 557de18a-be1c-4ce8-9024-b128685c5678
-    m_ActionName: PlayerMap/Navigate[/XInputControllerWindows/dpad/up,/XInputControllerWindows/leftStick/up,/XInputControllerWindows/dpad/down,/XInputControllerWindows/leftStick/down,/XInputControllerWindows/dpad/left,/XInputControllerWindows/leftStick/left,/XInputControllerWindows/dpad/right,/XInputControllerWindows/leftStick/right]
+    m_ActionName: PlayerMap/Navigate
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: PlayerMap

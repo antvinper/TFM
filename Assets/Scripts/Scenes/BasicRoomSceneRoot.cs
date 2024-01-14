@@ -16,7 +16,7 @@ public class BasicRoomSceneRoot : SceneRoot
     public override async Task Initialize()
     {
         await new WaitUntil(() => IsInitialized);
-
+        
         ActivatePlayerController();
         InGameHUD.Instance.Setup();
 

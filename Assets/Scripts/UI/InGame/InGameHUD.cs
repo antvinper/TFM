@@ -1,5 +1,6 @@
 using CompanyStats;
 using System;
+using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -14,12 +15,13 @@ public class InGameHUD : SingletonMonoBehaviour<InGameHUD>
     [SerializeField] protected EventSystem eventSystem;
     [SerializeField] private PlayerController playerController;
     [SerializeField] private InputActionReference pauseReference;
-    [SerializeField] private InputActionReference submitReference;
+    //[SerializeField] private InputActionReference submitReference;
     [SerializeField] private GameObject pauseStartButtonActive;
     [SerializeField] private MovePlayer movePlayer;
 
 
     [Header("InGameHUD Parts")]
+    [SerializeField] private RewardsUiController rewardsUiController;
     [SerializeField] private GameObject inGameHUD;
     [SerializeField] private Slider healthSlider;
     [SerializeField] private Image sliderColor;
@@ -55,6 +57,30 @@ public class InGameHUD : SingletonMonoBehaviour<InGameHUD>
         // Asignar el player model dinamicamente? Si no, se asigna a mano en todas las escenas
         //Debug.Log("Is there a player controller?: " + (playerController == null ? "No" : "Yes"));
         pauseReference.action.performed += this.PauseIddle;
+        GameManager.Instance.InGameHUD = this;
+    }
+
+    public async Task ChooseRewardAsync()
+    {
+        /**
+         * 1- Abrir panel
+         * 2- Esperar hasta que el jugador elija una recompensa y asignarla al GameManager
+         * 3- Cerrar panel
+         * 4- Cambiar escena
+         */
+        ActivateRewardsUi();
+        await new WaitUntil(() => rewardsUiController.RewardHasBeenSelected);
+        DeActivateRewardsUi();
+    }
+
+    private void ActivateRewardsUi()
+    {
+        rewardsUiController.gameObject.SetActive(true);
+    }
+    private void DeActivateRewardsUi()
+    {
+        rewardsUiController.ResetRewardHasBeenSelected();
+        rewardsUiController.gameObject.SetActive(false);
     }
 
     public void Setup()

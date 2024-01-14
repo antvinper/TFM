@@ -16,6 +16,6 @@ public class LevelSelectorSceneRoot : SceneRoot
         await new WaitUntil(() => IsInitialized);
         Debug.Log("TODO Load something for tree?");
 
-        GameManager.Instance.GetPlayerController().DeActivateControls();
+        GameManager.Instance.GetPlayerController().DeActivateControls(true);
     }
 }

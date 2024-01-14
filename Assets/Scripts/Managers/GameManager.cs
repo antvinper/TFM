@@ -15,6 +15,8 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     public bool newTestingGame;
     public bool loadDataTestingGame;
 
+    private InGameHUD inGameHud;
+    public InGameHUD InGameHUD { get => inGameHud; set => inGameHud = value; }
     /**
      * TODO
      * Quiz�s borrar. Ahora se usa en el application quit para almacenar la localizaci�n del personaje

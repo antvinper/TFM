@@ -8,6 +8,21 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : CompanyCharacterController//<PlayerMutableModel>
 {
+    [Header("Transforms")]
+    [SerializeField] Transform parentTransform;
+    /*[Header("Transforms")]
+    [SerializeField] Transform parentTransform;
+    [SerializeField] Transform cameraTransform;
+    [SerializeField] Transform virtualCameraTransform;*/
+
+    [Header("Transform offsets")]
+    [SerializeField] private Vector3 selfPositionOffset;
+    [SerializeField] private Quaternion selfRotationOffset;
+
+    Transform selfOffset = null;
+    Transform cameraOffset = null;
+    Transform virtualCameraOffset = null;
+
     private PlayerController instance;
 
     private PlayerMutableModel playerModel;
@@ -33,6 +48,8 @@ public class PlayerController : CompanyCharacterController//<PlayerMutableModel>
         get => rupees;
     }
 
+
+    [Space(10)]
     //TODO -> Make it private and get it from WeaponActive
     public WeaponController weaponController;
 
@@ -53,6 +70,8 @@ public class PlayerController : CompanyCharacterController//<PlayerMutableModel>
 
     [Header("Scripts and objects that must be de/activated")]
     [SerializeField] GameObject camera;
+
+
     [SerializeField] GameObject virtualCamera;
     [SerializeField] MovePlayer movePlayer;
     [SerializeField] PlayerInputManager playerInputManager;
@@ -65,42 +84,39 @@ public class PlayerController : CompanyCharacterController//<PlayerMutableModel>
 
     internal void ActivateControls()
     {
-        if (!areControlActives)
-        {
-            camera.SetActive(true);
-            virtualCamera.SetActive(true);
+        camera.SetActive(true);
+        virtualCamera.SetActive(true);
 
-            capsuleCollider.enabled = true;
+        capsuleCollider.enabled = true;
 
 
-            playerInput.enabled = true;
-            playerInputManager.enabled = true;
+        playerInput.enabled = true;
+        playerInputManager.enabled = true;
 
-            movePlayer.ActivateControls();
-            movePlayer.ContinueMovement();
+        movePlayer.ActivateControls();
+        movePlayer.ContinueMovement();
 
-            areControlActives = true;
-        }
-        
+        areControlActives = true;
     }
 
-    internal void DeActivateControls()
+    internal void DeActivateControls(bool deActivateCamera)
     {
-        if (areControlActives)
+        playerInputManager.enabled = false;
+        playerInput.enabled = false;
+
+        movePlayer.StopMovement();
+        movePlayer.DeActivateControls();
+
+        capsuleCollider.enabled = false;
+
+        if (deActivateCamera)
         {
-            playerInputManager.enabled = false;
-            playerInput.enabled = false;
-
-            movePlayer.StopMovement();
-            movePlayer.DeActivateControls();
-
-            capsuleCollider.enabled = false;
-
             virtualCamera.SetActive(false);
             camera.SetActive(false);
-
-            areControlActives = false;
         }
+
+        areControlActives = false;
+        
     }
 
     private void Awake()
@@ -133,7 +149,42 @@ public class PlayerController : CompanyCharacterController//<PlayerMutableModel>
         base.Setup(playerModel);
 
     }
+    private void SetOffsets()
+    {
+        if(cameraOffset == null)
+        {
+            //cameraOffset = camera.transform;
+        }
+        if(virtualCameraOffset == null)
+        {
+            //virtualCameraOffset = virtualCamera.transform;
+        }
+        if(selfOffset == null)
+        {
+            //selfOffset = transform;
+            selfPositionOffset = transform.position;
+            selfRotationOffset = transform.rotation;
+        }
+    }
 
+    internal void SetStartPosition(Transform playerSpawnPoint)
+    {
+        parentTransform.position = playerSpawnPoint.position;
+        parentTransform.rotation = playerSpawnPoint.rotation;
+
+        /*camera.transform.position = cameraOffset.position;
+        camera.transform.rotation = cameraOffset.rotation;
+
+        virtualCamera.transform.position = virtualCameraOffset.position;
+        virtualCamera.transform.rotation = virtualCameraOffset.rotation;*/
+
+        //transform.position = selfOffset.position;
+        transform.position = selfPositionOffset;
+        //transform.rotation = selfOffset.rotation;
+        transform.rotation = selfRotationOffset;
+
+        Debug.Log("#PLAYER player set in position");
+    }
     /**
      * TODO
      * borrar este start y ponerlo donde toque
@@ -144,6 +195,12 @@ public class PlayerController : CompanyCharacterController//<PlayerMutableModel>
      */
     private void Start()
     {
+        Debug.Log("#PLAYER start");
+        if(cameraOffset == null || selfOffset == null || virtualCameraOffset == null)
+        {
+            SetOffsets();
+        }
+
         /**
          * TODO
          * Refactor all the Start Method
@@ -338,7 +395,7 @@ public class PlayerController : CompanyCharacterController//<PlayerMutableModel>
     }
     public void CancelComboAnimEvent()
     {
-        Debug.Log("#DASH CancelComboAnimEvent");
+        Debug.Log("#COMBO CancelComboAnimEvent");
 
         weaponController.CancelComboFromAnim();
     }

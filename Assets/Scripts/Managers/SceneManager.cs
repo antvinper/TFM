@@ -21,7 +21,7 @@ public class SceneManager: SingletonMonoBehaviour<SceneManager>
         }
     }
 
-    public void ChangeToRandomScene()
+    public async Task ChangeToRandomScene()
     {
         countRooms = GameManager.Instance.RunLevel;
         if (availableScenes.Count > 0)
@@ -45,9 +45,24 @@ public class SceneManager: SingletonMonoBehaviour<SceneManager>
             }
             else
             {
+
+
                 //Get random index
                 int randomIndex = Random.Range(0, availableScenes.Count-1);
                 int sceneToLoad = availableScenes[randomIndex];
+
+                
+                if (HasToChooseReward(sceneToLoad))
+                {
+                    GameManager.Instance.GetPlayerController().DeActivateControls(false);
+                    await GameManager.Instance.InGameHUD.ChooseRewardAsync();
+                    Debug.Log("#REWARD Reward selected!!! Now I can load the next scene");
+                }
+                else
+                {
+                    Debug.Log("#REWARD Not reward to selected :(    Now I can load the next scene");
+                }
+                
                 availableScenes.RemoveAt(randomIndex);
                 UnityEngine.SceneManagement.SceneManager.LoadScene(sceneToLoad);
             }
@@ -61,6 +76,11 @@ public class SceneManager: SingletonMonoBehaviour<SceneManager>
                 availableScenes.Add(i);
             }
         }
+    }
+
+    private bool HasToChooseReward(int sceneIndex)
+    {
+        return sceneIndex <= 11;
     }
 
     public async Task LoadMenuScene()

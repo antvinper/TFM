@@ -26,12 +26,19 @@ public class LobbyManager : MonoBehaviour
         Debug.Log("Starting LobbyManager...");
         startRunButton.onClick.AddListener(async delegate
         {
+            DeActivateLevelSelectorCanvas();
             GameManager.Instance.StartRun();
         });
         meditateButton.onClick.AddListener(async delegate
         {
+            DeActivateLevelSelectorCanvas();
             Debug.Log("Starting meditate...");
         });
+    }
+
+    private void DeActivateLevelSelectorCanvas()
+    {
+        startRunButton.GetComponentInParent<Canvas>().transform.gameObject.SetActive(false);
     }
 }
 
