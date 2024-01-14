@@ -5618,7 +5618,7 @@ PrefabInstance:
     - target: {fileID: 6553969178112137670, guid: d4014901a5033d14b8e019c13613a731, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 505907942}
     - target: {fileID: 6553969178112137670, guid: d4014901a5033d14b8e019c13613a731, type: 3}
       propertyPath: centerZoneObject
       value: 
