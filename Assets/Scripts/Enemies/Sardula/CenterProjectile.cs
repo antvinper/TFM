@@ -12,7 +12,7 @@ public class CenterProjectile : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            PlayerController target = other.GetComponent<PlayerController>();
+            PlayerController target = other.GetComponentInChildren<PlayerController>();
             skill.ProcessSkill(sardula, target);
             gameObject.SetActive(false);
             Destroy(gameObject);

@@ -107,7 +107,7 @@ public class IaksaController : EnemyController
         if ((collision.collider.CompareTag("Player") || collision.collider.CompareTag("Enemy")) && canAttack)
         {
             animator.Play("Armature|Action");
-            CompanyCharacterController companyCharacterController = collision.collider.GetComponent<CompanyCharacterController>();
+            CompanyCharacterController companyCharacterController = collision.collider.GetComponentInChildren<CompanyCharacterController>();
             ApplySkill(companyCharacterController);
             ResetAttack();
 

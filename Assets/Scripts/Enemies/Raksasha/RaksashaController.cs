@@ -98,7 +98,7 @@ public class RaksashaController : EnemyController
         if (other.CompareTag("Player") && canAttack)
         {
             //Realiza ataque en area "Aplastar" (Smash)
-            PlayerController playerController = other.GetComponent<PlayerController>();
+            PlayerController playerController = other.GetComponentInChildren<PlayerController>();
             ApplySkillSmash(playerController); //TODO -> Mejorar, ya que debe hacer daño si esta dentro del area, si sale no deberia hacerle caso
             animator.SetTrigger("Aplastar");
 
@@ -118,7 +118,7 @@ public class RaksashaController : EnemyController
         {
             //Realiza un "zarpazo" (Blow)
             animator.SetTrigger("Zarpazo");
-            PlayerController playerController = collision.collider.GetComponent<PlayerController>();
+            PlayerController playerController = collision.collider.GetComponentInChildren<PlayerController>();
             ApplySkillBlow(playerController);
             ResetAttack();
 

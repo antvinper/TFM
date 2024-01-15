@@ -20,7 +20,6 @@ public class VetalaController : EnemyController
 
     void Start()
     {
-
         vetalaModel = new VetalaModel();
         this.SetModel(vetalaModel);
 
@@ -65,7 +64,7 @@ public class VetalaController : EnemyController
         //Si el jugador entra en contacto con "Box Collider"
         if (collision.collider.CompareTag("Player"))
         {
-            PlayerController playerController = collision.collider.GetComponent<PlayerController>();
+            PlayerController playerController = collision.collider.GetComponentInChildren<PlayerController>();
             ApplySkill(playerController);
         }
 
