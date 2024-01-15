@@ -21,7 +21,8 @@ public class PlayerInputManager : MonoBehaviour
     {
         if (callbackContext.phase.Equals(InputActionPhase.Performed))
         {
-            if (callbackContext.action.activeControl.ToString().Contains("buttonWest"))
+            string controlPerformed = callbackContext.action.activeControl.ToString();
+            if (controlPerformed.Contains("buttonWest") || controlPerformed.Contains("Keyboard/h"))
             {
                 moverEspada.Play();
                 playerController.DoCombo(ButtonsXbox.X);
@@ -29,20 +30,20 @@ public class PlayerInputManager : MonoBehaviour
                 //Debug.Log("West or X Pressed");
                 //TODO
             }
-            if (callbackContext.action.activeControl.ToString().Contains("buttonNorth"))
+            if (controlPerformed.Contains("buttonNorth") || controlPerformed.Contains("Keyboard/u"))
             {
                 moverEspada.Play();
                 playerController.DoCombo(ButtonsXbox.Y);
                 playerController.StartCharging();
             }
-            if (callbackContext.action.activeControl.ToString().Contains("rightTrigger"))
+            if (controlPerformed.Contains("rightTrigger") || controlPerformed.Contains("Keyboard/rightShift"))
             {
                 moverEspada.Play();
                 playerController.DoCombo(ButtonsXbox.RT);
                 //Debug.Log("Right or RT Pressed");
                 //TODO
             }
-            if (callbackContext.action.activeControl.ToString().Contains("buttonEast"))
+            if (controlPerformed.Contains("buttonEast") || controlPerformed.Contains("Keyboard/k"))
             {
                 //moverEspada.Play();
                 //playerController.DoDash();
@@ -54,7 +55,8 @@ public class PlayerInputManager : MonoBehaviour
 
         if (callbackContext.phase.Equals(InputActionPhase.Canceled))
         {
-            if (callbackContext.action.activeControl.ToString().Contains("buttonNorth"))
+            string controlPerformed = callbackContext.action.activeControl.ToString();
+            if (controlPerformed.Contains("buttonNorth") || controlPerformed.Contains("Keyboard/u"))
             {
                 playerController.StopCharging();
             }
