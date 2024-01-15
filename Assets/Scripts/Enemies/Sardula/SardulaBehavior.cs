@@ -12,7 +12,7 @@ public class SardulaBehavior : EnemyController
     private bool doneAction;
     private Vector3 actionPosition;
     private float timeToReachTarget, t;
-    [SerializeField] Transform player;
+    [SerializeField] Transform playerTransform;
     [SerializeField] float dist = 0.0f;
     [SerializeField] Transform centerZoneObject;
     [SerializeField] GameObject beamProjectile;
@@ -41,6 +41,7 @@ public class SardulaBehavior : EnemyController
     {
         sardulaModel = new SardulaModel();
         this.SetModel(sardulaModel);
+        playerTransform = GameManager.Instance.GetPlayerController().GetComponentInParent<CharacterController>().transform;
         stompArea.GetComponent<StompArea>().sardula = this;
         anim = GetComponent<Animator>();
         CallAction("center");
@@ -55,7 +56,7 @@ public class SardulaBehavior : EnemyController
         //Si no esta haciendo una accion, mira al jugador
         if (!isAction)
         {
-            actionPosition = player.position;
+            actionPosition = playerTransform.position;
         }
 
         if ((sardulaModel.GetStatValue(StatNames.HEALTH, StatParts.ACTUAL_VALUE) == 1250 && secondPhase != null) || (isSecondPhase && secondPhase != null))
@@ -65,7 +66,7 @@ public class SardulaBehavior : EnemyController
 
         LookAtTarget(actionPosition);
 
-        dist = Vector3.Distance(player.position, transform.position);
+        dist = Vector3.Distance(playerTransform.position, transform.position);
 
         timer += Time.deltaTime;
         if ((int)timer == 4)
@@ -189,7 +190,7 @@ public class SardulaBehavior : EnemyController
     void CallAction(string action)
     {
         anim.SetTrigger(action);
-        actionPosition = new Vector3(player.position.x, transform.position.y, player.position.z); ;
+        actionPosition = new Vector3(playerTransform.position.x, transform.position.y, playerTransform.position.z); ;
         doingAction = action;
         isAction = true;
     }
