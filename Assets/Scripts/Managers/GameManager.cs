@@ -14,7 +14,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     //TODO borrar
     public bool newTestingGame;
     public bool loadDataTestingGame;
-    public bool saveGameTesting;
+    //public bool saveGameTesting;
 
     private InGameHUD inGameHud;
     public InGameHUD InGameHUD { get => inGameHud; set => inGameHud = value; }
@@ -51,6 +51,11 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
     public void SetPlayerController(PlayerController playerController)
     {
+        this.playerController = playerController;
+    }
+
+    private void SetupPlayer()
+    {
         if (dataPersistenceManager.IsDataLoaded)
         {
             playerController.SetUp(GameModel.PlayerModel);
@@ -59,7 +64,6 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         {
             playerController.SetUp();
         }
-        this.playerController = playerController;
     }
 
     public PlayerController GetPlayerController()
@@ -87,11 +91,12 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         isGameStarted = true;
     }
 
-    public void NewGame(int slotIndex)
+    public async Task NewGame(int slotIndex)
     {
         dataPersistenceManager.NewGame(slotIndex);
         isGameStarted = true;
-        SceneManager.Instance.LoadLobbyScene();
+        SetupPlayer();
+        await SceneManager.Instance.LoadLobbyScene();
     }
 
     public bool IsGameStarted
@@ -100,13 +105,14 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         set => isGameStarted = value;
     }
 
-    internal void LoadGame(GameModel gameModel)
+    internal async Task LoadGame(GameModel gameModel)
     {
         dataPersistenceManager.gameModel = gameModel;
         runLevel = dataPersistenceManager.gameModel.RunLevel;
         //Debug.Log("Game loaded in slot " + dataPersistenceManager.gameModel.SlotIndex + ", now should be change scene");
         //SceneManager.Instance.LoadLobbyScene();
-        SceneManager.Instance.LoadScene(dataPersistenceManager.gameModel.SceneName);
+        SetupPlayer();
+        await SceneManager.Instance.LoadScene(dataPersistenceManager.gameModel.SceneName);
     }
 
     public async Task StartRun()
@@ -149,11 +155,12 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
             dataPersistenceManager.gameModel.RunLevel = runLevel;
             dataPersistenceManager.gameModel.SceneName = SceneManager.Instance.GetActiveScene();
 
-            if (saveGameTesting)
+            /*if (saveGameTesting)
             {
                 dataPersistenceManager.SaveGame();
-            }
-            
+            }*/
+            dataPersistenceManager.SaveGame();
+
         }
         else
         {

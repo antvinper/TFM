@@ -14,8 +14,6 @@ public class LevelSelectorSceneRoot : SceneRoot
     public override async Task Initialize()
     {
         await new WaitUntil(() => IsInitialized);
-        Debug.Log("TODO Load something for tree?");
-
         GameManager.Instance.GetPlayerController().DeActivateControls(true);
         await fadeController.FadeOut();
     }

@@ -40,11 +40,6 @@ public class WeaponController: MonoBehaviour
 
     WeaponModel model;
 
-    private void Update()
-    {
-        Debug.Log("#DOINGCOMBO: " + DoingCombo);
-    }
-
     internal void SetIsDoingCombo(bool isDoingCombo)
     {
         this.doingCombo = isDoingCombo;
