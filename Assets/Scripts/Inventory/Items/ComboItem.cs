@@ -12,8 +12,8 @@ public class ComboItem : Item
         this.combo = combo;
         /*
          * TODO
-         * Fijar el precio según el número de combo obtenido.
-         * Si por ejemplo, no tenemos ningún combo, cualquiera que salga valdrá 10
+         * Fijar el precio segï¿½n el nï¿½mero de combo obtenido.
+         * Si por ejemplo, no tenemos ningï¿½n combo, cualquiera que salga valdrï¿½ 10
          * El siguiente que salga, 40...
          */
         finalPrice = combo.Price;

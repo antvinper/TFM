@@ -5,15 +5,15 @@ using UnityEngine;
 public class ShopCurrencySlot : ShopSlot
 {
     private int soulFragments;
-    public void Setup(CurrencyItem currencyItem, int index, Shop shop)
+    public void Setup(CurrencyItem currencyItem, int index, ShopController shopController)
     {
         this.index = index;
-        base.Setup(currencyItem, shop);
+        base.Setup(currencyItem, shopController);
         soulFragments = currencyItem.SoulFragments;
     }
     public void Purchase()
     {
-        shop.ApplySoulFragmentPurchase(price, soulFragments, this.index);
+        shopController.ApplySoulFragmentPurchase(price, soulFragments, this.index);
         base.Purchase();
     }
 

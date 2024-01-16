@@ -50,7 +50,7 @@ public class SceneManager: SingletonMonoBehaviour<SceneManager>
                 //Get random index
                 int randomIndex = Random.Range(0, availableScenes.Count-1);
                 int sceneToLoad = availableScenes[randomIndex];
-
+                sceneToLoad = 13;
                 
                 if (HasToChooseReward(sceneToLoad))
                 {

@@ -87,7 +87,7 @@ public class PlayerController : CompanyCharacterController//<PlayerMutableModel>
         camera.SetActive(true);
         virtualCamera.SetActive(true);
 
-        capsuleCollider.enabled = true;
+        //capsuleCollider.enabled = true;
 
 
         playerInput.enabled = true;
@@ -107,7 +107,7 @@ public class PlayerController : CompanyCharacterController//<PlayerMutableModel>
         movePlayer.StopMovement();
         movePlayer.DeActivateControls();
 
-        capsuleCollider.enabled = false;
+        //capsuleCollider.enabled = false;
 
         if (deActivateCamera)
         {
@@ -209,45 +209,18 @@ public class PlayerController : CompanyCharacterController//<PlayerMutableModel>
         this.rupees = new Rupee(playerModel.Rupees);
         this.soulFragments = new SoulFragment(playerModel.SoulFragments);
 
-        
-
-
-
-
         statsCanvas = FindObjectOfType<StatsCanvasSupport>();
-        WriteStats();
         //ActiveSlotTree(1);
         //ApplySkill();
-        //canvasTreeManager.Setup(playerModel.Tree.Slots);
 
         //TODO -> Erase from here. Just for testing
         AddSoulFragments(100);
-    }
-
-    //TODO to erase
-    private void WriteStats()
-    {
-        
-        /*statsCanvas.statsPanelSupport.healthText.text = StatNames.HEALTH + ": " + playerModel.GetStatValue(StatNames.HEALTH, StatParts.ACTUAL_VALUE);
-        statsCanvas.statsPanelSupport.actualMaxHealthText.text = StatNames.HEALTH + " ACTUAL MAX: " + playerModel.GetStatValue(StatNames.HEALTH, StatParts.ACTUAL_MAX_VALUE);
-        statsCanvas.statsPanelSupport.manaText.text = StatNames.MANA + ": " + playerModel.GetStatValue(StatNames.MANA, StatParts.ACTUAL_VALUE);
-        statsCanvas.statsPanelSupport.attackText.text = StatNames.ATTACK + ": " + playerModel.GetStatValue(StatNames.ATTACK, StatParts.ACTUAL_VALUE);
-        statsCanvas.statsPanelSupport.magicalAttackText.text = StatNames.MAGICAL_ATTACK + ": " + playerModel.GetStatValue(StatNames.MAGICAL_ATTACK, StatParts.ACTUAL_VALUE);
-        statsCanvas.statsPanelSupport.defenseText.text = StatNames.DEFENSE + ": " + playerModel.GetStatValue(StatNames.DEFENSE, StatParts.ACTUAL_VALUE);
-        statsCanvas.statsPanelSupport.magicalDefenseText.text = StatNames.MAGICAL_DEFENSE + ": " + playerModel.GetStatValue(StatNames.MAGICAL_DEFENSE, StatParts.ACTUAL_VALUE);
-        statsCanvas.statsPanelSupport.speedText.text = StatNames.SPEED + ": " + playerModel.GetStatValue(StatNames.SPEED, StatParts.ACTUAL_VALUE);
-        statsCanvas.statsPanelSupport.evasionText.text = StatNames.EVASION + ": " + playerModel.GetStatValue(StatNames.EVASION, StatParts.ACTUAL_VALUE);
-        statsCanvas.statsPanelSupport.critChanceText.text = StatNames.CRIT_CHANCE + ": " + playerModel.GetStatValue(StatNames.CRIT_CHANCE, StatParts.ACTUAL_VALUE);
-        statsCanvas.statsPanelSupport.dodgeChanceText.text = StatNames.DODGE_CHANCE + ": " + playerModel.GetStatValue(StatNames.DODGE_CHANCE, StatParts.ACTUAL_VALUE);
-        statsCanvas.statsPanelSupport.luckyText.text = StatNames.LUCKY + ": " + playerModel.GetStatValue(StatNames.LUCKY, StatParts.ACTUAL_VALUE);*/
-        
     }
 
 
     public async Task IncrementSlotTree(TreeSlot slot)
     {
         playerModel.ProcessIncrementSlotTree(slot);
-        WriteStats();
     }
 
 
@@ -294,7 +267,6 @@ public class PlayerController : CompanyCharacterController//<PlayerMutableModel>
         {
             Debug.Log("TODO -> Behaviour when dies. Maybe should override method if enemy or player");
         }
-        WriteStats();
     }
 
     /*public async Task ApplySkill()

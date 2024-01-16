@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.EventSystems;
 
 //Este shopSlot tiene que ser una especie de factory
 //Puedo comprar efectos, combos y monedas
@@ -16,13 +17,15 @@ public class ShopSlot : MonoBehaviour
     [SerializeField] private TextMeshProUGUI name;
     [SerializeField] private TextMeshProUGUI description;
     [SerializeField] protected Button purchaseButton;
+    [SerializeField] protected TextMeshProUGUI purchaseButtonText;
     protected int index;
     public int Index => index;
     protected int price;
+    protected bool hasBeenPurchased;
 
-    protected Shop shop;
+    protected ShopController shopController;
 
-    public void Setup(Item item, Shop shop)
+    public void Setup(Item item, ShopController shopController)
     {
         this.price = item.FinalPrice;
         this.name.text = item.Name + item.NameSufix;
@@ -30,7 +33,7 @@ public class ShopSlot : MonoBehaviour
         this.image.sprite = item.Sprite;
         purchaseButton.GetComponentInChildren<TextMeshProUGUI>().text ="Buy " + this.price + "Rp";
 
-        this.shop = shop;
+        this.shopController = shopController;
 
         gameObject.SetActive(true);
 
@@ -40,13 +43,32 @@ public class ShopSlot : MonoBehaviour
     public void Purchase()
     {
         Debug.Log(name.text + ": purchased");
+        hasBeenPurchased = true;
     }
 
     public void CheckButtonInteractability()
     {
-        if (price > GameManager.Instance.GetPlayerController().Rupees.Amount)
+        bool canPayit = price <= GameManager.Instance.GetPlayerController().Rupees.Amount;
+        if (!canPayit || hasBeenPurchased)
         {
             purchaseButton.interactable = false;
+            if (hasBeenPurchased)
+            {
+                purchaseButtonText.text = "Comprado!";
+            }
+            
         }
+    }
+
+    public bool SetButtonAsFirstSelected(EventSystem eventSystem)
+    {
+        bool hasBeenSetted = false;
+        if (purchaseButton.interactable)
+        {
+            eventSystem.SetSelectedGameObject(purchaseButton.gameObject);
+            hasBeenSetted = true;
+        }
+
+        return hasBeenSetted;
     }
 }

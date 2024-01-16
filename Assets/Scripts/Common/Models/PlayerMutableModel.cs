@@ -53,8 +53,8 @@ public class PlayerMutableModel : CharacterMutableModel
     public PlayerMutableModel(StatsTree tree)
     {
         this.tree = tree;
-        this.soulFragments = 0;
-        this.rupees = 0;
+        this.soulFragments = 5;
+        this.rupees = 120;
         SetTreeStruct();
     }
 

@@ -97,6 +97,7 @@ MonoBehaviour:
   name: {fileID: 5975259682719188831}
   description: {fileID: 5975259681481395355}
   purchaseButton: {fileID: 5975259682640806901}
+  purchaseButtonText: {fileID: 5975259682946348536}
 --- !u!1 &5975259681225874826
 GameObject:
   m_ObjectHideFlags: 0

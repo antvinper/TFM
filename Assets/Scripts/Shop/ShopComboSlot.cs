@@ -5,11 +5,11 @@ using UnityEngine;
 public class ShopComboSlot : ShopSlot
 {
     BasicComboDefinition combo;
-    public void Setup(ComboItem comboItem, int i, Shop shop)
+    public void Setup(ComboItem comboItem, int i, ShopController shopController)
     {
         this.combo = comboItem.Combo;
         this.index = i;
-        base.Setup(comboItem, shop);
+        base.Setup(comboItem, shopController);
     }
 
     public void Purchase()
@@ -18,7 +18,7 @@ public class ShopComboSlot : ShopSlot
          * TODO
          * Get the combo
          */
-        shop.ApplyComboPurchase(price, combo, index);
+        shopController.ApplyComboPurchase(price, combo, index);
         base.Purchase();
     }
 }

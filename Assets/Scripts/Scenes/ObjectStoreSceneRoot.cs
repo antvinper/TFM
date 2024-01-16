@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class ObjectStoreSceneRoot : SceneRoot
 {
+    [SerializeField] ShopController shopController;
+
     private void Start()
     {
         Initialize();
@@ -14,9 +16,9 @@ public class ObjectStoreSceneRoot : SceneRoot
     {
         await new WaitUntil(() => IsInitialized);
 
-        ActivatePlayerController();
+        await ActivatePlayerController();
         InGameHUD.Instance.Setup();
 
-        Debug.Log("TODO");
+        shopController.CreateShop(playerController);
     }
 }
