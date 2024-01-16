@@ -55,6 +55,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: HighRoomSceneRoot Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 7609985578163436352, guid: 07e9afb9da145ed41877cf1331df7d35, type: 3}
+      propertyPath: startColor.a
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8232645649537126076, guid: 07e9afb9da145ed41877cf1331df7d35, type: 3}
       propertyPath: m_Size.y
       value: 3.4034553
@@ -117,6 +121,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 07e9afb9da145ed41877cf1331df7d35, type: 3}
+--- !u!114 &5737472006802737361 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7609985578163436352, guid: 07e9afb9da145ed41877cf1331df7d35, type: 3}
+  m_PrefabInstance: {fileID: 2739175883720848273}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70bbf2cd838f77f44ab6eeb22ae356bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &6071901703767448680 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8232645651215331321, guid: 07e9afb9da145ed41877cf1331df7d35, type: 3}
@@ -146,5 +161,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   saveOnInit: 1
+  playerSpawnPoint: {fileID: 0}
+  fadeController: {fileID: 5737472006802737361}
   roomController: {fileID: 6071901703767448680}
   roomDefinition: {fileID: 11400000, guid: 5af2e39620caa774d8d41ecb6851f212, type: 2}

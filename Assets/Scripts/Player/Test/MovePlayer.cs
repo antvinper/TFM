@@ -32,21 +32,29 @@ public class MovePlayer : MonoBehaviour//SingletonMonoBehaviour<MovePlayer>
     [SerializeField] private float fallVelocity;
     [SerializeField] private float rotationSpeed;
 
-    [SerializeField] private CharacterController player;
+    [SerializeField] private CharacterController characterController;
     [SerializeField] private Animator anim;
 
     private Vector3 movePlayer;
-    
+
+    private bool areControlActives = false;
+
+    internal CharacterController CharacterController { get => characterController; }
+
+    internal void SetInputControls(bool isActive)
+    {
+        areControlActives = isActive;
+    }
 
     internal void ActivateControls()
     {
-        player.enabled = true;
+        characterController.enabled = true;
         anim.enabled = true;
     }
 
     internal void DeActivateControls()
     {
-        player.enabled = false;
+        characterController.enabled = false;
         anim.enabled = false;
     }
 
@@ -69,7 +77,7 @@ public class MovePlayer : MonoBehaviour//SingletonMonoBehaviour<MovePlayer>
     {
         playerInput = Vector3.zero;
 
-        if (!isDashing && canMove)
+        if (!isDashing && canMove && areControlActives)
         {
             SetPlayerInputConverted();
         }
@@ -88,11 +96,11 @@ public class MovePlayer : MonoBehaviour//SingletonMonoBehaviour<MovePlayer>
         if (isDashing)
         {
             movePlayer = transform.forward * playerSpeed;
-            player.Move(movePlayer * dashingPower * Time.deltaTime);
+            characterController.Move(movePlayer * dashingPower * Time.deltaTime);
         }
         else
         {
-            player.Move(movePlayer * Time.deltaTime);
+            characterController.Move(movePlayer * Time.deltaTime);
         }
 
         //Rotacion del personaje segun hacia donde mira
@@ -105,7 +113,8 @@ public class MovePlayer : MonoBehaviour//SingletonMonoBehaviour<MovePlayer>
 
     void SetGravity()
     {
-        if (player.isGrounded)
+        Debug.Log("#GRAVITY -> isGrounded: " + characterController.isGrounded);
+        if (characterController.isGrounded)
         {
             fallVelocity = -gravity * Time.deltaTime;
             movePlayer.y = fallVelocity;

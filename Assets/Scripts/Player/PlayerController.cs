@@ -80,23 +80,29 @@ public class PlayerController : CompanyCharacterController//<PlayerMutableModel>
 
     public MovePlayer MovePlayer { get => movePlayer; } 
 
-    private bool areControlActives = true;
 
-    internal void ActivateControls()
+    internal void CameraSetActive(bool isActive)
+    {
+        camera.SetActive(isActive);
+        virtualCamera.SetActive(isActive);
+    }
+
+    internal async Task ActivateControls()
     {
         camera.SetActive(true);
         virtualCamera.SetActive(true);
+        movePlayer.ContinueMovement();
+        movePlayer.CharacterController.enabled = true;
 
-        //capsuleCollider.enabled = true;
+        await new WaitForSeconds(0.3f);
+        //await new WaitUntil(() => !movePlayer.CharacterController.isGrounded);
+        await new WaitUntil(() => movePlayer.CharacterController.isGrounded);
 
-
+        movePlayer.SetInputControls(true);
         playerInput.enabled = true;
         playerInputManager.enabled = true;
 
         movePlayer.ActivateControls();
-        movePlayer.ContinueMovement();
-
-        areControlActives = true;
     }
 
     internal void DeActivateControls(bool deActivateCamera)
@@ -114,9 +120,6 @@ public class PlayerController : CompanyCharacterController//<PlayerMutableModel>
             virtualCamera.SetActive(false);
             camera.SetActive(false);
         }
-
-        areControlActives = false;
-        
     }
 
     private void Awake()

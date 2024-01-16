@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &4878712500125896908
+--- !u!1001 &7369722608871705634
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -53,44 +53,38 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6756055089048055073, guid: 07e9afb9da145ed41877cf1331df7d35, type: 3}
       propertyPath: m_Name
-      value: BossRoomSceneRoot Variant
+      value: MainMenuSceneRoot Variant
       objectReference: {fileID: 0}
     - target: {fileID: 7609985578163436352, guid: 07e9afb9da145ed41877cf1331df7d35, type: 3}
-      propertyPath: startColor.a
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8232645651191850395, guid: 07e9afb9da145ed41877cf1331df7d35, type: 3}
-      propertyPath: m_IsActive
+      propertyPath: fadePanel
+      value: 
+      objectReference: {fileID: 6677566984724718724}
+    - target: {fileID: 7609985578163436352, guid: 07e9afb9da145ed41877cf1331df7d35, type: 3}
+      propertyPath: fadeInPanel
+      value: 
+      objectReference: {fileID: 7965901415083193135}
+    - target: {fileID: 7609985578163436352, guid: 07e9afb9da145ed41877cf1331df7d35, type: 3}
+      propertyPath: fadeOutPanel
+      value: 
+      objectReference: {fileID: 6840541642672344086}
+    - target: {fileID: 7609985578163436352, guid: 07e9afb9da145ed41877cf1331df7d35, type: 3}
+      propertyPath: fadeInAnimator
+      value: 
+      objectReference: {fileID: 7439261220818665287}
+    - target: {fileID: 7609985578163436352, guid: 07e9afb9da145ed41877cf1331df7d35, type: 3}
+      propertyPath: startsInActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7609985578163436352, guid: 07e9afb9da145ed41877cf1331df7d35, type: 3}
+      propertyPath: fadeOutAnimator
+      value: 
+      objectReference: {fileID: 6661015635549765710}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 07e9afb9da145ed41877cf1331df7d35, type: 3}
---- !u!1 &2195222679440522733 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6756055089048055073, guid: 07e9afb9da145ed41877cf1331df7d35, type: 3}
-  m_PrefabInstance: {fileID: 4878712500125896908}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &356089701
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2195222679440522733}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 24bb17f598549094da435a5ba07f7a1e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  saveOnInit: 1
-  playerSpawnPoint: {fileID: 0}
-  fadeController: {fileID: 3037874468229081996}
-  roomController: {fileID: 3599661098117742389}
-  roomDefinition: {fileID: 11400000, guid: 7c3e5ee9babb92a4ca5b6e3eaa769021, type: 2}
---- !u!114 &3037874468229081996 stripped
+--- !u!114 &1142395032858294114 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7609985578163436352, guid: 07e9afb9da145ed41877cf1331df7d35, type: 3}
-  m_PrefabInstance: {fileID: 4878712500125896908}
+  m_PrefabInstance: {fileID: 7369722608871705634}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
@@ -98,14 +92,49 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70bbf2cd838f77f44ab6eeb22ae356bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &3599661098117742389 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8232645651215331321, guid: 07e9afb9da145ed41877cf1331df7d35, type: 3}
-  m_PrefabInstance: {fileID: 4878712500125896908}
+--- !u!1 &4288790121083003139 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6756055089048055073, guid: 07e9afb9da145ed41877cf1331df7d35, type: 3}
+  m_PrefabInstance: {fileID: 7369722608871705634}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+--- !u!114 &271975730
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4288790121083003139}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3b0d18c25802cfc4e92fdbb3f3a8c1bd, type: 3}
+  m_Script: {fileID: 11500000, guid: 97257a87822bd79488febdc5efe0c290, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  saveOnInit: 0
+  playerSpawnPoint: {fileID: 0}
+  fadeController: {fileID: 1142395032858294114}
+  startMenu: {fileID: 0}
+--- !u!95 &6661015635549765710 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 4194590436782951532, guid: 07e9afb9da145ed41877cf1331df7d35, type: 3}
+  m_PrefabInstance: {fileID: 7369722608871705634}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6677566984724718724 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4246323121500596390, guid: 07e9afb9da145ed41877cf1331df7d35, type: 3}
+  m_PrefabInstance: {fileID: 7369722608871705634}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6840541642672344086 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4082794309692555316, guid: 07e9afb9da145ed41877cf1331df7d35, type: 3}
+  m_PrefabInstance: {fileID: 7369722608871705634}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &7439261220818665287 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 106699910262993765, guid: 07e9afb9da145ed41877cf1331df7d35, type: 3}
+  m_PrefabInstance: {fileID: 7369722608871705634}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7965901415083193135 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 633339087203745549, guid: 07e9afb9da145ed41877cf1331df7d35, type: 3}
+  m_PrefabInstance: {fileID: 7369722608871705634}
+  m_PrefabAsset: {fileID: 0}

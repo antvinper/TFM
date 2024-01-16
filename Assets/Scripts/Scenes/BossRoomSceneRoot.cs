@@ -16,9 +16,9 @@ public class BossRoomSceneRoot : SceneRoot
     {
         await new WaitUntil(() => IsInitialized);
 
-        Debug.Log("TODO?");
+        //Debug.Log("TODO?");
 
-        ActivatePlayerController();
+        await ActivatePlayerController();
         InGameHUD.Instance.Setup();
     }
 }

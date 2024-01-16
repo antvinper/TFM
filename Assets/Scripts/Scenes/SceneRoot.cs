@@ -8,6 +8,7 @@ public class SceneRoot : MonoBehaviour
 {
     [SerializeField] private bool saveOnInit;
     [SerializeField] private Transform playerSpawnPoint;
+    [SerializeField] protected FadeController fadeController;
 
     protected PlayerController playerController;
     public bool IsInitialized { get; private set; }
@@ -25,6 +26,7 @@ public class SceneRoot : MonoBehaviour
             GameManager.Instance.SaveGame();
             //Debug.Log("GameSaved");
         }
+        SceneManager.Instance.Setup(this);
         IsInitialized = true;
     }
 
@@ -41,12 +43,17 @@ public class SceneRoot : MonoBehaviour
 
     protected async Task ActivatePlayerController()
     {
-        Debug.Log("TODO -> Scene transition");
-        await new WaitForSeconds(1.0f);
         playerController = GameManager.Instance.GetPlayerController();
         playerController.SetStartPosition(playerSpawnPoint);
         Debug.Log("PlayerPosition setted");
-        playerController.ActivateControls();
+        await playerController.ActivateControls();
+        //await new WaitForSeconds(1.0f);
+        await fadeController.FadeOut();
+    }
+
+    public async Task FadeIn()
+    {
+        await fadeController.FadeIn();
     }
 
 

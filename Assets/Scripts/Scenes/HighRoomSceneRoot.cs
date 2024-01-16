@@ -16,7 +16,7 @@ public class HighRoomSceneRoot : SceneRoot
     {
         await new WaitUntil(() => IsInitialized);
 
-        ActivatePlayerController();
+        await ActivatePlayerController();
         InGameHUD.Instance.Setup();
 
         roomController.Setup(playerController);

@@ -55,6 +55,34 @@ PrefabInstance:
       propertyPath: m_Name
       value: BasicRoomSceneRoot Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 7609985578163436352, guid: 07e9afb9da145ed41877cf1331df7d35, type: 3}
+      propertyPath: fadePanel
+      value: 
+      objectReference: {fileID: 3806363949717827437}
+    - target: {fileID: 7609985578163436352, guid: 07e9afb9da145ed41877cf1331df7d35, type: 3}
+      propertyPath: fadeInPanel
+      value: 
+      objectReference: {fileID: 501308250960738502}
+    - target: {fileID: 7609985578163436352, guid: 07e9afb9da145ed41877cf1331df7d35, type: 3}
+      propertyPath: fadeOutPanel
+      value: 
+      objectReference: {fileID: 3933872777767716863}
+    - target: {fileID: 7609985578163436352, guid: 07e9afb9da145ed41877cf1331df7d35, type: 3}
+      propertyPath: startColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7609985578163436352, guid: 07e9afb9da145ed41877cf1331df7d35, type: 3}
+      propertyPath: fadeInAnimator
+      value: 
+      objectReference: {fileID: 1100005004201178286}
+    - target: {fileID: 7609985578163436352, guid: 07e9afb9da145ed41877cf1331df7d35, type: 3}
+      propertyPath: startsInActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7609985578163436352, guid: 07e9afb9da145ed41877cf1331df7d35, type: 3}
+      propertyPath: fadeOutAnimator
+      value: 
+      objectReference: {fileID: 3749596878550354855}
     - target: {fileID: 8232645649537126077, guid: 07e9afb9da145ed41877cf1331df7d35, type: 3}
       propertyPath: m_LocalPosition.x
       value: 20.99
@@ -113,6 +141,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 07e9afb9da145ed41877cf1331df7d35, type: 3}
+--- !u!1 &501308250960738502 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 633339087203745549, guid: 07e9afb9da145ed41877cf1331df7d35, type: 3}
+  m_PrefabInstance: {fileID: 1026560929352550347}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1100005004201178286 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 106699910262993765, guid: 07e9afb9da145ed41877cf1331df7d35, type: 3}
+  m_PrefabInstance: {fileID: 1026560929352550347}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &3749596878550354855 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 4194590436782951532, guid: 07e9afb9da145ed41877cf1331df7d35, type: 3}
+  m_PrefabInstance: {fileID: 1026560929352550347}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &3806363949717827437 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4246323121500596390, guid: 07e9afb9da145ed41877cf1331df7d35, type: 3}
+  m_PrefabInstance: {fileID: 1026560929352550347}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &3933872777767716863 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4082794309692555316, guid: 07e9afb9da145ed41877cf1331df7d35, type: 3}
+  m_PrefabInstance: {fileID: 1026560929352550347}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &6052072600974617322 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6756055089048055073, guid: 07e9afb9da145ed41877cf1331df7d35, type: 3}
@@ -131,8 +184,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   saveOnInit: 1
+  playerSpawnPoint: {fileID: 0}
+  fadeController: {fileID: 7467823781308562571}
   roomController: {fileID: 8970933101119154226}
   roomDefinition: {fileID: 11400000, guid: 15e1d85dfc50b7847b510507f1226b6a, type: 2}
+--- !u!114 &7467823781308562571 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7609985578163436352, guid: 07e9afb9da145ed41877cf1331df7d35, type: 3}
+  m_PrefabInstance: {fileID: 1026560929352550347}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70bbf2cd838f77f44ab6eeb22ae356bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &8970933101119154226 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8232645651215331321, guid: 07e9afb9da145ed41877cf1331df7d35, type: 3}

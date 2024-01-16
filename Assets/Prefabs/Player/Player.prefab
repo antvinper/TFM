@@ -987,7 +987,7 @@ MonoBehaviour:
   playerSpeed: 10
   fallVelocity: 5
   rotationSpeed: 200
-  player: {fileID: 3793823806163678081}
+  characterController: {fileID: 3793823806163678081}
   anim: {fileID: 274060088090906231}
 --- !u!82 &2154626831935442980
 AudioSource:

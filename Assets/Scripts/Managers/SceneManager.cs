@@ -10,6 +10,8 @@ public class SceneManager: SingletonMonoBehaviour<SceneManager>
     private int numRooms = 14;
     private int countRooms;
 
+    private SceneRoot sceneRoot;
+
     private void Start()
     {
         //List to store the index of available scenes
@@ -19,6 +21,11 @@ public class SceneManager: SingletonMonoBehaviour<SceneManager>
         {
             availableScenes.Add(i);
         }
+    }
+
+    internal void Setup(SceneRoot sceneRoot)
+    {
+        this.sceneRoot = sceneRoot;
     }
 
     public async Task ChangeToRandomScene()
@@ -61,9 +68,10 @@ public class SceneManager: SingletonMonoBehaviour<SceneManager>
                 {
                     Debug.Log("#REWARD Not reward to selected :(    Now I can load the next scene");
                 }
-                
+
+                await sceneRoot.FadeIn();
                 availableScenes.RemoveAt(randomIndex);
-                UnityEngine.SceneManagement.SceneManager.LoadScene(sceneToLoad);
+                await UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(sceneToLoad);
             }
                        
         }
