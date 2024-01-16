@@ -139,6 +139,8 @@ public class PlayerController : CompanyCharacterController//<PlayerMutableModel>
     public async Task SetUp(PlayerMutableModel model)
     {
         this.playerModel = model;
+        this.rupees = new Rupee(playerModel.Rupees);
+        this.soulFragments = new SoulFragment(playerModel.SoulFragments);
         StatsTree t = new StatsTree(tree);
         this.playerModel.Tree = t;
         this.playerModel.Setup(characterStatsDefinition);
@@ -149,6 +151,8 @@ public class PlayerController : CompanyCharacterController//<PlayerMutableModel>
     {
         StatsTree t = new StatsTree(tree);
         playerModel = new PlayerMutableModel(t);
+        this.rupees = new Rupee(playerModel.Rupees);
+        this.soulFragments = new SoulFragment(playerModel.SoulFragments);
         playerModel.Setup(characterStatsDefinition);
         GameManager.Instance.GameModel.PlayerModel = playerModel as PlayerMutableModel;
         base.Setup(playerModel);
@@ -211,16 +215,17 @@ public class PlayerController : CompanyCharacterController//<PlayerMutableModel>
          */
         GameManager.Instance.SetPlayerController(this);
 
-        this.rupees = new Rupee(playerModel.Rupees);
-        this.soulFragments = new SoulFragment(playerModel.SoulFragments);
+        /*this.rupees = new Rupee(playerModel.Rupees);
+        this.soulFragments = new SoulFragment(playerModel.SoulFragments);*/
 
         statsCanvas = FindObjectOfType<StatsCanvasSupport>();
         //ActiveSlotTree(1);
         //ApplySkill();
 
         //TODO -> Erase from here. Just for testing
-        AddSoulFragments(100);
+        //AddSoulFragments(100);
     }
+
 
 
     public async Task IncrementSlotTree(TreeSlot slot)

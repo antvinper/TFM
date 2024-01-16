@@ -15,6 +15,8 @@ public class MainMenuSceneRoot : SceneRoot
     public override async Task Initialize()
     {
         await new WaitUntil(() => IsInitialized);
+        await new WaitUntil(() => GameManager.Instance.GetPlayerController() != null);
+        GameManager.Instance.GetPlayerController().DeActivateControls(true);
         this.startMenu.Setup();
     }
 }

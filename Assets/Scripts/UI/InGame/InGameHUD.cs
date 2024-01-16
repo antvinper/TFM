@@ -96,7 +96,7 @@ public class InGameHUD : SingletonMonoBehaviour<InGameHUD>
     {
         //TODO -> Mover el setupInGameHud, sólo cuando ocurra un cambio en los stats del jugador
         //Tal como está chupa muchos recursos.
-        if(playerController != null)
+        if(playerController != null && playerController.Model != null)
         {
             SetUpInGameHUD();
         }

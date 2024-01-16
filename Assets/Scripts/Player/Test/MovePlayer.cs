@@ -113,7 +113,7 @@ public class MovePlayer : MonoBehaviour//SingletonMonoBehaviour<MovePlayer>
 
     void SetGravity()
     {
-        Debug.Log("#GRAVITY -> isGrounded: " + characterController.isGrounded);
+        //Debug.Log("#GRAVITY -> isGrounded: " + characterController.isGrounded);
         if (characterController.isGrounded)
         {
             fallVelocity = -gravity * Time.deltaTime;
