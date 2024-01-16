@@ -431,6 +431,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player 1
       objectReference: {fileID: 0}
+    - target: {fileID: 274060088606349923, guid: f3c70ea79c08c8944abdfe717f49ab21, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 274060088621764017, guid: f3c70ea79c08c8944abdfe717f49ab21, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.4669575
@@ -7416,7 +7420,6 @@ MonoBehaviour:
   runLevel: 0
   newTestingGame: 1
   loadDataTestingGame: 0
-  saveGameTesting: 0
 --- !u!4 &1555917435
 Transform:
   m_ObjectHideFlags: 0
@@ -9968,7 +9971,7 @@ MonoBehaviour:
   despawnEffect: {fileID: 0}
   isHit: 0
   timer: 0
-  player: {fileID: 0}
+  playerTransform: {fileID: 0}
   dist: 0
   centerZoneObject: {fileID: 1583548444}
   beamProjectile: {fileID: 2097861956}

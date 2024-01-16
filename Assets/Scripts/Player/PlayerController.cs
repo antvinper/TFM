@@ -5,6 +5,7 @@ using System.Linq;
 using CompanyStats;
 using System;
 using UnityEngine.InputSystem;
+using Cinemachine;
 
 public class PlayerController : CompanyCharacterController//<PlayerMutableModel>
 {
@@ -91,6 +92,7 @@ public class PlayerController : CompanyCharacterController//<PlayerMutableModel>
     {
         camera.SetActive(true);
         virtualCamera.SetActive(true);
+        virtualCamera.GetComponent<CinemachineVirtualCamera>().m_Lens.NearClipPlane = -10;
         movePlayer.ContinueMovement();
         movePlayer.CharacterController.enabled = true;
 

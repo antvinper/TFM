@@ -57,7 +57,7 @@ public class SceneManager: SingletonMonoBehaviour<SceneManager>
                 //Get random index
                 int randomIndex = Random.Range(0, availableScenes.Count-1);
                 int sceneToLoad = availableScenes[randomIndex];
-                
+                sceneToLoad = 15;
                 if (HasToChooseReward(sceneToLoad))
                 {
                     GameManager.Instance.GetPlayerController().DeActivateControls(false);
