@@ -23,6 +23,7 @@ public class InGameHUD : SingletonMonoBehaviour<InGameHUD>
     [Header("InGameHUD Parts")]
     [SerializeField] private RewardsUiController rewardsUiController;
     [SerializeField] private GameObject inGameHUD;
+    [SerializeField] private DieController dieController;
     [SerializeField] private Slider healthSlider;
     [SerializeField] private Image sliderColor;
     [SerializeField] private TextMeshProUGUI attackText;
@@ -166,6 +167,17 @@ public class InGameHUD : SingletonMonoBehaviour<InGameHUD>
         inGameHUD.SetActive(true);
         Time.timeScale = 1.0f;
         movePlayer.enabled = true;
+    }
+
+    public void GoToLobby()
+    {
+        SceneManager.Instance.LoadLobbyScene();
+    }
+
+    public void OpenDieMenu()
+    {
+        dieController.gameObject.SetActive(true);
+        dieController.Setup(eventSystem);
     }
 
     public void GoToMainMenu()

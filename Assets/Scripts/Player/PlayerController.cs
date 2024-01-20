@@ -257,25 +257,16 @@ public class PlayerController : CompanyCharacterController//<PlayerMutableModel>
         Debug.Log("#Room# Actual SoulFragments: " + this.playerModel.SoulFragments);
     }
 
-    //TODO -> Esto debería de crearse de otra manera -> al tomar una acción
-    private async Task CreateShop()
-    {
-        //ShopManager.Instance.CreateShop();
-
-        //GetActiveCombos();
-    }
-
     
     public override void ApplyDamage(Strike strike)
     {
-        //Debug.Log("Health before damage = " + playerModel.GetStatValue(StatNames.HEALTH, StatParts.ACTUAL_VALUE));
         bool isAlive = playerModel.ApplyDamage(strike);
-        //Debug.Log("Applied an attack of: " + strike.FinalValue + " points");
-        //Debug.Log("Health after damage = " + playerModel.GetStatValue(StatNames.HEALTH, StatParts.ACTUAL_VALUE));
 
         if (!isAlive)
         {
             Debug.Log("TODO -> Behaviour when dies. Maybe should override method if enemy or player");
+            DeActivateControls(false);
+            InGameHUD.Instance.OpenDieMenu();
         }
     }
 

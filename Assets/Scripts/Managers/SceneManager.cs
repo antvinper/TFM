@@ -69,9 +69,10 @@ public class SceneManager: SingletonMonoBehaviour<SceneManager>
                     Debug.Log("#REWARD Not reward to selected :(    Now I can load the next scene");
                 }
 
-                await sceneRoot.FadeIn();
+                string sceneName = System.IO.Path.GetFileNameWithoutExtension(SceneUtility.GetScenePathByBuildIndex(sceneToLoad)); 
                 availableScenes.RemoveAt(randomIndex);
-                await UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(sceneToLoad);
+
+                LoadSceneAsyncByName(sceneName);
             }
                        
         }
@@ -90,6 +91,12 @@ public class SceneManager: SingletonMonoBehaviour<SceneManager>
         return sceneIndex <= 11;
     }
 
+    private async Task LoadSceneAsyncByName(string sceneName)
+    {
+        await sceneRoot.FadeIn();
+        UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(sceneName);
+    }
+
     public async Task LoadMenuScene()
     {
         UnityEngine.SceneManagement.SceneManager.LoadSceneAsync("");
@@ -97,7 +104,8 @@ public class SceneManager: SingletonMonoBehaviour<SceneManager>
 
     public async Task LoadLobbyScene()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadSceneAsync("LevelSelector");
+        //UnityEngine.SceneManagement.SceneManager.LoadSceneAsync("LevelSelector");
+        LoadSceneAsyncByName("LevelSelector");
     }
 
     public async Task LoadScene(string scene)
