@@ -14,9 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: 
   description: 
-  temporalInstantEffects: []
-  permanentInstantEffects:
-  - {fileID: 0}
+  temporalInstantEffects:
+  - {fileID: 11400000, guid: d11ae1db73481f84b9fa4ea5b54d420d, type: 2}
+  permanentInstantEffects: []
   overTimeEffects: []
-  duringTimeEffects:
-  - {fileID: 0}
+  duringTimeEffects: []

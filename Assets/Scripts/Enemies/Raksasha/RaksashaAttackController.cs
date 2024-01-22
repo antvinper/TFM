@@ -1,10 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class RaksashaAttackController : MonoBehaviour
 {
     private RaksashaController raksashaController;
+    
+    private float timeBetweenApplyDamage = 2.1f;
+    private bool canMakeDamage = true;
 
     private void Start()
     {
@@ -13,17 +17,26 @@ public class RaksashaAttackController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && canMakeDamage)
         {
-            raksashaController.OnPlayerInAttackRange(true, other.GetComponentInChildren<PlayerController>());
+            raksashaController.ApplySkill(other.GetComponentInChildren<PlayerController>());
+            WaitBetweenMakeDamage();
         }
     }
 
-    private void OnTriggerExit(Collider other)
+    private void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && canMakeDamage)
         {
-            raksashaController.OnPlayerInAttackRange(false, other.GetComponentInChildren<PlayerController>());
+            raksashaController.ApplySkill(other.GetComponentInChildren<PlayerController>());
+            WaitBetweenMakeDamage();
         }
+    }
+
+    private async Task WaitBetweenMakeDamage()
+    {
+        canMakeDamage = false;
+        await new WaitForSeconds(timeBetweenApplyDamage);
+        canMakeDamage = true;
     }
 }

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4723718275106078}
   - component: {fileID: 198525775101834184}
   - component: {fileID: 199384370109858068}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: FireEmbers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4746,7 +4746,7 @@ GameObject:
   - component: {fileID: 198663536934198432}
   - component: {fileID: 199770912466261370}
   - component: {fileID: 8307402033234830687}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: LargeFlames
   m_TagString: Untagged
   m_Icon: {fileID: 0}
