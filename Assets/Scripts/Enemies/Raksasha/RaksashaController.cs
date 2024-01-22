@@ -4,6 +4,30 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 
+internal static class AnimNames
+{
+    internal const string APLASTAR = "Armature_Aplastar";
+    internal const string ZARPAZO = "Armature_Zarpazo";
+}
+
+internal class AnimInfo
+{
+    string animName;
+    string trigger;
+    float animTime;
+
+    internal string AnimName { get => animName; }
+    internal string Trigger { get => trigger; }
+    internal float AnimTime { get => animTime; }
+
+    internal AnimInfo(string animName, string trigger, float animTime)
+    {
+        this.animName = animName;
+        this.trigger = trigger;
+        this.animTime = animTime;
+    }
+}
+
 public class RaksashaController : EnemyController
 {
     private RaksashaModel raksashaModel;
@@ -38,7 +62,12 @@ public class RaksashaController : EnemyController
 
     private PlayerController playerController;
 
-    private string[] attackAnims = { "Aplastar", "Zarpazo" };
+    //private Dictionary<string, float> animInfo;
+    private List<AnimInfo> animInfoList;
+    private AnimInfo animActive;
+
+    private string[] attackAnims = { AnimNames.APLASTAR, AnimNames.ZARPAZO };
+    //private float attackTime
 
     void Start()
     {
@@ -48,6 +77,28 @@ public class RaksashaController : EnemyController
         actualTimeToChangeDirection = 0f;
 
         walkSpeed = GetStatValue(StatNames.SPEED, StatParts.ACTUAL_VALUE);
+
+        //animInfo = new Dictionary<string, float>();
+        animInfoList = new List<AnimInfo>();
+
+        SetAnimClipTimes();
+    }
+
+    private void SetAnimClipTimes()
+    {
+        AnimationClip[] clips = animator.runtimeAnimatorController.animationClips;
+        foreach (AnimationClip clip in clips)
+        {
+            switch (clip.name)
+            {
+                case AnimNames.APLASTAR:
+                    animInfoList.Add(new AnimInfo(AnimNames.APLASTAR, "Aplastar", clip.length));
+                    break;
+                case AnimNames.ZARPAZO:
+                    animInfoList.Add(new AnimInfo(AnimNames.ZARPAZO, "Zarpazo", clip.length));
+                    break;
+            }
+        }
     }
 
     private void ChangePatrolDirection()
@@ -71,27 +122,30 @@ public class RaksashaController : EnemyController
     {
         Quaternion rotationY = Quaternion.LookRotation(rotateTo);
         rotation.eulerAngles = new Vector3(0, rotationY.eulerAngles.y + 20, 0);
-        int index = Random.Range(0, attackAnims.Length);
-        animator.SetTrigger(attackAnims[index]);
+
+        int index = Random.Range(0, animInfoList.Count);
+        animator.SetTrigger(animInfoList[index].Trigger);
+
         //Debug.Log("#RAKSASHA ANIM: " + attackAnims[index]);
-        ResetAttack();
+
+        ResetAttack(index);
     }
 
     void Update()
     {
         if (actualTimeToChangeDirection > timeToChangeDirection && isPatrolling && !isCatchingPlayer)
         {
-            //Debug.Log("#RAKSASHA UPDATE: Change patrol direction");
+            Debug.Log("#RAKSASHA UPDATE: Change patrol direction");
             ChangePatrolDirection();
         }
         else if ((isCatchingPlayer || isInAttackRange) && !isAttacking)
         {
-            //Debug.Log("#RAKSASHA UPDATE: Catching player");
+            Debug.Log("#RAKSASHA UPDATE: Catching player");
             CatchPlayer();
         }
         if (isInAttackRange && canAttack)
         {
-            //Debug.Log("#RAKSASHA UPDATE: Attack");
+            Debug.Log("#RAKSASHA UPDATE: Attack");
             Attack();
         }
         actualTimeToChangeDirection += Time.deltaTime;
@@ -151,19 +205,22 @@ public class RaksashaController : EnemyController
         skillBlow.ProcessSkill(this, target);
     }
 
-    public async Task WaitUntilFinishAttack()
+    public async Task WaitUntilFinishAttack(int index)
     {
         //Debug.Log("#RAKSASHA UPDATE: Start waiting until finish attack");
         isAttacking = true;
         //Debug.Log("#RAKSASHA UPDATE animation clip: " + animator.GetCurrentAnimatorStateInfo(0).fullPathHash);
-        await new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).normalizedTime);
+
+        Debug.Log("#ANIMS Waiting until " + animInfoList[index].AnimName + " finish. " + animInfoList[index].AnimTime + "s");
+        await new WaitForSeconds(animInfoList[index].AnimTime);
+        Debug.Log("#ANIMS Waiting finished " + animInfoList[index].AnimName);
         isAttacking = false;
         //Debug.Log("#RAKSASHA UPDATE: End waiting until finish attack");
     }
 
-    public async Task ResetAttack()
+    public async Task ResetAttack(int index)
     {
-        WaitUntilFinishAttack();
+        WaitUntilFinishAttack(index);
         canAttack = false;
         while (actualTimeBetweenAttack < timeBetweenAttack)
         {
