@@ -76,7 +76,7 @@ public class PlayerController : CompanyCharacterController//<PlayerMutableModel>
     [SerializeField] GameObject virtualCamera;
     [SerializeField] MovePlayer movePlayer;
     [SerializeField] PlayerInputManager playerInputManager;
-    [SerializeField] CapsuleCollider capsuleCollider;
+    //[SerializeField] CapsuleCollider capsuleCollider;
     [SerializeField] PlayerInput playerInput;
 
     public MovePlayer MovePlayer { get => movePlayer; } 

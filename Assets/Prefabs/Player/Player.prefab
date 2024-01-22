@@ -210,7 +210,7 @@ CharacterController:
   m_Enabled: 1
   serializedVersion: 2
   m_Height: 2
-  m_Radius: 0.5
+  m_Radius: 0.33
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
@@ -844,7 +844,7 @@ CapsuleCollider:
   m_GameObject: {fileID: 1084454792363275054}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
+  m_Enabled: 0
   m_Radius: 0.6939254
   m_Height: 4.163621
   m_Direction: 1
@@ -893,7 +893,6 @@ MonoBehaviour:
   virtualCamera: {fileID: 274060088621764023}
   movePlayer: {fileID: 274060088090906228}
   playerInputManager: {fileID: 274060088090906234}
-  capsuleCollider: {fileID: 274060088090906230}
   playerInput: {fileID: 274060088090906235}
 --- !u!114 &274060088090906235
 MonoBehaviour:
