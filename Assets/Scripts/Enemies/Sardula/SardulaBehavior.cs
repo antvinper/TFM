@@ -59,7 +59,7 @@ public class SardulaBehavior : EnemyController
             actionPosition = playerTransform.position;
         }
 
-        if ((sardulaModel.GetStatValue(StatNames.HEALTH, StatParts.ACTUAL_VALUE) == 1250 && secondPhase != null) || (isSecondPhase && secondPhase != null))
+        if ((sardulaModel.GetStatValue(StatNames.HEALTH, StatParts.ACTUAL_VALUE) <= 1250 && secondPhase != null) || (isSecondPhase && secondPhase != null))
         {
             secondPhase.SetActive(true);
         }

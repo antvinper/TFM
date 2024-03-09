@@ -15,7 +15,7 @@ MonoBehaviour:
   name: Basic Attack
   description: 
   temporalInstantEffects:
-  - {fileID: 11400000, guid: d11ae1db73481f84b9fa4ea5b54d420d, type: 2}
+  - {fileID: 11400000, guid: 3360621fb5044304b8117d252d7ddb11, type: 2}
   permanentInstantEffects: []
   overTimeEffects: []
   duringTimeEffects: []

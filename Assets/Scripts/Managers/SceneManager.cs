@@ -31,8 +31,13 @@ public class SceneManager: SingletonMonoBehaviour<SceneManager>
     public async Task ChangeToRandomScene()
     {
         countRooms = GameManager.Instance.RunLevel;
+        
         if (availableScenes.Count > 0)
         {
+            if(countRooms == 2 && GameManager.Instance.isShortGame)
+            {
+                countRooms = 14;
+            }
             if (countRooms == 7 || countRooms == 13 || countRooms == 14)
             {
                 switch (countRooms)
@@ -52,8 +57,6 @@ public class SceneManager: SingletonMonoBehaviour<SceneManager>
             }
             else
             {
-
-
                 //Get random index
                 int randomIndex = Random.Range(0, availableScenes.Count-1);
                 int sceneToLoad = availableScenes[randomIndex];

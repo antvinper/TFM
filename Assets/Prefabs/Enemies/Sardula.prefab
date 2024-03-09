@@ -5151,7 +5151,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skill: {fileID: 11400000, guid: d411bed54f22f1b44bd6193c9133544a, type: 2}
-  sardula: {fileID: 0}
+  sardula: {fileID: 6553969178112137670}
 --- !u!1 &3774922925624257116
 GameObject:
   m_ObjectHideFlags: 0
@@ -14937,6 +14937,10 @@ PrefabInstance:
       propertyPath: skill
       value: 
       objectReference: {fileID: 11400000, guid: 5bc6c86557fe58a4fb21bcc6e9d8a14f, type: 2}
+    - target: {fileID: -3610301791911958947, guid: 291b18ef6c68785448074e6afdff784e, type: 3}
+      propertyPath: sardula
+      value: 
+      objectReference: {fileID: 6553969178112137670}
     - target: {fileID: 2671918981912148678, guid: 291b18ef6c68785448074e6afdff784e, type: 3}
       propertyPath: m_Name
       value: SardulaBeam
@@ -15211,7 +15215,7 @@ MonoBehaviour:
   despawnEffect: {fileID: 9072926729946414882}
   isHit: 0
   timer: 0
-  player: {fileID: 0}
+  playerTransform: {fileID: 0}
   dist: 0
   centerZoneObject: {fileID: 0}
   beamProjectile: {fileID: 32507805996406733}
@@ -15405,6 +15409,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6182597495819543042, guid: 640d63542474d5a4a8df7846b21bbc92, type: 3}
+      propertyPath: sardula
+      value: 
+      objectReference: {fileID: 6553969178112137670}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 640d63542474d5a4a8df7846b21bbc92, type: 3}
 --- !u!1 &7411609947844440296 stripped

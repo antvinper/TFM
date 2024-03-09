@@ -10,6 +10,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     private bool isGameInRun = false;
     [SerializeField] private int runLevel = 0;
     private DataPersistenceManager dataPersistenceManager;
+    public bool isShortGame;
 
     //TODO borrar
     public bool newTestingGame;
